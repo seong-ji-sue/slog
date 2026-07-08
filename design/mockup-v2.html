@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SLOG — 디자인 v2 「기록 노트」</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;900&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+  :root {
+    --paper: #FAFAF8; --ink: #1A1A1F; --sub: #6E6E76; --faint: #A8A8AD;
+    --marker: #FFE94A; --pen: #2451B2; --line: #E4E4DE;
+    --code-bg: #1D1D22; --code-text: #E8E8E3; --code-y: #FFE94A; --code-b: #8FB5FF; --code-g: #9CCC7A; --code-gr: #7E7E88;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #55555C; font-family: "Pretendard Variable", Pretendard, -apple-system, sans-serif; padding: 40px; }
+  .board-label { color: #fff; font: 500 13px "JetBrains Mono", monospace; margin: 48px 0 12px; }
+  .board { background: var(--paper); color: var(--ink); border-radius: 6px; overflow: hidden; }
+  .col { max-width: 680px; margin: 0 auto; padding: 0 24px; }
+  .mono { font-family: "JetBrains Mono", monospace; }
+  .serif { font-family: "Noto Serif KR", serif; }
+  a { color: inherit; text-decoration: none; }
+
+  /* 형광펜 — 시그니처. 텍스트 뒤에 살짝 어긋나게 칠해진 마커 */
+  mark {
+    background: linear-gradient(104deg, transparent 0.5%, var(--marker) 3%, var(--marker) 97%, transparent 99%);
+    background-size: 100% 0.72em;
+    background-position: 0 78%;
+    background-repeat: no-repeat;
+    color: inherit; padding: 0 0.08em;
+  }
+
+  header.site { border-bottom: 1px solid var(--line); }
+  header.site .col { display: flex; justify-content: space-between; align-items: baseline; padding-top: 26px; padding-bottom: 18px; }
+  .logo { font: 700 17px "JetBrains Mono", monospace; letter-spacing: -0.02em; }
+  .logo .cursor { color: var(--pen); }
+  .menu { display: flex; gap: 22px; }
+  .menu a { color: var(--sub); font-size: 14px; font-weight: 500; }
+  .menu a:hover, .menu a:focus-visible { color: var(--ink); box-shadow: 0 2px 0 var(--marker); outline: none; }
+
+  .hero { padding: 76px 0 52px; border-bottom: 1px solid var(--line); }
+  .hero h1 { font-family: "Noto Serif KR", serif; font-weight: 900; font-size: 40px; line-height: 1.42; letter-spacing: -0.01em; }
+  .hero p.bio { margin-top: 18px; color: var(--sub); font-size: 16.5px; line-height: 1.75; }
+  .hero .stat { margin-top: 26px; font: 400 12.5px "JetBrains Mono", monospace; color: var(--faint); letter-spacing: 0.02em; }
+  .hero .stat b { color: var(--ink); font-weight: 500; }
+
+  .feed { padding-bottom: 8px; }
+  .post-item { display: block; padding: 26px 0; border-bottom: 1px solid var(--line); }
+  .post-item .lognum { font: 500 12px "JetBrains Mono", monospace; color: var(--faint); }
+  .post-item .lognum .cat { color: var(--pen); }
+  .post-item h2 { margin-top: 8px; font-size: 21px; font-weight: 700; line-height: 1.5; letter-spacing: -0.01em; display: inline; }
+  .post-item h2 mark { background-size: 0% 0.72em; transition: background-size .28s ease; }
+  .post-item:hover h2 mark, .post-item:focus-visible h2 mark, .post-item.demo h2 mark { background-size: 100% 0.72em; }
+  .post-item p.desc { margin-top: 9px; color: var(--sub); font-size: 15px; line-height: 1.75; max-width: 620px; }
+  .post-item .meta { margin-top: 10px; font: 400 12px "JetBrains Mono", monospace; color: var(--faint); }
+
+  footer.site { padding: 44px 0 52px; }
+  footer.site .col { display: flex; justify-content: space-between; font: 400 12px "JetBrains Mono", monospace; color: var(--faint); }
+  footer.site a { color: var(--sub); }
+
+  /* ---------- post detail ---------- */
+  .post-head { padding-top: 68px; }
+  .post-head .lognum { font: 500 13px "JetBrains Mono", monospace; color: var(--sub); }
+  .post-head .lognum .cat { color: var(--pen); }
+  .post-head .lognum .stars { color: var(--ink); }
+  .post-head h1 { margin-top: 16px; font-family: "Noto Serif KR", serif; font-weight: 900; font-size: 34px; line-height: 1.5; letter-spacing: -0.01em; }
+  .tldr { margin-top: 30px; font-size: 17px; line-height: 1.85; font-weight: 600; }
+  .tldr .label { font: 700 11px "JetBrains Mono", monospace; color: var(--sub); letter-spacing: 0.14em; display: block; margin-bottom: 8px; }
+  .kw { display: flex; gap: 10px; margin-top: 22px; }
+  .kw span { font: 500 12.5px "JetBrains Mono", monospace; color: var(--ink); border: 1px solid var(--line); background: #fff; border-radius: 3px; padding: 6px 10px; }
+
+  article { padding-bottom: 24px; }
+  article h2 { margin: 52px 0 16px; font-size: 22px; font-weight: 700; letter-spacing: -0.01em; }
+  article h2 .check { color: var(--pen); margin-right: 8px; font-size: 19px; }
+  article p { margin: 15px 0; font-size: 16px; line-height: 1.85; }
+  article p code, article li code { font: 500 14px "JetBrains Mono", monospace; background: #EFEFEA; border-radius: 3px; padding: 2px 5px; }
+  .dialog { margin: 20px 0; border-left: 2px solid var(--pen); padding: 6px 0 6px 18px; color: #3C3C44; font-size: 15.5px; line-height: 2.0; }
+  .dialog b { color: var(--pen); font-weight: 700; }
+  pre { margin: 20px 0; background: var(--code-bg); color: var(--code-text); border-radius: 6px; padding: 18px 20px; overflow-x: auto; font: 400 13.5px/1.7 "JetBrains Mono", monospace; }
+  pre .k { color: var(--code-y); } pre .f { color: var(--code-b); } pre .s { color: var(--code-g); } pre .c { color: var(--code-gr); }
+  .img-ph { margin: 20px 0; border: 1px solid var(--line); background: #fff; border-radius: 6px; height: 200px; display: flex; align-items: center; justify-content: center; color: var(--faint); font: 400 12.5px "JetBrains Mono", monospace; }
+  .refs { margin-top: 44px; border-top: 1px solid var(--line); padding-top: 20px; }
+  .refs .label { font: 700 11px "JetBrains Mono", monospace; color: var(--sub); letter-spacing: 0.14em; }
+  .refs a { display: block; margin-top: 10px; color: var(--pen); font-size: 15px; text-decoration: underline; text-underline-offset: 3px; }
+  .series { display: flex; gap: 14px; margin: 40px 0; }
+  .series a { flex: 1; border: 1px solid var(--line); background: #fff; border-radius: 5px; padding: 14px 16px; }
+  .series .dir { font: 500 11px "JetBrains Mono", monospace; color: var(--faint); }
+  .series .t { display: block; margin-top: 6px; font-size: 14.5px; font-weight: 600; line-height: 1.5; }
+  .series a:hover .t { box-shadow: inset 0 -0.55em 0 var(--marker); }
+  .comments { margin: 8px 0 64px; border: 1px dashed var(--line); border-radius: 6px; padding: 36px; text-align: center; color: var(--faint); font-size: 13px; }
+
+  @media (prefers-reduced-motion: reduce) { .post-item h2 mark { transition: none; } }
+</style>
+</head>
+<body>
+
+<div class="board-label">① Home — 1440 · 「기록 노트」 라이트 기본</div>
+<div class="board">
+  <header class="site"><div class="col">
+    <span class="logo">SLOG<span class="cursor">_</span></span>
+    <nav class="menu"><a href="#">글</a><a href="#">시리즈</a><a href="#">소개</a><a href="#">RSS</a></nav>
+  </div></header>
+  <div class="col">
+    <section class="hero">
+      <h1>무엇이 될지 모르는<br><mark>평범한 개발자</mark>의 기록</h1>
+      <p class="bio">실무에서 만난 문제를 파고들어 적습니다. 삽질의 과정까지가 기록입니다.<br>React · TypeScript · Next.js를 주로 다루는 프론트엔드 개발자, Zibu.</p>
+      <div class="stat">2021.12 — ing&nbsp;&nbsp;·&nbsp;&nbsp;<b>LOG 083</b>까지 기록됨&nbsp;&nbsp;·&nbsp;&nbsp;주간 1회 목표</div>
+    </section>
+    <section class="feed">
+      <a class="post-item demo" href="#">
+        <span class="lognum">LOG_083&nbsp;&nbsp;<span class="cat">트러블슈팅</span></span>
+        <h2><mark>다건·단건 파일 전송 구현</mark> — FormData와 multipart 제대로 알기</h2>
+        <p class="desc">인증서는 단건, 라이센스는 3개 파일. File 데이터와 multipart/form-data를 파고들어 UI부터 전송까지 구현한 기록.</p>
+        <div class="meta">2025.07.10&nbsp;&nbsp;·&nbsp;&nbsp;난이도 ★★★☆☆&nbsp;&nbsp;·&nbsp;&nbsp;12 min</div>
+      </a>
+      <a class="post-item" href="#">
+        <span class="lognum">LOG_082&nbsp;&nbsp;<span class="cat">트러블슈팅</span></span>
+        <h2><mark>Next.js 커스텀 서버 없이 standalone으로 HTTPS 적용하기</mark></h2>
+        <p class="desc">server.js를 걷어내고 쿠버네티스 환경에 배포하기 위한 standalone 빌드 전환기.</p>
+        <div class="meta">2025.06.29&nbsp;&nbsp;·&nbsp;&nbsp;난이도 ★★★☆☆&nbsp;&nbsp;·&nbsp;&nbsp;9 min</div>
+      </a>
+      <a class="post-item" href="#">
+        <span class="lognum">LOG_077&nbsp;&nbsp;<span class="cat">딥다이브</span></span>
+        <h2><mark>리액트 렌더링 최적화 방법 총정리</mark></h2>
+        <p class="desc">리렌더링이 일어나는 조건부터 memo·useMemo·useCallback을 언제 써야 하는지까지 한 번에 정리.</p>
+        <div class="meta">2023.12.07&nbsp;&nbsp;·&nbsp;&nbsp;난이도 ★★☆☆☆&nbsp;&nbsp;·&nbsp;&nbsp;14 min</div>
+      </a>
+      <a class="post-item" href="#">
+        <span class="lognum">LOG_072&nbsp;&nbsp;<span class="cat">딥다이브</span></span>
+        <h2><mark>TypeScript, 왜 써야 할까?</mark></h2>
+        <p class="desc">"그냥 다들 쓰니까"에서 벗어나기. 타입 시스템이 실제로 막아주는 사고들을 코드로 확인한다.</p>
+        <div class="meta">2023.04.02&nbsp;&nbsp;·&nbsp;&nbsp;난이도 ★★☆☆☆&nbsp;&nbsp;·&nbsp;&nbsp;11 min</div>
+      </a>
+    </section>
+  </div>
+  <footer class="site"><div class="col">
+    <span>© 2026 Zibu — 기록으로 증명</span>
+    <span><a href="#">GitHub</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="#">RSS</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="#">Tistory 아카이브</a></span>
+  </div></footer>
+</div>
+
+<div class="board-label">② Post Detail — 1440</div>
+<div class="board">
+  <header class="site"><div class="col">
+    <span class="logo">SLOG<span class="cursor">_</span></span>
+    <nav class="menu"><a href="#">글</a><a href="#">시리즈</a><a href="#">소개</a><a href="#">RSS</a></nav>
+  </div></header>
+  <div class="col">
+    <div class="post-head">
+      <span class="lognum">LOG_083&nbsp;&nbsp;·&nbsp;&nbsp;<span class="cat">트러블슈팅</span>&nbsp;&nbsp;·&nbsp;&nbsp;2025.07.10&nbsp;&nbsp;·&nbsp;&nbsp;<span class="stars">난이도 ★★★☆☆</span></span>
+      <h1>다건·단건 파일 전송 구현 —<br><mark>FormData와 multipart</mark> 제대로 알기</h1>
+      <div class="tldr">
+        <span class="label">TL;DR</span>
+        파일은 바이너리라 JSON으로 못 보낸다. <mark>FormData에 담아 multipart/form-data로</mark> 보내야 하고, 첨부 UI는 기본 input을 숨기고 ref로 클릭을 위임하면 깔끔하게 만들 수 있다.
+      </div>
+      <div class="kw"><span>1️⃣ FormData</span><span>2️⃣ multipart/form-data</span></div>
+    </div>
+    <article>
+      <h2><span class="check">✅</span>상황 (요구사항)</h2>
+      <div class="dialog">
+        <b>설계 부장님</b> : 배포 서버 인증서를 관리자가 UI에서 직접 첨부해야 되고, 플랫폼마다 라이센스 파일들을 업로드할 수 있어야 돼~<br>
+        <b>백엔드 대리님</b> : 프론트에서 파일만 전송해주면 쿠버 환경에 주입되게 처리할게요!<br>
+        <b>예스맨</b> : YES! 인증서는 단건 + 다른 데이터와 같이, 라이센스는 3개 파일 전송~
+      </div>
+      <p>일감을 받고 가장 먼저 든 생각은 두 가지였다. '첨부 UI를 어떻게 그리지?' 그리고 '첨부한 파일을 어떤 형태로 보관하고 전송하지?' 평소처럼 <code>Content-Type: application/json</code>으로 보낼 수 없다는 것부터가 출발점이다.</p>
+      <h2><span class="check">✅</span>File 전용 데이터, Multipart Type</h2>
+      <p>File 인터페이스는 Blob을 상속받는 바이너리 데이터다. FormData에 담아 <code>multipart/form-data</code>로 보내야 하고, FormData는 일반 객체처럼 직렬화되지 않아 콘솔에 바로 찍히지 않는다.</p>
+      <pre><span class="c">// 데이터 저장</span>
+formData.<span class="f">append</span>(<span class="s">'data'</span>, JSON.<span class="f">stringify</span>({ data: data.text }));
+formData.<span class="f">append</span>(data.file.type, data.file);
+
+<span class="c">// 출력 — FormData는 console.log로 바로 안 보인다</span>
+<span class="k">for</span> (<span class="k">const</span> pair <span class="k">of</span> formData.<span class="f">entries</span>()) {
+  console.<span class="f">log</span>(pair[0] + <span class="s">': '</span> + pair[1]);
+}</pre>
+      <div class="img-ph">IMG — 요청 본문 boundary 구분 스크린샷</div>
+      <h2><span class="check">✅</span>결과 &amp; 배운 점</h2>
+      <p>단건은 데이터와 파일을 한 FormData에, 다건은 같은 key로 여러 번 append. <mark>boundary는 브라우저가 자동 생성하므로 Content-Type을 직접 지정하지 않는 것이 오히려 정답</mark>이었다.</p>
+      <div class="refs">
+        <span class="label">참고한 링크</span>
+        <a href="#">MDN — Using FormData Objects</a>
+        <a href="#">MDN — File API</a>
+      </div>
+      <div class="series">
+        <a href="#"><span class="dir">← LOG_082</span><span class="t">Next.js standalone으로 HTTPS 적용하기</span></a>
+        <a href="#" style="text-align:right"><span class="dir">LOG_084 →</span><span class="t">(다음 기록을 준비 중)</span></a>
+      </div>
+      <div class="comments">💬 giscus — GitHub 계정으로 댓글</div>
+    </article>
+  </div>
+</div>
+
+</body>
+</html>

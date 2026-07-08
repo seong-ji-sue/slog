@@ -1,0 +1,1326 @@
+{
+  "img_ok": 355,
+  "img_fail": [],
+  "posts": [
+    {
+      "id": 12,
+      "file": "012-자바 정의, 실행 환경 및 초기세팅.md",
+      "title": "자바 정의, 실행 환경 및 초기세팅",
+      "date": "2021-12-22 16:21:00 +0900",
+      "category": "공부(Study)/언어(JS, TS)",
+      "tags": [
+        "HelloWorld출력",
+        "java",
+        "jdk",
+        "jre",
+        "JVM",
+        "자바",
+        "자바정의",
+        "초기세팅",
+        "환경설정"
+      ],
+      "body_chars": 4588
+    },
+    {
+      "id": 13,
+      "file": "013-데이터 타입 구조 종류, JVM 자료구조, 입력과 출력시.md",
+      "title": "데이터 타입 구조 종류,  JVM 자료구조, 입력과 출력시",
+      "date": "2021-12-22 18:35:00 +0900",
+      "category": "공부(Study)/언어(JS, TS)",
+      "tags": [
+        "java",
+        "데이터타입",
+        "메모리구조",
+        "아스키코드",
+        "자바",
+        "진수표기법",
+        "표준입출력"
+      ],
+      "body_chars": 4799
+    },
+    {
+      "id": 54,
+      "file": "054-블록체인 기술 _ 개념과 의미.md",
+      "title": "블록체인 기술 _ 개념과 의미",
+      "date": "2021-05-08 21:32:00 +0900",
+      "category": "잡지식(Miscellaneous Knowledge)",
+      "tags": [],
+      "body_chars": 3668
+    },
+    {
+      "id": 105,
+      "file": "105-DOM 완전히 잡아가기~!, 노드접근 ,CSS속성부여 및 삭제, 노드 추가 제거 , dir VS log.md",
+      "title": "DOM 완전히 잡아가기~!, 노드접근 ,CSS속성부여 및 삭제, 노드 추가 제거 , dir VS log",
+      "date": "2021-08-28 02:43:00 +0900",
+      "category": "공부(Study)/언어(JS, TS)",
+      "tags": [
+        "2주차",
+        "addEventListener",
+        "dom",
+        "html",
+        "pre-course",
+        "Wecode",
+        "노드",
+        "위코드",
+        "자바스크립트",
+        "코드잇"
+      ],
+      "body_chars": 11499
+    },
+    {
+      "id": 111,
+      "file": "111-모던스크립트, 자바스크립트의 깝놀 정보(변수, 함수), var let const 차이점 깔끔 정리!.md",
+      "title": "모던스크립트, 자바스크립트의 깝놀 정보(변수, 함수), var let const 차이점 깔끔 정리!",
+      "date": "2021-07-20 17:11:00 +0900",
+      "category": "공부(Study)/언어(JS, TS)",
+      "tags": [],
+      "body_chars": 5399
+    },
+    {
+      "id": 113,
+      "file": "113-함수 만드는 법 (종합본~!), 함수 활용, arguments활용, 파라미터 활용, this(생활코딩으로 살짤다룸).md",
+      "title": "함수 만드는 법 (종합본~!), 함수 활용, arguments활용, 파라미터 활용, this(생활코딩으로 살짤다룸)",
+      "date": "2021-07-21 20:13:00 +0900",
+      "category": "공부(Study)/언어(JS, TS)",
+      "tags": [],
+      "body_chars": 6270
+    },
+    {
+      "id": 114,
+      "file": "114-a b c(조건 연산자의 표현식 버전),spread구문 , 객체 프로퍼티, 구조분해 ,에러 -- 토종을 파괴하는 간첩들 모임!(2015버전이후.md",
+      "title": "a ? b : c(조건 연산자의 표현식 버전),spread구문 , 객체 프로퍼티, 구조분해 ,에러 --> 토종을 파괴하는 간첩들 모임!(2015버전이후 사용가능)",
+      "date": "2021-07-22 23:47:00 +0900",
+      "category": "공부(Study)/언어(JS, TS)",
+      "tags": [],
+      "body_chars": 7170
+    },
+    {
+      "id": 118,
+      "file": "118-변수(정의, 선언, 호출), 데이터 타입(종류, 연산시), 함수(선언, 사용방법), 조건식(종류, 선언, 사용방법).md",
+      "title": "변수(정의, 선언, 호출), 데이터 타입(종류, 연산시), 함수(선언, 사용방법), 조건식(종류, 선언, 사용방법)",
+      "date": "2021-07-27 18:55:00 +0900",
+      "category": "공부(Study)/언어(JS, TS)",
+      "tags": [
+        "pullstack",
+        "week1",
+        "개발자부트캠프",
+        "사전학습",
+        "위코드",
+        "자바스크립트",
+        "풀스택"
+      ],
+      "body_chars": 14022
+    },
+    {
+      "id": 123,
+      "file": "123-배열이란 , 배열의 메소드(추가, 삭제 등등) , 반복문의 종류(for, while), 제어자(break, continue), 배열의 반복문 메.md",
+      "title": "배열이란? , 배열의 메소드(추가, 삭제 등등) , 반복문의 종류(for, while), 제어자(break, continue), 배열의 반복문 메소드(forEach, map등등), 야구게임 만들기",
+      "date": "2021-08-03 21:59:00 +0900",
+      "category": "공부(Study)/언어(JS, TS)",
+      "tags": [
+        "codeit",
+        "week2",
+        "반복문",
+        "배열",
+        "배열메소드",
+        "배열반복문메소드",
+        "코드잇"
+      ],
+      "body_chars": 7715
+    },
+    {
+      "id": 126,
+      "file": "126-웹브라우저의 구동 원리, URL등 용어 개념,JSON , AJAX -- 졸지마라 여기서부터 중요하다~!😅.md",
+      "title": "웹브라우저의 구동 원리, URL등 용어 개념,JSON , AJAX --> 졸지마라 여기서부터 중요하다~!😅",
+      "date": "2021-09-18 17:32:00 +0900",
+      "category": "공부(Study)/리엑트(React)",
+      "tags": [
+        "5주차",
+        "ajax",
+        "API",
+        "JSON이란",
+        "백엔드",
+        "비동기실행",
+        "서버통신방법",
+        "웹",
+        "웹프로그래밍",
+        "위코드"
+      ],
+      "body_chars": 8322
+    },
+    {
+      "id": 127,
+      "file": "127-비동기 함수란 fetch 함수, req res , Promise객체란 , .then메소드란 , catch finally 사용법, await as.md",
+      "title": "비동기 함수란? fetch 함수, req ?? res ?? , Promise객체란? , .then메소드란? , catch finally 사용법, await async",
+      "date": "2021-09-29 21:29:00 +0900",
+      "category": "공부(Study)/언어(JS, TS)",
+      "tags": [
+        ".then",
+        "async",
+        "await",
+        "Fetch",
+        "Promise",
+        "requset",
+        "response",
+        "Wecode",
+        "오류체크",
+        "위코드"
+      ],
+      "body_chars": 9864
+    },
+    {
+      "id": 128,
+      "file": "128-객체의 기초 정의, 객체의 요소 추가 삭제 수정 방법, 내장객체(DOM,BOM), 라이브러리VS프레임워크.md",
+      "title": "객체의 기초 정의, 객체의 요소 추가 삭제 수정 방법, 내장객체(DOM,BOM), 라이브러리VS프레임워크",
+      "date": "2021-08-08 13:28:00 +0900",
+      "category": "공부(Study)/언어(JS, TS)",
+      "tags": [
+        "Wecode",
+        "week3",
+        "객체기초",
+        "객체선언방법",
+        "객체정의",
+        "객체추가삭제수정",
+        "내장객체종류",
+        "배열+객체",
+        "위코드",
+        "프레임워크+라이브러리"
+      ],
+      "body_chars": 4315
+    },
+    {
+      "id": 129,
+      "file": "129-HTML의 정의, HTML 태그 종류 (필요한것들만 다룸~!!), HTML에서 CSS+ JavaScript 다루기.md",
+      "title": "HTML의 정의, HTML 태그 종류 (필요한것들만 다룸~!!), HTML에서 CSS+ JavaScript 다루기",
+      "date": "2021-08-12 20:30:00 +0900",
+      "category": "공부(Study)/웹퍼블리싱(CSS, HTML)",
+      "tags": [
+        "html",
+        "HTML에서CSS",
+        "HTML에서JS",
+        "week4",
+        "wocode",
+        "사전학습",
+        "위코드",
+        "태그종류"
+      ],
+      "body_chars": 4956
+    },
+    {
+      "id": 132,
+      "file": "132-Git이랑 GitHub랑 차이가 뭐임 , Git 파일공간 +상태 +커널 명령어 , 코드 구현해보기.md",
+      "title": "Git이랑 GitHub랑 차이가 뭐임? , Git 파일공간 +상태 +커널 명령어 , 코드 구현해보기",
+      "date": "2021-08-29 19:00:00 +0900",
+      "category": "공부(Study)/버전관리(Git)",
+      "tags": [
+        "bash명령어",
+        "GitHub",
+        "git이란?",
+        "pre-course",
+        "Wecode",
+        "부트캠프",
+        "상태종류",
+        "위코드",
+        "코드잇"
+      ],
+      "body_chars": 12865
+    },
+    {
+      "id": 134,
+      "file": "134-CSS란 , 속성 총정리~!(폰트수정, 그리드, 배경설정, 영역관리), display inline 차이 알고있음.md",
+      "title": "CSS란?,  속성 총정리~!(폰트수정, 그리드, 배경설정, 영역관리), display inline 차이 알고있음?",
+      "date": "2021-08-12 20:31:00 +0900",
+      "category": "공부(Study)/웹퍼블리싱(CSS, HTML)",
+      "tags": [
+        "CSS",
+        "css속성",
+        "Wecode",
+        "week4",
+        "속성종류",
+        "위코드"
+      ],
+      "body_chars": 4394
+    },
+    {
+      "id": 138,
+      "file": "138-Flex 개념 정리 , Flex 속성 총정리~!! (실습하는 페이지 따로 링크 남김~!).md",
+      "title": "Flex 개념 정리 , Flex 속성 총정리~!! (실습하는 페이지 따로 링크 남김~!)",
+      "date": "2021-08-21 16:34:00 +0900",
+      "category": "공부(Study)/웹퍼블리싱(CSS, HTML)",
+      "tags": [
+        "CSS",
+        "Flex",
+        "html",
+        "pre-course",
+        "Wecode",
+        "week1",
+        "개구리실습",
+        "위코드",
+        "정렬"
+      ],
+      "body_chars": 2472
+    },
+    {
+      "id": 139,
+      "file": "139-Semantic Web란 , Semantic Tag 왜 써야되는지, 태그종류, img태그 VS background-image 속성 , 개인적인.md",
+      "title": "Semantic Web란?, Semantic Tag 왜 써야되는지, 태그종류, img태그 VS background-image 속성 , 개인적인 뇌피셜",
+      "date": "2021-08-19 00:19:00 +0900",
+      "category": "공부(Study)/웹퍼블리싱(CSS, HTML)",
+      "tags": [
+        "backgound속성",
+        "CSS",
+        "html",
+        "img태그",
+        "pre-course",
+        "semantic tag",
+        "Wecode",
+        "부트캠프",
+        "위코드",
+        "이미지삽입방법"
+      ],
+      "body_chars": 2977
+    },
+    {
+      "id": 141,
+      "file": "141-position 속성값 정의, display 속성값 정의 , float 속성값 정의 , 코드 실습, 왜 쓰는지 이유 생각 , 이제 익숙해질때도.md",
+      "title": "position 속성값 정의, display 속성값 정의 , float 속성값 정의 , 코드 실습, 왜 쓰는지 이유 생각 , 이제 익숙해질때도 됬다....",
+      "date": "2021-08-19 23:33:00 +0900",
+      "category": "공부(Study)/웹퍼블리싱(CSS, HTML)",
+      "tags": [
+        "Display",
+        "float",
+        "position",
+        "pre-course",
+        "Wecode",
+        "빡코딩",
+        "속성값정리",
+        "위코드",
+        "이제그만~",
+        "코드실습"
+      ],
+      "body_chars": 3561
+    },
+    {
+      "id": 142,
+      "file": "142-모르는 개념, 모르는 코드 정리~! , title 왜 씀 , 테이블태그 완벽 , hover 다른요소에 주기!, media에 놀라운 사실~!.md",
+      "title": "모르는 개념, 모르는 코드 정리~! , title 왜 씀?,  테이블태그 완벽?, hover 다른요소에 주기!, media에 놀라운 사실~!",
+      "date": "2021-08-21 15:27:00 +0900",
+      "category": "공부(Study)/웹퍼블리싱(CSS, HTML)",
+      "tags": [
+        "CSS",
+        "html",
+        "pre-course",
+        "Wecode",
+        "week1",
+        "위코드",
+        "헬replit"
+      ],
+      "body_chars": 3799
+    },
+    {
+      "id": 143,
+      "file": "143-Date 객체 메소드 정리 , String 메소드 정리, 사용자 정의 객체 메소드 , 그냥 모르는것들, 블로그 기능중 개 궁금한것!.md",
+      "title": "Date 객체 메소드 정리 , String 메소드 정리, 사용자 정의 객체 메소드 , 그냥 모르는것들, 블로그 기능중 개 궁금한것!",
+      "date": "2021-08-21 18:18:00 +0900",
+      "category": "공부(Study)/언어(JS, TS)",
+      "tags": [
+        "date객체",
+        "js",
+        "pre-course",
+        "String메소드",
+        "Wecode",
+        "week1",
+        "객체메소드",
+        "위코드",
+        "자바스크립트",
+        "캐캐캐궁금"
+      ],
+      "body_chars": 4738
+    },
+    {
+      "id": 144,
+      "file": "144-위코드 Week1(Pre-Course) - 레알찐후기~! , 해야될거~!, Replit 풀면서 모르는 코드 개념 , TIL정리 모음~!😂.md",
+      "title": "위코드 Week1(Pre-Course) - 레알찐후기~! , 해야될거~!,  Replit 풀면서 모르는 코드 개념 , TIL정리 모음~!😂",
+      "date": "2021-08-21 21:24:00 +0900",
+      "category": "교육(Education)",
+      "tags": [
+        "Wecode",
+        "week1",
+        "ㅖpre-course",
+        "레알후기",
+        "부캠후기",
+        "위코드",
+        "위코드후기",
+        "일정",
+        "찐후기",
+        "해야되는거"
+      ],
+      "body_chars": 5779
+    },
+    {
+      "id": 145,
+      "file": "145-위코드 Week2(Pre-Course) - 레알찐후기~! , 해야될거~!, 궁금한 거 (한마디로 장난아니다~!!)💁‍♀️💁‍♂️.md",
+      "title": "위코드 Week2(Pre-Course) - 레알찐후기~! , 해야될거~!, 궁금한 거 (한마디로 장난아니다~!!)💁‍♀️💁‍♂️",
+      "date": "2021-08-29 19:13:00 +0900",
+      "category": "교육(Education)",
+      "tags": [
+        "2주차",
+        "pre-course",
+        "Wecode",
+        "부트캠프",
+        "위벅스",
+        "위코드",
+        "찐후기",
+        "풀스택2기"
+      ],
+      "body_chars": 4048
+    },
+    {
+      "id": 146,
+      "file": "146-Webucks 클론~!! (드디어~!!) , 미션 구현하는법, 어려웠던것~! , 나의 구현파일~!!.md",
+      "title": "Webucks 클론~!! (드디어~!!) , 미션 구현하는법, 어려웠던것~! , 나의 구현파일~!!",
+      "date": "2021-08-29 18:59:00 +0900",
+      "category": "교육(Education)",
+      "tags": [
+        "pre-course",
+        "webucks",
+        "Wecode",
+        "떨림",
+        "스타벅스클론",
+        "위벅스",
+        "위코드",
+        "위코드홍보",
+        "첫과제",
+        "풀스택2기"
+      ],
+      "body_chars": 4414
+    },
+    {
+      "id": 147,
+      "file": "147-위코드 Week2(Refactoring , 기본편) - Refactoring이란 , alt를 왜써줘야되는지 등 기본적으로 코드를 치면서 다치고.md",
+      "title": "위코드 Week2(Refactoring , 기본편) - Refactoring이란???, alt를 왜써줘야되는지 등 기본적으로 코드를 치면서 다치고 난뒤에 점검해야될 사항들~!!!",
+      "date": "2021-09-07 12:10:00 +0900",
+      "category": "교육(Education)",
+      "tags": [
+        "notion",
+        "Refactoring",
+        "smenticTag",
+        "week2",
+        "기초",
+        "들여씌기",
+        "리팩토링",
+        "위코드"
+      ],
+      "body_chars": 6958
+    },
+    {
+      "id": 149,
+      "file": "149-create-react-app 설치방법 , 폴더에 react 관련 파일 폴더 설치하기 , VScode상 터미널 세팅하기, 빌드 설정하기, 개인.md",
+      "title": "create-react-app 설치방법 , 폴더에 react 관련 파일 폴더 설치하기 , VScode상 터미널 세팅하기, 빌드 설정하기, 개인 서버 연결하기",
+      "date": "2021-08-29 22:31:00 +0900",
+      "category": "공부(Study)/리엑트(React)",
+      "tags": [
+        "3주차",
+        "creat-react-app",
+        "react",
+        "Wecode",
+        "리엑트",
+        "리엑트설치",
+        "생활코딩",
+        "위코드",
+        "코드잇"
+      ],
+      "body_chars": 5214
+    },
+    {
+      "id": 151,
+      "file": "151-위코드 Week3(Question) - 질문한것들~! , 모르는것들~! , 에러난부분~! npm install할때 , 리엑트파일 git clon.md",
+      "title": "위코드 Week3(Question) - 질문한것들~! , 모르는것들~! , 에러난부분~! npm install할때 , 리엑트파일 git clone할때 , self closing tag , font-awsome, 운영체제 호환(LF), gitHub 커밋메세지 수정",
+      "date": "2021-09-07 12:10:00 +0900",
+      "category": "교육(Education)",
+      "tags": [
+        "Wecode",
+        "모르는것",
+        "부트캠프",
+        "스스로학습",
+        "에러내용",
+        "위코드",
+        "질문",
+        "커뮤니티",
+        "코딩"
+      ],
+      "body_chars": 5748
+    },
+    {
+      "id": 152,
+      "file": "152-리엑트 필수 구현 TIL, State란 Props란 , 이벤트 어떻게 써용 , 참고사이트.md",
+      "title": "리엑트 필수 구현 TIL, State란??? Props란??? , 이벤트 어떻게 써용??? , 참고사이트",
+      "date": "2021-09-07 11:11:00 +0900",
+      "category": "공부(Study)/리엑트(React)",
+      "tags": [
+        "bind",
+        "FOUNDATION",
+        "preventDefault()",
+        "props",
+        "state",
+        "Wecode",
+        "리엑트",
+        "생활코딩",
+        "위코드",
+        "이벤트"
+      ],
+      "body_chars": 8399
+    },
+    {
+      "id": 155,
+      "file": "155-위코드 Week3,4(Foundation, 프론트엔드) - 리엑트 기간~!, 위벅스 리엑트화, 레알찐후기~! , 해야될거~!, 궁금한 거 (한마.md",
+      "title": "위코드 Week3,4(Foundation, 프론트엔드) -  리엑트 기간~!, 위벅스 리엑트화, 레알찐후기~! , 해야될거~!, 궁금한 거 (한마디로 장난아니다~!!)💁‍♀️💁‍♂️",
+      "date": "2021-09-07 11:33:00 +0900",
+      "category": "교육(Education)",
+      "tags": [
+        "FOUNDATION",
+        "Wecode",
+        "week3",
+        "리엑트",
+        "부트캠프",
+        "위코드",
+        "찐후기",
+        "해야될것"
+      ],
+      "body_chars": 4564
+    },
+    {
+      "id": 157,
+      "file": "157-위코드 Foundation Week3,4(Refactoring , 프론트편) - 리팩토링 하는방법 CSS 를 SCSS화 하기, import하는방.md",
+      "title": "위코드 Foundation Week3,4(Refactoring , 프론트편) -  리팩토링 하는방법 CSS 를 SCSS화 하기, import하는방법, 들여쓰기(기초부분), 구조분해 적극 활용하기~!, 3항연산자 마구 쓰기",
+      "date": "2021-09-13 00:37:00 +0900",
+      "category": "교육(Education)",
+      "tags": [
+        "FOUNDATION",
+        "Frontend Refactoring",
+        "react",
+        "Wecode",
+        "꼭지켜야됨",
+        "위코드"
+      ],
+      "body_chars": 5501
+    },
+    {
+      "id": 159,
+      "file": "159-데이터베이스란 뭐지 관계형 비관계형 , PK FK 는 뭥미 1대다 1대다 다대다 ~ 꼭알자~.md",
+      "title": "데이터베이스란 뭐지?? 관계형 ?? 비관계형??? , PK FK 는 뭥미?? 1대다 1대다 다대다 ~ 꼭알자~",
+      "date": "2021-09-18 17:35:00 +0900",
+      "category": "공부(Study)/데이터베이스(mysql, oracleDB)",
+      "tags": [
+        "5주차",
+        "Backend",
+        "MySQL",
+        "pkfk",
+        "Wecode",
+        "관계형",
+        "다대다",
+        "비관계형",
+        "위코드",
+        "정의"
+      ],
+      "body_chars": 5305
+    },
+    {
+      "id": 160,
+      "file": "160-이벤트 루프 실행 과정, 논 블로킹이란 , 프로세스와 스레드의 차이점, 스레드+ 논 블로킹 예시.md",
+      "title": "이벤트 루프 실행 과정, 논 블로킹이란? , 프로세스와 스레드의 차이점, 스레드+ 논 블로킹 예시",
+      "date": "2021-09-24 16:49:00 +0900",
+      "category": "공부(Study)/언어(JS, TS)",
+      "tags": [
+        "node.js책",
+        "Wecode",
+        "블로킹",
+        "스레드",
+        "위코드",
+        "이벤트루프",
+        "추각코",
+        "프로세스"
+      ],
+      "body_chars": 3747
+    },
+    {
+      "id": 162,
+      "file": "162-위코드 Week 5(Foundation, 후기) - 노드 세션 시작~! , 해야될것, 궁금한것, 모르는 용어~! , TIL쓴거 최종 정리.md",
+      "title": "위코드 Week 5(Foundation, 후기) - 노드 세션 시작~! , 해야될것, 궁금한것, 모르는 용어~! , TIL쓴거 최종 정리",
+      "date": "2021-09-19 20:32:00 +0900",
+      "category": "교육(Education)",
+      "tags": [
+        "5주차",
+        "node",
+        "ORM",
+        "prisma",
+        "SQL",
+        "Wecode",
+        "부트캠프 후기",
+        "빽엔드",
+        "위코드",
+        "질의문"
+      ],
+      "body_chars": 4744
+    },
+    {
+      "id": 164,
+      "file": "164-위코드 Week5 (Project) - 프로젝트 초기세팅 가이드, Prittier, CRA세팅 , 서버세팅, gitignore 세팅, packa.md",
+      "title": "위코드 Week5 (Project) - 프로젝트 초기세팅 가이드, Prittier, CRA세팅 , 서버세팅, gitignore 세팅, package.json세팅 등등",
+      "date": "2021-09-19 23:57:00 +0900",
+      "category": "교육(Education)",
+      "tags": [
+        "node",
+        "react",
+        "webucks",
+        "Wecode",
+        "모르는거 물어보기",
+        "위코드",
+        "초기세팅가이드",
+        "프로젝트"
+      ],
+      "body_chars": 4691
+    },
+    {
+      "id": 165,
+      "file": "165-SQL 기본(DDL, DML, TCL), 트랜젝션, 함수, NULL.md",
+      "title": "SQL 기본(DDL, DML, TCL), 트랜젝션, 함수, NULL",
+      "date": "2023-04-21 17:24:00 +0900",
+      "category": "공부(Study)/데이터베이스(mysql, oracleDB)",
+      "tags": [
+        "DCL",
+        "DDL",
+        "DML",
+        "SQL",
+        "TCL",
+        "트랜젝션"
+      ],
+      "body_chars": 10847
+    },
+    {
+      "id": 166,
+      "file": "166-export랑 export default의 차이점 , 동기식 or 비동기식 때 예외 처리하는 방법, 에러 객체 종류.md",
+      "title": "export랑 export default의 차이점 , 동기식 or 비동기식 때 예외 처리하는 방법, 에러 객체 종류",
+      "date": "2021-09-24 15:32:00 +0900",
+      "category": "공부(Study)/언어(JS, TS)",
+      "tags": [
+        "5주차",
+        "export",
+        "export default",
+        "Import",
+        "Wecode",
+        "에러객체 종류",
+        "예외처리",
+        "위코드"
+      ],
+      "body_chars": 4093
+    },
+    {
+      "id": 169,
+      "file": "169-위코드 Week 6(추각코, 후기) - 추각코때 한것들~!, 궁금한거~!, 위코드 추각코 일정~! , 참고링크 , 직접작성한 솔직 100% 후기.md",
+      "title": "위코드 Week 6(추각코, 후기) - 추각코때 한것들~!, 궁금한거~!, 위코드 추각코 일정~! , 참고링크 , 직접작성한 솔직 100% 후기",
+      "date": "2021-09-26 23:30:00 +0900",
+      "category": "교육(Education)",
+      "tags": [
+        "express",
+        "node",
+        "Promise",
+        "SQL",
+        "Wecode",
+        "week6",
+        "복습",
+        "위코드",
+        "이벤트루프",
+        "추각코"
+      ],
+      "body_chars": 4638
+    },
+    {
+      "id": 171,
+      "file": "171-CRUD란 뭐임 RestAPI란 뭐임 HTTP 메소드 종류~!.md",
+      "title": "CRUD란 뭐임 RestAPI란 뭐임 HTTP 메소드 종류~!",
+      "date": "2021-09-29 21:30:00 +0900",
+      "category": "공부(Study)/언어(JS, TS)",
+      "tags": [],
+      "body_chars": 5083
+    },
+    {
+      "id": 172,
+      "file": "172-위코드 Week 7(Foundation, 마지막 후기) - 1주동안 한것들~~~!!, 질문한것들~!!, 알게된것들~!, 후기~!!! , 참고한것.md",
+      "title": "위코드 Week 7(Foundation, 마지막 후기) - 1주동안 한것들~~~!!, 질문한것들~!!, 알게된것들~!, 후기~!!! , 참고한것들~!",
+      "date": "2021-10-02 19:31:00 +0900",
+      "category": "교육(Education)",
+      "tags": [
+        "FOUNDATION",
+        "Wecode",
+        "week7",
+        "부트캠프",
+        "알게된거",
+        "위코드",
+        "질의응답",
+        "한것들",
+        "후기"
+      ],
+      "body_chars": 6123
+    },
+    {
+      "id": 174,
+      "file": "174-위코드 Week 9(1차 Project, 회고록) - 일정 총 정리, 기술 스택, 공유하고 싶은 코드, 알게 된 것들, 찐 후기.md",
+      "title": "위코드 Week 9(1차 Project, 회고록) - 일정 총 정리, 기술 스택, 공유하고 싶은 코드, 알게 된 것들, 찐 후기",
+      "date": "2021-10-17 17:47:00 +0900",
+      "category": "교육(Education)",
+      "tags": [
+        "1차프로젝트",
+        "Q&A",
+        "Wecode",
+        "공유하고싶은코드",
+        "부트캠프",
+        "위코드",
+        "프론트",
+        "회고록",
+        "후기"
+      ],
+      "body_chars": 16277
+    },
+    {
+      "id": 175,
+      "file": "175-위코드 week8(1차 Project, 프론트 후기) - 한것들~!!, 궁금한것들, 질의문답, 알게된것, 참고 링크 목록.md",
+      "title": "위코드 week8(1차 Project, 프론트 후기) - 한것들~!!, 궁금한것들, 질의문답, 알게된것, 참고 링크 목록",
+      "date": "2021-10-17 11:40:00 +0900",
+      "category": "교육(Education)",
+      "tags": [
+        "1차프젝",
+        "Project",
+        "Wecode",
+        "week8",
+        "개빡셈",
+        "부트캠프",
+        "위코드",
+        "프론트엔드"
+      ],
+      "body_chars": 4915
+    },
+    {
+      "id": 176,
+      "file": "176-위코드 week9(1차 Project, 빽엔드 후기) - 한것들~!!, 궁금한것들, 질의문답, 알게된것, 참고 링크 목록.md",
+      "title": "위코드 week9(1차 Project, 빽엔드 후기) - 한것들~!!, 궁금한것들, 질의문답, 알게된것, 참고 링크 목록",
+      "date": "2021-10-17 13:19:00 +0900",
+      "category": "교육(Education)",
+      "tags": [
+        "1차프로젝트",
+        "Wecode",
+        "week9",
+        "부트캠프",
+        "빽엔드",
+        "예외처리",
+        "위코드"
+      ],
+      "body_chars": 4494
+    },
+    {
+      "id": 178,
+      "file": "178-위코드 Week 10(1차 Project , 마무리 + Refactoring ) - 일정정리, 알게된거, 질문한거 등등.md",
+      "title": "위코드 Week 10(1차 Project , 마무리 + Refactoring ) - 일정정리, 알게된거, 질문한거  등등",
+      "date": "2021-10-25 00:11:00 +0900",
+      "category": "교육(Education)",
+      "tags": [],
+      "body_chars": 5589
+    },
+    {
+      "id": 180,
+      "file": "180-위코드 week11~12(2차 Project, 프론트 후기) - 2차 프로젝트 기간동안 실질적으로 한것들, 알게된것 , 질문한것.md",
+      "title": "위코드 week11~12(2차 Project, 프론트 후기) - 2차 프로젝트 기간동안 실질적으로 한것들, 알게된것 , 질문한것",
+      "date": "2021-11-08 12:14:00 +0900",
+      "category": "교육(Education)",
+      "tags": [],
+      "body_chars": 5176
+    },
+    {
+      "id": 181,
+      "file": "181-위코드 Week 12(2차 Project, 회고록) - 일정 총 정리, 기술스택, 공유하고싶은 코드, 알게된것들, 찐 후기.md",
+      "title": "위코드 Week 12(2차 Project, 회고록) - 일정 총 정리, 기술스택, 공유하고싶은 코드, 알게된것들, 찐 후기",
+      "date": "2021-11-08 12:17:00 +0900",
+      "category": "교육(Education)",
+      "tags": [
+        "2차프로젝트",
+        "stylecomponent",
+        "Wecode",
+        "부트캠프",
+        "프론트엔드",
+        "프립",
+        "함수형컴포넌트"
+      ],
+      "body_chars": 10869
+    },
+    {
+      "id": 182,
+      "file": "182-Redux 기초 개념 필수!.md",
+      "title": "Redux 기초 개념 필수!",
+      "date": "2021-11-15 12:00:00 +0900",
+      "category": "공부(Study)/리엑트(React)",
+      "tags": [
+        "action",
+        "Hook",
+        "react",
+        "reducer",
+        "Redux",
+        "store",
+        "리덕스",
+        "상태관리",
+        "전역상태관리"
+      ],
+      "body_chars": 4953
+    },
+    {
+      "id": 183,
+      "file": "183-위코드 Week 13~16(기업협업, 회고록) - 일정 총 정리, 기술스택, CRUD, 알게된것들, 찐 후기.md",
+      "title": "위코드 Week 13~16(기업협업, 회고록) - 일정 총 정리, 기술스택, CRUD, 알게된것들, 찐 후기",
+      "date": "2021-11-19 10:33:00 +0900",
+      "category": "교육(Education)",
+      "tags": [
+        "Bootcamp",
+        "Wecode",
+        "기업협업",
+        "부트캠프",
+        "블랙보드",
+        "아이비즈",
+        "위코드"
+      ],
+      "body_chars": 15989
+    },
+    {
+      "id": 184,
+      "file": "184-JDK Lombok Tomcat 초기세팅 및 설치.md",
+      "title": "JDK Lombok Tomcat 초기세팅 및 설치",
+      "date": "2021-12-27 18:34:00 +0900",
+      "category": "공부(Study)/스프링(Spring)",
+      "tags": [
+        "jdk",
+        "JUnit",
+        "lombok",
+        "Spring",
+        "sts3",
+        "tomcat",
+        "스프링",
+        "자바",
+        "초기세팅"
+      ],
+      "body_chars": 5656
+    },
+    {
+      "id": 185,
+      "file": "185-스프링 정의 및 특징, 어노테이션이란 , 의존성 주입이란 , Lombok을 써야되는 이유, servlet-context.xml root-cont.md",
+      "title": "스프링 정의 및 특징, 어노테이션이란?, 의존성 주입이란?, Lombok을 써야되는 이유, servlet-context.xml root-context.xml 차이점, 테스트 코드란?",
+      "date": "2021-12-28 23:19:00 +0900",
+      "category": "공부(Study)/스프링(Spring)",
+      "tags": [
+        "lombok",
+        "Spring",
+        "TDD",
+        "스프링",
+        "어노테이션",
+        "의존성주입",
+        "자바",
+        "특징"
+      ],
+      "body_chars": 7201
+    },
+    {
+      "id": 186,
+      "file": "186-OracleDB, sqlDeveloper, JDBC, Connection Poll 세팅 및 다운로드.md",
+      "title": "OracleDB, sqlDeveloper, JDBC, Connection Poll 세팅 및 다운로드",
+      "date": "2021-12-27 22:55:00 +0900",
+      "category": "공부(Study)/스프링(Spring)",
+      "tags": [
+        "datasource",
+        "jdbc",
+        "log4j",
+        "mapper",
+        "mybatis",
+        "Spring",
+        "sqldeveloper",
+        "스프링",
+        "자바",
+        "초기세팅"
+      ],
+      "body_chars": 8616
+    },
+    {
+      "id": 187,
+      "file": "187-React Native Cli 초기세팅(윈도우), 오류시 해결방법.md",
+      "title": "React Native Cli 초기세팅(윈도우), 오류시 해결방법",
+      "date": "2021-12-28 15:53:00 +0900",
+      "category": "공부(Study)/리엑트(React)",
+      "tags": [
+        "react-native-cli",
+        "reactnative",
+        "SDK",
+        "리엑트네이티브",
+        "안드로이드스튜디오",
+        "어플개발",
+        "오류"
+      ],
+      "body_chars": 10242
+    },
+    {
+      "id": 188,
+      "file": "188-스프링 MVC 구조 및 특징, Controller 사용방법, return 타입에따른 차이점, 파일 업로드방법, MVC 동작 원리 순서.md",
+      "title": "스프링 MVC 구조 및 특징, Controller 사용방법, return 타입에따른 차이점, 파일 업로드방법, MVC 동작 원리 순서",
+      "date": "2021-12-31 22:40:00 +0900",
+      "category": "공부(Study)/스프링(Spring)",
+      "tags": [
+        "controller",
+        "model",
+        "view",
+        "궁금증",
+        "스프링",
+        "스프링MVC",
+        "오류해결",
+        "자바",
+        "파일업로드방법"
+      ],
+      "body_chars": 7220
+    },
+    {
+      "id": 189,
+      "file": "189-주니어 개발자의 포토폴리오 작성 방법(회고록, 후기+Q & A)).md",
+      "title": "주니어 개발자의 포토폴리오 작성 방법(회고록, 후기+Q & A))",
+      "date": "2023-05-25 01:27:00 +0900",
+      "category": "취업(Employment)",
+      "tags": [
+        "개발자",
+        "이력서",
+        "이력서넣기",
+        "자기소개서",
+        "자소서",
+        "취업준비",
+        "프론트엔드"
+      ],
+      "body_chars": 4934
+    },
+    {
+      "id": 190,
+      "file": "190-주니어 개발자의 면접(회고록, 면접 질문, 후기+Q & A).md",
+      "title": "주니어 개발자의 면접(회고록, 면접 질문, 후기+Q & A)",
+      "date": "2023-05-31 15:01:00 +0900",
+      "category": "취업(Employment)",
+      "tags": [
+        "react",
+        "면접",
+        "이력서",
+        "취업",
+        "취업준비",
+        "취준생",
+        "프론트",
+        "회고록"
+      ],
+      "body_chars": 13415
+    },
+    {
+      "id": 191,
+      "file": "191-리엑트 뷰 차이점 (코드 비교, 특징, 이벤트 사용 방법, 랜더링 시점).md",
+      "title": "리엑트 뷰 차이점 (코드 비교, 특징, 이벤트 사용 방법, 랜더링 시점)",
+      "date": "2022-03-29 16:46:00 +0900",
+      "category": "세미나(Seminar)",
+      "tags": [],
+      "body_chars": 7580
+    },
+    {
+      "id": 192,
+      "file": "192-Infrean 스프링 입문 강의 추천! 김영한님의 모든 것!.md",
+      "title": "Infrean 스프링 입문 강의 추천! 김영한님의 모든 것!",
+      "date": "2022-10-05 22:43:00 +0900",
+      "category": "공부(Study)/스프링(Spring)",
+      "tags": [
+        "김영한",
+        "스프링",
+        "스프링부트",
+        "스프링입문강의",
+        "인프런"
+      ],
+      "body_chars": 3898
+    },
+    {
+      "id": 193,
+      "file": "193-네트워크 관리사 2급 실기 - 가이드 라인 (시험 보기 전 체크).md",
+      "title": "네트워크 관리사 2급 실기 - 가이드 라인 (시험 보기 전 체크)",
+      "date": "2022-10-05 23:46:00 +0900",
+      "category": "취업(Employment)/자격증(Certificate)",
+      "tags": [],
+      "body_chars": 2077
+    },
+    {
+      "id": 194,
+      "file": "194-네트워크 관리사 2급 실기 - 라우터 설정.md",
+      "title": "네트워크 관리사 2급 실기 - 라우터 설정",
+      "date": "2022-10-06 17:05:00 +0900",
+      "category": "취업(Employment)/자격증(Certificate)",
+      "tags": [],
+      "body_chars": 6089
+    },
+    {
+      "id": 195,
+      "file": "195-네트워크 관리사 2급 실기 - 네트워크 설정.md",
+      "title": "네트워크 관리사 2급 실기 - 네트워크 설정",
+      "date": "2022-10-08 15:24:00 +0900",
+      "category": "취업(Employment)/자격증(Certificate)",
+      "tags": [],
+      "body_chars": 6977
+    },
+    {
+      "id": 196,
+      "file": "196-네트워크 관리사 2급 실기 - 이론(객관식, 주관식) 문제.md",
+      "title": "네트워크 관리사 2급 실기 - 이론(객관식, 주관식) 문제",
+      "date": "2022-10-08 16:44:00 +0900",
+      "category": "취업(Employment)/자격증(Certificate)",
+      "tags": [
+        "네트워크관리사",
+        "네트워크관리사2급",
+        "네트워크관리사2급실기",
+        "자격증"
+      ],
+      "body_chars": 7345
+    },
+    {
+      "id": 197,
+      "file": "197-스프링 프로젝트 생성 및 빌드 방법.md",
+      "title": "스프링 프로젝트 생성 및 빌드 방법",
+      "date": "2022-10-13 13:18:00 +0900",
+      "category": "공부(Study)/스프링(Spring)",
+      "tags": [
+        "Build",
+        "IntelliJ",
+        "java",
+        "Spring",
+        "스프링",
+        "스프링빌드",
+        "스프링프로젝트생성"
+      ],
+      "body_chars": 1720
+    },
+    {
+      "id": 198,
+      "file": "198-스프링 컨텐츠 종류 및 동작 방식.md",
+      "title": "스프링 컨텐츠 종류 및 동작 방식",
+      "date": "2022-10-13 13:37:00 +0900",
+      "category": "공부(Study)/스프링(Spring)",
+      "tags": [
+        "김영한",
+        "스프링",
+        "인프런"
+      ],
+      "body_chars": 3705
+    },
+    {
+      "id": 199,
+      "file": "199-스프링 데이터 객체(domain), Repository, Service, Controller 및 테스트 케이스.md",
+      "title": "스프링 데이터 객체(domain), Repository, Service, Controller 및 테스트 케이스",
+      "date": "2022-10-13 15:05:00 +0900",
+      "category": "공부(Study)/스프링(Spring)",
+      "tags": [
+        "기본",
+        "김영한",
+        "스프링",
+        "인프런"
+      ],
+      "body_chars": 8804
+    },
+    {
+      "id": 200,
+      "file": "200-스프링 DI, 의존성 주입.md",
+      "title": "스프링 DI, 의존성 주입",
+      "date": "2022-10-13 15:18:00 +0900",
+      "category": "공부(Study)/스프링(Spring)",
+      "tags": [
+        "김영한",
+        "스프링",
+        "의존관계주입",
+        "의존성주입",
+        "인프런"
+      ],
+      "body_chars": 3098
+    },
+    {
+      "id": 201,
+      "file": "201-스프링 DB 연결 및 JDBC Template, JPA.md",
+      "title": "스프링 DB 연결 및 JDBC Template, JPA",
+      "date": "2022-10-13 15:39:00 +0900",
+      "category": "공부(Study)/스프링(Spring)",
+      "tags": [],
+      "body_chars": 4870
+    },
+    {
+      "id": 202,
+      "file": "202-로그인을 처리하는 방식(Token, Session).md",
+      "title": "로그인을 처리하는 방식(Token, Session)",
+      "date": "2023-03-23 04:11:00 +0900",
+      "category": "세미나(Seminar)",
+      "tags": [
+        "cookies",
+        "oauth",
+        "SESSION",
+        "Token",
+        "로그인",
+        "로그인 방법",
+        "세션",
+        "소셜로그인",
+        "쿠키",
+        "토큰"
+      ],
+      "body_chars": 7010
+    },
+    {
+      "id": 203,
+      "file": "203-React Hook 종류와 쓰는 방법.md",
+      "title": "React Hook 종류와 쓰는 방법",
+      "date": "2023-03-24 21:35:00 +0900",
+      "category": "공부(Study)/리엑트(React)",
+      "tags": [
+        "react",
+        "React Hooks",
+        "useCallback",
+        "useContext",
+        "useEffect",
+        "useMemo",
+        "useRef",
+        "useState",
+        "리엑트",
+        "리엑트 훅"
+      ],
+      "body_chars": 7248
+    },
+    {
+      "id": 204,
+      "file": "204-웹 기본 동작 방식(GET, POST, 브라우저 랜더링).md",
+      "title": "웹 기본 동작 방식(GET, POST, 브라우저 랜더링)",
+      "date": "2023-03-29 15:25:00 +0900",
+      "category": "세미나(Seminar)",
+      "tags": [
+        "Get",
+        "Post",
+        "was",
+        "Web",
+        "동작방식",
+        "랜더링",
+        "웹브라우저"
+      ],
+      "body_chars": 5837
+    },
+    {
+      "id": 205,
+      "file": "205-Pagination 만드는 방법.md",
+      "title": "Pagination 만드는 방법",
+      "date": "2023-04-10 17:46:00 +0900",
+      "category": "세미나(Seminar)",
+      "tags": [
+        "pagination",
+        "react",
+        "react hook",
+        "typescript"
+      ],
+      "body_chars": 4297
+    },
+    {
+      "id": 206,
+      "file": "206-게시판 프로젝트 CRUD (F React, 혼자 진행).md",
+      "title": "게시판 프로젝트 CRUD (F: React, 혼자 진행)",
+      "date": "2023-04-20 18:06:00 +0900",
+      "category": "취업(Employment)/프로젝트(Project)",
+      "tags": [
+        "CRUD",
+        "pagination",
+        "react",
+        "게시판구현",
+        "페이지네이션"
+      ],
+      "body_chars": 6618
+    },
+    {
+      "id": 207,
+      "file": "207-JOIN 종류와 계층 쿼리, 그룹 함수, 윈도우 함수, 서브쿼리.md",
+      "title": "JOIN 종류와 계층 쿼리, 그룹 함수, 윈도우 함수, 서브쿼리",
+      "date": "2023-04-22 15:07:00 +0900",
+      "category": "공부(Study)/데이터베이스(mysql, oracleDB)",
+      "tags": [
+        "group function",
+        "join",
+        "SQL",
+        "Sub Query",
+        "Window Function",
+        "계층형 함수"
+      ],
+      "body_chars": 7821
+    },
+    {
+      "id": 208,
+      "file": "208-typescript Why ! ! (이유, 주의, 활용).md",
+      "title": "typescript Why?!?!?(이유, 주의, 활용)",
+      "date": "2023-11-30 14:20:00 +0900",
+      "category": "공부(Study)/언어(JS, TS)",
+      "tags": [
+        "typescript",
+        "타입스크립트",
+        "타입스크립트 사용 이유",
+        "타입활용",
+        "활용"
+      ],
+      "body_chars": 7788
+    },
+    {
+      "id": 209,
+      "file": "209-typescript 기초! 이 정도는 알고 있어야 함!.md",
+      "title": "typescript 기초! 이 정도는 알고 있어야 함!",
+      "date": "2023-12-01 09:40:00 +0900",
+      "category": "공부(Study)/언어(JS, TS)",
+      "tags": [
+        "Any",
+        "interface",
+        "Never",
+        "Type",
+        "typescript",
+        "void",
+        "기초",
+        "타입스크립트"
+      ],
+      "body_chars": 8320
+    },
+    {
+      "id": 210,
+      "file": "210-typescript Enum, 제네릭, 내장.md",
+      "title": "typescript Enum, 제네릭, 내장",
+      "date": "2023-12-01 10:25:00 +0900",
+      "category": "공부(Study)/언어(JS, TS)",
+      "tags": [
+        "conditional type",
+        "enum",
+        "infer",
+        "typescript"
+      ],
+      "body_chars": 11011
+    },
+    {
+      "id": 211,
+      "file": "211-Date 객체의 정의와 쓰면 안되는 이유.md",
+      "title": "Date 객체의 정의와 쓰면 안되는 이유",
+      "date": "2023-12-05 11:08:00 +0900",
+      "category": "공부(Study)/언어(JS, TS)",
+      "tags": [
+        "Date",
+        "javascript",
+        "javascript date",
+        "Moment",
+        "자바스크립트"
+      ],
+      "body_chars": 7244
+    },
+    {
+      "id": 212,
+      "file": "212-자바스크립트 일급객체 프로토타입 한번에 정리!.md",
+      "title": "자바스크립트 일급객체 프로토타입 한번에 정리!",
+      "date": "2023-12-06 09:51:00 +0900",
+      "category": "공부(Study)/언어(JS, TS)",
+      "tags": [
+        "javascript",
+        "Prototype",
+        "__proto",
+        "객체",
+        "상속",
+        "유사배열",
+        "일급객체",
+        "자바스크립트",
+        "프로토타입"
+      ],
+      "body_chars": 8990
+    },
+    {
+      "id": 213,
+      "file": "213-리엑트 랜더링 최적화 방법 총 정리~!!.md",
+      "title": "리엑트 랜더링 최적화 방법 총 정리~!!",
+      "date": "2023-12-07 10:40:00 +0900",
+      "category": "공부(Study)/리엑트(React)",
+      "tags": [],
+      "body_chars": 9680
+    },
+    {
+      "id": 214,
+      "file": "214-Recoil 기초 개념 필수!.md",
+      "title": "Recoil 기초 개념 필수!",
+      "date": "2023-12-12 09:49:00 +0900",
+      "category": "공부(Study)/리엑트(React)",
+      "tags": [
+        "atom",
+        "context",
+        "react",
+        "Recoil",
+        "Redux",
+        "state",
+        "리엑트",
+        "상태관리",
+        "전역상태"
+      ],
+      "body_chars": 6998
+    },
+    {
+      "id": 215,
+      "file": "215-여러 계정에서 ssh로 git clone 하기.md",
+      "title": "여러 계정에서 ssh로 git clone 하기",
+      "date": "2024-03-19 19:14:00 +0900",
+      "category": "공부(Study)/버전관리(Git)",
+      "tags": [],
+      "body_chars": 4649
+    },
+    {
+      "id": 216,
+      "file": "216-Tab 마다 로그인 정보를 다르게 동작하고 싶을 때.md",
+      "title": "Tab 마다 로그인 정보를 다르게 동작하고 싶을 때",
+      "date": "2024-03-28 18:06:00 +0900",
+      "category": "",
+      "tags": [
+        "localStorage",
+        "redis",
+        "sessionStorage",
+        "Tab로그인",
+        "로그인"
+      ],
+      "body_chars": 3322
+    },
+    {
+      "id": 218,
+      "file": "218-Next.js에서 커스텀 서버 없이 standalone 적용 (HTTPS 설정, 환경변수 주입).md",
+      "title": "Next.js에서 커스텀 서버 없이 standalone 적용 (HTTPS 설정, 환경변수 주입)",
+      "date": "2025-07-10 00:45:00 +0900",
+      "category": "일감",
+      "tags": [
+        "https",
+        "Next.js",
+        "NGINX",
+        "server.js",
+        "SSL",
+        "stanalone",
+        "번들최적화",
+        "빌드최적화",
+        "이미지최적화",
+        "환경변수주입"
+      ],
+      "body_chars": 4074
+    },
+    {
+      "id": 219,
+      "file": "219-다건, 단건 파일 전송 로직 구현- UI, 데이터 전송 구현.md",
+      "title": "다건, 단건 파일 전송 로직 구현- UI, 데이터 전송 구현",
+      "date": "2025-07-10 18:26:00 +0900",
+      "category": "일감",
+      "tags": [
+        "file",
+        "FormData",
+        "Multipart",
+        "Next.js",
+        "react",
+        "바이러리파일",
+        "파일 전송"
+      ],
+      "body_chars": 7920
+    }
+  ],
+  "errors": []
+}

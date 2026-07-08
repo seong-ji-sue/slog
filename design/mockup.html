@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SLOG — 디자인 목업</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+  :root {
+    --bg: #0A0A0B; --surface: #161618; --border: #26262A;
+    --text: #ECEDEE; --sub: #9BA1A6; --accent: #FFD400;
+    --code-green: #7EE787; --code-blue: #79C0FF; --code-orange: #FFA657; --code-gray: #8B949E;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #2E2E33; font-family: "Pretendard Variable", Pretendard, -apple-system, sans-serif; padding: 40px; }
+  .mono { font-family: "JetBrains Mono", monospace; }
+  .artboard-label { color: #fff; font: 500 13px "JetBrains Mono", monospace; margin: 48px 0 12px; }
+  .artboard { background: var(--bg); color: var(--text); border-radius: 8px; overflow: hidden; }
+  .col { max-width: 672px; margin: 0 auto; padding: 0 24px; }
+
+  nav { display: flex; justify-content: space-between; align-items: center; padding-top: 36px; }
+  .logo { font: 700 20px "JetBrains Mono", monospace; color: var(--accent); letter-spacing: -0.5px; }
+  .menu { display: flex; gap: 22px; }
+  .menu a { color: var(--sub); text-decoration: none; font-size: 14px; font-weight: 500; }
+  .menu a:hover { color: var(--text); }
+
+  .hero { padding: 72px 0 44px; }
+  .hero h1 { font-size: 32px; font-weight: 900; line-height: 1.3; }
+  .hero p { margin-top: 12px; color: var(--sub); font-size: 16px; line-height: 1.7; }
+  .hero .em { color: var(--accent); font-weight: 600; }
+
+  .label { font: 500 12px "JetBrains Mono", monospace; color: var(--accent); letter-spacing: 1.5px; }
+
+  .post-item { padding: 24px 0; border-bottom: 1px solid var(--border); display: block; text-decoration: none; }
+  .post-item h2 { font-size: 21px; font-weight: 700; color: var(--text); line-height: 1.45; }
+  .post-item:hover h2, .post-item.hot h2 { color: var(--accent); }
+  .meta { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+  .meta time { font: 400 12px "JetBrains Mono", monospace; color: var(--sub); }
+  .chip { background: var(--surface); border-radius: 4px; padding: 3px 8px; font: 500 11px "JetBrains Mono", monospace; color: var(--sub); }
+  .stars { font: 400 11px "JetBrains Mono", monospace; color: var(--accent); }
+  .post-item p { margin-top: 8px; color: var(--sub); font-size: 15px; line-height: 1.7; }
+
+  footer { display: flex; justify-content: space-between; padding: 48px 0; color: var(--sub); font: 400 12px "JetBrains Mono", monospace; }
+
+  /* ---------- post detail ---------- */
+  .post-header { padding-top: 64px; }
+  .post-header h1 { font-size: 34px; font-weight: 900; line-height: 1.35; margin-top: 14px; }
+  .tldr { margin-top: 28px; background: var(--surface); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 16px 20px; font-size: 15.5px; line-height: 1.7; }
+  .tldr b { color: var(--accent); }
+  .keywords { display: flex; gap: 8px; margin-top: 16px; }
+  .kw { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 5px 10px; font: 500 12.5px "JetBrains Mono", monospace; color: var(--text); }
+
+  article { padding-bottom: 40px; }
+  article h2 { font-size: 23px; font-weight: 700; margin: 44px 0 14px; }
+  article h2 .check { color: var(--accent); margin-right: 6px; }
+  article p { font-size: 16px; line-height: 1.8; color: var(--text); margin: 14px 0; }
+  article .dialog { border-left: 3px solid var(--border); padding: 4px 18px; margin: 18px 0; color: var(--sub); font-size: 15px; line-height: 1.9; }
+  article .dialog b { color: var(--text); font-weight: 600; }
+  pre { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; margin: 18px 0; overflow-x: auto; font: 400 13.5px/1.65 "JetBrains Mono", monospace; }
+  pre .k { color: var(--code-orange); } pre .f { color: var(--code-blue); } pre .s { color: var(--code-green); } pre .c { color: var(--code-gray); }
+  .img-ph { background: var(--surface); border: 1px dashed var(--border); border-radius: 8px; height: 220px; display: flex; align-items: center; justify-content: center; color: var(--sub); font-size: 13px; margin: 18px 0; }
+  .refs { background: var(--surface); border-radius: 8px; padding: 18px 22px; margin-top: 36px; }
+  .refs .label { color: var(--sub); }
+  .refs a { display: block; color: var(--code-blue); font-size: 14.5px; margin-top: 10px; text-decoration: none; }
+  .series-nav { display: flex; gap: 12px; margin-top: 36px; }
+  .series-nav a { flex: 1; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; text-decoration: none; }
+  .series-nav .dir { font: 500 11px "JetBrains Mono", monospace; color: var(--sub); }
+  .series-nav .t { display: block; margin-top: 6px; color: var(--text); font-size: 14.5px; font-weight: 600; line-height: 1.5; }
+  .series-nav a:hover .t { color: var(--accent); }
+  .comments { border: 1px dashed var(--border); border-radius: 8px; padding: 40px; text-align: center; color: var(--sub); font-size: 13.5px; margin: 40px 0 60px; }
+</style>
+</head>
+<body>
+
+<div class="artboard-label">① Home / Desktop — 1440</div>
+<div class="artboard" id="home">
+  <div class="col">
+    <nav>
+      <span class="logo">SLOG_</span>
+      <div class="menu"><a href="#">글</a><a href="#">시리즈</a><a href="#">소개</a><a href="#">RSS</a></div>
+    </nav>
+    <div class="hero">
+      <h1>무엇이 될지 모르는<br>평범한 개발자</h1>
+      <p>실무에서 만난 문제를 파고들어 기록합니다.<br><span class="em">React · TypeScript · Next.js</span> — 기록으로 증명하는 프론트엔드 개발자, Zibu.</p>
+    </div>
+    <div class="label">LATEST POSTS</div>
+    <a class="post-item hot" href="#">
+      <h2>다건·단건 파일 전송 구현 — FormData와 multipart 제대로 알기</h2>
+      <div class="meta"><time>2025.07.10</time><span class="chip">트러블슈팅</span><span class="stars">난이도 ★★★☆☆</span></div>
+      <p>인증서는 단건, 라이센스는 3개 파일. File 데이터와 multipart/form-data를 파고들어 UI부터 전송까지 구현한 기록.</p>
+    </a>
+    <a class="post-item" href="#">
+      <h2>Next.js 커스텀 서버 없이 standalone으로 HTTPS 적용하기</h2>
+      <div class="meta"><time>2025.06.29</time><span class="chip">트러블슈팅</span><span class="stars">난이도 ★★★☆☆</span></div>
+      <p>server.js를 걷어내고 쿠버네티스 환경에 배포하기 위한 standalone 빌드 전환기.</p>
+    </a>
+    <a class="post-item" href="#">
+      <h2>리액트 렌더링 최적화 방법 총정리</h2>
+      <div class="meta"><time>2023.05.14</time><span class="chip">딥다이브</span><span class="stars">난이도 ★★☆☆☆</span></div>
+      <p>리렌더링이 일어나는 조건부터 memo·useMemo·useCallback을 언제 써야 하는지까지 한 번에 정리.</p>
+    </a>
+    <a class="post-item" href="#">
+      <h2>TypeScript, 왜 써야 할까?</h2>
+      <div class="meta"><time>2023.04.02</time><span class="chip">딥다이브</span><span class="stars">난이도 ★★☆☆☆</span></div>
+      <p>"그냥 다들 쓰니까"에서 벗어나기. 타입 시스템이 실제로 막아주는 사고들을 코드로 확인한다.</p>
+    </a>
+    <footer><span>© 2026 Zibu — 기록으로 증명</span><span>GitHub · RSS · Tistory(아카이브)</span></footer>
+  </div>
+</div>
+
+<div class="artboard-label">② Post Detail / Desktop — 1440</div>
+<div class="artboard" id="post">
+  <div class="col">
+    <nav>
+      <span class="logo">SLOG_</span>
+      <div class="menu"><a href="#">글</a><a href="#">시리즈</a><a href="#">소개</a><a href="#">RSS</a></div>
+    </nav>
+    <div class="post-header">
+      <div class="meta"><span class="chip">트러블슈팅</span><time>2025.07.10</time><span class="stars">난이도 ★★★☆☆</span><time>12 min</time></div>
+      <h1>다건·단건 파일 전송 구현<br>— FormData와 multipart 제대로 알기</h1>
+      <div class="tldr"><b>TL;DR</b> — 파일은 바이너리라 JSON으로 못 보낸다. FormData에 담아 multipart/form-data로 보내야 하고, 단건·다건의 차이는 append 전략에서 갈린다.</div>
+      <div class="keywords"><span class="kw">1️⃣ FormData</span><span class="kw">2️⃣ multipart/form-data</span></div>
+    </div>
+    <article>
+      <h2><span class="check">✅</span>상황 (요구사항)</h2>
+      <div class="dialog">
+        <b>설계 부장님</b> : 배포 서버 인증서를 관리자가 UI에서 직접 첨부해야 되고, 플랫폼마다 라이센스 파일들을 업로드할 수 있어야 돼~<br>
+        <b>백엔드 대리님</b> : 프론트에서 파일만 전송해주면 쿠버 환경에 주입되게 처리할게요!<br>
+        <b>예스맨</b> : YES! 인증서는 단건 + 다른 데이터와 같이, 라이센스는 3개 파일 전송~
+      </div>
+      <p>일감을 받고 가장 먼저 든 생각은 두 가지였다. '첨부 UI를 어떻게 그리지?' 그리고 '첨부한 파일을 어떤 형태로 보관하고 전송하지?' 평소처럼 <code class="mono">Content-Type: application/json</code>으로 보낼 수 없다는 것부터가 출발점이다.</p>
+      <h2><span class="check">✅</span>File 전용 데이터, Multipart Type</h2>
+      <p>File 인터페이스는 Blob을 상속받는 바이너리 데이터다. 그래서 FormData에 담아 <code class="mono">multipart/form-data</code>로 보내야 한다.</p>
+      <pre><span class="c">// 데이터 저장</span>
+formData.<span class="f">append</span>(<span class="s">'data'</span>, JSON.<span class="f">stringify</span>({ data: data.text }));
+formData.<span class="f">append</span>(data.file.type, data.file);
+
+<span class="c">// 출력 — FormData는 콘솔에 바로 안 찍힌다</span>
+<span class="k">for</span> (<span class="k">const</span> pair <span class="k">of</span> formData.<span class="f">entries</span>()) {
+  console.<span class="f">log</span>(pair[0] + <span class="s">': '</span> + pair[1]);
+}</pre>
+      <div class="img-ph">이미지 — 요청 본문의 boundary 구분 스크린샷</div>
+      <h2><span class="check">✅</span>결과 &amp; 배운 점</h2>
+      <p>단건은 데이터와 파일을 한 FormData에, 다건은 같은 key로 여러 번 append. 브라우저가 boundary를 알아서 만들어주니 Content-Type을 직접 지정하지 않는 것이 오히려 정답이었다.</p>
+      <div class="refs">
+        <div class="label">참고한 링크</div>
+        <a href="#">MDN — Using FormData Objects</a>
+        <a href="#">MDN — File API</a>
+      </div>
+      <div class="series-nav">
+        <a href="#"><span class="dir">← 이전 글</span><span class="t">Next.js standalone으로 HTTPS 적용하기</span></a>
+        <a href="#" style="text-align:right"><span class="dir">다음 글 →</span><span class="t">Tab마다 로그인 정보 분리하기</span></a>
+      </div>
+      <div class="comments">💬 giscus 댓글 (GitHub Discussions)</div>
+    </article>
+  </div>
+</div>
+
+</body>
+</html>
