@@ -1,8 +1,10 @@
 // playwright.config.js — TC 하니스 설정 (RED/GREEN 판정은 _tools/red_run.sh 가 수행).
+// 설치 위치: .claude/specs/tc/tests/playwright.config.js
 // BASE_URL 은 red_run.sh 가 target 별로 주입:
-//   app  → http://127.0.0.1:{port} (미구현/빈 대상 정적 서버)
-//   mock → http://127.0.0.1:{port} (prd/html 목업 정적 서버)
-//   real → 구동 중인 실앱 (예: next dev, http://localhost:3000)
+//   app  → http://127.0.0.1:{port} (코드 부재 빈 셸 정적 서버 — RED)
+//   real → 구동 중인 실앱 (예: http://localhost:3000 — GREEN)
+// testDir '.' = tc/tests 전체: 단위 *.spec.js + _structure.spec.js + specs/e2e/**.
+// RED 시점엔 e2e spec 이 존재하지 않으므로 단위+구조만 실행된다.
 const { defineConfig } = require('@playwright/test');
 
 module.exports = defineConfig({

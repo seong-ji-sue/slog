@@ -10,13 +10,15 @@
 
 ```
 기획서 브리프
+  → [FACTS 단계] agent:facts-writer · skill:facts-spec → FACTS_{feature}.json (Human Gate)
   → [PRD 단계]  agent:prd-writer  · skill:prd-spec   → PRD.md      + prd.contract.json
   → [PLAN 단계] agent:plan-writer · skill:plan-spec  → PLAN.md     + plan.contract.json
-  → [TC 단계]   agent:tc-writer   · skill:tc-spec    → tests/*(RED) + TC.md
+  → [TC 단계]   agent:tc-writer   · skill:tc-spec    → tests/*(RED) + 시나리오 시트(.xlsx) + TC.md
 ```
 
-- **명세 워크플로우 1개**(`spec-workflow.js`)가 세 단계를 **순차 위임**만 한다. 단계 자체는 워크플로우가 아니라 `[agent+skill+hook+rule+계약]` 단위다.
+- **명세 워크플로우 1개**(`spec-workflow.js`)가 네 단계를 **순차 위임**만 한다. 단계 자체는 워크플로우가 아니라 `[agent+skill+hook+rule+계약]` 단위다.
 - **단계 독립**: 각 단계는 앞 단계의 **계약 파일(json)만** 입력으로 받는다. 계약만 있으면 단계 하나를 단독 실행할 수 있다(앞 단계 재실행 불필요).
+- **FACTS는 계약이 아니라 Human Gate**: FACTS_{feature}.json은 PRD의 참고 입력일 뿐 `prd.contract.json` 필드에 편입되지 않는다. `approved:true`가 파일에 기록되기 전까지 PRD 단계는 시작되지 않는다.
 - **TC portability**: TC 단계는 **`prd.contract.json`만** 소비한다(Plan을 보지 않는다). 그래서 tests/ 를 떼어 **계약 형태가 같은 다른 PRD/Plan에 붙여도 동작**한다.
 
 ---
@@ -27,9 +29,10 @@
 
 | 단계 | 입력(이전 단계에서 필요한 것) | 출력(다음 단계에 주는 것) |
 |------|------------------------------|---------------------------|
-| **PRD** | 기획서 브리프(사람) | `prd.contract.json`(screens·acs·impl_requirements) + `PRD.md` |
+| **FACTS** | 기획서 브리프(사람) | `FACTS_{feature}.json`(confidence·issues·questions·approved) — Human Gate, 계약 아님 |
+| **PRD** | 기획서 브리프(사람) + 승인된 FACTS(선택) | `prd.contract.json`(screens·acs·impl_requirements) + `PRD.md` |
 | **PLAN** | `prd.contract.json`의 **acs + screens** | `plan.contract.json`(tasks, 모든 AC 커버) + `PLAN.md` |
-| **TC** | `prd.contract.json`의 **acs + screens.components** (Plan 미참조) | `tests/**/*.spec.*`(코드부재 RED) + `TC.md` |
+| **TC** | `prd.contract.json`의 **acs + screens.components** (Plan 미참조) | `tests/**/*.spec.*`(코드부재 RED) + 시나리오 시트(`.xlsx`) + `TC.md` |
 
 **추적 체인 (문자열 동일성 = 게이트 강제)**
 ```
@@ -73,25 +76,13 @@ prd.contract.json.acs[].id  →  plan.contract.json.tasks[].ac_refs  →  TC 테
   "impl_requirements": {                          // req#8: stack-agnostic 구현 명세
     "frontend": ["화면 A-18은 컬럼 제목/작성자/상태 그리드 + 검색창 + 생성버튼(생성 모달)을 제공해야 한다"],
     "backend":  ["피드 목록 조회는 {id,title,author,status} 리스트를 반환하는 계약을 제공해야 한다"]
-  },
-  "non_goals": ["일괄 삭제", "권한별 노출 분기"],  // §6 비목표 — 스코프 경계 (기계 검사)
-  "unknowns": [{                                  // U-xxx 원장: 근거 없으면 지어내지 말고 남긴다
-    "id": "U-001",
-    "area": "A-18",
-    "unknown": "검색 대상 필드가 기획서에 미명시",
-    "impact": "AC-A18-03 then 확정 불가",
-    "blocking": true,                             // true = 게이트 REVIEW_REQUIRED (사람 결정 대기)
-    "required_decision": "제목만 vs 제목+작성자"
-  }]
+  }
 }
 ```
 
 - **컴포넌트는 `key`(논리 식별자)만 준다. `locate`/`testid`/CSS 등 셀렉터는 계약에 없다** — 그건 스택 종속이라 §4 어댑터가 TC 실행 시점에 해석한다. PRD는 스택을 모른다.
 - **`impl_requirements`(req#8)**: 코드도 없고 스택도 미정인 상태에서 "FE/BE가 **이렇게 구현돼야 한다**"를 행동·인터페이스 수준으로 서술. 코드·프레임워크명·파일경로 금지.
 - **원자성**: AC 1개 = Given 1·When 1·Then 1. `then`은 PRD에 명시된 관측 가능 요소/동작만.
-- **`non_goals`**: 브리프에 인접하지만 이번 구현에서 제외하는 것(≥1). Plan·TC가 non_goals 항목을 다루면 **창작 = FAIL**.
-- **`unknowns`(U-xxx)**: 근거가 없으면 추측으로 채우지 않고 U-xxx로 남긴다. `blocking=true`면 게이트가 **REVIEW_REQUIRED**로 사람 결정을 기다린다 — 실패가 아니라 대기다.
-- **표면 완비**: 화면당 `render` AC ≥ 1 (게이트 강제). AC 커버리지는 "있는 AC"만 보므로, 화면 자체가 빠지는 누락은 이 규칙이 잡는다.
 
 ---
 
@@ -150,23 +141,27 @@ TC는 **구현 코드가 하나도 없다는 가정**에서 시작한다. 목업
 | 산출 | 내용 |
 |------|------|
 | `tc/tests/**/{screen_id}.spec.*` | AC별 테스트 (제목=AC-ID, 셀렉터=`ui(key)`, 진입=`gotoScreen(screen_id)`) |
+| `tc/tests/_structure.spec.js` | 구조검증 spec — `gen_structure_spec.py` 결정론 생성 |
+| `tc/tests/specs/e2e/*.spec.js` | E2E spec(제목=`SC-{feature}-{NNN}`) — test-workflow 산출, `gate_check.py e2e` 대상 |
 | `tc/TC.md` | AC↔TC 추적 매트릭스 + RED/GREEN 열 |
+| `tc/sheet_{feature}.json` | 시나리오 시트 정본(scenario_id/screen_id/no/feature_fn/test_item/method_steps/expected/ac_refs/e2e/result) |
+| `tc/sheet_{feature}.xlsx` | 시나리오 시트 실제 엑셀 산출(사람 전달물, req#4 필수) — `gen_test_sheet.py`(openpyxl) |
 | `tc/tc.lock.json` | valid RED 확정 시 spec sha256 + ac_refs 락 |
+| `tc/tc.e2e.lock.json` | `gate_check.py e2e` 최초 PASS 시 E2E spec sha256 락 |
+
+> 이 계약은 `gate_check.py facts|prd|plan|tc|e2e`가 기계 검증한다. 다섯 게이트 PASS = 단계 계약 충족.
 
 ---
 
-## 7. 게이트 판정 · 상류 변경 감지
+## 7. 역행(백트래킹) — root_cause_level
 
-`gate_check.py {prd|plan|tc}`의 판정은 **루프백 목적지를 내장**한다 (manifest `verdict` 필드):
+문제가 있으면 같은 단계를 반복하지 않고 **원인이 있는 상위 단계로 되돌아간다.** 자동 롤백(파일을 직접 고쳐씀)은 없다 — 대신 진단 → 재진입 신호 → Main이 재호출하는 구조다.
 
-| verdict | exit | 의미 · 라우팅 |
-|---------|------|---------------|
-| `APPROVE` | 0 | 통과 — 다음 단계 진행 |
-| `REVISE_THIS` | 1 | 이 단계 산출물 최소 수정 후 재게이트 (산출물 누락은 exit 2) |
-| `REVISE_EARLIER` | 1 | 상류 문제 — **이 단계 수정 금지**, 상류 단계 재실행(`startAt`) |
-| `REVIEW_REQUIRED` | 3 | **실패 아님** — 사람 결정 대기 (blocking unknown · tc.lock 해시 드리프트) |
+| 단계 | 같은 단계 1회 재시도 실패 시 | 반복(3회 초과) 시 |
+|------|------------------------------|--------------------|
+| FACTS/PRD/PLAN/TC (spec-workflow) | `spec-lead` dispatch → `root_cause_level`(`facts`\|`prd`\|`plan`\|`tc`\|`null`) 진단 → `spec_retry.py bump` | `human_gate_required:true` 반환 — Main 재호출 금지, 사용자 보고 |
+| IMPL(impl-workflow) | `impl-lead`가 REPORT에 `root_cause_level`(`prd`\|`plan`\|`null`) 포함 가능 | 해당 시 Main이 명세 파이프라인으로 복귀 |
+| TEST(test-workflow) | `test-lead`가 REPORT에 `root_cause_level`(`prd`\|`plan`\|`tc`\|`null`) 포함 가능 | 해당 시 Main이 명세 파이프라인으로 복귀 |
 
-- **상류 변경 감지(stale)**: 각 게이트는 manifest에 계약 `contract_sha256`을 기록하고, 하류 게이트(plan·tc)는 상류 계약의 현재 해시와 대조한다. 불일치 = `REVISE_EARLIER`(gate_prd 재실행 + 하류 영향 검토). **하류 산출물 자동 재생성 금지** — 감지·보고까지만, 반영은 사람이 결정한다.
-- **TC 락 사전 차단**: `tc.lock.json` 존재 상태에서 `tc/tests/**` 수정 시도는 훅(`hooks/scripts/tc_lock_guard.py`)이 실행 전에 잡아 사람 승인(ask)을 요구한다 — 게이트 해시 드리프트 검출(사후)의 사전판. 승인된 재-RED는 `TC_LOCK_ALLOW=1`.
-
-> 이 계약은 `gate_check.py prd|plan|tc`가 기계 검증한다. 세 게이트 `APPROVE` = 단계 계약 충족.
+- `root_cause_level`이 현재 단계보다 상위(순서: facts < prd < plan < tc)면 Main은 `Workflow('spec-workflow', {base, feature, startAt: root_cause_level, hints: concerns})`로 재호출한다.
+- 성공한 단계는 `spec_retry.py reset`으로 카운터가 즉시 0으로 리셋된다 — "연속 실패"만 누적, 성공하면 다시 3회부터 시작.

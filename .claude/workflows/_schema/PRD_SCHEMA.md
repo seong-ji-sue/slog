@@ -13,7 +13,8 @@
 | `prd/PRD_{feature}.md` | PRD 본문 §0~§8 (해당 기능의 여러 화면 전부) |
 | `prd/prd.contract.json` | 기계 계약: `{feature, screens, acs, impl_requirements}` — `prd.contract.schema.json` 준수 |
 
-> **생성하지 않는 것**: `prd/html/`·`prd/components.json`·`prd/screens.json`·`prd/PRD_{area}.json`·FACTS 파일
+> **생성하지 않는 것**: `prd/html/`·`prd/components.json`·`prd/screens.json`·`prd/PRD_{area}.json`
+> `_data/facts/FACTS_{feature}.json`은 PRD가 만들지 않는다 — 별도 FACTS 단계(`facts-writer`)의 산출물이며, PRD는 이를 승인된 참고 입력으로만 받는다(`prd.contract.json` 필드에는 포함되지 않음).
 
 ---
 
@@ -26,8 +27,8 @@
 | §2 | 화면·상호작용 (화면별: 경로/신규·수정/영역/버튼/그리드 컬럼/모달 연결/근거) | — |
 | §3 | 비즈니스 규칙 BR-ID 표 (분기 열거) | — |
 | §4 | **수용기준 AC 표** (원자단위, UI 관측 동작만 — TC 유일 소비 대상) | AC ≥ 1 |
-| §5 | 예외·에러 + 이슈 (충돌·판독불가·미확인 "TBD" — 차단성 미결은 contract `unknowns[]` U-xxx로 승격) | blocking=true → REVIEW_REQUIRED |
-| §6 | **비목표** (이번 구현 제외 항목 — contract `non_goals[]`와 일치) | `non_goals` ≥ 1 (기계 검사) |
+| §5 | 예외·에러 + 이슈 (충돌·판독불가·미확인 "TBD") | — |
+| §6 | **비목표** (이번 구현 제외 항목) | 존재 필수 |
 | §7 | 용어집 (codes, 코드값 사전) | — |
 | §8 | **impl_requirements** (FE·BE 구현 명세 — 행동·인터페이스 수준) | 존재 필수 |
 
@@ -37,7 +38,7 @@
 - 정규식: `AC-[A-Z][A-Z0-9]*(?:-[0-9]+)*-[0-9]{2}`
 - AC 1개 = **Given 1 · When 1 · Then 1**. UI에서 관측 가능한 동작만 (렌더·클릭·모달·메시지).
 - `then`은 기획서에 명시된 요소/동작만. 추측 금지.
-- 분량 가이드: 신규 화면 2~4개(렌더1 + 상호작용), 수정 화면 1~2개. **화면당 render AC ≥ 1은 게이트 강제**(표면 완비 — 화면 누락 방지).
+- 분량 가이드: 신규 화면 2~4개(렌더1 + 상호작용), 수정 화면 1~2개.
 - `components`: 이 AC가 참조하는 컴포넌트 key 목록 (해당 screen에 실재하는 key만).
 - **금지**: `locate`·`testid`·CSS·경로·프레임워크명 — TC 실행 시 스택 어댑터 몫.
 
@@ -102,19 +103,7 @@
     "backend": [
       "피드 목록 조회는 {id, title, author, status} 리스트를 반환하는 계약을 제공해야 한다"
     ]
-  },
-  "non_goals": [
-    "일괄 삭제",                      // §6 비목표 — 이번 구현 제외 (스코프 경계, 기계 검사)
-    "권한별 노출 분기"
-  ],
-  "unknowns": [{                      // U-xxx 원장 — 근거 없으면 지어내지 말고 남긴다 (선택 필드)
-    "id": "U-001",
-    "area": "A-18",
-    "unknown": "검색 대상 필드가 기획서에 미명시",
-    "impact": "AC-A18-03 then 확정 불가",
-    "blocking": true,                 // true = 게이트 REVIEW_REQUIRED (사람 결정 대기, 실패 아님)
-    "required_decision": "제목만 vs 제목+작성자"
-  }]
+  }
 }
 ```
 
@@ -145,7 +134,8 @@
 | 입력 | 내용 |
 |------|------|
 | 기획서 브리프 | 사람이 제공하는 기획 문서·슬라이드·텍스트 |
+| 승인된 FACTS (선택) | `_data/facts/FACTS_{feature}.json`(`approved:true`) — 브리프 모호점에 대한 사용자 답변 반영 |
 | 도메인 SSoT (선택) | 프로젝트 specs/ — §8 impl_requirements 참고 |
 
-> 추측 금지: 브리프·SSoT에 있는 것만. 없으면 §5 이슈 기록 + **차단성 미결은 `unknowns[]`에 U-xxx(blocking=true)로 남긴다**. 창작 = 재작업 사유.
-> FACTS 파일 선행 단계 없음 — 기획서 브리프에서 직접 PRD 도출.
+> 추측 금지: 브리프·SSoT에 있는 것만. 없으면 §5 이슈 기록. 창작 = 재작업 사유.
+> FACTS는 PRD 이전 Human Gate 단계(`facts-writer`)의 산출물 — PRD는 이를 참고만 하고 재생성하지 않는다.

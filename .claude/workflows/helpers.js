@@ -58,14 +58,14 @@ function componentOf(screenId, key) {
 
 /**
  * gotoScreen(page, screenId) — 화면 진입.
- * 웹 기본: '/{screen_id}' (프리셋 환경변수 PRESET_SPEC_APP_ROUTE_{SID}로 재정의).
+ * 웹 기본: app_route 또는 '/{screen_id}' (프리셋 환경변수로 주입 가능).
  * CONTRACT.md §4: 스택 종속 진입 경로는 프리셋이 주입.
  */
 async function gotoScreen(page, screenId) {
   const s = screenOf(screenId);
   // 환경변수 우선: PRESET_SPEC_APP_ROUTE_A18 형태 (- → _ 변환)
   const envKey = 'PRESET_SPEC_APP_ROUTE_' + screenId.replace(/-/g, '_');
-  const route = process.env[envKey] || ('/' + screenId);
+  const route = process.env[envKey] || s.app_route || ('/' + screenId);
   await page.goto(route.startsWith('/') ? route : '/' + route);
 }
 

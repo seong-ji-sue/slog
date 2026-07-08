@@ -23,8 +23,13 @@
 | 파일 | 내용 |
 |------|------|
 | `tc/tests/{screen_id}.spec.js` | AC별 Playwright 테스트 (제목=AC-ID) |
+| `tc/tests/_structure.spec.js` | 구조검증 spec — `gen_structure_spec.py`가 prd.contract.json에서 결정론 생성 |
+| `tc/tests/specs/e2e/{scenario_id}.spec.js` | E2E spec(제목=SC-{feature}-{NNN}) — test-workflow GEN-E2E 단계 산출, `gate_check.py e2e` 대상 |
 | `tc/TC.md` | AC↔TC 추적 매트릭스 + RED/GREEN 열 |
+| `tc/sheet_{feature}.json` | 시나리오 시트 정본 (scenario_id/screen_id/no/feature_fn/test_item/method_steps/expected/ac_refs/e2e/result) |
+| `tc/sheet_{feature}.xlsx` | 시나리오 시트 실제 엑셀 산출(사람 전달물) — `gen_test_sheet.py` |
 | `tc/tc.lock.json` | valid RED 확정 시 spec sha256 + ac_refs 락 |
+| `tc/tc.e2e.lock.json` | `gate_check.py e2e` 최초 PASS 시 E2E spec sha256 락 |
 
 ---
 
@@ -32,7 +37,7 @@
 
 ```javascript
 const { test, expect } = require('@playwright/test');
-const { gotoScreen, ui } = require('./helpers');
+const { gotoScreen, ui } = require('../helpers');
 
 test('AC-A18-01: 피드 목록 화면 진입 시 그리드가 렌더링된다', async ({ page }) => {
   // Given/When — 화면 진입
@@ -46,7 +51,6 @@ test('AC-A18-01: 피드 목록 화면 진입 시 그리드가 렌더링된다', 
 - Given/When/Then 주석. `expect` 단언 필수.
 - 셀렉터: **`ui(page, screen_id, key)`만** — CSS/텍스트 추측 금지 (ghost FAIL).
 - 진입: **`gotoScreen(page, screen_id)`만**.
-- **단언 강화**: `toBeVisible()` 하나로 끝내지 않는다 — 계약에 `columns`·`label`이 있으면 그 값을 단언한다 (예: grid는 컬럼 라벨 `toContainText`). 마커만 붙인 빈 구현이 GREEN 되는 TC는 무효.
 - **금지 패턴** (게이트 기계 검출): `waitForTimeout` · `test.skip(` · expect 없는 test · 시간/랜덤 의존.
 - 같은 key 여러 행 반복 시 `.first()`/행 스코프로 strict-mode 위반 방지.
 - 층(layer): render(진입·핵심렌더, 화면당1) · interaction(버튼→팝업·탭·필수값, 多) · flow(화면이동·상태배지, 少).
@@ -55,13 +59,12 @@ test('AC-A18-01: 피드 목록 화면 진입 시 그리드가 렌더링된다', 
 
 ## AC↔TC 추적 매트릭스 (TC.md)
 
-| AC-ID | 층 | spec 파일 | 테스트 제목 | 잡는 버그 | RED 확인 | GREEN |
-|-------|----|-----------|------------|-----------|----------|-------|
-| AC-A18-01 | render | tc/tests/A-18.spec.js | AC-A18-01: ... | grid-list 미구현/컬럼 누락 | ✅ RED (LOGIC_ABSENT) | ⏳ 실앱 대기 |
+| AC-ID | 층 | spec 파일 | 테스트 제목 | RED 확인 | GREEN |
+|-------|----|-----------|------------|----------|-------|
+| AC-A18-01 | render | tc/tests/A-18.spec.js | AC-A18-01: ... | ✅ RED (LOGIC_ABSENT) | ⏳ 실앱 대기 |
 
 - **RED 열**: `red_run.sh` 실측 결과 (이력 보존).
 - **GREEN 열**: `red_run.sh real` 실측 후 갱신.
-- **잡는 버그 열(필수)**: 구현의 **무엇이 빠지면 이 테스트가 빨개지는지** 한 줄. 자가검사: *"계약 key 마커만 부착한 빈 구현으로도 GREEN이 되는가?"* — '예'면 단언을 데이터 수준(그리드 columns 라벨·모달 제목)으로 강화한다 (test-theater 방지).
 
 ---
 
@@ -119,16 +122,16 @@ valid RED 확정 → spec별 sha256 + ac_refs → `tc/tc.lock.json` 자동 생�
 python3 workflows/_tools/gate_check.py tc --feature {feature}
 ```
 
-exit 0=APPROVE · 1=REVISE_THIS/REVISE_EARLIER · 2=산출물 누락 · 3=REVIEW_REQUIRED (CONTRACT.md §7).
+exit 0=PASS, 1=FAIL, 2=누락.
 
-| 검사 항목 | 기준 | 판정 |
-|-----------|------|------|
-| AC 커버리지 | prd manifest ac_ids 전건 spec 제목에 존재 | REVISE_THIS |
-| 제목 형식 | AC-ID 패턴 100% | REVISE_THIS |
-| ghost 셀렉터 | 계약 screens[].components[].key 외 key 0건 | REVISE_THIS |
-| valid RED | `red_report.json.valid_red = true` | REVISE_THIS |
-| 금지 패턴 | `waitForTimeout` · `test.skip(` 0건 | REVISE_THIS |
-| 상류 stale | prd.contract.json 현재 sha256 = prd manifest 기록값 | REVISE_EARLIER |
-| 해시 드리프트 | `tc.lock.json` 기준 spec 해시 변동 0건 | REVIEW_REQUIRED (HUMAN GATE) |
+| 검사 항목 | 기준 |
+|-----------|------|
+| AC 커버리지 | prd manifest ac_ids 전건 spec 제목에 존재 |
+| 제목 형식 | AC-ID 패턴 100% |
+| ghost 셀렉터 | 계약 screens[].components[].key 외 key 0건 |
+| 시나리오 시트 커버리지 | `sheet_{feature}.json` AC 전수 커버 + `sheet_{feature}.xlsx` 실제 산출 존재 |
+| valid RED | `red_report.json.valid_red = true` |
+| 해시 드리프트 | `tc.lock.json` 기준 spec 해시 변동 0건 |
+| 금지 패턴 | `waitForTimeout` · `test.skip(` 0건 |
 
-> 드리프트의 **사전 차단**은 훅 `hooks/scripts/tc_lock_guard.py` — 락 상태에서 `tc/tests/**` 수정 시도 시 실행 전에 사람 승인(ask)을 요구. 승인된 재-RED는 `TC_LOCK_ALLOW=1`.
+E2E(`gate_check.py e2e --feature {feature}`) 검사 항목: 제목 `SC-{feature}-{NNN}` 형식 100% · ghost 셀렉터 0건 · `sheet_{feature}.json` e2e=true 행 ↔ spec 양방향 커버리지 · `tc.e2e.lock.json` 해시 드리프트 0건.

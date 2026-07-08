@@ -1,0 +1,34 @@
+#!/bin/bash
+# 브랜치 전환 시 worktree 사용 권고 알림
+# 인자: prev_ref, new_ref, branch_change_flag(1 if branch)
+
+[[ "$3" != "1" ]] && exit 0  # 파일 체크아웃은 무시
+
+current_branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+current_dir_name=$(basename "$PWD")
+
+[[ -z "$current_branch" ]] && exit 0
+
+# 메인 저장소 디렉토리 이름 추출 (git-common-dir 의 부모 디렉토리 이름)
+COMMON_DIR=$(git rev-parse --git-common-dir 2>/dev/null)
+case "$COMMON_DIR" in
+  /*) ;;  # 이미 절대
+  *) COMMON_DIR="$PWD/$COMMON_DIR" ;;
+esac
+MAIN_DIR_NAME=$(basename "$(dirname "$COMMON_DIR")")
+[[ -z "$MAIN_DIR_NAME" ]] && MAIN_DIR_NAME="$current_dir_name"
+
+if [[ "$current_dir_name" == "$MAIN_DIR_NAME" ]]; then
+  case "$current_branch" in
+    feature/*|fix/*|refactor/*|chore/*|docs/*)
+      echo "" >&2
+      echo "⚠️  메인 디렉토리에서 '$current_branch' 브랜치로 전환됨" >&2
+      echo "    commit 시도 시 pre-commit hook이 차단함" >&2
+      echo "    worktree 사용 권장: git worktree add ../$MAIN_DIR_NAME-<주제> -b $current_branch" >&2
+      echo "    또는 메인 디렉토리는 develop으로 복귀: git checkout develop" >&2
+      echo "" >&2
+    ;;
+  esac
+fi
+
+exit 0

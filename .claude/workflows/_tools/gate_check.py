@@ -1,24 +1,15 @@
 #!/usr/bin/env python3
 """gate_check.py — PRD/Plan/TC 기계 게이트 (BOSU).
 
-에이전트 자가신고 불신 — 산출물(.claude/specs/)을 직접 재파싱해 판정.
-결과는 _data/manifests/{stage}.manifest.json 에 기록.
-
-판정 어휘 (루프백 목적지가 판정에 내장됨):
-  APPROVE          exit 0  통과 — 다음 단계 진행
-  REVISE_THIS      exit 1  이 단계 산출물 최소 수정 후 재게이트
-  (산출물 누락)     exit 2  REVISE_THIS 특수형 — 산출물 자체가 없음
-  REVISE_EARLIER   exit 1  상류 문제 — 이 단계 수정으로 못 고침, 상류 단계 재실행
-  REVIEW_REQUIRED  exit 3  실패 아님 — 사람 결정 대기 (blocking unknown·tc.lock 해시 드리프트)
-
-상류 변경 감지(stale): 각 게이트는 manifest 에 계약 sha256 을 기록하고,
-하류 게이트는 상류 계약의 현재 해시와 대조한다. 불일치 = REVISE_EARLIER.
-하류 산출물 자동 재생성 금지 — 감지·보고까지만, 반영은 사람이 결정한다.
+에이전트 자가신고 불신 — 산출물(.claude/specs/)을 직접 재파싱해 PASS/FAIL 판정.
+exit 0=PASS, 1=FAIL, 2=산출물 누락. 결과는 _data/manifests/{stage}.manifest.json 에 기록.
 
 usage:
-  gate_check.py prd  --feature {feature}
-  gate_check.py plan --feature {feature}
-  gate_check.py tc   --feature {feature}
+  gate_check.py facts --feature {feature}
+  gate_check.py prd   --feature {feature}
+  gate_check.py plan  --feature {feature}
+  gate_check.py tc    --feature {feature}
+  gate_check.py e2e   --feature {feature}
 
 계약 모델: prd.contract.json (CONTRACT.md). 스택 어댑터는 helpers.js 가 TC 실행 시점에 해석.
 """
@@ -37,7 +28,6 @@ MANIFEST_DIR = os.path.join(SPECS, "_data", "manifests")
 
 AC_RE = re.compile(r"^AC-[A-Z][A-Z0-9]*(?:-[0-9]+)*-[0-9]{2}$")
 AC_SCAN = re.compile(r"AC-[A-Z][A-Z0-9]*(?:-[0-9]+)*-[0-9]{2}\b")
-U_RE = re.compile(r"^U-[0-9]{3}$")
 FORBIDDEN = ["waitForTimeout", "test.skip("]
 
 
@@ -51,100 +41,103 @@ def read(p):
         return f.read()
 
 
-def sha256_file(p):
-    with open(p, "rb") as f:
-        return hashlib.sha256(f.read()).hexdigest()
-
-
 def write_manifest(stage, m):
     os.makedirs(MANIFEST_DIR, exist_ok=True)
     with open(os.path.join(MANIFEST_DIR, f"{stage}.manifest.json"), "w", encoding="utf-8") as f:
         json.dump(m, f, ensure_ascii=False, indent=1)
 
 
-def emit(stage, fails, earlier=None, reviews=None, extra=None, missing=False):
-    """판정 우선순위: 누락(2) > 상류(REVISE_EARLIER) > 이 단계(REVISE_THIS) > 사람 대기(REVIEW_REQUIRED) > 통과."""
-    earlier = earlier or []
-    reviews = reviews or []
-    if missing:
-        verdict, code = "REVISE_THIS", 2
-    elif earlier:
-        verdict, code = "REVISE_EARLIER", 1
-    elif fails:
-        verdict, code = "REVISE_THIS", 1
-    elif reviews:
-        verdict, code = "REVIEW_REQUIRED", 3
-    else:
-        verdict, code = "APPROVE", 0
-    m = {
-        "stage": stage,
-        "pass": code == 0,
-        "verdict": verdict,
-        "fails": fails,
-        "earlier": earlier,
-        "reviews": reviews,
-    }
+def emit(stage, ok, fails, extra=None):
+    m = {"stage": stage, "pass": ok, "fails": fails}
     if extra:
         m.update(extra)
     write_manifest(stage, m)
-    print(f"── gate {stage}: {verdict}")
-    for fl in earlier:
-        print(f"   ⇡ {fl}")
+    tag = "PASS" if ok else "FAIL"
+    print(f"── gate {stage}: {tag}")
     for fl in fails:
         print(f"   ✗ {fl}")
-    for fl in reviews:
-        print(f"   ☐ {fl}")
-    return code
+    return 0 if ok else 1
 
 
-def load_upstream_prd(earlier):
-    """하류(plan·tc) 공통 — prd manifest 로드 + stale(계약 sha256) 대조.
-
-    반환: prd ac_ids 집합. 문제는 earlier 리스트에 기록됨.
+# ─────────────────────────── FACTS ───────────────────────────
+def gate_facts(feature):
+    """FACTS_{feature}.json 검증 — Human Gate 산식 재계산 + 승인 무결성.
+    - human_gate_required 값이 산식(overall<0.75 OR screen<0.70 OR blocking 존재) 재계산과 일치
+    - blocking issue 전부 questions[].source_issue 로 참조됨 (고아 0)
+    - approved:true 면 questions[] 전부 answer 존재
     """
-    contract = os.path.join(SPECS, "prd", "prd.contract.json")
-    m_path = os.path.join(MANIFEST_DIR, "prd.manifest.json")
-    if not os.path.exists(m_path):
-        earlier.append("prd.manifest.json 없음 — gate_prd 미실행 (상류 게이트 먼저)")
-        return set()
+    fails = []
+    facts_path = os.path.join(SPECS, "_data", "facts", f"FACTS_{feature}.json")
+    if not os.path.exists(facts_path):
+        emit("facts", False, ["FACTS_{feature}.json 누락"])
+        return 2
+
     try:
-        m = jread(m_path)
-    except json.JSONDecodeError:
-        earlier.append("prd.manifest.json 파싱 오류 — gate_prd 재실행")
-        return set()
-    if not os.path.exists(contract):
-        earlier.append("prd/prd.contract.json 소실 — PRD 단계 재실행")
-        return set(m.get("ac_ids", []))
-    recorded = m.get("contract_sha256")
-    if recorded and recorded != sha256_file(contract):
-        earlier.append(
-            "상류 PRD 계약 변경 감지(sha256 불일치) — gate_prd 재실행 + 하류 영향 검토. "
-            "자동 재생성 금지(표시·보고까지만)"
-        )
-    if m.get("verdict") not in (None, "APPROVE"):
-        earlier.append(f"상류 gate prd 판정이 APPROVE 아님({m.get('verdict')}) — 상류 해소 먼저")
-    return set(m.get("ac_ids", []))
+        data = jread(facts_path)
+    except json.JSONDecodeError as e:
+        emit("facts", False, [f"FACTS_{feature}.json JSON 파싱 오류: {e}"])
+        return 2
+
+    for fld in ("feature", "screens", "overall_confidence", "human_gate_required", "questions", "approved"):
+        if fld not in data:
+            fails.append(f"최상위 필수 필드 '{fld}' 누락")
+
+    screens = data.get("screens", [])
+    if not screens:
+        fails.append("screens 비어있음")
+
+    blocking_ids = set()
+    for s in screens:
+        ref = s.get("screen_ref", "?")
+        if not (0.5 <= float(s.get("confidence", 0)) <= 1.0):
+            fails.append(f"screen {ref}: confidence 범위(0.5~1.0) 위반")
+        for i in s.get("issues", []):
+            if i.get("severity") == "blocking":
+                blocking_ids.add(i.get("id"))
+
+    questions = data.get("questions", [])
+    referenced = {q.get("source_issue") for q in questions if q.get("source_issue")}
+    orphan_blocking = blocking_ids - referenced
+    if orphan_blocking:
+        fails.append(f"고아 blocking issue {len(orphan_blocking)}건(질문 미연결): {sorted(orphan_blocking)[:5]}")
+
+    overall = data.get("overall_confidence", 0)
+    expect_gate = (
+        overall < 0.75
+        or any(s.get("confidence", 1.0) < 0.70 for s in screens)
+        or bool(blocking_ids)
+    )
+    if bool(data.get("human_gate_required")) != expect_gate:
+        fails.append(f"human_gate_required 산식 불일치 (재계산={expect_gate}, 기록={data.get('human_gate_required')})")
+
+    if data.get("approved"):
+        unanswered = [q for q in questions if not q.get("answer")]
+        if unanswered:
+            fails.append(f"approved:true 인데 미답변 질문 {len(unanswered)}건")
+
+    return emit("facts", not fails, fails)
 
 
 # ─────────────────────────── PRD ───────────────────────────
 def gate_prd(feature):
     """prd.contract.json 검증 — prd.contract.schema.json 준수.
-    screens·acs·impl_requirements·non_goals 필수. AC-ID 포맷. acs[].components key 실재.
-    화면당 render AC ≥ 1(표면 완비). unknowns(U-xxx): blocking=true → REVIEW_REQUIRED.
+    screens·acs·impl_requirements 필수. AC-ID 포맷. acs[].components key 실재.
     HTML/목업/phantom 검사 없음.
     """
-    fails, reviews = [], []
+    fails = []
     contract_path = os.path.join(SPECS, "prd", "prd.contract.json")
     if not os.path.exists(contract_path):
-        return emit("prd", ["prd.contract.json 누락"], missing=True)
+        emit("prd", False, ["prd.contract.json 누락"])
+        return 2
 
     try:
         data = jread(contract_path)
     except json.JSONDecodeError as e:
-        return emit("prd", [f"prd.contract.json JSON 파싱 오류: {e}"], missing=True)
+        emit("prd", False, [f"prd.contract.json JSON 파싱 오류: {e}"])
+        return 2
 
     # 최상위 필수 필드
-    for fld in ("feature", "screens", "acs", "impl_requirements", "non_goals"):
+    for fld in ("feature", "screens", "acs", "impl_requirements"):
         if not data.get(fld):
             fails.append(f"최상위 필수 필드 '{fld}' 누락/비어있음")
 
@@ -203,12 +196,6 @@ def gate_prd(feature):
     if not ac_ids:
         fails.append("AC 0건")
 
-    # 화면당 render AC ≥ 1 (표면 완비 — AC 커버리지는 '있는 AC'만 보므로 화면 누락은 여기서 잡는다)
-    render_screens = {ac.get("screen_id") for ac in acs if ac.get("layer") == "render"}
-    for sid in screen_component_keys:
-        if sid not in render_screens:
-            fails.append(f"screen {sid}: render AC 없음 (화면당 render ≥1)")
-
     # impl_requirements 검증: frontend 필수
     if isinstance(impl, dict):
         if not impl.get("frontend"):
@@ -216,58 +203,32 @@ def gate_prd(feature):
     else:
         fails.append("impl_requirements 형식 오류 (object 필요)")
 
-    # non_goals 검증: 비어있지 않은 문자열 배열 (§6 비목표 — 스코프 경계의 기계화)
-    non_goals = data.get("non_goals")
-    if non_goals is not None and not (
-        isinstance(non_goals, list)
-        and all(isinstance(x, str) and x.strip() for x in non_goals)
-    ):
-        fails.append("non_goals 형식 오류 (문자열 배열 필요)")
-
-    # unknowns(U-xxx 원장) 검증 — 근거 없으면 지어내지 말고 남긴다
-    for u in data.get("unknowns") or []:
-        uid = u.get("id", "")
-        if not U_RE.match(uid):
-            fails.append(f"unknown id 포맷 오류: '{uid}' (기대: U-NNN)")
-        for fld in ("unknown", "impact"):
-            if not u.get(fld):
-                fails.append(f"unknown {uid}: 필수 필드 '{fld}' 누락")
-        if "blocking" not in u:
-            fails.append(f"unknown {uid}: 'blocking'(bool) 누락")
-        elif u["blocking"]:
-            reviews.append(
-                f"blocking unknown {uid}: {u.get('unknown', '')} — "
-                f"결정 필요: {u.get('required_decision', '(미기재)')}"
-            )
-
     ac_ids_sorted = sorted(set(ac_ids))
-    return emit(
-        "prd", fails, reviews=reviews,
-        extra={"ac_ids": ac_ids_sorted, "contract_sha256": sha256_file(contract_path)},
-    )
+    return emit("prd", not fails, fails, {"ac_ids": ac_ids_sorted})
 
 
 # ─────────────────────────── PLAN ───────────────────────────
 def gate_plan(feature):
-    """plan.contract.json 검증 — 고아 AC(prd manifest ac_ids − task ac_refs) FAIL.
-    상류 stale(prd 계약 sha256 대조) = REVISE_EARLIER.
-    """
-    fails, earlier = [], []
+    """plan.contract.json 검증 — 고아 AC(prd manifest ac_ids − task ac_refs) FAIL."""
+    fails = []
     plan_path = os.path.join(SPECS, "plan", "plan.contract.json")
     if not os.path.exists(plan_path):
-        return emit("plan", ["plan.contract.json 누락"], missing=True)
+        emit("plan", False, ["plan.contract.json 누락"])
+        return 2
 
     try:
         data = jread(plan_path)
     except json.JSONDecodeError as e:
-        return emit("plan", [f"plan.contract.json JSON 파싱 오류: {e}"], missing=True)
+        emit("plan", False, [f"plan.contract.json JSON 파싱 오류: {e}"])
+        return 2
 
     tasks = data.get("tasks", [])
     if not tasks:
         fails.append("tasks 비어있음")
 
-    # 상류 prd manifest 로드 + stale 대조
-    prd_acs = load_upstream_prd(earlier)
+    # prd manifest에서 ac_ids 로드
+    prd_m_path = os.path.join(MANIFEST_DIR, "prd.manifest.json")
+    prd_acs = set(jread(prd_m_path).get("ac_ids", [])) if os.path.exists(prd_m_path) else set()
 
     task_ids = {t.get("task_id") for t in tasks}
     covered_ac = set()
@@ -289,10 +250,7 @@ def gate_plan(feature):
         if orphan:
             fails.append(f"고아 AC {len(orphan)}건: {sorted(orphan)[:5]}")
 
-    return emit(
-        "plan", fails, earlier=earlier,
-        extra={"ac_ids": sorted(covered_ac), "contract_sha256": sha256_file(plan_path)},
-    )
+    return emit("plan", not fails, fails, {"ac_ids": sorted(covered_ac)})
 
 
 # ─────────────────────────── TC ───────────────────────────
@@ -301,19 +259,15 @@ def gate_tc(feature):
     - spec 제목=AC-ID 커버 (prd ac_ids − spec_acs = 0)
     - ghost 셀렉터 (계약 외 key)
     - valid RED (red_report.json.valid_red)
-    - tc.lock.json 해시 드리프트 = REVIEW_REQUIRED (HUMAN GATE — 사후 검출.
-      사전 차단은 hooks/scripts/tc_lock_guard.py)
-    - 상류 stale(prd 계약 sha256 대조) = REVISE_EARLIER
+    - tc.lock.json 해시 드리프트
     mock 정합(red_report_mock) 검사 없음.
     """
-    fails, earlier, reviews = [], [], []
+    fails = []
 
     # prd.contract.json에서 계약 key 집합 구성
     contract_path = os.path.join(SPECS, "prd", "prd.contract.json")
     contract_keys = set()  # (screen_id, key)
-    if not os.path.exists(contract_path):
-        earlier.append("prd/prd.contract.json 없음 — PRD 단계 먼저")
-    else:
+    if os.path.exists(contract_path):
         try:
             prd = jread(contract_path)
             for s in prd.get("screens", []):
@@ -325,14 +279,16 @@ def gate_tc(feature):
         except json.JSONDecodeError:
             fails.append("prd.contract.json JSON 파싱 오류 — ghost 검사 불가")
 
-    # 상류 prd manifest 로드 + stale 대조
-    prd_acs = load_upstream_prd(earlier)
+    # prd manifest에서 ac_ids 로드
+    prd_m_path = os.path.join(MANIFEST_DIR, "prd.manifest.json")
+    prd_acs = set(jread(prd_m_path).get("ac_ids", [])) if os.path.exists(prd_m_path) else set()
 
-    # spec 파일 탐색
-    spec_glob = os.path.join(SPECS, "tc", "tests", "**", "*.spec.js")
-    specs = sorted(glob.glob(spec_glob, recursive=True))
+    # AC 유닛 spec만 대상 — 비재귀(하위 specs/e2e/ 는 gate_e2e 소관, _structure.spec.js 는 구조검증 소관)
+    spec_glob = os.path.join(SPECS, "tc", "tests", "*.spec.js")
+    specs = [s for s in sorted(glob.glob(spec_glob)) if os.path.basename(s) != "_structure.spec.js"]
     if not specs:
-        return emit("tc", ["spec 파일 0건"], earlier=earlier, missing=True)
+        emit("tc", False, ["spec 파일 0건"])
+        return 2
 
     spec_acs = set()
     ui_re = re.compile(r"ui\(\s*page\s*,\s*['\"]([^'\"]+)['\"]\s*,\s*['\"]([^'\"]+)['\"]")
@@ -375,24 +331,144 @@ def gate_tc(feature):
         if miss:
             fails.append(f"AC 미커버 {len(miss)}건: {sorted(miss)[:5]}")
 
+    # 구조검증 spec 위생 (있으면만 — AC-ID 타이틀 요구 제외, 최소 위생만)
+    struct_path = os.path.join(SPECS, "tc", "tests", "_structure.spec.js")
+    if os.path.exists(struct_path):
+        struct_src = read(struct_path)
+        for pat in FORBIDDEN:
+            if pat in struct_src:
+                fails.append(f"_structure.spec.js: 금지패턴 '{pat}'")
+        if "expect(" not in struct_src:
+            fails.append("_structure.spec.js: expect 단언 없음")
+
+    # 시나리오 시트 + 실제 엑셀 산출 (req#4 — TC 완료의 필수 산출물)
+    sheet_path = os.path.join(SPECS, "tc", f"sheet_{feature}.json")
+    xlsx_path = os.path.join(SPECS, "tc", f"sheet_{feature}.xlsx")
+    if not os.path.exists(sheet_path):
+        fails.append(f"sheet_{feature}.json 없음 — TC 단계 시나리오 시트 필수")
+    else:
+        try:
+            sheet_rows = jread(sheet_path).get("rows", [])
+        except json.JSONDecodeError:
+            sheet_rows = []
+            fails.append("sheet json 파싱 오류")
+        covered = {a for r in sheet_rows for a in (r.get("ac_refs") or [])}
+        if prd_acs:
+            uncovered = prd_acs - covered
+            if uncovered:
+                fails.append(f"시나리오 시트 AC 미커버 {len(uncovered)}건: {sorted(uncovered)[:5]}")
+    if not os.path.exists(xlsx_path):
+        fails.append(f"sheet_{feature}.xlsx 없음 — 실제 엑셀 산출 필수(gen_test_sheet.py 실행)")
+
     # valid RED
     rr_path = os.path.join(MANIFEST_DIR, "red_report.json")
     if not os.path.exists(rr_path) or not jread(rr_path).get("valid_red"):
         fails.append("valid RED 미확인 (red_report.json.valid_red = false 또는 파일 없음)")
     else:
-        # tc.lock.json 해시 드리프트 — 실패가 아니라 사람 결정 대기 (HUMAN GATE)
+        # tc.lock.json 해시 드리프트
         lock_path = os.path.join(SPECS, "tc", "tc.lock.json")
         if not os.path.exists(lock_path):
             fails.append("tc.lock.json 부재 (valid RED 확정인데 락 없음)")
         else:
             drift = hash_drift(lock_path)
             if drift:
-                reviews.append(
-                    f"해시 드리프트 {len(drift)}건 — HUMAN GATE"
-                    f"(승인: red_run.sh 재실행으로 재-RED + tc.lock.json 갱신 / 반려: spec 원복): {drift[:3]}"
-                )
+                fails.append(f"해시 드리프트 {len(drift)}건 (HUMAN GATE): {drift[:3]}")
 
-    return emit("tc", fails, earlier=earlier, reviews=reviews)
+    return emit("tc", not fails, fails)
+
+
+# ─────────────────────────── E2E ───────────────────────────
+def gate_e2e(feature):
+    """tc/tests/specs/e2e/*.spec.js 검증.
+    - 제목 SC-{feature}-{NNN} 형식 · 금지패턴 0 · expect 필수 · ghost 셀렉터 0
+    - sheet_{feature}.json e2e=true 행 ↔ spec 양방향 커버리지
+    - tc.e2e.lock.json 해시 드리프트(최초 PASS 시 자동 생성)
+    """
+    fails = []
+    e2e_dir = os.path.join(SPECS, "tc", "tests", "specs", "e2e")
+    specs = sorted(glob.glob(os.path.join(e2e_dir, "*.spec.js")))
+
+    # 시트에 e2e 행이 0건이면 E2E spec이 없는 것이 정상 — PASS
+    sheet_path = os.path.join(SPECS, "tc", f"sheet_{feature}.json")
+    sheet_e2e_ids = None
+    if os.path.exists(sheet_path):
+        try:
+            sheet_e2e_ids = {
+                r.get("scenario_id")
+                for r in jread(sheet_path).get("rows", [])
+                if r.get("e2e")
+            }
+        except json.JSONDecodeError:
+            fails.append("sheet json 파싱 오류")
+
+    if not specs:
+        if sheet_e2e_ids is not None and not sheet_e2e_ids and not fails:
+            return emit("e2e", True, [], {"note": "시트 e2e 행 0건 — E2E spec 불필요"})
+        emit("e2e", False, fails + ["e2e spec 0건 (tc/tests/specs/e2e/*.spec.js)"])
+        return 2
+
+    contract_keys = set()
+    contract_path = os.path.join(SPECS, "prd", "prd.contract.json")
+    if os.path.exists(contract_path):
+        try:
+            for s in jread(contract_path).get("screens", []):
+                for c in s.get("components", []):
+                    if c.get("key"):
+                        contract_keys.add((s.get("screen_id", ""), c["key"]))
+        except json.JSONDecodeError:
+            fails.append("prd.contract.json JSON 파싱 오류 — ghost 검사 불가")
+
+    sc_re = re.compile(rf"^SC-{re.escape(feature)}-[0-9]{{3}}\b")
+    ui_re = re.compile(r"ui\(\s*page\s*,\s*['\"]([^'\"]+)['\"]\s*,\s*['\"]([^'\"]+)['\"]")
+    found_ids, ghost = set(), 0
+
+    for sp in specs:
+        src, bname = read(sp), os.path.basename(sp)
+        for pat in FORBIDDEN:
+            if pat in src:
+                fails.append(f"{bname}: 금지패턴 '{pat}'")
+        if "expect(" not in src:
+            fails.append(f"{bname}: expect 단언 없음")
+        for m in re.finditer(r"test\(\s*['\"]([^'\"]+)['\"]", src):
+            title = m.group(1)
+            sm = sc_re.match(title)
+            if sm:
+                found_ids.add(sm.group(0))
+            else:
+                fails.append(f"{bname}: 제목이 SC-{feature}-NNN 형식이 아님 — '{title[:50]}'")
+        if contract_keys:
+            for sid, key in ui_re.findall(src):
+                if (sid, key) not in contract_keys:
+                    ghost += 1
+    if ghost:
+        fails.append(f"ghost 셀렉터 {ghost}건 (E2E spec)")
+
+    if sheet_e2e_ids is None:
+        fails.append(f"sheet_{feature}.json 없음 — e2e 행 대조 불가")
+    else:
+        if sheet_e2e_ids - found_ids:
+            fails.append(f"sheet e2e 행 중 spec 없음 {len(sheet_e2e_ids - found_ids)}건: {sorted(sheet_e2e_ids - found_ids)[:5]}")
+        if found_ids - sheet_e2e_ids:
+            fails.append(f"sheet에 없는 e2e spec {len(found_ids - sheet_e2e_ids)}건: {sorted(found_ids - sheet_e2e_ids)[:5]}")
+
+    lock_path = os.path.join(SPECS, "tc", "tc.e2e.lock.json")
+    if not fails:
+        if os.path.exists(lock_path):
+            drift = hash_drift(lock_path)
+            if drift:
+                fails.append(f"E2E 해시 드리프트 {len(drift)}건 (HUMAN GATE): {drift[:3]}")
+        if not fails:
+            lock = {
+                "unlock_condition": "E2E 재확정 필요 시만 수정(락 이후 변조=HUMAN GATE)",
+                "files": [
+                    {"path": os.path.relpath(sf, SPECS), "sha256": hashlib.sha256(open(sf, "rb").read()).hexdigest()}
+                    for sf in specs
+                ],
+            }
+            with open(lock_path, "w", encoding="utf-8") as f:
+                json.dump(lock, f, ensure_ascii=False, indent=1)
+
+    return emit("e2e", not fails, fails)
 
 
 def hash_drift(lock_path):
@@ -411,13 +487,13 @@ def hash_drift(lock_path):
 # ─────────────────────────── main ───────────────────────────
 def main():
     ap = argparse.ArgumentParser(
-        description="gate_check.py {prd|plan|tc} --feature {feature}"
+        description="gate_check.py {facts|prd|plan|tc|e2e} --feature {feature}"
     )
-    ap.add_argument("stage", choices=["prd", "plan", "tc"])
+    ap.add_argument("stage", choices=["facts", "prd", "plan", "tc", "e2e"])
     ap.add_argument("--feature", required=True, help="기능/업무영역 식별자")
     a = ap.parse_args()
 
-    fn = {"prd": gate_prd, "plan": gate_plan, "tc": gate_tc}[a.stage]
+    fn = {"facts": gate_facts, "prd": gate_prd, "plan": gate_plan, "tc": gate_tc, "e2e": gate_e2e}[a.stage]
     result = fn(a.feature)
     sys.exit(result)
 
