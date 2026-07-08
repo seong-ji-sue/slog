@@ -15,7 +15,9 @@
 set -uo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-BASE="${SPECS_BASE:-$(cd "$SCRIPT_DIR/../../.claude/specs" 2>/dev/null && pwd || echo "$SCRIPT_DIR/../../.claude/specs")}"
+ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+if [ "$(basename "$ROOT")" = ".claude" ]; then DEFAULT_BASE="$ROOT/specs"; else DEFAULT_BASE="$ROOT/.claude/specs"; fi
+BASE="${SPECS_BASE:-$DEFAULT_BASE}"
 TESTS_DIR="$BASE/tc/tests"
 
 [ -d "$TESTS_DIR/node_modules/@playwright" ] || {

@@ -14,8 +14,8 @@ import json
 import os
 import sys
 
-SPECS = os.environ.get("SPECS_BASE") or os.path.abspath(
-    os.path.join(os.path.dirname(__file__), "..", "..", ".claude", "specs")
+SPECS = os.environ.get("SPECS_BASE") or (lambda r: os.path.join(r, "specs") if os.path.basename(r) == ".claude" else os.path.join(r, ".claude", "specs"))(
+    os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 )
 COLS = ["scenario_id", "screen_id", "no", "feature_fn", "test_item", "method_steps", "expected", "ac_refs", "e2e", "result"]
 HEADERS_KO = {

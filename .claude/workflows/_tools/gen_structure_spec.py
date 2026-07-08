@@ -14,8 +14,8 @@ import argparse
 import json
 import os
 
-SPECS = os.environ.get("SPECS_BASE") or os.path.abspath(
-    os.path.join(os.path.dirname(__file__), "..", "..", ".claude", "specs")
+SPECS = os.environ.get("SPECS_BASE") or (lambda r: os.path.join(r, "specs") if os.path.basename(r) == ".claude" else os.path.join(r, ".claude", "specs"))(
+    os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 )
 
 # 구조 검증 대상 kind (상호작용이 아닌 렌더 존재 검증 가능한 것)

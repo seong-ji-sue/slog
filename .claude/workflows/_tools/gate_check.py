@@ -21,8 +21,8 @@ import os
 import re
 import sys
 
-SPECS = os.environ.get("SPECS_BASE") or os.path.abspath(
-    os.path.join(os.path.dirname(__file__), "..", "..", ".claude", "specs")
+SPECS = os.environ.get("SPECS_BASE") or (lambda r: os.path.join(r, "specs") if os.path.basename(r) == ".claude" else os.path.join(r, ".claude", "specs"))(
+    os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 )
 MANIFEST_DIR = os.path.join(SPECS, "_data", "manifests")
 
