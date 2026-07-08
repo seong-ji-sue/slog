@@ -15,3 +15,4 @@ BOSU/
 
 # BOSU workflows 경로버그 산출물 방지 (SPECS_BASE 미주입 시 .claude/.claude 생성)
 .claude/.claude/
+__pycache__/

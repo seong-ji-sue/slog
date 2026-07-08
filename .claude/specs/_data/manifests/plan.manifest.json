@@ -1,10 +1,7 @@
 {
  "stage": "plan",
  "pass": true,
- "verdict": "APPROVE",
  "fails": [],
- "earlier": [],
- "reviews": [],
  "ac_ids": [
   "AC-B01-01",
   "AC-B01-02",
@@ -21,6 +18,5 @@
   "AC-B04-02",
   "AC-B05-01",
   "AC-B05-02"
- ],
- "contract_sha256": "6bd8695b3816dde46feaf16349d14e821aa36a6b6a11165314751d4d79232f73"
+ ]
 }
