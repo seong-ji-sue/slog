@@ -1,0 +1,406 @@
+{
+  "feature": "blog",
+  "screens": [
+    {
+      "screen_id": "B-01",
+      "title": "홈",
+      "purpose": "사이트 진입점. 최신 글 피드·피처드 3편·저자 소개 2줄을 표시하여 방문자가 5초 내 맥락을 파악하게 함.",
+      "entry": "사이트 루트 URL 진입",
+      "components": [
+        {
+          "key": "logo-slog",
+          "kind": "text",
+          "label": "SLOG_",
+          "role": "사이트 로고",
+          "behavior": "사이트 루트로 이동하는 링크"
+        },
+        {
+          "key": "nav-main",
+          "kind": "tab",
+          "label": "글 · 시리즈 · 소개 · RSS",
+          "role": "상단 내비게이션 메뉴",
+          "behavior": "각 링크 클릭 시 해당 화면으로 이동"
+        },
+        {
+          "key": "button-darkmode",
+          "kind": "button",
+          "label": "다크모드 토글",
+          "role": "라이트/다크 팔레트 전환 버튼",
+          "behavior": "클릭 시 전체 페이지 배경·텍스트 색상을 다크 팔레트로 전환; 재클릭 시 라이트로 복원"
+        },
+        {
+          "key": "hero-title",
+          "kind": "text",
+          "label": "무엇이 될지 모르는 평범한 개발자의 기록",
+          "role": "히어로 영역 메인 제목(Noto Serif 900)",
+          "behavior": "핵심어에 형광펜 mark 적용된 정적 텍스트"
+        },
+        {
+          "key": "text-bio",
+          "kind": "text",
+          "label": "실무에서 만난 문제를 파고들어 적습니다. 삽질의 과정까지가 기록입니다.",
+          "role": "저자 소개 2줄 bio",
+          "behavior": "정적 텍스트"
+        },
+        {
+          "key": "text-stat",
+          "kind": "text",
+          "label": "2021.12 — ing · LOG 083까지 기록됨 · 주간 1회 목표",
+          "role": "히어로 통계 라인(JetBrains Mono)",
+          "behavior": "정적 메타 정보 표시"
+        },
+        {
+          "key": "list-feed",
+          "kind": "list",
+          "label": "포스트 카드 피드",
+          "role": "최신순 글 카드 리스트(LOG 번호·카테고리·제목·설명·날짜·난이도·읽기 시간 포함)",
+          "behavior": "카드 hover 시 제목 형광펜 스윕 애니메이션 표시; 카드 클릭 시 해당 글 상세(B-03)로 이동"
+        },
+        {
+          "key": "text-footer",
+          "kind": "text",
+          "label": "© 2026 Zibu — 기록으로 증명",
+          "role": "사이트 푸터 (저작권 + GitHub·RSS·Tistory 링크 포함)",
+          "behavior": "정적 텍스트 + 외부 링크"
+        }
+      ]
+    },
+    {
+      "screen_id": "B-02",
+      "title": "전체 글 목록 + 태그 필터",
+      "purpose": "전체 글을 카테고리 필터로 추려 탐색하는 화면.",
+      "entry": "상단 내비 '글' 링크 클릭 또는 /posts 직접 진입",
+      "components": [
+        {
+          "key": "tab-filter",
+          "kind": "tab",
+          "label": "전체 · 트러블슈팅 · 딥다이브 · 프로젝트회고 · 작업로그",
+          "role": "카테고리별 필터 버튼 그룹",
+          "behavior": "버튼 클릭 시 해당 카테고리 글만 목록에 노출; '전체' 클릭 시 모든 글 복원; 활성 버튼은 선택 상태로 표시"
+        },
+        {
+          "key": "list-posts",
+          "kind": "list",
+          "label": "전체 글 카드 리스트",
+          "role": "필터 결과 글 카드 목록 (포스트 카드 포맷 — B-01과 동일)",
+          "behavior": "필터 상태에 따라 표시 글 변경; 카드 클릭 시 해당 글 상세(B-03)로 이동"
+        }
+      ]
+    },
+    {
+      "screen_id": "B-03",
+      "title": "글 상세",
+      "purpose": "개별 글의 전체 콘텐츠를 표시하는 화면.",
+      "entry": "포스트 카드(B-01·B-02·B-04) 클릭",
+      "components": [
+        {
+          "key": "text-post-meta",
+          "kind": "text",
+          "label": "LOG_NNN · 카테고리 · 날짜 · 난이도 ★",
+          "role": "포스트 헤더 메타 라인(JetBrains Mono)",
+          "behavior": "정적 메타 정보 표시"
+        },
+        {
+          "key": "text-post-title",
+          "kind": "text",
+          "label": "글 제목",
+          "role": "Noto Serif 900 h1 제목 (mark 포함 가능)",
+          "behavior": "정적 텍스트"
+        },
+        {
+          "key": "text-tldr",
+          "kind": "text",
+          "label": "TL;DR",
+          "role": "핵심 한 줄 요약 블록 (레이블 + 형광펜 mark 인라인)",
+          "behavior": "정적 텍스트"
+        },
+        {
+          "key": "list-keywords",
+          "kind": "list",
+          "label": "1️⃣ 키워드A  2️⃣ 키워드B",
+          "role": "키워드 프리뷰 칩 목록(JetBrains Mono)",
+          "behavior": "정적 태그칩 표시"
+        },
+        {
+          "key": "text-body",
+          "kind": "text",
+          "label": "본문",
+          "role": "글 본문 영역 (✅ 헤딩·대화체 인용·코드 블록·mark 포함)",
+          "behavior": "정적 콘텐츠 렌더링"
+        },
+        {
+          "key": "list-refs",
+          "kind": "list",
+          "label": "참고한 링크",
+          "role": "마무리 고정 참고 링크 섹션",
+          "behavior": "링크 클릭 시 외부 URL 새 탭으로 열림"
+        },
+        {
+          "key": "nav-series",
+          "kind": "tab",
+          "label": "← 이전 글 / 다음 글 →",
+          "role": "시리즈 이전·다음 글 내비게이션 카드",
+          "behavior": "이전 카드 클릭 시 이전 글 상세로 이동; 다음 카드 클릭 시 다음 글 상세로 이동; 경계 글의 경우 해당 방향 카드 미표시 또는 비활성"
+        }
+      ]
+    },
+    {
+      "screen_id": "B-04",
+      "title": "시리즈",
+      "purpose": "연재 시리즈 목록을 탐색하고 시리즈별 글 목록을 확인하는 화면.",
+      "entry": "상단 내비 '시리즈' 링크 클릭 또는 /series 직접 진입",
+      "components": [
+        {
+          "key": "list-series",
+          "kind": "list",
+          "label": "시리즈 카드 목록",
+          "role": "시리즈 제목·글 수·최신 업데이트 날짜 포함 카드 리스트",
+          "behavior": "카드 클릭 시 해당 시리즈 글 목록(B-04 드릴) 표시"
+        },
+        {
+          "key": "list-series-posts",
+          "kind": "list",
+          "label": "시리즈 글 목록",
+          "role": "선택된 시리즈에 속한 글 목록(순서 번호 포함)",
+          "behavior": "시리즈 카드 선택 후 표시; 글 클릭 시 해당 글 상세(B-03)로 이동"
+        }
+      ]
+    },
+    {
+      "screen_id": "B-05",
+      "title": "소개(About)",
+      "purpose": "이직용 저자 프로필 페이지. 이력·기술 스택·프로젝트 링크·연락처 제공.",
+      "entry": "상단 내비 '소개' 링크 클릭 또는 /about 직접 진입",
+      "components": [
+        {
+          "key": "text-bio-detail",
+          "kind": "text",
+          "label": "이력 요약",
+          "role": "저자 이력 텍스트 영역 (실제 내용 자리표시)",
+          "behavior": "정적 텍스트 영역 (콘텐츠는 저자 작성)"
+        },
+        {
+          "key": "list-stack",
+          "kind": "list",
+          "label": "기술 스택",
+          "role": "저자 주력 기술 스택 목록",
+          "behavior": "정적 목록 표시"
+        },
+        {
+          "key": "list-projects",
+          "kind": "list",
+          "label": "프로젝트 링크",
+          "role": "공개 레포·포트폴리오 링크 목록",
+          "behavior": "링크 클릭 시 해당 외부 URL 새 탭으로 열림"
+        },
+        {
+          "key": "list-contact",
+          "kind": "list",
+          "label": "연락처",
+          "role": "이메일 등 연락 수단 목록",
+          "behavior": "정적 연락처 정보 표시"
+        }
+      ]
+    }
+  ],
+  "acs": [
+    {
+      "id": "AC-B01-01",
+      "screen_id": "B-01",
+      "layer": "render",
+      "given": "사이트 루트에 진입한 상태",
+      "when": "홈 페이지가 렌더링됨",
+      "then": "로고(SLOG_), 내비 메뉴(글·시리즈·소개·RSS), 히어로 제목, bio 2줄, 통계 라인, 포스트 카드 리스트, 푸터가 모두 화면에 표시됨",
+      "components": ["logo-slog", "nav-main", "hero-title", "text-bio", "text-stat", "list-feed", "text-footer"]
+    },
+    {
+      "id": "AC-B01-02",
+      "screen_id": "B-01",
+      "layer": "interaction",
+      "given": "홈 피드에 포스트 카드가 렌더링된 상태",
+      "when": "포스트 카드 위에 마우스를 올림",
+      "then": "카드 제목의 형광펜 mark가 스윕 애니메이션으로 나타남",
+      "components": ["list-feed"]
+    },
+    {
+      "id": "AC-B01-03",
+      "screen_id": "B-01",
+      "layer": "interaction",
+      "given": "홈 화면이 라이트 모드로 렌더링된 상태",
+      "when": "다크모드 토글을 클릭",
+      "then": "전체 페이지 배경·텍스트 색상이 다크 팔레트로 전환됨",
+      "components": ["button-darkmode"]
+    },
+    {
+      "id": "AC-B01-04",
+      "screen_id": "B-01",
+      "layer": "flow",
+      "given": "홈 화면이 렌더링된 상태",
+      "when": "포스트 카드를 클릭",
+      "then": "해당 글 상세 화면(B-03)으로 이동함",
+      "components": ["list-feed"]
+    },
+    {
+      "id": "AC-B01-05",
+      "screen_id": "B-01",
+      "layer": "flow",
+      "given": "홈 화면이 렌더링된 상태",
+      "when": "내비 '글' 링크를 클릭",
+      "then": "전체 글 목록 화면(B-02)으로 이동함",
+      "components": ["nav-main"]
+    },
+    {
+      "id": "AC-B02-01",
+      "screen_id": "B-02",
+      "layer": "render",
+      "given": "/posts 화면에 진입한 상태",
+      "when": "화면이 렌더링됨",
+      "then": "태그 필터 버튼 그룹과 전체 글 카드 리스트가 표시됨",
+      "components": ["tab-filter", "list-posts"]
+    },
+    {
+      "id": "AC-B02-02",
+      "screen_id": "B-02",
+      "layer": "interaction",
+      "given": "/posts 화면에 전체 글이 표시된 상태",
+      "when": "특정 카테고리 필터 버튼을 클릭",
+      "then": "해당 카테고리에 속하는 글 카드만 목록에 남고 선택된 필터 버튼이 활성 상태로 표시됨",
+      "components": ["tab-filter", "list-posts"]
+    },
+    {
+      "id": "AC-B02-03",
+      "screen_id": "B-02",
+      "layer": "interaction",
+      "given": "특정 카테고리 필터가 활성인 상태",
+      "when": "'전체' 필터 버튼을 클릭",
+      "then": "모든 글 카드가 목록에 복원됨",
+      "components": ["tab-filter", "list-posts"]
+    },
+    {
+      "id": "AC-B03-01",
+      "screen_id": "B-03",
+      "layer": "render",
+      "given": "특정 글 상세 페이지에 진입한 상태",
+      "when": "화면이 렌더링됨",
+      "then": "포스트 헤더(LOG 번호·카테고리·날짜·난이도), h1 제목, TL;DR 블록, 키워드 프리뷰, 본문, 참고한 링크 섹션, 시리즈 내비 카드가 모두 표시됨",
+      "components": ["text-post-meta", "text-post-title", "text-tldr", "list-keywords", "text-body", "list-refs", "nav-series"]
+    },
+    {
+      "id": "AC-B03-02",
+      "screen_id": "B-03",
+      "layer": "interaction",
+      "given": "글 상세 본문이 표시된 상태이고 이전 글이 존재하는 상태",
+      "when": "시리즈 내비의 이전 글 카드를 클릭",
+      "then": "이전 글 상세 화면으로 이동함",
+      "components": ["nav-series"]
+    },
+    {
+      "id": "AC-B03-03",
+      "screen_id": "B-03",
+      "layer": "interaction",
+      "given": "글 상세 본문이 표시된 상태이고 다음 글이 존재하는 상태",
+      "when": "시리즈 내비의 다음 글 카드를 클릭",
+      "then": "다음 글 상세 화면으로 이동함",
+      "components": ["nav-series"]
+    },
+    {
+      "id": "AC-B04-01",
+      "screen_id": "B-04",
+      "layer": "render",
+      "given": "/series 화면에 진입한 상태",
+      "when": "화면이 렌더링됨",
+      "then": "시리즈 카드 목록이 시리즈 제목·글 수·최신 업데이트 날짜와 함께 표시됨",
+      "components": ["list-series"]
+    },
+    {
+      "id": "AC-B04-02",
+      "screen_id": "B-04",
+      "layer": "interaction",
+      "given": "/series 화면에 시리즈 카드 목록이 표시된 상태",
+      "when": "특정 시리즈 카드를 클릭",
+      "then": "해당 시리즈 글 목록(순서 번호 포함)이 표시됨",
+      "components": ["list-series", "list-series-posts"]
+    },
+    {
+      "id": "AC-B05-01",
+      "screen_id": "B-05",
+      "layer": "render",
+      "given": "/about 화면에 진입한 상태",
+      "when": "화면이 렌더링됨",
+      "then": "이력 요약 영역, 기술 스택 영역, 프로젝트 링크 영역, 연락처 영역이 모두 화면에 표시됨",
+      "components": ["text-bio-detail", "list-stack", "list-projects", "list-contact"]
+    },
+    {
+      "id": "AC-B05-02",
+      "screen_id": "B-05",
+      "layer": "interaction",
+      "given": "/about 화면에서 프로젝트 링크 영역이 표시된 상태",
+      "when": "특정 프로젝트 링크를 클릭",
+      "then": "해당 외부 링크(GitHub 등)가 새 탭에서 열림",
+      "components": ["list-projects"]
+    }
+  ],
+  "impl_requirements": {
+    "frontend": [
+      "화면 B-01(홈)은 사이트 헤더(로고+내비+다크모드 토글), 히어로 영역(Noto Serif 900 제목+bio 2줄+통계 라인), 피처드 3편 고정 카드 블록, 최신순 포스트 카드 피드, 푸터를 제공해야 한다.",
+      "포스트 카드는 LOG 번호, 카테고리(볼펜 블루 색상), 제목(mark 포함 가능), 설명, 날짜·난이도·읽기 시간 메타 정보를 표시해야 한다.",
+      "포스트 카드 hover 시 제목 형광펜이 background-size 0% → 100% 스윕 전환으로 나타나야 한다; prefers-reduced-motion 활성 시 transition을 제거해야 한다.",
+      "다크모드 토글은 클릭 시 전체 페이지 팔레트를 다크 모드로 전환해야 하며, 라이트 상태를 기본으로 유지해야 한다.",
+      "화면 B-02(/posts)는 카테고리 필터 버튼 그룹과 전체 글 카드 리스트를 제공해야 한다; 필터 선택 시 해당 카테고리 글만 노출하고, '전체' 선택 시 전체 글을 복원해야 한다.",
+      "화면 B-03(글 상세)은 포스트 헤더(LOG·카테고리·날짜·난이도), Noto Serif 900 h1 제목, TL;DR 블록, 키워드 프리뷰 칩 목록, 본문(✅ 헤딩·대화체 인용·코드 블록·mark), 참고한 링크 섹션, 시리즈 내비 카드를 제공해야 한다.",
+      "본문 최대폭은 680px 고정이어야 한다.",
+      "코드 블록은 #1D1D22 배경의 다크 아일랜드 스타일을 적용해야 하며, 라이트 모드·다크 모드 무관하게 어두운 배경을 유지해야 한다.",
+      "화면 B-04(/series)는 시리즈 카드 목록을 제공해야 하고, 시리즈 카드 선택 시 순서 번호가 포함된 해당 시리즈 글 목록을 표시해야 한다.",
+      "화면 B-05(/about)는 이력 요약·기술 스택·프로젝트 링크·연락처 4개 영역을 구조로 제공해야 한다; 프로젝트 링크는 외부 URL을 새 탭으로 열어야 한다.",
+      "키보드 포커스 시 해당 요소에 형광펜 표시가 나타나야 한다.",
+      "폰트는 Noto Serif KR 900(제목), Pretendard(본문), JetBrains Mono(메타·코드·로고)를 구분해 적용해야 한다."
+    ],
+    "backend": [
+      "글 목록 조회는 {slug, lognum, title, description, category, date, difficulty, readingTime} 필드를 포함하는 목록을 반환하는 계약을 제공해야 한다.",
+      "글 상세 조회는 {slug, lognum, title, description, category, date, difficulty, readingTime, tldr, keywords, body, seriesPrev, seriesNext, refs} 필드를 포함하는 단일 항목을 반환하는 계약을 제공해야 한다.",
+      "시리즈 목록 조회는 {seriesId, title, postCount, lastUpdated} 목록을 반환하는 계약을 제공해야 한다.",
+      "시리즈 상세 조회는 해당 시리즈에 속한 글 목록을 순서 번호(order)를 포함하여 반환하는 계약을 제공해야 한다.",
+      "카테고리 필터 조회는 카테고리 값을 파라미터로 받아 해당 카테고리 글 목록만 반환하는 계약을 제공해야 한다."
+    ]
+  },
+  "non_goals": [
+    "Vercel 배포·커스텀 도메인 연결 (P4)",
+    "giscus 댓글 실연동 (댓글 자리표시만, 실 연동 P4)",
+    "조회수 카운터 (P4 Upstash Redis)",
+    "크로스포스팅(velog·티스토리) (P4)",
+    "blog-draft 자동화 스킬 구현 (P3)",
+    "SEO/OG 이미지 세부 구현 (P4)",
+    "RSS/사이트맵 실제 파일 생성 (P4)",
+    "About 실제 이력 본문 텍스트 작성 (저자 직접 제공)",
+    "관리자 CMS 화면",
+    "81편 전체 자동 이관 (P2 스코프: A급 10편만)",
+    "404 별도 화면 명세 (기본 처리로 충분)",
+    "피처드 3편 관리 UI (운영자가 코드·설정으로 직접 지정)"
+  ],
+  "unknowns": [
+    {
+      "id": "U-001",
+      "area": "B-03",
+      "unknown": "시리즈 내비 경계 처리 — 첫 글의 이전 카드·마지막 글의 다음 카드의 구체적 UI 처리(미표시 vs 비활성 vs 다음 시리즈 이동 등) 기획서 미명시",
+      "impact": "AC-B03-02 / AC-B03-03 경계 케이스 then 확정 불가; 구현자가 임의 결정해야 함",
+      "blocking": false,
+      "required_decision": "경계 글에서 해당 방향 카드를 미표시할지 vs 비활성 버튼으로 표시할지"
+    },
+    {
+      "id": "U-002",
+      "area": "B-05",
+      "unknown": "About 페이지 이력 본문 텍스트·연락처 실제 내용 미제공",
+      "impact": "AC-B05-01 then: 영역 구조 존재 여부만 확인 가능; 실제 콘텐츠 단언 불가",
+      "blocking": false,
+      "required_decision": "저자가 구현 단계에서 텍스트 직접 제공"
+    },
+    {
+      "id": "U-003",
+      "area": "B-01",
+      "unknown": "다크모드 팔레트 값(배경·텍스트·형광펜 다크 변형 등) 기획서·목업 미명시 (라이트 팔레트만 확정)",
+      "impact": "AC-B01-03 then: 전환 동작 확인까지만; 다크 팔레트 정확한 색상값 단언 불가",
+      "blocking": false,
+      "required_decision": "다크 팔레트 색상값 확정 (별도 디자인 결정)"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+#!/bin/bash
+# 브랜치-디렉토리 격리 강제 hook
+# 메인 디렉토리(<project>/)에서는 develop·master만, feature/fix/refactor/chore/docs는 worktree에서만
+
+current_branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+current_dir_name=$(basename "$PWD")
+
+[[ -z "$current_branch" ]] && exit 0
+
+# 메인 저장소 디렉토리 이름 추출 (git-common-dir 의 부모 디렉토리 이름)
+# 메인 체크아웃에서는 common-dir = <main>/.git, worktree 에서는 동일하게 메인을 가리킴
+COMMON_DIR=$(git rev-parse --git-common-dir 2>/dev/null)
+case "$COMMON_DIR" in
+  /*) ;;  # 이미 절대
+  *) COMMON_DIR="$PWD/$COMMON_DIR" ;;
+esac
+MAIN_DIR_NAME=$(basename "$(dirname "$COMMON_DIR")")
+[[ -z "$MAIN_DIR_NAME" ]] && MAIN_DIR_NAME="$current_dir_name"
+
+# 대소문자 정규화 비교 (macOS bash 3.2 호환 — tr 사용)
+MAIN_DIR_LOWER=$(echo "$MAIN_DIR_NAME" | tr '[:upper:]' '[:lower:]')
+CURRENT_DIR_LOWER=$(echo "$current_dir_name" | tr '[:upper:]' '[:lower:]')
+
+# 메인 디렉토리(<project>/)에서 feature/fix/refactor/chore/docs 브랜치 커밋 reject
+if [[ "$CURRENT_DIR_LOWER" == "$MAIN_DIR_LOWER" ]]; then
+  case "$current_branch" in
+    feature/*|fix/*|refactor/*|chore/*|docs/*)
+      echo "" >&2
+      echo "🚫 메인 디렉토리($MAIN_DIR_NAME/)에서 '$current_branch' 브랜치 커밋 금지" >&2
+      echo "   메인 디렉토리는 develop·master 전용 (머지·push 공간)" >&2
+      echo "   해결: 메인 디렉토리에서 git checkout develop" >&2
+      echo "        worktree 생성: git worktree add ../$MAIN_DIR_NAME-<주제> -b $current_branch" >&2
+      echo "" >&2
+      exit 1
+    ;;
+  esac
+fi
+
+# feature/* 등 브랜치는 <project>-<주제>/ worktree에서만 허용
+case "$current_branch" in
+  feature/*|fix/*|refactor/*|chore/*|docs/*)
+    if [[ "$CURRENT_DIR_LOWER" != "$MAIN_DIR_LOWER-"* ]]; then
+      echo "" >&2
+      echo "🚫 '$current_branch' 브랜치는 $MAIN_DIR_NAME-<주제>/ worktree에서만 커밋 가능" >&2
+      echo "   현재 디렉토리: $current_dir_name (PWD: $PWD)" >&2
+      echo "   해결: git worktree list 로 정상 worktree 확인 후 거기서 작업" >&2
+      echo "" >&2
+      exit 1
+    fi
+  ;;
+esac
+
+exit 0

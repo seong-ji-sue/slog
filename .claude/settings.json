@@ -1,0 +1,42 @@
+{
+  "model": "sonnet",
+  "permissions": {
+    "defaultMode": "bypassPermissions"
+  },
+  "enabledPlugins": {
+    "bosu@bosu": true
+  },
+  "extraKnownMarketplaces": {
+    "bosu": {
+      "source": {
+        "source": "directory",
+        "path": "./BOSU"
+      }
+    }
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /Users/seongjisu/Documents/project/slog/.claude/scripts/ts_check.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /Users/seongjisu/Documents/project/slog/.claude/scripts/curator_sync.sh"
+          }
+        ]
+      }
+    ]
+  },
+  "env": {
+    "ECC_GATEGUARD": "off"
+  }
+}

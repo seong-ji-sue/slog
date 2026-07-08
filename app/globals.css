@@ -1,0 +1,556 @@
+/* ============================================================
+   SLOG — 디자인 토큰 + 공통 스타일
+   SSOT: design/mockup-v2.html
+   ============================================================ */
+
+/* ---------- 라이트 팔레트 (기본) ---------- */
+:root {
+  --paper: #FAFAF8;
+  --ink: #1A1A1F;
+  --sub: #6E6E76;
+  --faint: #A8A8AD;
+  --marker: #FFE94A;
+  --pen: #2451B2;
+  --line: #E4E4DE;
+  --code-bg: #1D1D22;
+  --code-text: #E8E8E3;
+  --code-y: #FFE94A;
+  --code-b: #8FB5FF;
+  --code-g: #9CCC7A;
+  --code-gr: #7E7E88;
+}
+
+/* ---------- 다크 팔레트 ---------- */
+[data-theme="dark"] {
+  --paper: #17171B;
+  --ink: #ECECE6;
+  --sub: #9B9BA3;
+  --faint: #5A5A62;
+  --marker: #FFE94A; /* 형광펜 색 유지 */
+  --pen: #6B9BF5;    /* 가독성 보정 */
+  --line: #2A2A30;
+  --code-bg: #1D1D22; /* 코드 아일랜드는 항상 어두움 */
+  --code-text: #E8E8E3;
+  --code-y: #FFE94A;
+  --code-b: #8FB5FF;
+  --code-g: #9CCC7A;
+  --code-gr: #7E7E88;
+}
+
+/* ---------- 리셋 ---------- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ---------- 기반 ---------- */
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  transition: background 0.2s ease, color 0.2s ease;
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ---------- 레이아웃 ---------- */
+.col {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.mono {
+  font-family: "JetBrains Mono", monospace;
+}
+
+.serif {
+  font-family: "Noto Serif KR", serif;
+}
+
+/* ---------- 형광펜 — 시그니처 ---------- */
+mark {
+  background: linear-gradient(104deg, transparent 0.5%, var(--marker) 3%, var(--marker) 97%, transparent 99%);
+  background-size: 100% 0.72em;
+  background-position: 0 78%;
+  background-repeat: no-repeat;
+  color: inherit;
+  padding: 0 0.08em;
+}
+
+/* ---------- 헤더 ---------- */
+header.site {
+  border-bottom: 1px solid var(--line);
+}
+
+header.site .col {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 26px;
+  padding-bottom: 18px;
+  gap: 16px;
+}
+
+.logo {
+  font: 700 17px "JetBrains Mono", monospace;
+  letter-spacing: -0.02em;
+  cursor: pointer;
+}
+
+.logo .cursor {
+  color: var(--pen);
+}
+
+.menu {
+  display: flex;
+  gap: 22px;
+  align-items: center;
+}
+
+.menu a {
+  color: var(--sub);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.menu a:hover,
+.menu a:focus-visible {
+  color: var(--ink);
+  box-shadow: 0 2px 0 var(--marker);
+  outline: none;
+}
+
+/* 다크모드 토글 버튼 */
+.darkmode-toggle {
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  cursor: pointer;
+  font: 400 12px "JetBrains Mono", monospace;
+  color: var(--sub);
+  padding: 4px 8px;
+  transition: color 0.15s ease, border-color 0.15s ease;
+  line-height: 1.4;
+}
+
+.darkmode-toggle:hover,
+.darkmode-toggle:focus-visible {
+  color: var(--ink);
+  border-color: var(--ink);
+  outline: none;
+}
+
+/* ---------- 히어로 ---------- */
+.hero {
+  padding: 76px 0 52px;
+  border-bottom: 1px solid var(--line);
+}
+
+.hero h1 {
+  font-family: "Noto Serif KR", serif;
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 1.42;
+  letter-spacing: -0.01em;
+}
+
+.hero p.bio {
+  margin-top: 18px;
+  color: var(--sub);
+  font-size: 16.5px;
+  line-height: 1.75;
+}
+
+.hero .stat {
+  margin-top: 26px;
+  font: 400 12.5px "JetBrains Mono", monospace;
+  color: var(--faint);
+  letter-spacing: 0.02em;
+}
+
+.hero .stat b {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+/* ---------- 피드 ---------- */
+.feed {
+  padding-bottom: 8px;
+}
+
+/* ---------- 포스트 아이템 ---------- */
+.post-item {
+  display: block;
+  padding: 26px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.post-item .lognum {
+  font: 500 12px "JetBrains Mono", monospace;
+  color: var(--faint);
+  margin-right: 10px; /* JSX 공백 트리밍 보정 — 목업의 라벨·제목 인라인 간격 */
+}
+
+.post-item .lognum .cat {
+  color: var(--pen);
+}
+
+.post-item h2 {
+  margin-top: 8px;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  display: inline;
+}
+
+.post-item h2 mark {
+  background-size: 0% 0.72em;
+  transition: background-size 0.28s ease;
+}
+
+.post-item:hover h2 mark,
+.post-item:focus-visible h2 mark {
+  background-size: 100% 0.72em;
+}
+
+/* 키보드 포커스 시 형광펜 */
+.post-item:focus-visible {
+  outline: 2px solid var(--marker);
+  outline-offset: 2px;
+}
+
+.post-item p.desc {
+  margin-top: 9px;
+  color: var(--sub);
+  font-size: 15px;
+  line-height: 1.75;
+  max-width: 620px;
+}
+
+.post-item .meta {
+  margin-top: 10px;
+  font: 400 12px "JetBrains Mono", monospace;
+  color: var(--faint);
+}
+
+/* ---------- 푸터 ---------- */
+footer.site {
+  padding: 44px 0 52px;
+}
+
+footer.site .col {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font: 400 12px "JetBrains Mono", monospace;
+  color: var(--faint);
+  gap: 16px;
+}
+
+footer.site a {
+  color: var(--sub);
+}
+
+footer.site a:hover,
+footer.site a:focus-visible {
+  color: var(--ink);
+  outline: none;
+  box-shadow: 0 1px 0 var(--marker);
+}
+
+/* ---------- 글 상세 (B-03, Stage B 용) ---------- */
+.post-head {
+  padding-top: 68px;
+}
+
+.post-head .lognum {
+  font: 500 13px "JetBrains Mono", monospace;
+  color: var(--sub);
+}
+
+.post-head .lognum .cat {
+  color: var(--pen);
+}
+
+.post-head .lognum .stars {
+  color: var(--ink);
+}
+
+.post-head h1 {
+  margin-top: 16px;
+  font-family: "Noto Serif KR", serif;
+  font-weight: 900;
+  font-size: 34px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+}
+
+.tldr {
+  margin-top: 30px;
+  font-size: 17px;
+  line-height: 1.85;
+  font-weight: 600;
+}
+
+.tldr .label {
+  font: 700 11px "JetBrains Mono", monospace;
+  color: var(--sub);
+  letter-spacing: 0.14em;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.kw {
+  display: flex;
+  gap: 10px;
+  margin-top: 22px;
+  flex-wrap: wrap;
+}
+
+.kw span {
+  font: 500 12.5px "JetBrains Mono", monospace;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  background: var(--paper);
+  border-radius: 3px;
+  padding: 6px 10px;
+}
+
+article {
+  padding-bottom: 24px;
+}
+
+article h2 {
+  margin: 52px 0 16px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+article h2 .check {
+  color: var(--pen);
+  margin-right: 8px;
+  font-size: 19px;
+}
+
+article p {
+  margin: 15px 0;
+  font-size: 16px;
+  line-height: 1.85;
+}
+
+article p code,
+article li code {
+  font: 500 14px "JetBrains Mono", monospace;
+  background: #EFEFEA;
+  border-radius: 3px;
+  padding: 2px 5px;
+}
+
+[data-theme="dark"] article p code,
+[data-theme="dark"] article li code {
+  background: #2A2A30;
+}
+
+.dialog {
+  margin: 20px 0;
+  border-left: 2px solid var(--pen);
+  padding: 6px 0 6px 18px;
+  color: var(--sub);
+  font-size: 15.5px;
+  line-height: 2.0;
+}
+
+.dialog b {
+  color: var(--pen);
+  font-weight: 700;
+}
+
+pre {
+  margin: 20px 0;
+  background: var(--code-bg) !important;
+  color: var(--code-text);
+  border-radius: 6px;
+  padding: 18px 20px;
+  overflow-x: auto;
+  font: 400 13.5px/1.7 "JetBrains Mono", monospace;
+}
+
+pre .k { color: var(--code-y); }
+pre .f { color: var(--code-b); }
+pre .s { color: var(--code-g); }
+pre .c { color: var(--code-gr); }
+
+.img-ph {
+  margin: 20px 0;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  border-radius: 6px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--faint);
+  font: 400 12.5px "JetBrains Mono", monospace;
+}
+
+.refs {
+  margin-top: 44px;
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+}
+
+.refs .label {
+  font: 700 11px "JetBrains Mono", monospace;
+  color: var(--sub);
+  letter-spacing: 0.14em;
+}
+
+.refs a {
+  display: block;
+  margin-top: 10px;
+  color: var(--pen);
+  font-size: 15px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.series-nav {
+  display: flex;
+  gap: 14px;
+  margin: 40px 0;
+}
+
+.series-nav a {
+  flex: 1;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  border-radius: 5px;
+  padding: 14px 16px;
+}
+
+.series-nav .dir {
+  font: 500 11px "JetBrains Mono", monospace;
+  color: var(--faint);
+}
+
+.series-nav .t {
+  display: block;
+  margin-top: 6px;
+  font-size: 14.5px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.series-nav a:hover .t {
+  box-shadow: inset 0 -0.55em 0 var(--marker);
+}
+
+/* ---------- About 페이지 ---------- */
+.about-section {
+  padding: 48px 0 0;
+}
+
+.about-section:last-child {
+  padding-bottom: 64px;
+}
+
+.about-section + .about-section {
+  border-top: 1px solid var(--line);
+}
+
+.about-section h2 {
+  font: 700 11px "JetBrains Mono", monospace;
+  color: var(--sub);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.about-section p {
+  font-size: 16px;
+  line-height: 1.85;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+
+.stack-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+}
+
+.stack-list li {
+  font: 500 13px "JetBrains Mono", monospace;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 5px 10px;
+}
+
+.project-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.project-list li a {
+  color: var(--pen);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.project-list li a:hover {
+  color: var(--ink);
+}
+
+.project-list li span {
+  display: block;
+  margin-top: 2px;
+  font-size: 13px;
+  color: var(--sub);
+}
+
+.contact-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contact-list li {
+  font-size: 15px;
+  color: var(--ink);
+}
+
+.contact-list li a {
+  color: var(--pen);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ---------- prefers-reduced-motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .post-item h2 mark {
+    transition: none;
+  }
+  body {
+    transition: none;
+  }
+}

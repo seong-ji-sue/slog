@@ -13,20 +13,9 @@ import rehypeStringify from "rehype-stringify";
 const POSTS_DIR = path.join(process.cwd(), "content", "posts");
 const DRAFTS_DIR = path.join(process.cwd(), "content", "drafts");
 
-export interface PostMeta {
-  slug: string;
-  title: string;
-  date: string; // ISO
-  description: string;
-  categories: string[];
-  tags: string[];
-  difficulty: number;
-  log: number;
-  series?: string;
-  source?: string;
-  draft: boolean;
-  readingMin: number;
-}
+export type { PostMeta } from "./format";
+export { stars, fmtDate, logNum } from "./format";
+import type { PostMeta } from "./format";
 
 export interface Post extends PostMeta {
   html: string;
@@ -100,17 +89,35 @@ export function adjacent(slug: string): { prev: PostMeta | null; next: PostMeta 
   return { prev: all[i + 1] ?? null, next: all[i - 1] ?? null };
 }
 
-export function stars(d: number): string {
-  const n = Math.min(5, Math.max(0, d));
-  return "★".repeat(n) + "☆".repeat(5 - n);
+
+
+
+export function maxLog(): number {
+  const all = getAllPosts();
+  if (all.length === 0) return 0;
+  return Math.max(...all.map((p) => p.log));
 }
 
-export function fmtDate(iso: string): string {
-  const d = new Date(iso);
-  if (isNaN(d.getTime())) return iso.slice(0, 10).replace(/-/g, ".");
-  return `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, "0")}.${String(d.getDate()).padStart(2, "0")}`;
+export function getSeriesList(): { name: string; count: number; lastDate: string }[] {
+  const all = getAllPosts();
+  const map = new Map<string, { count: number; lastDate: string }>();
+  for (const p of all) {
+    if (!p.series) continue;
+    const existing = map.get(p.series);
+    if (!existing) {
+      map.set(p.series, { count: 1, lastDate: p.date });
+    } else {
+      existing.count += 1;
+      if (p.date > existing.lastDate) existing.lastDate = p.date;
+    }
+  }
+  return Array.from(map.entries())
+    .map(([name, v]) => ({ name, count: v.count, lastDate: v.lastDate }))
+    .sort((a, b) => (a.lastDate < b.lastDate ? 1 : -1));
 }
 
-export function logNum(n: number): string {
-  return `LOG_${String(n).padStart(3, "0")}`;
+export function getSeriesPosts(name: string): PostMeta[] {
+  return getAllPosts()
+    .filter((p) => p.series === name)
+    .sort((a, b) => (a.date < b.date ? -1 : 1)); // date 오름차순 = 1부부터
 }

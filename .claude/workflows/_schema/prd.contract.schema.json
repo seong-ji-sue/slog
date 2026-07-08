@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "prd.contract.json — PRD가 Plan·TC에 넘기는 기계 계약 (코드·스택 무관)",
+  "type": "object",
+  "required": ["feature", "screens", "acs", "impl_requirements"],
+  "additionalProperties": false,
+  "properties": {
+    "feature": { "type": "string", "description": "기능/업무영역 식별자" },
+    "screens": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["screen_id", "title", "components"],
+        "additionalProperties": false,
+        "properties": {
+          "screen_id": { "type": "string", "description": "화면 식별자 (예 A-18)" },
+          "title": { "type": "string" },
+          "purpose": { "type": "string" },
+          "entry": { "type": "string", "description": "도달 경로 서술(스택 무관)" },
+          "components": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["key", "kind", "label"],
+              "additionalProperties": false,
+              "properties": {
+                "key": { "type": "string", "pattern": "^[a-z]+-[a-z0-9-]+$", "description": "{kind}-{name} 논리 식별자. 셀렉터 아님" },
+                "kind": { "enum": ["grid", "button", "search", "modal", "field", "link", "tab", "badge", "list", "text"] },
+                "label": { "type": "string", "description": "실제 표시 텍스트" },
+                "role": { "type": "string" },
+                "columns": { "type": "array", "items": { "type": "string" } },
+                "opens": { "type": "string", "description": "여는 컴포넌트 key" },
+                "behavior": { "type": "string", "description": "관측가능 반응" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "acs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "screen_id", "layer", "given", "when", "then"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^AC-[A-Z][A-Z0-9]*(?:-[0-9]+)*-[0-9]{2}$" },
+          "screen_id": { "type": "string" },
+          "layer": { "enum": ["render", "interaction", "flow"] },
+          "given": { "type": "string" },
+          "when": { "type": "string" },
+          "then": { "type": "string" },
+          "components": { "type": "array", "items": { "type": "string" }, "description": "참조 컴포넌트 key" }
+        }
+      }
+    },
+    "impl_requirements": {
+      "type": "object",
+      "description": "req#8 — 코드 없음·스택 미정 전제의 구현 명세. 코드·프레임워크명·파일경로 금지",
+      "required": ["frontend"],
+      "additionalProperties": false,
+      "properties": {
+        "frontend": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "backend": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

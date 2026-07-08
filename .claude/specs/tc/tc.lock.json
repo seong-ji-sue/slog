@@ -1,0 +1,51 @@
+{
+ "unlock_condition": "구현 GREEN + 리드 승인 (락 이후 spec 수정 = HUMAN GATE)",
+ "red_report": "_data/manifests/red_report.json",
+ "files": [
+  {
+   "path": "tc/tests/B-01.spec.js",
+   "sha256": "1b7d4217414114713ed7c5a543aedb657d7882611362d65851ca275e63c9d85d",
+   "ac_refs": [
+    "AC-B01-01",
+    "AC-B01-02",
+    "AC-B01-03",
+    "AC-B01-04",
+    "AC-B01-05"
+   ]
+  },
+  {
+   "path": "tc/tests/B-02.spec.js",
+   "sha256": "f7e5f85c0d9039dc07fabc24734471338c69a9933160538780830d509dfcb156",
+   "ac_refs": [
+    "AC-B02-01",
+    "AC-B02-02",
+    "AC-B02-03"
+   ]
+  },
+  {
+   "path": "tc/tests/B-03.spec.js",
+   "sha256": "7b68d1aa932ad19cc1d76c8e38350e5f593a89f7440f9973af343242ecb7ea5e",
+   "ac_refs": [
+    "AC-B03-01",
+    "AC-B03-02",
+    "AC-B03-03"
+   ]
+  },
+  {
+   "path": "tc/tests/B-04.spec.js",
+   "sha256": "4e708807b2a04746848b7dfc5295d647d5f75649310683bd0d8c2044deb7eba3",
+   "ac_refs": [
+    "AC-B04-01",
+    "AC-B04-02"
+   ]
+  },
+  {
+   "path": "tc/tests/B-05.spec.js",
+   "sha256": "b7d47e050100ab1d84114f989049cf007ef1602dad8c87f23a95d535984a8bb7",
+   "ac_refs": [
+    "AC-B05-01",
+    "AC-B05-02"
+   ]
+  }
+ ]
+}

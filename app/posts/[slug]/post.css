@@ -1,0 +1,347 @@
+/* ============================================================
+   post.css — B-03 글 상세 스타일
+   globals.css 토큰(var()) 사용, mockup-v2.html ② 보드 기준
+   ============================================================ */
+
+/* ── 레이아웃 ── */
+.post-wrap {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+}
+
+/* ── 포스트 헤더 ── */
+.post-head {
+  padding-top: 68px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 32px;
+}
+
+.post-head .lognum {
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--sub);
+  display: block;
+  margin-bottom: 14px;
+}
+
+.post-head .lognum .cat {
+  color: var(--pen);
+}
+
+.post-head .lognum .stars {
+  color: var(--fg);
+}
+
+.post-head h1 {
+  font-family: "Noto Serif KR", "Noto Serif", serif;
+  font-weight: 900;
+  font-size: 32px;
+  line-height: 1.45;
+  letter-spacing: -0.5px;
+  color: var(--fg);
+  margin: 0 0 24px;
+}
+
+/* ── TL;DR ── */
+.tldr {
+  background: var(--bg2);
+  border-left: 3px solid var(--pen);
+  border-radius: 0 6px 6px 0;
+  padding: 16px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.85;
+  color: var(--fg);
+  margin-bottom: 20px;
+}
+
+.tldr .label {
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pen);
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* ── 키워드 칩 ── */
+.kw {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.kw span {
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 500;
+  font-size: 12.5px;
+  color: var(--sub);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 4px 10px;
+  background: var(--bg);
+}
+
+/* ── 본문 article ── */
+.post-body {
+  font-size: 16px;
+  line-height: 1.9;
+  color: var(--fg);
+}
+
+.post-body h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 52px 0 16px;
+  color: var(--fg);
+}
+
+.post-body h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 36px 0 12px;
+  color: var(--fg);
+}
+
+.post-body p {
+  margin: 0 0 18px;
+}
+
+.post-body strong {
+  font-weight: 700;
+}
+
+.post-body a {
+  color: var(--pen);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.post-body mark {
+  background: var(--hl);
+  color: inherit;
+  border-radius: 2px;
+  padding: 0 2px;
+}
+
+/* ── 대화체 인용 (blockquote) ── */
+.post-body blockquote {
+  border-left: 2px solid var(--pen);
+  margin: 24px 0;
+  padding: 12px 18px;
+  background: var(--bg2);
+  border-radius: 0 4px 4px 0;
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--sub);
+}
+
+.post-body blockquote p {
+  margin: 0;
+}
+
+/* ── 인라인 코드 ── */
+.post-body p code,
+.post-body li code {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13.5px;
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 1px 5px;
+  color: var(--fg);
+}
+
+/* ── 코드 블록 — 다크 아일랜드 (#1D1D22) ── */
+.post-body pre {
+  background: #1D1D22 !important;
+  border-radius: 8px;
+  padding: 20px 22px;
+  margin: 20px 0;
+  overflow-x: auto;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13.5px;
+  line-height: 1.65;
+}
+
+.post-body pre code {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  font-size: inherit;
+  color: #E2E2E6;
+}
+
+/* hljs 토큰 색상 매핑 (mockup 코드 팔레트) */
+.post-body .hljs-keyword,
+.post-body .hljs-selector-tag,
+.post-body .hljs-built_in,
+.post-body .hljs-name,
+.post-body .hljs-tag {
+  color: #FFE94A;
+}
+
+.post-body .hljs-title,
+.post-body .hljs-title.class_,
+.post-body .hljs-title.function_,
+.post-body .hljs-function,
+.post-body .hljs-attr {
+  color: #8FB5FF;
+}
+
+.post-body .hljs-string,
+.post-body .hljs-template-string,
+.post-body .hljs-addition {
+  color: #9CCC7A;
+}
+
+.post-body .hljs-comment,
+.post-body .hljs-meta,
+.post-body .hljs-deletion {
+  color: #7E7E88;
+}
+
+.post-body .hljs-number,
+.post-body .hljs-literal,
+.post-body .hljs-type,
+.post-body .hljs-params {
+  color: #FFB86C;
+}
+
+.post-body .hljs-variable,
+.post-body .hljs-symbol {
+  color: #E2E2E6;
+}
+
+/* ── 이미지 ── */
+.post-body img {
+  max-width: 100%;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  display: block;
+  margin: 20px auto;
+}
+
+/* ── 목록 ── */
+.post-body ul,
+.post-body ol {
+  margin: 0 0 18px 20px;
+  padding: 0;
+}
+
+.post-body li {
+  margin-bottom: 6px;
+}
+
+/* ── 참고한 링크 섹션 ── */
+.refs {
+  border-top: 1px solid var(--line);
+  margin-top: 44px;
+  padding-top: 24px;
+}
+
+.refs .label {
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sub);
+  display: block;
+  margin-bottom: 12px;
+}
+
+.refs ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.refs ul li {
+  margin-bottom: 8px;
+}
+
+.refs ul a {
+  color: var(--pen);
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ── 시리즈 내비 ── */
+.series-nav {
+  display: flex;
+  gap: 14px;
+  margin: 40px 0;
+}
+
+.series-nav a {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--fg);
+  transition: border-color 0.15s;
+}
+
+.series-nav a:hover {
+  border-color: var(--pen);
+}
+
+.series-nav a.prev {
+  text-align: left;
+}
+
+.series-nav a.next {
+  text-align: right;
+}
+
+.series-nav .dir {
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 500;
+  font-size: 11px;
+  color: var(--sub);
+}
+
+.series-nav .t {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--fg);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.series-nav .inactive {
+  flex: 1;
+  padding: 14px 16px;
+  border: 1px dashed var(--line);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: var(--sub);
+}
+
+/* ── giscus 자리표시 ── */
+.comments-placeholder {
+  border: 1.5px dashed var(--line);
+  border-radius: 8px;
+  padding: 40px 24px;
+  text-align: center;
+  margin-top: 48px;
+  color: var(--sub);
+  font-size: 14px;
+}
