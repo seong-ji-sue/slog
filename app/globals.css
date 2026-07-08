@@ -199,6 +199,7 @@ header.site .col {
 .post-item .lognum {
   font: 500 12px "JetBrains Mono", monospace;
   color: var(--faint);
+  margin-right: 10px; /* JSX 공백 트리밍 보정 — 목업의 라벨·제목 인라인 간격 */
 }
 
 .post-item .lognum .cat {
