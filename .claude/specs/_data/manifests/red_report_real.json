@@ -1,0 +1,133 @@
+{
+ "mode": "real",
+ "total": 17,
+ "passed": 17,
+ "logic_absent_fail": 0,
+ "infra_fail": 0,
+ "other_fail": 0,
+ "summary": "total=17 pass=17 logic_absent=0 infra=0 other=0",
+ "tests": [
+  {
+   "file": "B-01.spec.js",
+   "title": "AC-B01-01: 홈 페이지 렌더링 시 주요 구성 요소가 모두 표시됨",
+   "status": "passed",
+   "class": "PASS",
+   "reason": ""
+  },
+  {
+   "file": "B-01.spec.js",
+   "title": "AC-B01-01: 홈 로고 텍스트가 SLOG_ 를 포함함",
+   "status": "passed",
+   "class": "PASS",
+   "reason": ""
+  },
+  {
+   "file": "B-01.spec.js",
+   "title": "AC-B01-02: 포스트 카드에 마우스를 올리면 형광펜 애니메이션이 적용됨",
+   "status": "passed",
+   "class": "PASS",
+   "reason": ""
+  },
+  {
+   "file": "B-01.spec.js",
+   "title": "AC-B01-03: 다크모드 토글 클릭 시 페이지 팔레트가 다크로 전환됨",
+   "status": "passed",
+   "class": "PASS",
+   "reason": ""
+  },
+  {
+   "file": "B-01.spec.js",
+   "title": "AC-B01-04: 포스트 카드 클릭 시 글 상세(B-03)로 이동함",
+   "status": "passed",
+   "class": "PASS",
+   "reason": ""
+  },
+  {
+   "file": "B-01.spec.js",
+   "title": "AC-B01-05: 내비 글 링크 클릭 시 전체 글 목록 화면(B-02)으로 이동함",
+   "status": "passed",
+   "class": "PASS",
+   "reason": ""
+  },
+  {
+   "file": "B-02.spec.js",
+   "title": "AC-B02-01: /posts 진입 시 필터 버튼 그룹과 글 카드 리스트가 표시됨",
+   "status": "passed",
+   "class": "PASS",
+   "reason": ""
+  },
+  {
+   "file": "B-02.spec.js",
+   "title": "AC-B02-02: 카테고리 필터 클릭 시 해당 카테고리 글만 노출되고 버튼이 활성 상태가 됨",
+   "status": "passed",
+   "class": "PASS",
+   "reason": ""
+  },
+  {
+   "file": "B-02.spec.js",
+   "title": "AC-B02-03: 전체 필터 클릭 시 모든 글이 복원됨",
+   "status": "passed",
+   "class": "PASS",
+   "reason": ""
+  },
+  {
+   "file": "B-03.spec.js",
+   "title": "AC-B03-01: 글 상세 진입 시 포스트 구성 요소가 모두 표시됨",
+   "status": "passed",
+   "class": "PASS",
+   "reason": ""
+  },
+  {
+   "file": "B-03.spec.js",
+   "title": "AC-B03-01: TL;DR 블록이 TL;DR 텍스트를 포함함",
+   "status": "passed",
+   "class": "PASS",
+   "reason": ""
+  },
+  {
+   "file": "B-03.spec.js",
+   "title": "AC-B03-02: 시리즈 이전 글 카드 클릭 시 이전 글 상세로 이동함",
+   "status": "passed",
+   "class": "PASS",
+   "reason": ""
+  },
+  {
+   "file": "B-03.spec.js",
+   "title": "AC-B03-03: 시리즈 다음 글 카드 클릭 시 다음 글 상세로 이동함",
+   "status": "passed",
+   "class": "PASS",
+   "reason": ""
+  },
+  {
+   "file": "B-04.spec.js",
+   "title": "AC-B04-01: /series 진입 시 시리즈 카드 목록이 표시됨",
+   "status": "passed",
+   "class": "PASS",
+   "reason": ""
+  },
+  {
+   "file": "B-04.spec.js",
+   "title": "AC-B04-02: 시리즈 카드 클릭 시 해당 시리즈 글 목록이 표시됨",
+   "status": "passed",
+   "class": "PASS",
+   "reason": ""
+  },
+  {
+   "file": "B-05.spec.js",
+   "title": "AC-B05-01: /about 진입 시 이력·스택·프로젝트·연락처 영역이 모두 표시됨",
+   "status": "passed",
+   "class": "PASS",
+   "reason": ""
+  },
+  {
+   "file": "B-05.spec.js",
+   "title": "AC-B05-02: 프로젝트 링크 클릭 시 새 탭에서 외부 URL이 열림",
+   "status": "passed",
+   "class": "PASS",
+   "reason": ""
+  }
+ ],
+ "all_green": true,
+ "green_ratio": "17/17",
+ "failing": []
+}
