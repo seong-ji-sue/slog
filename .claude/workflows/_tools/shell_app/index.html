@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>BOSU — App Shell (미구현 RED 실측 대상)</title>
+<style>
+  body { font-family: -apple-system, "Malgun Gothic", sans-serif; margin: 0; background: #f4f6f8; color: #333; }
+  header { background: #2c3e50; color: #fff; padding: 10px 16px; font-size: 14px; }
+  #app-root { padding: 24px; }
+  .empty { border: 1px dashed #b0bec5; background: #fff; padding: 40px; text-align: center; color: #90a4ae; border-radius: 4px; }
+  code { background: #eceff1; padding: 1px 5px; border-radius: 3px; }
+</style>
+</head>
+<body>
+<header>BOSU — 빈 앱 셸 (RED 실측 대상)</header>
+<div id="app-root">
+  <div class="empty">
+    <p>요청 라우트: <code id="route">/</code></p>
+    <p>화면은 아직 구현되지 않았습니다. (의도된 상태 — TC RED 실측용. 계약 key/data-testid 의도적 부재)</p>
+  </div>
+</div>
+<script>
+  // 라우터 스텁: 라우트 표시만. 컴포넌트·data-testid 는 의도적으로 없음(LOGIC_ABSENT 유발).
+  function render() { document.getElementById('route').textContent = location.pathname + location.hash; }
+  window.addEventListener('hashchange', render);
+  render();
+</script>
+</body>
+</html>

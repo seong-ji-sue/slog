@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "plan.contract.json — Plan이 주는 AC 커버리지 보증 (PRD 계약만 소비, 창작 금지)",
+  "type": "object",
+  "required": ["feature", "tasks"],
+  "additionalProperties": false,
+  "properties": {
+    "feature": { "type": "string" },
+    "tasks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["task_id", "ac_refs", "kind", "target", "steps", "success_criteria"],
+        "additionalProperties": false,
+        "properties": {
+          "task_id": { "type": "string" },
+          "ac_refs": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "string", "description": "prd 계약의 AC-ID/BE-ID (창작 금지)" }
+          },
+          "kind": { "enum": ["frontend", "backend"] },
+          "target": { "type": "string", "description": "구현 대상 서술. 스택 표준 경로는 프리셋값 주입" },
+          "steps": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+          "success_criteria": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+          "depends_on": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  }
+}

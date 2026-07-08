@@ -1,0 +1,5 @@
+{
+  "$comment": "PLAN_SCHEMA.json — plan.contract.schema.json의 참조 선언. 실제 스키마는 plan.contract.schema.json이 SSOT.",
+  "$ref": "./plan.contract.schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}
