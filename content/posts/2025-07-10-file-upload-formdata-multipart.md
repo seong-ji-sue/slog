@@ -7,7 +7,9 @@ tags: ["FormData", "multipart", "file-upload", "Next.js", "React"]
 series: ""
 difficulty: 3
 source: https://zibu-story.tistory.com/219
-draft: true
+draft: false
+log: 81
+slug: "file-upload-formdata-multipart"
 ---
 
 > **TL;DR** — 파일은 바이너리라 JSON으로 못 보낸다. FormData에 담아 `multipart/form-data`로 보내야 하고, 파일 첨부 UI는 기본 input을 숨기고 ref로 클릭을 위임하면 깔끔하게 만들 수 있다.
@@ -30,13 +32,13 @@ draft: true
 
 UI도 문제였다. HTML이 제공하는 `<input type="file">`은 기능은 다 있지만 스타일이 그대로는 못 쓸 수준이다.
 
-![input type=file 기본 태그](../images/219/img_02.png)
+![input type=file 기본 태그](/images/219/img_02.png)
 
 ## ✅ 원인 분석 — File 전용 데이터, Multipart Type
 
 File 인터페이스는 `<input type="file">` 요소로 파일 데이터를 받을 수 있고, Blob 인터페이스를 상속받는다.
 
-![File 인터페이스 구조](../images/219/img_01.png)
+![File 인터페이스 구조](/images/219/img_01.png)
 
 **파일 요청 인터페이스 — FormData**
 

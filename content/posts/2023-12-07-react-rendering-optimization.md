@@ -7,7 +7,9 @@ tags: ["React", "rendering", "optimization", "useMemo", "useTransition"]
 series: "React 파고들기"
 difficulty: 2
 source: https://zibu-story.tistory.com/213
-draft: true
+draft: false
+log: 76
+slug: "react-rendering-optimization"
 ---
 
 > **TL;DR** — 사용자는 3초만 지나면 페이지를 떠난다. 렌더링이 "언제" 일어나는지 알고, "측정"부터 한 뒤에, 아래 5가지 방법을 골라 쓰면 된다.
@@ -39,7 +41,7 @@ draft: true
 3. React는 새 가상 DOM을 만들어 이전 가상 DOM과 비교(diffing)함
 4. 변경된 컴포넌트만 실제 DOM에 반영함
 
-![렌더링 과정](../images/213/img_01.png)
+![렌더링 과정](/images/213/img_01.png)
 
 ## ✅ 측정부터 — 렌더링 체크 방법
 
@@ -48,14 +50,14 @@ draft: true
 - **크롬 개발자도구 Performance 탭** — 페이지 렌더링에 걸리는 시간, 어느 구간에서 병목이 나는지 분석해줌
 - **React DevTools Profiler** — 컴포넌트 렌더링 타임라인을 보여줌. 하이라이트 옵션을 켜면 어떤 요소가 렌더링되는지 깜빡임으로 표시됨
 
-![React Profiler 설정](../images/213/img_02.png)
+![React Profiler 설정](/images/213/img_02.png)
 
 사용자 기준의 지표도 챙겨야 한다. DOMContentLoaded만 빨라지면 로딩바만 빨리 나오고 체감 최적화는 안 된 것이다.
 
 - **FMP(First Meaningful Paint)** — 사용자에게 의미 있는 콘텐츠가 처음 나타나는 시점
 - **LCP(Largest Contentful Paint)** — 가장 큰 콘텐츠 요소가 완전히 렌더링되는 시점. Lighthouse·Performance 탭에서 확인함
 
-![성능 지표](../images/213/img_06.png)
+![성능 지표](/images/213/img_06.png)
 
 ## ✅ 방법 1. Hook 개선
 
@@ -117,7 +119,7 @@ function App() {
 
 ## ✅ 방법 3. 디바운싱과 스로틀링
 
-![디바운싱 vs 스로틀링](../images/213/img_07.png)
+![디바운싱 vs 스로틀링](/images/213/img_07.png)
 
 **디바운싱(Debouncing)** — 요청이 연속으로 들어오면 delay 뒤에 **마지막 요청만** 실행함
 
