@@ -1,7 +1,0 @@
-{
- "stage": "prd",
- "pass": false,
- "fails": [
-  "prd.contract.json 누락"
- ]
-}
