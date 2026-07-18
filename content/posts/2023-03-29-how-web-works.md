@@ -7,7 +7,7 @@ tags: ["HTTP", "GET", "POST", "브라우저렌더링", "DNS", "WAS", "DOM", "Ref
 series: ""
 difficulty: 2
 source: https://zibu-story.tistory.com/204
-log: 64
+log: 67
 slug: "how-web-works"
 draft: false
 ---

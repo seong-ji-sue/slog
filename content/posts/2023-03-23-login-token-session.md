@@ -7,7 +7,7 @@ tags: ["JWT", "Session", "Cookie", "OAuth", "인증", "인가", "Token", "localS
 series: ""
 difficulty: 2
 source: https://zibu-story.tistory.com/202
-log: 62
+log: 65
 slug: "login-token-session"
 draft: false
 ---
