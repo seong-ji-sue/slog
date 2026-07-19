@@ -2,11 +2,11 @@
   "config": {
     "argv": [
       "/opt/homebrew/Cellar/node/25.8.1_1/bin/node",
-      "/Users/seongjisu/Documents/project/slog/.claude/specs/tc/tests/node_modules/.bin/playwright",
+      "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/node_modules/.bin/playwright",
       "test"
     ],
-    "configFile": "/Users/seongjisu/Documents/project/slog/.claude/specs/tc/tests/playwright.config.js",
-    "rootDir": "/Users/seongjisu/Documents/project/slog/.claude/specs/tc/tests",
+    "configFile": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/playwright.config.js",
+    "rootDir": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests",
     "failOnFlakyTests": false,
     "forbidOnly": false,
     "fullyParallel": true,
@@ -22,7 +22,7 @@
     "preserveOutput": "always",
     "projects": [
       {
-        "outputDir": "/Users/seongjisu/Documents/project/slog/.claude/specs/tc/tests/test-results",
+        "outputDir": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
@@ -30,7 +30,7 @@
         },
         "id": "chromium",
         "name": "chromium",
-        "testDir": "/Users/seongjisu/Documents/project/slog/.claude/specs/tc/tests",
+        "testDir": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests",
         "testIgnore": [],
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
@@ -65,14 +65,14 @@
   },
   "suites": [
     {
-      "title": "B-01.spec.js",
-      "file": "B-01.spec.js",
+      "title": "_structure.spec.js",
+      "file": "_structure.spec.js",
       "column": 0,
       "line": 0,
       "specs": [
         {
-          "title": "AC-B01-01: 홈 페이지 렌더링 시 주요 구성 요소가 모두 표시됨",
-          "ok": true,
+          "title": "STRUCT-B-01: 계약 컴포넌트가 렌더링된다",
+          "ok": false,
           "tags": [],
           "tests": [
             {
@@ -85,28 +85,58 @@
                 {
                   "workerIndex": 0,
                   "parallelIndex": 0,
-                  "status": "passed",
-                  "duration": 1007,
-                  "errors": [],
+                  "status": "failed",
+                  "duration": 3187,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-01-logo-slog')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-01-logo-slog')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-01-logo-slog')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-01-logo-slog')\u001b[22m\n\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/_structure.spec.js:6:47",
+                    "location": {
+                      "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/_structure.spec.js",
+                      "column": 47,
+                      "line": 6
+                    },
+                    "snippet": "  4 | test('STRUCT-B-01: 계약 컴포넌트가 렌더링된다', async ({ page }) => {\n  5 |   await gotoScreen(page, 'B-01');\n> 6 |   await expect(ui(page, 'B-01', 'logo-slog')).toBeVisible();\n    |                                               ^\n  7 |   await expect(ui(page, 'B-01', 'nav-main')).toBeVisible();\n  8 |   await expect(ui(page, 'B-01', 'button-darkmode')).toBeVisible();\n  9 |   await expect(ui(page, 'B-01', 'hero-title')).toBeVisible();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/_structure.spec.js",
+                        "column": 47,
+                        "line": 6
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-01-logo-slog')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-01-logo-slog')\u001b[22m\n\n\n  4 | test('STRUCT-B-01: 계약 컴포넌트가 렌더링된다', async ({ page }) => {\n  5 |   await gotoScreen(page, 'B-01');\n> 6 |   await expect(ui(page, 'B-01', 'logo-slog')).toBeVisible();\n    |                                               ^\n  7 |   await expect(ui(page, 'B-01', 'nav-main')).toBeVisible();\n  8 |   await expect(ui(page, 'B-01', 'button-darkmode')).toBeVisible();\n  9 |   await expect(ui(page, 'B-01', 'hero-title')).toBeVisible();\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/_structure.spec.js:6:47"
+                    }
+                  ],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-07-08T23:17:36.573Z",
+                  "startTime": "2026-07-19T08:42:24.472Z",
                   "annotations": [],
-                  "attachments": []
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/test-results/_structure-STRUCT-B-01-계약-컴포넌트가-렌더링된다-chromium/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/_structure.spec.js",
+                    "column": 47,
+                    "line": 6
+                  }
                 }
               ],
-              "status": "expected"
+              "status": "unexpected"
             }
           ],
-          "id": "923a1391c2b915a5a3bc-4a83a8c30e028654dd45",
-          "file": "B-01.spec.js",
-          "line": 6,
+          "id": "088ca9dedb288acfa4ee-fc29ee0a269cdc350d02",
+          "file": "_structure.spec.js",
+          "line": 4,
           "column": 1
         },
         {
-          "title": "AC-B01-01: 홈 로고 텍스트가 SLOG_ 를 포함함",
-          "ok": true,
+          "title": "STRUCT-B-02: 계약 컴포넌트가 렌더링된다",
+          "ok": false,
           "tags": [],
           "tests": [
             {
@@ -119,28 +149,58 @@
                 {
                   "workerIndex": 1,
                   "parallelIndex": 1,
-                  "status": "passed",
-                  "duration": 845,
-                  "errors": [],
+                  "status": "failed",
+                  "duration": 3244,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-02-tab-filter')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-02-tab-filter')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-02-tab-filter')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-02-tab-filter')\u001b[22m\n\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/_structure.spec.js:18:48",
+                    "location": {
+                      "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/_structure.spec.js",
+                      "column": 48,
+                      "line": 18
+                    },
+                    "snippet": "  16 | test('STRUCT-B-02: 계약 컴포넌트가 렌더링된다', async ({ page }) => {\n  17 |   await gotoScreen(page, 'B-02');\n> 18 |   await expect(ui(page, 'B-02', 'tab-filter')).toBeVisible();\n     |                                                ^\n  19 |   await expect(ui(page, 'B-02', 'list-posts')).toBeVisible();\n  20 | });\n  21 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/_structure.spec.js",
+                        "column": 48,
+                        "line": 18
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-02-tab-filter')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-02-tab-filter')\u001b[22m\n\n\n  16 | test('STRUCT-B-02: 계약 컴포넌트가 렌더링된다', async ({ page }) => {\n  17 |   await gotoScreen(page, 'B-02');\n> 18 |   await expect(ui(page, 'B-02', 'tab-filter')).toBeVisible();\n     |                                                ^\n  19 |   await expect(ui(page, 'B-02', 'list-posts')).toBeVisible();\n  20 | });\n  21 |\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/_structure.spec.js:18:48"
+                    }
+                  ],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-07-08T23:17:36.585Z",
+                  "startTime": "2026-07-19T08:42:24.476Z",
                   "annotations": [],
-                  "attachments": []
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/test-results/_structure-STRUCT-B-02-계약-컴포넌트가-렌더링된다-chromium/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/_structure.spec.js",
+                    "column": 48,
+                    "line": 18
+                  }
                 }
               ],
-              "status": "expected"
+              "status": "unexpected"
             }
           ],
-          "id": "923a1391c2b915a5a3bc-3d0d8d08314849b3e2b4",
-          "file": "B-01.spec.js",
-          "line": 19,
+          "id": "088ca9dedb288acfa4ee-6230af29a2d7aee73fb8",
+          "file": "_structure.spec.js",
+          "line": 16,
           "column": 1
         },
         {
-          "title": "AC-B01-02: 포스트 카드에 마우스를 올리면 형광펜 애니메이션이 적용됨",
-          "ok": true,
+          "title": "STRUCT-B-03: 계약 컴포넌트가 렌더링된다",
+          "ok": false,
           "tags": [],
           "tests": [
             {
@@ -153,18 +213,504 @@
                 {
                   "workerIndex": 2,
                   "parallelIndex": 2,
-                  "status": "passed",
-                  "duration": 1031,
-                  "errors": [],
+                  "status": "failed",
+                  "duration": 3248,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-03-text-post-meta')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-03-text-post-meta')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-03-text-post-meta')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-03-text-post-meta')\u001b[22m\n\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/_structure.spec.js:24:52",
+                    "location": {
+                      "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/_structure.spec.js",
+                      "column": 52,
+                      "line": 24
+                    },
+                    "snippet": "  22 | test('STRUCT-B-03: 계약 컴포넌트가 렌더링된다', async ({ page }) => {\n  23 |   await gotoScreen(page, 'B-03');\n> 24 |   await expect(ui(page, 'B-03', 'text-post-meta')).toBeVisible();\n     |                                                    ^\n  25 |   await expect(ui(page, 'B-03', 'text-post-title')).toBeVisible();\n  26 |   await expect(ui(page, 'B-03', 'text-tldr')).toBeVisible();\n  27 |   await expect(ui(page, 'B-03', 'list-keywords')).toBeVisible();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/_structure.spec.js",
+                        "column": 52,
+                        "line": 24
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-03-text-post-meta')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-03-text-post-meta')\u001b[22m\n\n\n  22 | test('STRUCT-B-03: 계약 컴포넌트가 렌더링된다', async ({ page }) => {\n  23 |   await gotoScreen(page, 'B-03');\n> 24 |   await expect(ui(page, 'B-03', 'text-post-meta')).toBeVisible();\n     |                                                    ^\n  25 |   await expect(ui(page, 'B-03', 'text-post-title')).toBeVisible();\n  26 |   await expect(ui(page, 'B-03', 'text-tldr')).toBeVisible();\n  27 |   await expect(ui(page, 'B-03', 'list-keywords')).toBeVisible();\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/_structure.spec.js:24:52"
+                    }
+                  ],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-07-08T23:17:36.574Z",
+                  "startTime": "2026-07-19T08:42:24.448Z",
                   "annotations": [],
-                  "attachments": []
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/test-results/_structure-STRUCT-B-03-계약-컴포넌트가-렌더링된다-chromium/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/_structure.spec.js",
+                    "column": 52,
+                    "line": 24
+                  }
                 }
               ],
-              "status": "expected"
+              "status": "unexpected"
+            }
+          ],
+          "id": "088ca9dedb288acfa4ee-4b2e648a70eed23cd9c1",
+          "file": "_structure.spec.js",
+          "line": 22,
+          "column": 1
+        },
+        {
+          "title": "STRUCT-B-04: 계약 컴포넌트가 렌더링된다",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 3,
+                  "status": "failed",
+                  "duration": 3237,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-04-list-series')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-04-list-series')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-04-list-series')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-04-list-series')\u001b[22m\n\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/_structure.spec.js:35:49",
+                    "location": {
+                      "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/_structure.spec.js",
+                      "column": 49,
+                      "line": 35
+                    },
+                    "snippet": "  33 | test('STRUCT-B-04: 계약 컴포넌트가 렌더링된다', async ({ page }) => {\n  34 |   await gotoScreen(page, 'B-04');\n> 35 |   await expect(ui(page, 'B-04', 'list-series')).toBeVisible();\n     |                                                 ^\n  36 |   await expect(ui(page, 'B-04', 'list-series-posts')).toBeVisible();\n  37 | });\n  38 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/_structure.spec.js",
+                        "column": 49,
+                        "line": 35
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-04-list-series')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-04-list-series')\u001b[22m\n\n\n  33 | test('STRUCT-B-04: 계약 컴포넌트가 렌더링된다', async ({ page }) => {\n  34 |   await gotoScreen(page, 'B-04');\n> 35 |   await expect(ui(page, 'B-04', 'list-series')).toBeVisible();\n     |                                                 ^\n  36 |   await expect(ui(page, 'B-04', 'list-series-posts')).toBeVisible();\n  37 | });\n  38 |\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/_structure.spec.js:35:49"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-19T08:42:24.527Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/test-results/_structure-STRUCT-B-04-계약-컴포넌트가-렌더링된다-chromium/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/_structure.spec.js",
+                    "column": 49,
+                    "line": 35
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "088ca9dedb288acfa4ee-c0bd26482110cbb0dc98",
+          "file": "_structure.spec.js",
+          "line": 33,
+          "column": 1
+        },
+        {
+          "title": "STRUCT-B-05: 계약 컴포넌트가 렌더링된다",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 3133,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-05-text-bio-detail')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-05-text-bio-detail')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-05-text-bio-detail')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-05-text-bio-detail')\u001b[22m\n\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/_structure.spec.js:41:53",
+                    "location": {
+                      "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/_structure.spec.js",
+                      "column": 53,
+                      "line": 41
+                    },
+                    "snippet": "  39 | test('STRUCT-B-05: 계약 컴포넌트가 렌더링된다', async ({ page }) => {\n  40 |   await gotoScreen(page, 'B-05');\n> 41 |   await expect(ui(page, 'B-05', 'text-bio-detail')).toBeVisible();\n     |                                                     ^\n  42 |   await expect(ui(page, 'B-05', 'list-stack')).toBeVisible();\n  43 |   await expect(ui(page, 'B-05', 'list-projects')).toBeVisible();\n  44 |   await expect(ui(page, 'B-05', 'list-contact')).toBeVisible();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/_structure.spec.js",
+                        "column": 53,
+                        "line": 41
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-05-text-bio-detail')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-05-text-bio-detail')\u001b[22m\n\n\n  39 | test('STRUCT-B-05: 계약 컴포넌트가 렌더링된다', async ({ page }) => {\n  40 |   await gotoScreen(page, 'B-05');\n> 41 |   await expect(ui(page, 'B-05', 'text-bio-detail')).toBeVisible();\n     |                                                     ^\n  42 |   await expect(ui(page, 'B-05', 'list-stack')).toBeVisible();\n  43 |   await expect(ui(page, 'B-05', 'list-projects')).toBeVisible();\n  44 |   await expect(ui(page, 'B-05', 'list-contact')).toBeVisible();\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/_structure.spec.js:41:53"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-19T08:42:28.694Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/test-results/_structure-STRUCT-B-05-계약-컴포넌트가-렌더링된다-chromium/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/_structure.spec.js",
+                    "column": 53,
+                    "line": 41
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "088ca9dedb288acfa4ee-546d636c707a8d0920af",
+          "file": "_structure.spec.js",
+          "line": 39,
+          "column": 1
+        },
+        {
+          "title": "STRUCT-B-06: 계약 컴포넌트가 렌더링된다",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 3,
+                  "status": "failed",
+                  "duration": 3102,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-06-tab-view-toggle')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-06-tab-view-toggle')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-06-tab-view-toggle')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-06-tab-view-toggle')\u001b[22m\n\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/_structure.spec.js:49:53",
+                    "location": {
+                      "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/_structure.spec.js",
+                      "column": 53,
+                      "line": 49
+                    },
+                    "snippet": "  47 | test('STRUCT-B-06: 계약 컴포넌트가 렌더링된다', async ({ page }) => {\n  48 |   await gotoScreen(page, 'B-06');\n> 49 |   await expect(ui(page, 'B-06', 'tab-view-toggle')).toBeVisible();\n     |                                                     ^\n  50 |   await expect(ui(page, 'B-06', 'list-tags')).toBeVisible();\n  51 |   await expect(ui(page, 'B-06', 'list-graph')).toBeVisible();\n  52 | });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/_structure.spec.js",
+                        "column": 53,
+                        "line": 49
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-06-tab-view-toggle')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-06-tab-view-toggle')\u001b[22m\n\n\n  47 | test('STRUCT-B-06: 계약 컴포넌트가 렌더링된다', async ({ page }) => {\n  48 |   await gotoScreen(page, 'B-06');\n> 49 |   await expect(ui(page, 'B-06', 'tab-view-toggle')).toBeVisible();\n     |                                                     ^\n  50 |   await expect(ui(page, 'B-06', 'list-tags')).toBeVisible();\n  51 |   await expect(ui(page, 'B-06', 'list-graph')).toBeVisible();\n  52 | });\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/_structure.spec.js:49:53"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-19T08:42:28.770Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/test-results/_structure-STRUCT-B-06-계약-컴포넌트가-렌더링된다-chromium/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/_structure.spec.js",
+                    "column": 53,
+                    "line": 49
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "088ca9dedb288acfa4ee-d1b9f71cc0740038e0ee",
+          "file": "_structure.spec.js",
+          "line": 47,
+          "column": 1
+        },
+        {
+          "title": "STRUCT-B-07: 계약 컴포넌트가 렌더링된다",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 2,
+                  "status": "failed",
+                  "duration": 3093,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-07-text-tag-title')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-07-text-tag-title')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-07-text-tag-title')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-07-text-tag-title')\u001b[22m\n\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/_structure.spec.js:56:52",
+                    "location": {
+                      "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/_structure.spec.js",
+                      "column": 52,
+                      "line": 56
+                    },
+                    "snippet": "  54 | test('STRUCT-B-07: 계약 컴포넌트가 렌더링된다', async ({ page }) => {\n  55 |   await gotoScreen(page, 'B-07');\n> 56 |   await expect(ui(page, 'B-07', 'text-tag-title')).toBeVisible();\n     |                                                    ^\n  57 |   await expect(ui(page, 'B-07', 'list-posts-by-tag')).toBeVisible();\n  58 | });\n  59 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/_structure.spec.js",
+                        "column": 52,
+                        "line": 56
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-07-text-tag-title')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-07-text-tag-title')\u001b[22m\n\n\n  54 | test('STRUCT-B-07: 계약 컴포넌트가 렌더링된다', async ({ page }) => {\n  55 |   await gotoScreen(page, 'B-07');\n> 56 |   await expect(ui(page, 'B-07', 'text-tag-title')).toBeVisible();\n     |                                                    ^\n  57 |   await expect(ui(page, 'B-07', 'list-posts-by-tag')).toBeVisible();\n  58 | });\n  59 |\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/_structure.spec.js:56:52"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-19T08:42:28.765Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/test-results/_structure-STRUCT-B-07-계약-컴포넌트가-렌더링된다-chromium/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/_structure.spec.js",
+                    "column": 52,
+                    "line": 56
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "088ca9dedb288acfa4ee-68dab58252a92fd6e114",
+          "file": "_structure.spec.js",
+          "line": 54,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "B-01.spec.js",
+      "file": "B-01.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "AC-B01-01: 홈 페이지 렌더링 시 주요 구성 요소가 모두 표시됨",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 1,
+                  "status": "failed",
+                  "duration": 3088,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-01-logo-slog')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-01-logo-slog')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-01-logo-slog')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-01-logo-slog')\u001b[22m\n\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-01.spec.js:10:47",
+                    "location": {
+                      "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-01.spec.js",
+                      "column": 47,
+                      "line": 10
+                    },
+                    "snippet": "   8 |   await gotoScreen(page, 'B-01');\n   9 |   // Then — 계약 key 관측\n> 10 |   await expect(ui(page, 'B-01', 'logo-slog')).toBeVisible();\n     |                                               ^\n  11 |   await expect(ui(page, 'B-01', 'nav-main')).toBeVisible();\n  12 |   await expect(ui(page, 'B-01', 'hero-title')).toBeVisible();\n  13 |   await expect(ui(page, 'B-01', 'text-bio')).toBeVisible();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-01.spec.js",
+                        "column": 47,
+                        "line": 10
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-01-logo-slog')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-01-logo-slog')\u001b[22m\n\n\n   8 |   await gotoScreen(page, 'B-01');\n   9 |   // Then — 계약 key 관측\n> 10 |   await expect(ui(page, 'B-01', 'logo-slog')).toBeVisible();\n     |                                               ^\n  11 |   await expect(ui(page, 'B-01', 'nav-main')).toBeVisible();\n  12 |   await expect(ui(page, 'B-01', 'hero-title')).toBeVisible();\n  13 |   await expect(ui(page, 'B-01', 'text-bio')).toBeVisible();\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-01.spec.js:10:47"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-19T08:42:28.774Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/test-results/B-01-AC-B01-01-홈-페이지-렌더링-시-주요-구성-요소가-모두-표시됨-chromium/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-01.spec.js",
+                    "column": 47,
+                    "line": 10
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "923a1391c2b915a5a3bc-4a83a8c30e028654dd45",
+          "file": "B-01.spec.js",
+          "line": 6,
+          "column": 1
+        },
+        {
+          "title": "AC-B01-01: 홈 로고 텍스트가 SLOG_ 를 포함함",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2852,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-01-logo-slog')\nExpected substring: \u001b[32m\"SLOG_\"\u001b[39m\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-01-logo-slog')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-01-logo-slog')\nExpected substring: \u001b[32m\"SLOG_\"\u001b[39m\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-01-logo-slog')\u001b[22m\n\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-01.spec.js:23:47",
+                    "location": {
+                      "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-01.spec.js",
+                      "column": 47,
+                      "line": 23
+                    },
+                    "snippet": "  21 |   await gotoScreen(page, 'B-01');\n  22 |   // Then\n> 23 |   await expect(ui(page, 'B-01', 'logo-slog')).toContainText('SLOG_');\n     |                                               ^\n  24 | });\n  25 |\n  26 | test('AC-B01-02: 포스트 카드에 마우스를 올리면 형광펜 애니메이션이 적용됨', async ({ page }) => {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-01.spec.js",
+                        "column": 47,
+                        "line": 23
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-01-logo-slog')\nExpected substring: \u001b[32m\"SLOG_\"\u001b[39m\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-01-logo-slog')\u001b[22m\n\n\n  21 |   await gotoScreen(page, 'B-01');\n  22 |   // Then\n> 23 |   await expect(ui(page, 'B-01', 'logo-slog')).toContainText('SLOG_');\n     |                                               ^\n  24 | });\n  25 |\n  26 | test('AC-B01-02: 포스트 카드에 마우스를 올리면 형광펜 애니메이션이 적용됨', async ({ page }) => {\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-01.spec.js:23:47"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-19T08:42:32.381Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/test-results/B-01-AC-B01-01-홈-로고-텍스트가-SLOG-를-포함함-chromium/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-01.spec.js",
+                    "column": 47,
+                    "line": 23
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "923a1391c2b915a5a3bc-3d0d8d08314849b3e2b4",
+          "file": "B-01.spec.js",
+          "line": 19,
+          "column": 1
+        },
+        {
+          "title": "AC-B01-02: 포스트 카드에 마우스를 올리면 형광펜 애니메이션이 적용됨",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 1,
+                  "status": "failed",
+                  "duration": 2902,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-01-list-feed')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-01-list-feed')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-01-list-feed')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-01-list-feed')\u001b[22m\n\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-01.spec.js:30:22",
+                    "location": {
+                      "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-01.spec.js",
+                      "column": 22,
+                      "line": 30
+                    },
+                    "snippet": "  28 |   await gotoScreen(page, 'B-01');\n  29 |   const feed = ui(page, 'B-01', 'list-feed');\n> 30 |   await expect(feed).toBeVisible();\n     |                      ^\n  31 |   // When — 피드의 첫 번째 카드 위에 마우스를 올림\n  32 |   const firstCard = feed.first();\n  33 |   await firstCard.hover();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-01.spec.js",
+                        "column": 22,
+                        "line": 30
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-01-list-feed')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-01-list-feed')\u001b[22m\n\n\n  28 |   await gotoScreen(page, 'B-01');\n  29 |   const feed = ui(page, 'B-01', 'list-feed');\n> 30 |   await expect(feed).toBeVisible();\n     |                      ^\n  31 |   // When — 피드의 첫 번째 카드 위에 마우스를 올림\n  32 |   const firstCard = feed.first();\n  33 |   await firstCard.hover();\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-01.spec.js:30:22"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-19T08:42:32.409Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/test-results/B-01-AC-B01-02-포스트-카드에-마우스를-올리면-형광펜-애니메이션이-적용됨-chromium/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-01.spec.js",
+                    "column": 22,
+                    "line": 30
+                  }
+                }
+              ],
+              "status": "unexpected"
             }
           ],
           "id": "923a1391c2b915a5a3bc-12898506ab870179f263",
@@ -174,7 +720,7 @@
         },
         {
           "title": "AC-B01-03: 다크모드 토글 클릭 시 페이지 팔레트가 다크로 전환됨",
-          "ok": true,
+          "ok": false,
           "tags": [],
           "tests": [
             {
@@ -185,20 +731,50 @@
               "projectName": "chromium",
               "results": [
                 {
-                  "workerIndex": 3,
-                  "parallelIndex": 3,
-                  "status": "passed",
-                  "duration": 960,
-                  "errors": [],
+                  "workerIndex": 10,
+                  "parallelIndex": 2,
+                  "status": "failed",
+                  "duration": 2904,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-01-button-darkmode')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-01-button-darkmode')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-01-button-darkmode')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-01-button-darkmode')\u001b[22m\n\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-01.spec.js:42:24",
+                    "location": {
+                      "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-01.spec.js",
+                      "column": 24,
+                      "line": 42
+                    },
+                    "snippet": "  40 |   await gotoScreen(page, 'B-01');\n  41 |   const toggle = ui(page, 'B-01', 'button-darkmode');\n> 42 |   await expect(toggle).toBeVisible();\n     |                        ^\n  43 |   // When — 다크모드 토글을 클릭\n  44 |   await toggle.click();\n  45 |   // Then — html 또는 body에 다크 모드 클래스/속성이 부착됨"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-01.spec.js",
+                        "column": 24,
+                        "line": 42
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-01-button-darkmode')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-01-button-darkmode')\u001b[22m\n\n\n  40 |   await gotoScreen(page, 'B-01');\n  41 |   const toggle = ui(page, 'B-01', 'button-darkmode');\n> 42 |   await expect(toggle).toBeVisible();\n     |                        ^\n  43 |   // When — 다크모드 토글을 클릭\n  44 |   await toggle.click();\n  45 |   // Then — html 또는 body에 다크 모드 클래스/속성이 부착됨\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-01.spec.js:42:24"
+                    }
+                  ],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-07-08T23:17:36.572Z",
+                  "startTime": "2026-07-19T08:42:32.415Z",
                   "annotations": [],
-                  "attachments": []
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/test-results/B-01-AC-B01-03-다크모드-토글-클릭-시-페이지-팔레트가-다크로-전환됨-chromium/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-01.spec.js",
+                    "column": 24,
+                    "line": 42
+                  }
                 }
               ],
-              "status": "expected"
+              "status": "unexpected"
             }
           ],
           "id": "923a1391c2b915a5a3bc-40323a285db27078a8a1",
@@ -208,7 +784,7 @@
         },
         {
           "title": "AC-B01-04: 포스트 카드 클릭 시 글 상세(B-03)로 이동함",
-          "ok": true,
+          "ok": false,
           "tags": [],
           "tests": [
             {
@@ -219,20 +795,50 @@
               "projectName": "chromium",
               "results": [
                 {
-                  "workerIndex": 1,
-                  "parallelIndex": 1,
-                  "status": "passed",
-                  "duration": 790,
-                  "errors": [],
+                  "workerIndex": 11,
+                  "parallelIndex": 3,
+                  "status": "failed",
+                  "duration": 2860,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-01-list-feed')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-01-list-feed')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-01-list-feed')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-01-list-feed')\u001b[22m\n\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-01.spec.js:57:22",
+                    "location": {
+                      "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-01.spec.js",
+                      "column": 22,
+                      "line": 57
+                    },
+                    "snippet": "  55 |   await gotoScreen(page, 'B-01');\n  56 |   const feed = ui(page, 'B-01', 'list-feed');\n> 57 |   await expect(feed).toBeVisible();\n     |                      ^\n  58 |   // When — 첫 번째 포스트 카드를 클릭\n  59 |   await feed.first().click();\n  60 |   // Then — URL이 포스트 상세 경로로 변경됨"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-01.spec.js",
+                        "column": 22,
+                        "line": 57
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-01-list-feed')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-01-list-feed')\u001b[22m\n\n\n  55 |   await gotoScreen(page, 'B-01');\n  56 |   const feed = ui(page, 'B-01', 'list-feed');\n> 57 |   await expect(feed).toBeVisible();\n     |                      ^\n  58 |   // When — 첫 번째 포스트 카드를 클릭\n  59 |   await feed.first().click();\n  60 |   // Then — URL이 포스트 상세 경로로 변경됨\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-01.spec.js:57:22"
+                    }
+                  ],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-07-08T23:17:37.735Z",
+                  "startTime": "2026-07-19T08:42:32.445Z",
                   "annotations": [],
-                  "attachments": []
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/test-results/B-01-AC-B01-04-포스트-카드-클릭-시-글-상세-B-03-로-이동함-chromium/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-01.spec.js",
+                    "column": 22,
+                    "line": 57
+                  }
                 }
               ],
-              "status": "expected"
+              "status": "unexpected"
             }
           ],
           "id": "923a1391c2b915a5a3bc-65a7d4c130e0910a7a25",
@@ -242,7 +848,7 @@
         },
         {
           "title": "AC-B01-05: 내비 글 링크 클릭 시 전체 글 목록 화면(B-02)으로 이동함",
-          "ok": true,
+          "ok": false,
           "tags": [],
           "tests": [
             {
@@ -253,25 +859,119 @@
               "projectName": "chromium",
               "results": [
                 {
-                  "workerIndex": 3,
-                  "parallelIndex": 3,
-                  "status": "passed",
-                  "duration": 723,
-                  "errors": [],
+                  "workerIndex": 12,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2690,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-01-nav-main')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-01-nav-main')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-01-nav-main')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-01-nav-main')\u001b[22m\n\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-01.spec.js:68:21",
+                    "location": {
+                      "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-01.spec.js",
+                      "column": 21,
+                      "line": 68
+                    },
+                    "snippet": "  66 |   await gotoScreen(page, 'B-01');\n  67 |   const nav = ui(page, 'B-01', 'nav-main');\n> 68 |   await expect(nav).toBeVisible();\n     |                     ^\n  69 |   // When — 내비의 '글' 링크를 클릭\n  70 |   await nav.getByRole('link', { name: '글' }).click();\n  71 |   // Then — /posts 화면으로 이동함"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-01.spec.js",
+                        "column": 21,
+                        "line": 68
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-01-nav-main')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-01-nav-main')\u001b[22m\n\n\n  66 |   await gotoScreen(page, 'B-01');\n  67 |   const nav = ui(page, 'B-01', 'nav-main');\n> 68 |   await expect(nav).toBeVisible();\n     |                     ^\n  69 |   // When — 내비의 '글' 링크를 클릭\n  70 |   await nav.getByRole('link', { name: '글' }).click();\n  71 |   // Then — /posts 화면으로 이동함\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-01.spec.js:68:21"
+                    }
+                  ],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-07-08T23:17:37.852Z",
+                  "startTime": "2026-07-19T08:42:35.781Z",
                   "annotations": [],
-                  "attachments": []
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/test-results/B-01-AC-B01-05-내비-글-링크-클릭-시-전체-글-목록-화면-B-02-으로-이동함-chromium/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-01.spec.js",
+                    "column": 21,
+                    "line": 68
+                  }
                 }
               ],
-              "status": "expected"
+              "status": "unexpected"
             }
           ],
           "id": "923a1391c2b915a5a3bc-fd3cd3af37fd2695b0df",
           "file": "B-01.spec.js",
           "line": 64,
+          "column": 1
+        },
+        {
+          "title": "AC-B01-06: project 필드가 있는 포스트 카드에 project 배지가 표시됨",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 13,
+                  "parallelIndex": 3,
+                  "status": "failed",
+                  "duration": 2696,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-01-list-feed')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-01-list-feed')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-01-list-feed')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-01-list-feed')\u001b[22m\n\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-01.spec.js:78:47",
+                    "location": {
+                      "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-01.spec.js",
+                      "column": 47,
+                      "line": 78
+                    },
+                    "snippet": "  76 |   // Given — 홈 피드에 project 필드가 있는 포스트가 포함된 상태\n  77 |   await gotoScreen(page, 'B-01');\n> 78 |   await expect(ui(page, 'B-01', 'list-feed')).toBeVisible();\n     |                                               ^\n  79 |   // When — 화면이 렌더링됨\n  80 |   // Then — badge-project 요소가 화면에 하나 이상 존재함\n  81 |   await expect(ui(page, 'B-01', 'badge-project').first()).toBeVisible();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-01.spec.js",
+                        "column": 47,
+                        "line": 78
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-01-list-feed')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-01-list-feed')\u001b[22m\n\n\n  76 |   // Given — 홈 피드에 project 필드가 있는 포스트가 포함된 상태\n  77 |   await gotoScreen(page, 'B-01');\n> 78 |   await expect(ui(page, 'B-01', 'list-feed')).toBeVisible();\n     |                                               ^\n  79 |   // When — 화면이 렌더링됨\n  80 |   // Then — badge-project 요소가 화면에 하나 이상 존재함\n  81 |   await expect(ui(page, 'B-01', 'badge-project').first()).toBeVisible();\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-01.spec.js:78:47"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-19T08:42:35.796Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/test-results/B-01-AC-B01-06-project-필드가-있는-포스트-카드에-project-배지가-표시됨-chromium/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-01.spec.js",
+                    "column": 47,
+                    "line": 78
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "923a1391c2b915a5a3bc-d55e965404f65881db61",
+          "file": "B-01.spec.js",
+          "line": 75,
           "column": 1
         }
       ]
@@ -284,7 +984,7 @@
       "specs": [
         {
           "title": "AC-B02-01: /posts 진입 시 필터 버튼 그룹과 글 카드 리스트가 표시됨",
-          "ok": true,
+          "ok": false,
           "tags": [],
           "tests": [
             {
@@ -295,20 +995,50 @@
               "projectName": "chromium",
               "results": [
                 {
-                  "workerIndex": 0,
-                  "parallelIndex": 0,
-                  "status": "passed",
-                  "duration": 495,
-                  "errors": [],
+                  "workerIndex": 14,
+                  "parallelIndex": 1,
+                  "status": "failed",
+                  "duration": 2832,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-02-tab-filter')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-02-tab-filter')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-02-tab-filter')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-02-tab-filter')\u001b[22m\n\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-02.spec.js:10:48",
+                    "location": {
+                      "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-02.spec.js",
+                      "column": 48,
+                      "line": 10
+                    },
+                    "snippet": "   8 |   await gotoScreen(page, 'B-02');\n   9 |   // Then — 계약 key 관측\n> 10 |   await expect(ui(page, 'B-02', 'tab-filter')).toBeVisible();\n     |                                                ^\n  11 |   await expect(ui(page, 'B-02', 'list-posts')).toBeVisible();\n  12 | });\n  13 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-02.spec.js",
+                        "column": 48,
+                        "line": 10
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-02-tab-filter')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-02-tab-filter')\u001b[22m\n\n\n   8 |   await gotoScreen(page, 'B-02');\n   9 |   // Then — 계약 key 관측\n> 10 |   await expect(ui(page, 'B-02', 'tab-filter')).toBeVisible();\n     |                                                ^\n  11 |   await expect(ui(page, 'B-02', 'list-posts')).toBeVisible();\n  12 | });\n  13 |\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-02.spec.js:10:48"
+                    }
+                  ],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-07-08T23:17:37.897Z",
+                  "startTime": "2026-07-19T08:42:35.859Z",
                   "annotations": [],
-                  "attachments": []
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/test-results/B-02-AC-B02-01-posts-진입-시-필터-버튼-그룹과-글-카드-리스트가-표시됨-chromium/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-02.spec.js",
+                    "column": 48,
+                    "line": 10
+                  }
                 }
               ],
-              "status": "expected"
+              "status": "unexpected"
             }
           ],
           "id": "a6daddf10d9dcb95d42b-4fcef362e8ba83ea7232",
@@ -318,7 +1048,7 @@
         },
         {
           "title": "AC-B02-02: 카테고리 필터 클릭 시 해당 카테고리 글만 노출되고 버튼이 활성 상태가 됨",
-          "ok": true,
+          "ok": false,
           "tags": [],
           "tests": [
             {
@@ -329,20 +1059,50 @@
               "projectName": "chromium",
               "results": [
                 {
-                  "workerIndex": 2,
+                  "workerIndex": 15,
                   "parallelIndex": 2,
-                  "status": "passed",
-                  "duration": 804,
-                  "errors": [],
+                  "status": "failed",
+                  "duration": 2879,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-02-tab-filter')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-02-tab-filter')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-02-tab-filter')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-02-tab-filter')\u001b[22m\n\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-02.spec.js:18:24",
+                    "location": {
+                      "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-02.spec.js",
+                      "column": 24,
+                      "line": 18
+                    },
+                    "snippet": "  16 |   await gotoScreen(page, 'B-02');\n  17 |   const filter = ui(page, 'B-02', 'tab-filter');\n> 18 |   await expect(filter).toBeVisible();\n     |                        ^\n  19 |   // When — '트러블슈팅' 필터 버튼을 클릭\n  20 |   await filter.getByRole('button', { name: '트러블슈팅' }).click();\n  21 |   // Then — 필터 버튼이 활성 상태(aria-selected 또는 data-active)로 표시됨"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-02.spec.js",
+                        "column": 24,
+                        "line": 18
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-02-tab-filter')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-02-tab-filter')\u001b[22m\n\n\n  16 |   await gotoScreen(page, 'B-02');\n  17 |   const filter = ui(page, 'B-02', 'tab-filter');\n> 18 |   await expect(filter).toBeVisible();\n     |                        ^\n  19 |   // When — '트러블슈팅' 필터 버튼을 클릭\n  20 |   await filter.getByRole('button', { name: '트러블슈팅' }).click();\n  21 |   // Then — 필터 버튼이 활성 상태(aria-selected 또는 data-active)로 표시됨\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-02.spec.js:18:24"
+                    }
+                  ],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-07-08T23:17:37.922Z",
+                  "startTime": "2026-07-19T08:42:35.862Z",
                   "annotations": [],
-                  "attachments": []
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/test-results/B-02-AC-B02-02-카테고리-필터-클릭-시-해당-카테고리-글만-노출되고-버튼이-활성-상태가-됨-chromium/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-02.spec.js",
+                    "column": 24,
+                    "line": 18
+                  }
                 }
               ],
-              "status": "expected"
+              "status": "unexpected"
             }
           ],
           "id": "a6daddf10d9dcb95d42b-8c2e2d500b911455302f",
@@ -352,7 +1112,7 @@
         },
         {
           "title": "AC-B02-03: 전체 필터 클릭 시 모든 글이 복원됨",
-          "ok": true,
+          "ok": false,
           "tags": [],
           "tests": [
             {
@@ -363,25 +1123,119 @@
               "projectName": "chromium",
               "results": [
                 {
-                  "workerIndex": 0,
+                  "workerIndex": 16,
                   "parallelIndex": 0,
-                  "status": "passed",
-                  "duration": 654,
-                  "errors": [],
+                  "status": "failed",
+                  "duration": 2612,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-02-tab-filter')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-02-tab-filter')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-02-tab-filter')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-02-tab-filter')\u001b[22m\n\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-02.spec.js:37:24",
+                    "location": {
+                      "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-02.spec.js",
+                      "column": 24,
+                      "line": 37
+                    },
+                    "snippet": "  35 |   await gotoScreen(page, 'B-02');\n  36 |   const filter = ui(page, 'B-02', 'tab-filter');\n> 37 |   await expect(filter).toBeVisible();\n     |                        ^\n  38 |   await filter.getByRole('button', { name: '트러블슈팅' }).click();\n  39 |   // When — '전체' 필터 버튼을 클릭\n  40 |   await filter.getByRole('button', { name: '전체' }).click();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-02.spec.js",
+                        "column": 24,
+                        "line": 37
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-02-tab-filter')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-02-tab-filter')\u001b[22m\n\n\n  35 |   await gotoScreen(page, 'B-02');\n  36 |   const filter = ui(page, 'B-02', 'tab-filter');\n> 37 |   await expect(filter).toBeVisible();\n     |                        ^\n  38 |   await filter.getByRole('button', { name: '트러블슈팅' }).click();\n  39 |   // When — '전체' 필터 버튼을 클릭\n  40 |   await filter.getByRole('button', { name: '전체' }).click();\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-02.spec.js:37:24"
+                    }
+                  ],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-07-08T23:17:38.398Z",
+                  "startTime": "2026-07-19T08:42:38.938Z",
                   "annotations": [],
-                  "attachments": []
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/test-results/B-02-AC-B02-03-전체-필터-클릭-시-모든-글이-복원됨-chromium/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-02.spec.js",
+                    "column": 24,
+                    "line": 37
+                  }
                 }
               ],
-              "status": "expected"
+              "status": "unexpected"
             }
           ],
           "id": "a6daddf10d9dcb95d42b-8339f1bf90516467ed4d",
           "file": "B-02.spec.js",
           "line": 33,
+          "column": 1
+        },
+        {
+          "title": "AC-B02-04: project 필드가 있는 포스트 카드에 project 배지가 표시됨",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 17,
+                  "parallelIndex": 3,
+                  "status": "failed",
+                  "duration": 2612,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-02-list-posts')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-02-list-posts')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-02-list-posts')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-02-list-posts')\u001b[22m\n\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-02.spec.js:55:48",
+                    "location": {
+                      "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-02.spec.js",
+                      "column": 48,
+                      "line": 55
+                    },
+                    "snippet": "  53 |   // Given — /posts 화면에서 project 필드가 있는 포스트가 목록에 포함된 상태\n  54 |   await gotoScreen(page, 'B-02');\n> 55 |   await expect(ui(page, 'B-02', 'list-posts')).toBeVisible();\n     |                                                ^\n  56 |   // When — 화면이 렌더링됨\n  57 |   // Then — badge-project 요소가 화면에 하나 이상 존재함\n  58 |   await expect(ui(page, 'B-02', 'badge-project').first()).toBeVisible();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-02.spec.js",
+                        "column": 48,
+                        "line": 55
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-02-list-posts')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-02-list-posts')\u001b[22m\n\n\n  53 |   // Given — /posts 화면에서 project 필드가 있는 포스트가 목록에 포함된 상태\n  54 |   await gotoScreen(page, 'B-02');\n> 55 |   await expect(ui(page, 'B-02', 'list-posts')).toBeVisible();\n     |                                                ^\n  56 |   // When — 화면이 렌더링됨\n  57 |   // Then — badge-project 요소가 화면에 하나 이상 존재함\n  58 |   await expect(ui(page, 'B-02', 'badge-project').first()).toBeVisible();\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-02.spec.js:55:48"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-19T08:42:38.937Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/test-results/B-02-AC-B02-04-project-필드가-있는-포스트-카드에-project-배지가-표시됨-chromium/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-02.spec.js",
+                    "column": 48,
+                    "line": 55
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "a6daddf10d9dcb95d42b-1292118a26989d36efb5",
+          "file": "B-02.spec.js",
+          "line": 52,
           "column": 1
         }
       ]
@@ -394,7 +1248,7 @@
       "specs": [
         {
           "title": "AC-B03-01: 글 상세 진입 시 포스트 구성 요소가 모두 표시됨",
-          "ok": true,
+          "ok": false,
           "tags": [],
           "tests": [
             {
@@ -405,20 +1259,50 @@
               "projectName": "chromium",
               "results": [
                 {
-                  "workerIndex": 1,
+                  "workerIndex": 18,
                   "parallelIndex": 1,
-                  "status": "passed",
-                  "duration": 656,
-                  "errors": [],
+                  "status": "failed",
+                  "duration": 2834,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-03-text-post-meta')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-03-text-post-meta')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-03-text-post-meta')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-03-text-post-meta')\u001b[22m\n\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-03.spec.js:10:52",
+                    "location": {
+                      "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-03.spec.js",
+                      "column": 52,
+                      "line": 10
+                    },
+                    "snippet": "   8 |   await gotoScreen(page, 'B-03');\n   9 |   // Then — 계약 key 관측\n> 10 |   await expect(ui(page, 'B-03', 'text-post-meta')).toBeVisible();\n     |                                                    ^\n  11 |   await expect(ui(page, 'B-03', 'text-post-title')).toBeVisible();\n  12 |   await expect(ui(page, 'B-03', 'text-tldr')).toBeVisible();\n  13 |   await expect(ui(page, 'B-03', 'list-keywords')).toBeVisible();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-03.spec.js",
+                        "column": 52,
+                        "line": 10
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-03-text-post-meta')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-03-text-post-meta')\u001b[22m\n\n\n   8 |   await gotoScreen(page, 'B-03');\n   9 |   // Then — 계약 key 관측\n> 10 |   await expect(ui(page, 'B-03', 'text-post-meta')).toBeVisible();\n     |                                                    ^\n  11 |   await expect(ui(page, 'B-03', 'text-post-title')).toBeVisible();\n  12 |   await expect(ui(page, 'B-03', 'text-tldr')).toBeVisible();\n  13 |   await expect(ui(page, 'B-03', 'list-keywords')).toBeVisible();\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-03.spec.js:10:52"
+                    }
+                  ],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-07-08T23:17:38.532Z",
+                  "startTime": "2026-07-19T08:42:39.584Z",
                   "annotations": [],
-                  "attachments": []
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/test-results/B-03-AC-B03-01-글-상세-진입-시-포스트-구성-요소가-모두-표시됨-chromium/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-03.spec.js",
+                    "column": 52,
+                    "line": 10
+                  }
                 }
               ],
-              "status": "expected"
+              "status": "unexpected"
             }
           ],
           "id": "a2a74fc4df8bf521aebb-1cfc6ec6b49a710d7b5c",
@@ -428,7 +1312,7 @@
         },
         {
           "title": "AC-B03-01: TL;DR 블록이 TL;DR 텍스트를 포함함",
-          "ok": true,
+          "ok": false,
           "tags": [],
           "tests": [
             {
@@ -439,20 +1323,50 @@
               "projectName": "chromium",
               "results": [
                 {
-                  "workerIndex": 3,
-                  "parallelIndex": 3,
-                  "status": "passed",
-                  "duration": 637,
-                  "errors": [],
+                  "workerIndex": 19,
+                  "parallelIndex": 2,
+                  "status": "failed",
+                  "duration": 2839,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-03-text-tldr')\nExpected substring: \u001b[32m\"TL;DR\"\u001b[39m\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-03-text-tldr')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-03-text-tldr')\nExpected substring: \u001b[32m\"TL;DR\"\u001b[39m\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-03-text-tldr')\u001b[22m\n\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-03.spec.js:23:47",
+                    "location": {
+                      "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-03.spec.js",
+                      "column": 47,
+                      "line": 23
+                    },
+                    "snippet": "  21 |   await gotoScreen(page, 'B-03');\n  22 |   // Then\n> 23 |   await expect(ui(page, 'B-03', 'text-tldr')).toContainText('TL;DR');\n     |                                               ^\n  24 | });\n  25 |\n  26 | test('AC-B03-02: 시리즈 이전 글 카드 클릭 시 이전 글 상세로 이동함', async ({ page }) => {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-03.spec.js",
+                        "column": 47,
+                        "line": 23
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-03-text-tldr')\nExpected substring: \u001b[32m\"TL;DR\"\u001b[39m\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-03-text-tldr')\u001b[22m\n\n\n  21 |   await gotoScreen(page, 'B-03');\n  22 |   // Then\n> 23 |   await expect(ui(page, 'B-03', 'text-tldr')).toContainText('TL;DR');\n     |                                               ^\n  24 | });\n  25 |\n  26 | test('AC-B03-02: 시리즈 이전 글 카드 클릭 시 이전 글 상세로 이동함', async ({ page }) => {\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-03.spec.js:23:47"
+                    }
+                  ],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-07-08T23:17:38.583Z",
+                  "startTime": "2026-07-19T08:42:39.603Z",
                   "annotations": [],
-                  "attachments": []
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/test-results/B-03-AC-B03-01-TL-DR-블록이-TL-DR-텍스트를-포함함-chromium/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-03.spec.js",
+                    "column": 47,
+                    "line": 23
+                  }
                 }
               ],
-              "status": "expected"
+              "status": "unexpected"
             }
           ],
           "id": "a2a74fc4df8bf521aebb-8238301a2279a539727a",
@@ -462,7 +1376,7 @@
         },
         {
           "title": "AC-B03-02: 시리즈 이전 글 카드 클릭 시 이전 글 상세로 이동함",
-          "ok": true,
+          "ok": false,
           "tags": [],
           "tests": [
             {
@@ -473,20 +1387,50 @@
               "projectName": "chromium",
               "results": [
                 {
-                  "workerIndex": 2,
-                  "parallelIndex": 2,
-                  "status": "passed",
-                  "duration": 734,
-                  "errors": [],
+                  "workerIndex": 20,
+                  "parallelIndex": 3,
+                  "status": "failed",
+                  "duration": 2602,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-03-nav-series')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-03-nav-series')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-03-nav-series')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-03-nav-series')\u001b[22m\n\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-03.spec.js:30:27",
+                    "location": {
+                      "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-03.spec.js",
+                      "column": 27,
+                      "line": 30
+                    },
+                    "snippet": "  28 |   await gotoScreen(page, 'B-03');\n  29 |   const seriesNav = ui(page, 'B-03', 'nav-series');\n> 30 |   await expect(seriesNav).toBeVisible();\n     |                           ^\n  31 |   // When — 이전 글 링크/버튼 클릭\n  32 |   const prevLink = seriesNav.getByRole('link', { name: /이전/ });\n  33 |   await expect(prevLink).toBeVisible();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-03.spec.js",
+                        "column": 27,
+                        "line": 30
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-03-nav-series')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-03-nav-series')\u001b[22m\n\n\n  28 |   await gotoScreen(page, 'B-03');\n  29 |   const seriesNav = ui(page, 'B-03', 'nav-series');\n> 30 |   await expect(seriesNav).toBeVisible();\n     |                           ^\n  31 |   // When — 이전 글 링크/버튼 클릭\n  32 |   const prevLink = seriesNav.getByRole('link', { name: /이전/ });\n  33 |   await expect(prevLink).toBeVisible();\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-03.spec.js:30:27"
+                    }
+                  ],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-07-08T23:17:38.734Z",
+                  "startTime": "2026-07-19T08:42:41.978Z",
                   "annotations": [],
-                  "attachments": []
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/test-results/B-03-AC-B03-02-시리즈-이전-글-카드-클릭-시-이전-글-상세로-이동함-chromium/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-03.spec.js",
+                    "column": 27,
+                    "line": 30
+                  }
                 }
               ],
-              "status": "expected"
+              "status": "unexpected"
             }
           ],
           "id": "a2a74fc4df8bf521aebb-eb06b6aaf6a996eefbf7",
@@ -496,7 +1440,7 @@
         },
         {
           "title": "AC-B03-03: 시리즈 다음 글 카드 클릭 시 다음 글 상세로 이동함",
-          "ok": true,
+          "ok": false,
           "tags": [],
           "tests": [
             {
@@ -507,25 +1451,119 @@
               "projectName": "chromium",
               "results": [
                 {
-                  "workerIndex": 0,
+                  "workerIndex": 21,
                   "parallelIndex": 0,
-                  "status": "passed",
-                  "duration": 667,
-                  "errors": [],
+                  "status": "failed",
+                  "duration": 2604,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-03-nav-series')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-03-nav-series')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-03-nav-series')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-03-nav-series')\u001b[22m\n\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-03.spec.js:44:27",
+                    "location": {
+                      "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-03.spec.js",
+                      "column": 27,
+                      "line": 44
+                    },
+                    "snippet": "  42 |   await gotoScreen(page, 'B-03');\n  43 |   const seriesNav = ui(page, 'B-03', 'nav-series');\n> 44 |   await expect(seriesNav).toBeVisible();\n     |                           ^\n  45 |   // When — 다음 글 링크/버튼 클릭\n  46 |   const nextLink = seriesNav.getByRole('link', { name: /다음/ });\n  47 |   await expect(nextLink).toBeVisible();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-03.spec.js",
+                        "column": 27,
+                        "line": 44
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-03-nav-series')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-03-nav-series')\u001b[22m\n\n\n  42 |   await gotoScreen(page, 'B-03');\n  43 |   const seriesNav = ui(page, 'B-03', 'nav-series');\n> 44 |   await expect(seriesNav).toBeVisible();\n     |                           ^\n  45 |   // When — 다음 글 링크/버튼 클릭\n  46 |   const nextLink = seriesNav.getByRole('link', { name: /다음/ });\n  47 |   await expect(nextLink).toBeVisible();\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-03.spec.js:44:27"
+                    }
+                  ],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-07-08T23:17:39.064Z",
+                  "startTime": "2026-07-19T08:42:41.977Z",
                   "annotations": [],
-                  "attachments": []
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/test-results/B-03-AC-B03-03-시리즈-다음-글-카드-클릭-시-다음-글-상세로-이동함-chromium/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-03.spec.js",
+                    "column": 27,
+                    "line": 44
+                  }
                 }
               ],
-              "status": "expected"
+              "status": "unexpected"
             }
           ],
           "id": "a2a74fc4df8bf521aebb-46eb676192342da03cbe",
           "file": "B-03.spec.js",
           "line": 40,
+          "column": 1
+        },
+        {
+          "title": "AC-B03-04: project 필드가 있는 글 상세 헤더 메타 영역에 project 배지가 표시됨",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 23,
+                  "parallelIndex": 2,
+                  "status": "failed",
+                  "duration": 2777,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-03-text-post-meta')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-03-text-post-meta')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-03-text-post-meta')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-03-text-post-meta')\u001b[22m\n\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-03.spec.js:57:52",
+                    "location": {
+                      "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-03.spec.js",
+                      "column": 52,
+                      "line": 57
+                    },
+                    "snippet": "  55 |   // Given — project 필드가 있는 글 상세 페이지에 진입한 상태\n  56 |   await gotoScreen(page, 'B-03');\n> 57 |   await expect(ui(page, 'B-03', 'text-post-meta')).toBeVisible();\n     |                                                    ^\n  58 |   // When — 화면이 렌더링됨\n  59 |   // Then — badge-project 요소가 포스트 헤더 메타 영역에 표시됨\n  60 |   await expect(ui(page, 'B-03', 'badge-project')).toBeVisible();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-03.spec.js",
+                        "column": 52,
+                        "line": 57
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-03-text-post-meta')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-03-text-post-meta')\u001b[22m\n\n\n  55 |   // Given — project 필드가 있는 글 상세 페이지에 진입한 상태\n  56 |   await gotoScreen(page, 'B-03');\n> 57 |   await expect(ui(page, 'B-03', 'text-post-meta')).toBeVisible();\n     |                                                    ^\n  58 |   // When — 화면이 렌더링됨\n  59 |   // Then — badge-project 요소가 포스트 헤더 메타 영역에 표시됨\n  60 |   await expect(ui(page, 'B-03', 'badge-project')).toBeVisible();\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-03.spec.js:57:52"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-19T08:42:43.559Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/test-results/B-03-AC-B03-04-project-필드가-있는-글-상세-헤더-메타-영역에-project-배지가-표시됨-chromium/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-03.spec.js",
+                    "column": 52,
+                    "line": 57
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "a2a74fc4df8bf521aebb-b8ddc6af6140d6ec12d1",
+          "file": "B-03.spec.js",
+          "line": 54,
           "column": 1
         }
       ]
@@ -538,7 +1576,7 @@
       "specs": [
         {
           "title": "AC-B04-01: /series 진입 시 시리즈 카드 목록이 표시됨",
-          "ok": true,
+          "ok": false,
           "tags": [],
           "tests": [
             {
@@ -549,20 +1587,50 @@
               "projectName": "chromium",
               "results": [
                 {
-                  "workerIndex": 1,
+                  "workerIndex": 22,
                   "parallelIndex": 1,
-                  "status": "passed",
-                  "duration": 591,
-                  "errors": [],
+                  "status": "failed",
+                  "duration": 2777,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-04-list-series')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-04-list-series')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-04-list-series')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-04-list-series')\u001b[22m\n\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-04.spec.js:10:49",
+                    "location": {
+                      "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-04.spec.js",
+                      "column": 49,
+                      "line": 10
+                    },
+                    "snippet": "   8 |   await gotoScreen(page, 'B-04');\n   9 |   // Then — 계약 key 관측\n> 10 |   await expect(ui(page, 'B-04', 'list-series')).toBeVisible();\n     |                                                 ^\n  11 | });\n  12 |\n  13 | test('AC-B04-02: 시리즈 카드 클릭 시 해당 시리즈 글 목록이 표시됨', async ({ page }) => {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-04.spec.js",
+                        "column": 49,
+                        "line": 10
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-04-list-series')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-04-list-series')\u001b[22m\n\n\n   8 |   await gotoScreen(page, 'B-04');\n   9 |   // Then — 계약 key 관측\n> 10 |   await expect(ui(page, 'B-04', 'list-series')).toBeVisible();\n     |                                                 ^\n  11 | });\n  12 |\n  13 | test('AC-B04-02: 시리즈 카드 클릭 시 해당 시리즈 글 목록이 표시됨', async ({ page }) => {\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-04.spec.js:10:49"
+                    }
+                  ],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-07-08T23:17:39.197Z",
+                  "startTime": "2026-07-19T08:42:43.586Z",
                   "annotations": [],
-                  "attachments": []
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/test-results/B-04-AC-B04-01-series-진입-시-시리즈-카드-목록이-표시됨-chromium/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-04.spec.js",
+                    "column": 49,
+                    "line": 10
+                  }
                 }
               ],
-              "status": "expected"
+              "status": "unexpected"
             }
           ],
           "id": "66c7b54bc36414f0a1e4-3f1cec2c520c2f24018b",
@@ -572,7 +1640,7 @@
         },
         {
           "title": "AC-B04-02: 시리즈 카드 클릭 시 해당 시리즈 글 목록이 표시됨",
-          "ok": true,
+          "ok": false,
           "tags": [],
           "tests": [
             {
@@ -583,20 +1651,50 @@
               "projectName": "chromium",
               "results": [
                 {
-                  "workerIndex": 3,
+                  "workerIndex": 25,
                   "parallelIndex": 3,
-                  "status": "passed",
-                  "duration": 615,
-                  "errors": [],
+                  "status": "failed",
+                  "duration": 2814,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-04-list-series')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-04-list-series')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-04-list-series')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-04-list-series')\u001b[22m\n\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-04.spec.js:17:28",
+                    "location": {
+                      "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-04.spec.js",
+                      "column": 28,
+                      "line": 17
+                    },
+                    "snippet": "  15 |   await gotoScreen(page, 'B-04');\n  16 |   const seriesList = ui(page, 'B-04', 'list-series');\n> 17 |   await expect(seriesList).toBeVisible();\n     |                            ^\n  18 |   // When — 첫 번째 시리즈 카드를 클릭\n  19 |   await seriesList.first().click();\n  20 |   // Then — 시리즈 글 목록이 표시됨"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-04.spec.js",
+                        "column": 28,
+                        "line": 17
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-04-list-series')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-04-list-series')\u001b[22m\n\n\n  15 |   await gotoScreen(page, 'B-04');\n  16 |   const seriesList = ui(page, 'B-04', 'list-series');\n> 17 |   await expect(seriesList).toBeVisible();\n     |                            ^\n  18 |   // When — 첫 번째 시리즈 카드를 클릭\n  19 |   await seriesList.first().click();\n  20 |   // Then — 시리즈 글 목록이 표시됨\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-04.spec.js:17:28"
+                    }
+                  ],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-07-08T23:17:39.226Z",
+                  "startTime": "2026-07-19T08:42:45.423Z",
                   "annotations": [],
-                  "attachments": []
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/test-results/B-04-AC-B04-02-시리즈-카드-클릭-시-해당-시리즈-글-목록이-표시됨-chromium/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-04.spec.js",
+                    "column": 28,
+                    "line": 17
+                  }
                 }
               ],
-              "status": "expected"
+              "status": "unexpected"
             }
           ],
           "id": "66c7b54bc36414f0a1e4-d5c8b3d0ed584933d8ae",
@@ -614,7 +1712,7 @@
       "specs": [
         {
           "title": "AC-B05-01: /about 진입 시 이력·스택·프로젝트·연락처 영역이 모두 표시됨",
-          "ok": true,
+          "ok": false,
           "tags": [],
           "tests": [
             {
@@ -625,20 +1723,50 @@
               "projectName": "chromium",
               "results": [
                 {
-                  "workerIndex": 2,
-                  "parallelIndex": 2,
-                  "status": "passed",
-                  "duration": 566,
-                  "errors": [],
+                  "workerIndex": 24,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2829,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-05-text-bio-detail')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-05-text-bio-detail')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-05-text-bio-detail')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-05-text-bio-detail')\u001b[22m\n\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-05.spec.js:10:53",
+                    "location": {
+                      "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-05.spec.js",
+                      "column": 53,
+                      "line": 10
+                    },
+                    "snippet": "   8 |   await gotoScreen(page, 'B-05');\n   9 |   // Then — 계약 key 관측 (U-002: 실제 콘텐츠 미확정 — 영역 존재 여부만 단언)\n> 10 |   await expect(ui(page, 'B-05', 'text-bio-detail')).toBeVisible();\n     |                                                     ^\n  11 |   await expect(ui(page, 'B-05', 'list-stack')).toBeVisible();\n  12 |   await expect(ui(page, 'B-05', 'list-projects')).toBeVisible();\n  13 |   await expect(ui(page, 'B-05', 'list-contact')).toBeVisible();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-05.spec.js",
+                        "column": 53,
+                        "line": 10
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-05-text-bio-detail')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-05-text-bio-detail')\u001b[22m\n\n\n   8 |   await gotoScreen(page, 'B-05');\n   9 |   // Then — 계약 key 관측 (U-002: 실제 콘텐츠 미확정 — 영역 존재 여부만 단언)\n> 10 |   await expect(ui(page, 'B-05', 'text-bio-detail')).toBeVisible();\n     |                                                     ^\n  11 |   await expect(ui(page, 'B-05', 'list-stack')).toBeVisible();\n  12 |   await expect(ui(page, 'B-05', 'list-projects')).toBeVisible();\n  13 |   await expect(ui(page, 'B-05', 'list-contact')).toBeVisible();\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-05.spec.js:10:53"
+                    }
+                  ],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-07-08T23:17:39.474Z",
+                  "startTime": "2026-07-19T08:42:45.424Z",
                   "annotations": [],
-                  "attachments": []
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/test-results/B-05-AC-B05-01-about-진입-시-이력·스택·프로젝트·연락처-영역이-모두-표시됨-chromium/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-05.spec.js",
+                    "column": 53,
+                    "line": 10
+                  }
                 }
               ],
-              "status": "expected"
+              "status": "unexpected"
             }
           ],
           "id": "256abff01751375be3bf-37aa6b8f781a8f2857bc",
@@ -648,7 +1776,7 @@
         },
         {
           "title": "AC-B05-02: 프로젝트 링크 클릭 시 새 탭에서 외부 URL이 열림",
-          "ok": true,
+          "ok": false,
           "tags": [],
           "tests": [
             {
@@ -659,20 +1787,50 @@
               "projectName": "chromium",
               "results": [
                 {
-                  "workerIndex": 0,
-                  "parallelIndex": 0,
-                  "status": "passed",
-                  "duration": 1100,
-                  "errors": [],
+                  "workerIndex": 26,
+                  "parallelIndex": 1,
+                  "status": "failed",
+                  "duration": 2919,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-05-list-projects')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-05-list-projects')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-05-list-projects')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-05-list-projects')\u001b[22m\n\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-05.spec.js:20:30",
+                    "location": {
+                      "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-05.spec.js",
+                      "column": 30,
+                      "line": 20
+                    },
+                    "snippet": "  18 |   await gotoScreen(page, 'B-05');\n  19 |   const projectsList = ui(page, 'B-05', 'list-projects');\n> 20 |   await expect(projectsList).toBeVisible();\n     |                              ^\n  21 |   // When — 첫 번째 프로젝트 링크를 클릭 (새 탭 이벤트 수신)\n  22 |   const [newPage] = await Promise.all([\n  23 |     context.waitForEvent('page'),"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-05.spec.js",
+                        "column": 30,
+                        "line": 20
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-05-list-projects')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-05-list-projects')\u001b[22m\n\n\n  18 |   await gotoScreen(page, 'B-05');\n  19 |   const projectsList = ui(page, 'B-05', 'list-projects');\n> 20 |   await expect(projectsList).toBeVisible();\n     |                              ^\n  21 |   // When — 첫 번째 프로젝트 링크를 클릭 (새 탭 이벤트 수신)\n  22 |   const [newPage] = await Promise.all([\n  23 |     context.waitForEvent('page'),\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-05.spec.js:20:30"
+                    }
+                  ],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-07-08T23:17:39.742Z",
+                  "startTime": "2026-07-19T08:42:47.192Z",
                   "annotations": [],
-                  "attachments": []
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/test-results/B-05-AC-B05-02-프로젝트-링크-클릭-시-새-탭에서-외부-URL이-열림-chromium/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-05.spec.js",
+                    "column": 30,
+                    "line": 20
+                  }
                 }
               ],
-              "status": "expected"
+              "status": "unexpected"
             }
           ],
           "id": "256abff01751375be3bf-fbfcd9a556f9f8b6a353",
@@ -681,15 +1839,415 @@
           "column": 1
         }
       ]
+    },
+    {
+      "title": "B-06.spec.js",
+      "file": "B-06.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "AC-B06-01: /tags 진입 시 뷰 전환 토글과 태그 목록이 기본 목록 뷰로 표시됨",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 27,
+                  "parallelIndex": 2,
+                  "status": "failed",
+                  "duration": 2887,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-06-tab-view-toggle')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-06-tab-view-toggle')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-06-tab-view-toggle')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-06-tab-view-toggle')\u001b[22m\n\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-06.spec.js:10:53",
+                    "location": {
+                      "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-06.spec.js",
+                      "column": 53,
+                      "line": 10
+                    },
+                    "snippet": "   8 |   await gotoScreen(page, 'B-06');\n   9 |   // Then — tab-view-toggle과 list-tags가 기본 목록 뷰로 표시됨\n> 10 |   await expect(ui(page, 'B-06', 'tab-view-toggle')).toBeVisible();\n     |                                                     ^\n  11 |   await expect(ui(page, 'B-06', 'list-tags')).toBeVisible();\n  12 | });\n  13 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-06.spec.js",
+                        "column": 53,
+                        "line": 10
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-06-tab-view-toggle')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-06-tab-view-toggle')\u001b[22m\n\n\n   8 |   await gotoScreen(page, 'B-06');\n   9 |   // Then — tab-view-toggle과 list-tags가 기본 목록 뷰로 표시됨\n> 10 |   await expect(ui(page, 'B-06', 'tab-view-toggle')).toBeVisible();\n     |                                                     ^\n  11 |   await expect(ui(page, 'B-06', 'list-tags')).toBeVisible();\n  12 | });\n  13 |\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-06.spec.js:10:53"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-19T08:42:47.194Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/test-results/B-06-AC-B06-01-tags-진입-시-뷰-전환-토글과-태그-목록이-기본-목록-뷰로-표시됨-chromium/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-06.spec.js",
+                    "column": 53,
+                    "line": 10
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "d58ef6f35ca9431d6b51-a39f9ba78d10802ee7a4",
+          "file": "B-06.spec.js",
+          "line": 6,
+          "column": 1
+        },
+        {
+          "title": "AC-B06-02: 그래프 뷰 토글 클릭 시 태그 co-occurrence 그래프가 표시되고 목록 뷰가 감춰짐",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 28,
+                  "parallelIndex": 3,
+                  "status": "failed",
+                  "duration": 2861,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-06-tab-view-toggle')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-06-tab-view-toggle')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-06-tab-view-toggle')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-06-tab-view-toggle')\u001b[22m\n\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-06.spec.js:18:24",
+                    "location": {
+                      "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-06.spec.js",
+                      "column": 24,
+                      "line": 18
+                    },
+                    "snippet": "  16 |   await gotoScreen(page, 'B-06');\n  17 |   const toggle = ui(page, 'B-06', 'tab-view-toggle');\n> 18 |   await expect(toggle).toBeVisible();\n     |                        ^\n  19 |   // When — '그래프 뷰' 토글을 클릭\n  20 |   await toggle.getByRole('button', { name: /그래프/ }).click();\n  21 |   // Then — list-graph가 표시됨"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-06.spec.js",
+                        "column": 24,
+                        "line": 18
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-06-tab-view-toggle')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-06-tab-view-toggle')\u001b[22m\n\n\n  16 |   await gotoScreen(page, 'B-06');\n  17 |   const toggle = ui(page, 'B-06', 'tab-view-toggle');\n> 18 |   await expect(toggle).toBeVisible();\n     |                        ^\n  19 |   // When — '그래프 뷰' 토글을 클릭\n  20 |   await toggle.getByRole('button', { name: /그래프/ }).click();\n  21 |   // Then — list-graph가 표시됨\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-06.spec.js:18:24"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-19T08:42:49.231Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/test-results/B-06-AC-B06-02-그래프-뷰-토글-클릭-cd138-urrence-그래프가-표시되고-목록-뷰가-감춰짐-chromium/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-06.spec.js",
+                    "column": 24,
+                    "line": 18
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "d58ef6f35ca9431d6b51-1107384b23bd282516d0",
+          "file": "B-06.spec.js",
+          "line": 14,
+          "column": 1
+        },
+        {
+          "title": "AC-B06-03: 목록 뷰에서 태그 클릭 시 태그 상세 화면(B-07)으로 이동함",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 29,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2896,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-06-list-tags')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-06-list-tags')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-06-list-tags')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-06-list-tags')\u001b[22m\n\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-06.spec.js:29:25",
+                    "location": {
+                      "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-06.spec.js",
+                      "column": 25,
+                      "line": 29
+                    },
+                    "snippet": "  27 |   await gotoScreen(page, 'B-06');\n  28 |   const tagList = ui(page, 'B-06', 'list-tags');\n> 29 |   await expect(tagList).toBeVisible();\n     |                         ^\n  30 |   // When — 첫 번째 태그를 클릭\n  31 |   await tagList.getByRole('link').first().click();\n  32 |   // Then — /tags/[tag] URL로 이동함"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-06.spec.js",
+                        "column": 25,
+                        "line": 29
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-06-list-tags')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-06-list-tags')\u001b[22m\n\n\n  27 |   await gotoScreen(page, 'B-06');\n  28 |   const tagList = ui(page, 'B-06', 'list-tags');\n> 29 |   await expect(tagList).toBeVisible();\n     |                         ^\n  30 |   // When — 첫 번째 태그를 클릭\n  31 |   await tagList.getByRole('link').first().click();\n  32 |   // Then — /tags/[tag] URL로 이동함\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-06.spec.js:29:25"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-19T08:42:49.231Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/test-results/B-06-AC-B06-03-목록-뷰에서-태그-클릭-시-태그-상세-화면-B-07-으로-이동함-chromium/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-06.spec.js",
+                    "column": 25,
+                    "line": 29
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "d58ef6f35ca9431d6b51-27792a1de96e8ab4ede9",
+          "file": "B-06.spec.js",
+          "line": 25,
+          "column": 1
+        },
+        {
+          "title": "AC-B06-04: 그래프 뷰에서 태그 노드 클릭 시 태그 상세 화면(B-07)으로 이동함",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 30,
+                  "parallelIndex": 2,
+                  "status": "failed",
+                  "duration": 2972,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-06-tab-view-toggle')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-06-tab-view-toggle')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-06-tab-view-toggle')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-06-tab-view-toggle')\u001b[22m\n\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-06.spec.js:40:24",
+                    "location": {
+                      "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-06.spec.js",
+                      "column": 24,
+                      "line": 40
+                    },
+                    "snippet": "  38 |   await gotoScreen(page, 'B-06');\n  39 |   const toggle = ui(page, 'B-06', 'tab-view-toggle');\n> 40 |   await expect(toggle).toBeVisible();\n     |                        ^\n  41 |   await toggle.getByRole('button', { name: /그래프/ }).click();\n  42 |   const graph = ui(page, 'B-06', 'list-graph');\n  43 |   await expect(graph).toBeVisible();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-06.spec.js",
+                        "column": 24,
+                        "line": 40
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-06-tab-view-toggle')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-06-tab-view-toggle')\u001b[22m\n\n\n  38 |   await gotoScreen(page, 'B-06');\n  39 |   const toggle = ui(page, 'B-06', 'tab-view-toggle');\n> 40 |   await expect(toggle).toBeVisible();\n     |                        ^\n  41 |   await toggle.getByRole('button', { name: /그래프/ }).click();\n  42 |   const graph = ui(page, 'B-06', 'list-graph');\n  43 |   await expect(graph).toBeVisible();\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-06.spec.js:40:24"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-19T08:42:51.339Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/test-results/B-06-AC-B06-04-그래프-뷰에서-태그-노드-클릭-시-태그-상세-화면-B-07-으로-이동함-chromium/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-06.spec.js",
+                    "column": 24,
+                    "line": 40
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "d58ef6f35ca9431d6b51-82e5e97b113aa4cc7724",
+          "file": "B-06.spec.js",
+          "line": 36,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "B-07.spec.js",
+      "file": "B-07.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "AC-B07-01: /tags/[tag] 진입 시 태그 제목과 포스트 카드 목록이 표시됨",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 31,
+                  "parallelIndex": 1,
+                  "status": "failed",
+                  "duration": 2970,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-07-text-tag-title')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-07-text-tag-title')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-07-text-tag-title')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-07-text-tag-title')\u001b[22m\n\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-07.spec.js:10:52",
+                    "location": {
+                      "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-07.spec.js",
+                      "column": 52,
+                      "line": 10
+                    },
+                    "snippet": "   8 |   await gotoScreen(page, 'B-07');\n   9 |   // Then — text-tag-title과 list-posts-by-tag가 표시됨\n> 10 |   await expect(ui(page, 'B-07', 'text-tag-title')).toBeVisible();\n     |                                                    ^\n  11 |   await expect(ui(page, 'B-07', 'list-posts-by-tag')).toBeVisible();\n  12 | });\n  13 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-07.spec.js",
+                        "column": 52,
+                        "line": 10
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-07-text-tag-title')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-07-text-tag-title')\u001b[22m\n\n\n   8 |   await gotoScreen(page, 'B-07');\n   9 |   // Then — text-tag-title과 list-posts-by-tag가 표시됨\n> 10 |   await expect(ui(page, 'B-07', 'text-tag-title')).toBeVisible();\n     |                                                    ^\n  11 |   await expect(ui(page, 'B-07', 'list-posts-by-tag')).toBeVisible();\n  12 | });\n  13 |\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-07.spec.js:10:52"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-19T08:42:51.347Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/test-results/B-07-AC-B07-01-tags-tag-진입-시-태그-제목과-포스트-카드-목록이-표시됨-chromium/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-07.spec.js",
+                    "column": 52,
+                    "line": 10
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "d0b68db847a15968b7e4-70fc710baa7b09e77da4",
+          "file": "B-07.spec.js",
+          "line": 6,
+          "column": 1
+        },
+        {
+          "title": "AC-B07-02: 태그별 포스트 카드 클릭 시 글 상세 화면(B-03)으로 이동함",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 32,
+                  "parallelIndex": 3,
+                  "status": "failed",
+                  "duration": 2859,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-07-list-posts-by-tag')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-07-list-posts-by-tag')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-07-list-posts-by-tag')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-07-list-posts-by-tag')\u001b[22m\n\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-07.spec.js:18:26",
+                    "location": {
+                      "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-07.spec.js",
+                      "column": 26,
+                      "line": 18
+                    },
+                    "snippet": "  16 |   await gotoScreen(page, 'B-07');\n  17 |   const postList = ui(page, 'B-07', 'list-posts-by-tag');\n> 18 |   await expect(postList).toBeVisible();\n     |                          ^\n  19 |   // When — 첫 번째 포스트 카드를 클릭\n  20 |   await postList.getByRole('link').first().click();\n  21 |   // Then — 글 상세 URL로 이동함"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-07.spec.js",
+                        "column": 26,
+                        "line": 18
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-07-list-posts-by-tag')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 2500ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('B-07-list-posts-by-tag')\u001b[22m\n\n\n  16 |   await gotoScreen(page, 'B-07');\n  17 |   const postList = ui(page, 'B-07', 'list-posts-by-tag');\n> 18 |   await expect(postList).toBeVisible();\n     |                          ^\n  19 |   // When — 첫 번째 포스트 카드를 클릭\n  20 |   await postList.getByRole('link').first().click();\n  21 |   // Then — 글 상세 URL로 이동함\n    at /Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-07.spec.js:18:26"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-07-19T08:42:53.863Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/test-results/B-07-AC-B07-02-태그별-포스트-카드-클릭-시-글-상세-화면-B-03-으로-이동함-chromium/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/seongjisu/Documents/project/slog-v2-pivot/.claude/specs/tc/tests/B-07.spec.js",
+                    "column": 26,
+                    "line": 18
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "d0b68db847a15968b7e4-99c97e2e6d940e48f72e",
+          "file": "B-07.spec.js",
+          "line": 14,
+          "column": 1
+        }
+      ]
     }
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-07-08T23:17:36.260Z",
-    "duration": 4606.455,
-    "expected": 17,
+    "startTime": "2026-07-19T08:42:22.856Z",
+    "duration": 34244.627,
+    "expected": 0,
     "skipped": 0,
-    "unexpected": 0,
+    "unexpected": 33,
     "flaky": 0
   }
 }

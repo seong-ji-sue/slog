@@ -10,9 +10,7 @@
    "test_item": "홈 페이지가 렌더링됨",
    "method_steps": "Given: 사이트 루트에 진입한 상태 / When: 홈 페이지가 렌더링됨",
    "expected": "로고(SLOG_), 내비 메뉴(글·시리즈·소개·RSS), 히어로 제목, bio 2줄, 통계 라인, 포스트 카드 리스트, 푸터가 모두 화면에 표시됨",
-   "ac_refs": [
-    "AC-B01-01"
-   ],
+   "ac_refs": ["AC-B01-01"],
    "e2e": false,
    "result": ""
   },
@@ -24,9 +22,7 @@
    "test_item": "포스트 카드 위에 마우스를 올림",
    "method_steps": "Given: 홈 피드에 포스트 카드가 렌더링된 상태 / When: 포스트 카드 위에 마우스를 올림",
    "expected": "카드 제목의 형광펜 mark가 스윕 애니메이션으로 나타남",
-   "ac_refs": [
-    "AC-B01-02"
-   ],
+   "ac_refs": ["AC-B01-02"],
    "e2e": false,
    "result": ""
   },
@@ -38,9 +34,7 @@
    "test_item": "다크모드 토글을 클릭",
    "method_steps": "Given: 홈 화면이 라이트 모드로 렌더링된 상태 / When: 다크모드 토글을 클릭",
    "expected": "전체 페이지 배경·텍스트 색상이 다크 팔레트로 전환됨",
-   "ac_refs": [
-    "AC-B01-03"
-   ],
+   "ac_refs": ["AC-B01-03"],
    "e2e": false,
    "result": ""
   },
@@ -52,9 +46,7 @@
    "test_item": "포스트 카드를 클릭",
    "method_steps": "Given: 홈 화면이 렌더링된 상태 / When: 포스트 카드를 클릭",
    "expected": "해당 글 상세 화면(B-03)으로 이동함",
-   "ac_refs": [
-    "AC-B01-04"
-   ],
+   "ac_refs": ["AC-B01-04"],
    "e2e": false,
    "result": ""
   },
@@ -66,149 +58,235 @@
    "test_item": "내비 '글' 링크를 클릭",
    "method_steps": "Given: 홈 화면이 렌더링된 상태 / When: 내비 '글' 링크를 클릭",
    "expected": "전체 글 목록 화면(B-02)으로 이동함",
-   "ac_refs": [
-    "AC-B01-05"
-   ],
+   "ac_refs": ["AC-B01-05"],
    "e2e": false,
    "result": ""
   },
   {
    "scenario_id": "SC-blog-006",
-   "screen_id": "B-02",
-   "no": 1,
-   "feature_fn": "전체 글 목록 + 태그 필터",
-   "test_item": "화면이 렌더링됨",
-   "method_steps": "Given: /posts 화면에 진입한 상태 / When: 화면이 렌더링됨",
-   "expected": "태그 필터 버튼 그룹과 전체 글 카드 리스트가 표시됨",
-   "ac_refs": [
-    "AC-B02-01"
-   ],
+   "screen_id": "B-01",
+   "no": 6,
+   "feature_fn": "홈",
+   "test_item": "project 필드가 있는 포스트 카드 project 배지 표시",
+   "method_steps": "Given: 홈 화면에서 project 필드가 있는 포스트가 피드에 포함된 상태 / When: 화면이 렌더링됨",
+   "expected": "해당 포스트 카드에 project 배지가 표시됨",
+   "ac_refs": ["AC-B01-06"],
    "e2e": false,
    "result": ""
   },
   {
    "scenario_id": "SC-blog-007",
    "screen_id": "B-02",
-   "no": 2,
+   "no": 7,
    "feature_fn": "전체 글 목록 + 태그 필터",
-   "test_item": "특정 카테고리 필터 버튼을 클릭",
-   "method_steps": "Given: /posts 화면에 전체 글이 표시된 상태 / When: 특정 카테고리 필터 버튼을 클릭",
-   "expected": "해당 카테고리에 속하는 글 카드만 목록에 남고 선택된 필터 버튼이 활성 상태로 표시됨",
-   "ac_refs": [
-    "AC-B02-02"
-   ],
+   "test_item": "/posts 화면 렌더링",
+   "method_steps": "Given: /posts 화면에 진입한 상태 / When: 화면이 렌더링됨",
+   "expected": "카테고리 필터 버튼 그룹과 전체 글 카드 리스트가 표시됨",
+   "ac_refs": ["AC-B02-01"],
    "e2e": false,
    "result": ""
   },
   {
    "scenario_id": "SC-blog-008",
    "screen_id": "B-02",
-   "no": 3,
+   "no": 8,
    "feature_fn": "전체 글 목록 + 태그 필터",
-   "test_item": "'전체' 필터 버튼을 클릭",
-   "method_steps": "Given: 특정 카테고리 필터가 활성인 상태 / When: '전체' 필터 버튼을 클릭",
-   "expected": "모든 글 카드가 목록에 복원됨",
-   "ac_refs": [
-    "AC-B02-03"
-   ],
+   "test_item": "카테고리 필터 버튼 클릭",
+   "method_steps": "Given: /posts 화면에 전체 글이 표시된 상태 / When: 특정 카테고리 필터 버튼을 클릭",
+   "expected": "해당 카테고리에 속하는 글 카드만 목록에 남고 선택된 필터 버튼이 활성 상태로 표시됨",
+   "ac_refs": ["AC-B02-02"],
    "e2e": false,
    "result": ""
   },
   {
    "scenario_id": "SC-blog-009",
-   "screen_id": "B-03",
-   "no": 1,
-   "feature_fn": "글 상세",
-   "test_item": "화면이 렌더링됨",
-   "method_steps": "Given: 특정 글 상세 페이지에 진입한 상태 / When: 화면이 렌더링됨",
-   "expected": "포스트 헤더(LOG 번호·카테고리·날짜·난이도), h1 제목, TL;DR 블록, 키워드 프리뷰, 본문, 참고한 링크 섹션, 시리즈 내비 카드가 모두 표시됨",
-   "ac_refs": [
-    "AC-B03-01"
-   ],
+   "screen_id": "B-02",
+   "no": 9,
+   "feature_fn": "전체 글 목록 + 태그 필터",
+   "test_item": "'전체' 필터 버튼 클릭",
+   "method_steps": "Given: 특정 카테고리 필터가 활성인 상태 / When: '전체' 필터 버튼을 클릭",
+   "expected": "모든 글 카드가 목록에 복원됨",
+   "ac_refs": ["AC-B02-03"],
    "e2e": false,
    "result": ""
   },
   {
    "scenario_id": "SC-blog-010",
-   "screen_id": "B-03",
-   "no": 2,
-   "feature_fn": "글 상세",
-   "test_item": "시리즈 내비의 이전 글 카드를 클릭",
-   "method_steps": "Given: 글 상세 본문이 표시된 상태이고 이전 글이 존재하는 상태 / When: 시리즈 내비의 이전 글 카드를 클릭",
-   "expected": "이전 글 상세 화면으로 이동함",
-   "ac_refs": [
-    "AC-B03-02"
-   ],
+   "screen_id": "B-02",
+   "no": 10,
+   "feature_fn": "전체 글 목록 + 태그 필터",
+   "test_item": "project 필드가 있는 포스트 카드 project 배지 표시",
+   "method_steps": "Given: /posts 화면에서 project 필드가 있는 포스트가 목록에 포함된 상태 / When: 화면이 렌더링됨",
+   "expected": "해당 포스트 카드에 project 배지가 표시됨",
+   "ac_refs": ["AC-B02-04"],
    "e2e": false,
    "result": ""
   },
   {
    "scenario_id": "SC-blog-011",
    "screen_id": "B-03",
-   "no": 3,
+   "no": 11,
    "feature_fn": "글 상세",
-   "test_item": "시리즈 내비의 다음 글 카드를 클릭",
-   "method_steps": "Given: 글 상세 본문이 표시된 상태이고 다음 글이 존재하는 상태 / When: 시리즈 내비의 다음 글 카드를 클릭",
-   "expected": "다음 글 상세 화면으로 이동함",
-   "ac_refs": [
-    "AC-B03-03"
-   ],
+   "test_item": "글 상세 화면 렌더링",
+   "method_steps": "Given: 특정 글 상세 페이지에 진입한 상태 / When: 화면이 렌더링됨",
+   "expected": "포스트 헤더, h1 제목, TL;DR 블록, 키워드 프리뷰, 본문, 참고한 링크 섹션, 시리즈 내비 카드가 모두 표시됨",
+   "ac_refs": ["AC-B03-01"],
    "e2e": false,
    "result": ""
   },
   {
    "scenario_id": "SC-blog-012",
-   "screen_id": "B-04",
-   "no": 1,
-   "feature_fn": "시리즈",
-   "test_item": "화면이 렌더링됨",
-   "method_steps": "Given: /series 화면에 진입한 상태 / When: 화면이 렌더링됨",
-   "expected": "시리즈 카드 목록이 시리즈 제목·글 수·최신 업데이트 날짜와 함께 표시됨",
-   "ac_refs": [
-    "AC-B04-01"
-   ],
+   "screen_id": "B-03",
+   "no": 12,
+   "feature_fn": "글 상세",
+   "test_item": "시리즈 이전 글 카드 클릭",
+   "method_steps": "Given: 글 상세 본문이 표시된 상태이고 이전 글이 존재하는 상태 / When: 시리즈 내비의 이전 글 카드를 클릭",
+   "expected": "이전 글 상세 화면으로 이동함",
+   "ac_refs": ["AC-B03-02"],
    "e2e": false,
    "result": ""
   },
   {
    "scenario_id": "SC-blog-013",
-   "screen_id": "B-04",
-   "no": 2,
-   "feature_fn": "시리즈",
-   "test_item": "특정 시리즈 카드를 클릭",
-   "method_steps": "Given: /series 화면에 시리즈 카드 목록이 표시된 상태 / When: 특정 시리즈 카드를 클릭",
-   "expected": "해당 시리즈 글 목록(순서 번호 포함)이 표시됨",
-   "ac_refs": [
-    "AC-B04-02"
-   ],
+   "screen_id": "B-03",
+   "no": 13,
+   "feature_fn": "글 상세",
+   "test_item": "시리즈 다음 글 카드 클릭",
+   "method_steps": "Given: 글 상세 본문이 표시된 상태이고 다음 글이 존재하는 상태 / When: 시리즈 내비의 다음 글 카드를 클릭",
+   "expected": "다음 글 상세 화면으로 이동함",
+   "ac_refs": ["AC-B03-03"],
    "e2e": false,
    "result": ""
   },
   {
    "scenario_id": "SC-blog-014",
-   "screen_id": "B-05",
-   "no": 1,
-   "feature_fn": "소개(About)",
-   "test_item": "화면이 렌더링됨",
-   "method_steps": "Given: /about 화면에 진입한 상태 / When: 화면이 렌더링됨",
-   "expected": "이력 요약 영역, 기술 스택 영역, 프로젝트 링크 영역, 연락처 영역이 모두 화면에 표시됨",
-   "ac_refs": [
-    "AC-B05-01"
-   ],
+   "screen_id": "B-03",
+   "no": 14,
+   "feature_fn": "글 상세",
+   "test_item": "project 필드가 있는 글 상세 헤더 project 배지 표시",
+   "method_steps": "Given: project 필드가 있는 글 상세 페이지에 진입한 상태 / When: 화면이 렌더링됨",
+   "expected": "포스트 헤더 메타 영역에 project 배지가 표시됨",
+   "ac_refs": ["AC-B03-04"],
    "e2e": false,
    "result": ""
   },
   {
    "scenario_id": "SC-blog-015",
+   "screen_id": "B-04",
+   "no": 15,
+   "feature_fn": "시리즈",
+   "test_item": "/series 화면 렌더링",
+   "method_steps": "Given: /series 화면에 진입한 상태 / When: 화면이 렌더링됨",
+   "expected": "시리즈 카드 목록이 시리즈 제목·글 수·최신 업데이트 날짜와 함께 표시됨",
+   "ac_refs": ["AC-B04-01"],
+   "e2e": false,
+   "result": ""
+  },
+  {
+   "scenario_id": "SC-blog-016",
+   "screen_id": "B-04",
+   "no": 16,
+   "feature_fn": "시리즈",
+   "test_item": "시리즈 카드 클릭",
+   "method_steps": "Given: /series 화면에 시리즈 카드 목록이 표시된 상태 / When: 특정 시리즈 카드를 클릭",
+   "expected": "해당 시리즈 글 목록(순서 번호 포함)이 표시됨",
+   "ac_refs": ["AC-B04-02"],
+   "e2e": false,
+   "result": ""
+  },
+  {
+   "scenario_id": "SC-blog-017",
    "screen_id": "B-05",
-   "no": 2,
+   "no": 17,
    "feature_fn": "소개(About)",
-   "test_item": "특정 프로젝트 링크를 클릭",
+   "test_item": "/about 화면 렌더링",
+   "method_steps": "Given: /about 화면에 진입한 상태 / When: 화면이 렌더링됨",
+   "expected": "이력 요약 영역, 기술 스택 영역, 프로젝트 링크 영역, 연락처 영역이 모두 화면에 표시됨",
+   "ac_refs": ["AC-B05-01"],
+   "e2e": false,
+   "result": ""
+  },
+  {
+   "scenario_id": "SC-blog-018",
+   "screen_id": "B-05",
+   "no": 18,
+   "feature_fn": "소개(About)",
+   "test_item": "프로젝트 링크 클릭",
    "method_steps": "Given: /about 화면에서 프로젝트 링크 영역이 표시된 상태 / When: 특정 프로젝트 링크를 클릭",
    "expected": "해당 외부 링크(GitHub 등)가 새 탭에서 열림",
-   "ac_refs": [
-    "AC-B05-02"
-   ],
+   "ac_refs": ["AC-B05-02"],
+   "e2e": false,
+   "result": ""
+  },
+  {
+   "scenario_id": "SC-blog-019",
+   "screen_id": "B-06",
+   "no": 19,
+   "feature_fn": "태그 인덱스",
+   "test_item": "/tags 화면 렌더링",
+   "method_steps": "Given: /tags 화면에 진입한 상태 / When: 화면이 렌더링됨",
+   "expected": "뷰 전환 토글('목록 뷰 / 그래프 뷰')과 태그 목록(태그명 + 글 수)이 기본 목록 뷰로 표시됨",
+   "ac_refs": ["AC-B06-01"],
+   "e2e": false,
+   "result": ""
+  },
+  {
+   "scenario_id": "SC-blog-020",
+   "screen_id": "B-06",
+   "no": 20,
+   "feature_fn": "태그 인덱스",
+   "test_item": "'그래프 뷰' 토글 클릭",
+   "method_steps": "Given: /tags 화면에서 목록 뷰가 활성인 상태 / When: '그래프 뷰' 토글을 클릭",
+   "expected": "태그 co-occurrence 그래프가 표시되며 목록 뷰는 감춰짐",
+   "ac_refs": ["AC-B06-02"],
+   "e2e": false,
+   "result": ""
+  },
+  {
+   "scenario_id": "SC-blog-021",
+   "screen_id": "B-06",
+   "no": 21,
+   "feature_fn": "태그 인덱스",
+   "test_item": "목록 뷰에서 태그 클릭",
+   "method_steps": "Given: /tags 화면에서 목록 뷰가 표시된 상태 / When: 목록의 특정 태그를 클릭",
+   "expected": "해당 태그 상세 화면(B-07)으로 이동함",
+   "ac_refs": ["AC-B06-03"],
+   "e2e": false,
+   "result": ""
+  },
+  {
+   "scenario_id": "SC-blog-022",
+   "screen_id": "B-06",
+   "no": 22,
+   "feature_fn": "태그 인덱스",
+   "test_item": "그래프 뷰에서 태그 노드 클릭",
+   "method_steps": "Given: /tags 화면에서 그래프 뷰가 표시된 상태 / When: 그래프의 특정 태그 노드를 클릭",
+   "expected": "해당 태그 상세 화면(B-07)으로 이동함",
+   "ac_refs": ["AC-B06-04"],
+   "e2e": false,
+   "result": ""
+  },
+  {
+   "scenario_id": "SC-blog-023",
+   "screen_id": "B-07",
+   "no": 23,
+   "feature_fn": "태그 상세",
+   "test_item": "/tags/[tag] 화면 렌더링",
+   "method_steps": "Given: /tags/[tag] 화면에 진입한 상태 / When: 화면이 렌더링됨",
+   "expected": "태그 제목('#[태그명]')과 해당 태그가 포함된 포스트 카드 목록이 표시됨",
+   "ac_refs": ["AC-B07-01"],
+   "e2e": false,
+   "result": ""
+  },
+  {
+   "scenario_id": "SC-blog-024",
+   "screen_id": "B-07",
+   "no": 24,
+   "feature_fn": "태그 상세",
+   "test_item": "포스트 카드 클릭",
+   "method_steps": "Given: /tags/[tag] 화면에 포스트 카드 목록이 표시된 상태 / When: 포스트 카드를 클릭",
+   "expected": "해당 글 상세 화면(B-03)으로 이동함",
+   "ac_refs": ["AC-B07-02"],
    "e2e": false,
    "result": ""
   }

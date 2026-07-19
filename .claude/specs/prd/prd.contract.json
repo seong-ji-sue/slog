@@ -53,14 +53,21 @@
           "key": "list-feed",
           "kind": "list",
           "label": "포스트 카드 피드",
-          "role": "최신순 글 카드 리스트(LOG 번호·카테고리·제목·설명·날짜·난이도·읽기 시간 포함)",
+          "role": "최신순 글 카드 리스트(LOG 번호·카테고리·제목·설명·날짜·난이도·읽기 시간·project 배지 포함)",
           "behavior": "카드 hover 시 제목 형광펜 스윕 애니메이션 표시; 카드 클릭 시 해당 글 상세(B-03)로 이동"
+        },
+        {
+          "key": "badge-project",
+          "kind": "badge",
+          "label": "project 배지",
+          "role": "포스트 카드의 project taxonomy 표시 배지",
+          "behavior": "project 필드가 있는 포스트 카드에만 표시; project 필드가 없는 카드에는 표시하지 않음"
         },
         {
           "key": "text-footer",
           "kind": "text",
           "label": "© 2026 Zibu — 기록으로 증명",
-          "role": "사이트 푸터 (저작권 + GitHub·RSS·Tistory 링크 포함)",
+          "role": "사이트 푸터(저작권 + GitHub·RSS·Tistory 링크 포함)",
           "behavior": "정적 텍스트 + 외부 링크"
         }
       ]
@@ -82,8 +89,15 @@
           "key": "list-posts",
           "kind": "list",
           "label": "전체 글 카드 리스트",
-          "role": "필터 결과 글 카드 목록 (포스트 카드 포맷 — B-01과 동일)",
+          "role": "필터 결과 글 카드 목록(포스트 카드 포맷 — B-01과 동일)",
           "behavior": "필터 상태에 따라 표시 글 변경; 카드 클릭 시 해당 글 상세(B-03)로 이동"
+        },
+        {
+          "key": "badge-project",
+          "kind": "badge",
+          "label": "project 배지",
+          "role": "포스트 카드의 project taxonomy 표시 배지",
+          "behavior": "project 필드가 있는 포스트 카드에만 표시; project 필드가 없는 카드에는 표시하지 않음"
         }
       ]
     },
@@ -91,7 +105,7 @@
       "screen_id": "B-03",
       "title": "글 상세",
       "purpose": "개별 글의 전체 콘텐츠를 표시하는 화면.",
-      "entry": "포스트 카드(B-01·B-02·B-04) 클릭",
+      "entry": "포스트 카드(B-01·B-02·B-04·B-07) 클릭",
       "components": [
         {
           "key": "text-post-meta",
@@ -104,14 +118,14 @@
           "key": "text-post-title",
           "kind": "text",
           "label": "글 제목",
-          "role": "Noto Serif 900 h1 제목 (mark 포함 가능)",
+          "role": "Noto Serif 900 h1 제목(mark 포함 가능)",
           "behavior": "정적 텍스트"
         },
         {
           "key": "text-tldr",
           "kind": "text",
           "label": "TL;DR",
-          "role": "핵심 한 줄 요약 블록 (레이블 + 형광펜 mark 인라인)",
+          "role": "핵심 한 줄 요약 블록(레이블 + 형광펜 mark 인라인)",
           "behavior": "정적 텍스트"
         },
         {
@@ -125,7 +139,7 @@
           "key": "text-body",
           "kind": "text",
           "label": "본문",
-          "role": "글 본문 영역 (✅ 헤딩·대화체 인용·코드 블록·mark 포함)",
+          "role": "글 본문 영역(✅ 헤딩·대화체 인용·코드 블록·mark 포함)",
           "behavior": "정적 콘텐츠 렌더링"
         },
         {
@@ -141,6 +155,13 @@
           "label": "← 이전 글 / 다음 글 →",
           "role": "시리즈 이전·다음 글 내비게이션 카드",
           "behavior": "이전 카드 클릭 시 이전 글 상세로 이동; 다음 카드 클릭 시 다음 글 상세로 이동; 경계 글의 경우 해당 방향 카드 미표시 또는 비활성"
+        },
+        {
+          "key": "badge-project",
+          "kind": "badge",
+          "label": "project 배지",
+          "role": "포스트 헤더 메타 영역의 project taxonomy 표시 배지",
+          "behavior": "project 필드가 있는 글의 포스트 헤더에만 표시; project 필드가 없는 글은 표시하지 않음"
         }
       ]
     },
@@ -155,7 +176,7 @@
           "kind": "list",
           "label": "시리즈 카드 목록",
           "role": "시리즈 제목·글 수·최신 업데이트 날짜 포함 카드 리스트",
-          "behavior": "카드 클릭 시 해당 시리즈 글 목록(B-04 드릴) 표시"
+          "behavior": "카드 클릭 시 해당 시리즈 글 목록 표시"
         },
         {
           "key": "list-series-posts",
@@ -176,8 +197,8 @@
           "key": "text-bio-detail",
           "kind": "text",
           "label": "이력 요약",
-          "role": "저자 이력 텍스트 영역 (실제 내용 자리표시)",
-          "behavior": "정적 텍스트 영역 (콘텐츠는 저자 작성)"
+          "role": "저자 이력 텍스트 영역(실제 내용 자리표시)",
+          "behavior": "정적 텍스트 영역(콘텐츠는 저자 작성)"
         },
         {
           "key": "list-stack",
@@ -199,6 +220,57 @@
           "label": "연락처",
           "role": "이메일 등 연락 수단 목록",
           "behavior": "정적 연락처 정보 표시"
+        }
+      ]
+    },
+    {
+      "screen_id": "B-06",
+      "title": "태그 인덱스",
+      "purpose": "전체 태그를 목록 또는 co-occurrence 그래프로 탐색하고 태그 상세로 진입하는 화면.",
+      "entry": "/tags 직접 진입",
+      "components": [
+        {
+          "key": "tab-view-toggle",
+          "kind": "tab",
+          "label": "목록 뷰 / 그래프 뷰",
+          "role": "목록 뷰와 그래프 뷰 전환 탭",
+          "behavior": "클릭 시 목록 뷰 또는 그래프 뷰로 전환; 기본값은 목록 뷰"
+        },
+        {
+          "key": "list-tags",
+          "kind": "list",
+          "label": "태그 목록",
+          "role": "전체 태그 목록(태그명 + 해당 태그 포스트 수)",
+          "behavior": "목록 뷰 활성 시 표시; 태그 클릭 시 /tags/[tag] 이동"
+        },
+        {
+          "key": "list-graph",
+          "kind": "list",
+          "label": "태그 co-occurrence 그래프",
+          "role": "태그 co-occurrence 네트워크 시각화(노드=태그, 엣지=동일 글에 공존한 태그 쌍, 고립 태그 제외)",
+          "behavior": "그래프 뷰 활성 시 표시; 태그 노드 클릭 시 /tags/[tag] 이동"
+        }
+      ]
+    },
+    {
+      "screen_id": "B-07",
+      "title": "태그 상세",
+      "purpose": "특정 태그가 포함된 포스트 목록을 표시하는 화면.",
+      "entry": "/tags 목록·그래프 뷰에서 태그 클릭 또는 /tags/[tag] 직접 진입",
+      "components": [
+        {
+          "key": "text-tag-title",
+          "kind": "text",
+          "label": "#[태그명]",
+          "role": "현재 태그 식별자 제목",
+          "behavior": "정적 텍스트"
+        },
+        {
+          "key": "list-posts-by-tag",
+          "kind": "list",
+          "label": "태그별 포스트 목록",
+          "role": "해당 태그가 포함된 포스트 카드 목록(포스트 카드 포맷)",
+          "behavior": "카드 클릭 시 해당 글 상세(B-03)로 이동"
         }
       ]
     }
@@ -250,12 +322,21 @@
       "components": ["nav-main"]
     },
     {
+      "id": "AC-B01-06",
+      "screen_id": "B-01",
+      "layer": "render",
+      "given": "홈 화면에서 project 필드가 있는 포스트가 피드에 포함된 상태",
+      "when": "화면이 렌더링됨",
+      "then": "해당 포스트 카드에 project 배지가 표시됨",
+      "components": ["badge-project", "list-feed"]
+    },
+    {
       "id": "AC-B02-01",
       "screen_id": "B-02",
       "layer": "render",
       "given": "/posts 화면에 진입한 상태",
       "when": "화면이 렌더링됨",
-      "then": "태그 필터 버튼 그룹과 전체 글 카드 리스트가 표시됨",
+      "then": "카테고리 필터 버튼 그룹과 전체 글 카드 리스트가 표시됨",
       "components": ["tab-filter", "list-posts"]
     },
     {
@@ -275,6 +356,15 @@
       "when": "'전체' 필터 버튼을 클릭",
       "then": "모든 글 카드가 목록에 복원됨",
       "components": ["tab-filter", "list-posts"]
+    },
+    {
+      "id": "AC-B02-04",
+      "screen_id": "B-02",
+      "layer": "render",
+      "given": "/posts 화면에서 project 필드가 있는 포스트가 목록에 포함된 상태",
+      "when": "화면이 렌더링됨",
+      "then": "해당 포스트 카드에 project 배지가 표시됨",
+      "components": ["badge-project", "list-posts"]
     },
     {
       "id": "AC-B03-01",
@@ -302,6 +392,15 @@
       "when": "시리즈 내비의 다음 글 카드를 클릭",
       "then": "다음 글 상세 화면으로 이동함",
       "components": ["nav-series"]
+    },
+    {
+      "id": "AC-B03-04",
+      "screen_id": "B-03",
+      "layer": "render",
+      "given": "project 필드가 있는 글 상세 페이지에 진입한 상태",
+      "when": "화면이 렌더링됨",
+      "then": "포스트 헤더 메타 영역에 project 배지가 표시됨",
+      "components": ["badge-project", "text-post-meta"]
     },
     {
       "id": "AC-B04-01",
@@ -338,69 +437,88 @@
       "when": "특정 프로젝트 링크를 클릭",
       "then": "해당 외부 링크(GitHub 등)가 새 탭에서 열림",
       "components": ["list-projects"]
+    },
+    {
+      "id": "AC-B06-01",
+      "screen_id": "B-06",
+      "layer": "render",
+      "given": "/tags 화면에 진입한 상태",
+      "when": "화면이 렌더링됨",
+      "then": "뷰 전환 토글('목록 뷰 / 그래프 뷰')과 태그 목록(태그명 + 글 수)이 기본 목록 뷰로 표시됨",
+      "components": ["tab-view-toggle", "list-tags"]
+    },
+    {
+      "id": "AC-B06-02",
+      "screen_id": "B-06",
+      "layer": "interaction",
+      "given": "/tags 화면에서 목록 뷰가 활성인 상태",
+      "when": "'그래프 뷰' 토글을 클릭",
+      "then": "태그 co-occurrence 그래프가 표시되며 목록 뷰는 감춰짐",
+      "components": ["tab-view-toggle", "list-graph"]
+    },
+    {
+      "id": "AC-B06-03",
+      "screen_id": "B-06",
+      "layer": "flow",
+      "given": "/tags 화면에서 목록 뷰가 표시된 상태",
+      "when": "목록의 특정 태그를 클릭",
+      "then": "해당 태그 상세 화면(B-07)으로 이동함",
+      "components": ["list-tags"]
+    },
+    {
+      "id": "AC-B06-04",
+      "screen_id": "B-06",
+      "layer": "flow",
+      "given": "/tags 화면에서 그래프 뷰가 표시된 상태",
+      "when": "그래프의 특정 태그 노드를 클릭",
+      "then": "해당 태그 상세 화면(B-07)으로 이동함",
+      "components": ["list-graph"]
+    },
+    {
+      "id": "AC-B07-01",
+      "screen_id": "B-07",
+      "layer": "render",
+      "given": "/tags/[tag] 화면에 진입한 상태",
+      "when": "화면이 렌더링됨",
+      "then": "태그 제목('#[태그명]')과 해당 태그가 포함된 포스트 카드 목록이 표시됨",
+      "components": ["text-tag-title", "list-posts-by-tag"]
+    },
+    {
+      "id": "AC-B07-02",
+      "screen_id": "B-07",
+      "layer": "flow",
+      "given": "/tags/[tag] 화면에 포스트 카드 목록이 표시된 상태",
+      "when": "포스트 카드를 클릭",
+      "then": "해당 글 상세 화면(B-03)으로 이동함",
+      "components": ["list-posts-by-tag"]
     }
   ],
   "impl_requirements": {
     "frontend": [
       "화면 B-01(홈)은 사이트 헤더(로고+내비+다크모드 토글), 히어로 영역(Noto Serif 900 제목+bio 2줄+통계 라인), 피처드 3편 고정 카드 블록, 최신순 포스트 카드 피드, 푸터를 제공해야 한다.",
-      "포스트 카드는 LOG 번호, 카테고리(볼펜 블루 색상), 제목(mark 포함 가능), 설명, 날짜·난이도·읽기 시간 메타 정보를 표시해야 한다.",
+      "포스트 카드는 LOG 번호, 카테고리(볼펜 블루 색상), 제목(mark 포함 가능), 설명, 날짜·난이도·읽기 시간 메타 정보를 표시해야 한다. project 필드가 있는 경우 project 배지를 추가로 표시해야 하며, project 필드가 없는 포스트는 project 배지를 표시하지 않아야 한다.",
       "포스트 카드 hover 시 제목 형광펜이 background-size 0% → 100% 스윕 전환으로 나타나야 한다; prefers-reduced-motion 활성 시 transition을 제거해야 한다.",
       "다크모드 토글은 클릭 시 전체 페이지 팔레트를 다크 모드로 전환해야 하며, 라이트 상태를 기본으로 유지해야 한다.",
       "화면 B-02(/posts)는 카테고리 필터 버튼 그룹과 전체 글 카드 리스트를 제공해야 한다; 필터 선택 시 해당 카테고리 글만 노출하고, '전체' 선택 시 전체 글을 복원해야 한다.",
-      "화면 B-03(글 상세)은 포스트 헤더(LOG·카테고리·날짜·난이도), Noto Serif 900 h1 제목, TL;DR 블록, 키워드 프리뷰 칩 목록, 본문(✅ 헤딩·대화체 인용·코드 블록·mark), 참고한 링크 섹션, 시리즈 내비 카드를 제공해야 한다.",
+      "화면 B-03(글 상세)은 포스트 헤더(LOG·카테고리·날짜·난이도), Noto Serif 900 h1 제목, TL;DR 블록, 키워드 프리뷰 칩 목록, 본문(✅ 헤딩·대화체 인용·코드 블록·mark), 참고한 링크 섹션, 시리즈 내비 카드를 제공해야 한다. project 필드가 있는 글의 포스트 헤더 메타 영역에는 project 배지를 표시해야 하며, project 필드가 없는 글은 project 배지를 표시하지 않아야 한다.",
       "본문 최대폭은 680px 고정이어야 한다.",
       "코드 블록은 #1D1D22 배경의 다크 아일랜드 스타일을 적용해야 하며, 라이트 모드·다크 모드 무관하게 어두운 배경을 유지해야 한다.",
       "화면 B-04(/series)는 시리즈 카드 목록을 제공해야 하고, 시리즈 카드 선택 시 순서 번호가 포함된 해당 시리즈 글 목록을 표시해야 한다.",
       "화면 B-05(/about)는 이력 요약·기술 스택·프로젝트 링크·연락처 4개 영역을 구조로 제공해야 한다; 프로젝트 링크는 외부 URL을 새 탭으로 열어야 한다.",
-      "키보드 포커스 시 해당 요소에 형광펜 표시가 나타나야 한다.",
-      "폰트는 Noto Serif KR 900(제목), Pretendard(본문), JetBrains Mono(메타·코드·로고)를 구분해 적용해야 한다."
+      "키보드 포커스 시 해당 요소에 형광펜 표시가 나타나야 한다(접근성).",
+      "폰트는 Noto Serif KR 900(제목), Pretendard(본문), JetBrains Mono(메타·코드·로고)를 구분해 적용해야 한다.",
+      "화면 B-06(/tags)은 목록 뷰/그래프 뷰 전환 토글, 태그 목록(목록 뷰; 태그명+글 수), 태그 co-occurrence 그래프(그래프 뷰; 노드=태그·엣지=동일 글에 공존한 태그 쌍)를 제공해야 한다; 기본값은 목록 뷰이며, 고립 태그(co-occurrence 엣지가 없는 태그)는 그래프에서 제외해야 한다.",
+      "화면 B-07(/tags/[tag])은 태그 제목('#[태그명]')과 해당 태그가 포함된 포스트 카드 목록을 제공해야 한다."
     ],
     "backend": [
-      "글 목록 조회는 {slug, lognum, title, description, category, date, difficulty, readingTime} 필드를 포함하는 목록을 반환하는 계약을 제공해야 한다.",
-      "글 상세 조회는 {slug, lognum, title, description, category, date, difficulty, readingTime, tldr, keywords, body, seriesPrev, seriesNext, refs} 필드를 포함하는 단일 항목을 반환하는 계약을 제공해야 한다.",
+      "글 목록 조회는 {slug, lognum, title, description, category, date, difficulty, readingTime, project} 필드를 포함하는 목록을 반환하는 계약을 제공해야 한다; project는 nullable이어야 한다.",
+      "글 상세 조회는 {slug, lognum, title, description, category, date, difficulty, readingTime, tldr, keywords, body, seriesPrev, seriesNext, refs, project} 필드를 포함하는 단일 항목을 반환하는 계약을 제공해야 한다; project는 nullable이어야 한다.",
       "시리즈 목록 조회는 {seriesId, title, postCount, lastUpdated} 목록을 반환하는 계약을 제공해야 한다.",
       "시리즈 상세 조회는 해당 시리즈에 속한 글 목록을 순서 번호(order)를 포함하여 반환하는 계약을 제공해야 한다.",
-      "카테고리 필터 조회는 카테고리 값을 파라미터로 받아 해당 카테고리 글 목록만 반환하는 계약을 제공해야 한다."
+      "카테고리 필터 조회는 카테고리 값을 파라미터로 받아 해당 카테고리 글 목록만 반환하는 계약을 제공해야 한다.",
+      "태그 목록 조회는 {tag, postCount} 목록을 반환하는 계약을 제공해야 한다.",
+      "태그별 포스트 조회는 tag 식별자를 파라미터로 받아 해당 태그가 포함된 포스트 목록을 반환하는 계약을 제공해야 한다.",
+      "태그 co-occurrence 조회는 {source, target, weight} 엣지 목록을 반환하는 계약을 제공해야 한다; weight는 두 태그가 함께 쓰인 포스트 수이며, 고립 태그(엣지 수=0)는 결과에서 제외해야 한다."
     ]
-  },
-  "non_goals": [
-    "Vercel 배포·커스텀 도메인 연결 (P4)",
-    "giscus 댓글 실연동 (댓글 자리표시만, 실 연동 P4)",
-    "조회수 카운터 (P4 Upstash Redis)",
-    "크로스포스팅(velog·티스토리) (P4)",
-    "blog-draft 자동화 스킬 구현 (P3)",
-    "SEO/OG 이미지 세부 구현 (P4)",
-    "RSS/사이트맵 실제 파일 생성 (P4)",
-    "About 실제 이력 본문 텍스트 작성 (저자 직접 제공)",
-    "관리자 CMS 화면",
-    "81편 전체 자동 이관 (P2 스코프: A급 10편만)",
-    "404 별도 화면 명세 (기본 처리로 충분)",
-    "피처드 3편 관리 UI (운영자가 코드·설정으로 직접 지정)"
-  ],
-  "unknowns": [
-    {
-      "id": "U-001",
-      "area": "B-03",
-      "unknown": "시리즈 내비 경계 처리 — 첫 글의 이전 카드·마지막 글의 다음 카드의 구체적 UI 처리(미표시 vs 비활성 vs 다음 시리즈 이동 등) 기획서 미명시",
-      "impact": "AC-B03-02 / AC-B03-03 경계 케이스 then 확정 불가; 구현자가 임의 결정해야 함",
-      "blocking": false,
-      "required_decision": "경계 글에서 해당 방향 카드를 미표시할지 vs 비활성 버튼으로 표시할지"
-    },
-    {
-      "id": "U-002",
-      "area": "B-05",
-      "unknown": "About 페이지 이력 본문 텍스트·연락처 실제 내용 미제공",
-      "impact": "AC-B05-01 then: 영역 구조 존재 여부만 확인 가능; 실제 콘텐츠 단언 불가",
-      "blocking": false,
-      "required_decision": "저자가 구현 단계에서 텍스트 직접 제공"
-    },
-    {
-      "id": "U-003",
-      "area": "B-01",
-      "unknown": "다크모드 팔레트 값(배경·텍스트·형광펜 다크 변형 등) 기획서·목업 미명시 (라이트 팔레트만 확정)",
-      "impact": "AC-B01-03 then: 전환 동작 확인까지만; 다크 팔레트 정확한 색상값 단언 불가",
-      "blocking": false,
-      "required_decision": "다크 팔레트 색상값 확정 (별도 디자인 결정)"
-    }
-  ]
+  }
 }

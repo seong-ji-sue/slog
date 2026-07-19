@@ -50,3 +50,12 @@ test('AC-B03-03: 시리즈 다음 글 카드 클릭 시 다음 글 상세로 이
   // Then — URL이 변경됨(다음 글 상세)
   await expect(page).not.toHaveURL(currentUrl);
 });
+
+test('AC-B03-04: project 필드가 있는 글 상세 헤더 메타 영역에 project 배지가 표시됨', async ({ page }) => {
+  // Given — project 필드가 있는 글 상세 페이지에 진입한 상태
+  await gotoScreen(page, 'B-03');
+  await expect(ui(page, 'B-03', 'text-post-meta')).toBeVisible();
+  // When — 화면이 렌더링됨
+  // Then — badge-project 요소가 포스트 헤더 메타 영역에 표시됨
+  await expect(ui(page, 'B-03', 'badge-project')).toBeVisible();
+});

@@ -71,3 +71,12 @@ test('AC-B01-05: 내비 글 링크 클릭 시 전체 글 목록 화면(B-02)으�
   // Then — /posts 화면으로 이동함
   await expect(page).toHaveURL(/\/posts/);
 });
+
+test('AC-B01-06: project 필드가 있는 포스트 카드에 project 배지가 표시됨', async ({ page }) => {
+  // Given — 홈 피드에 project 필드가 있는 포스트가 포함된 상태
+  await gotoScreen(page, 'B-01');
+  await expect(ui(page, 'B-01', 'list-feed')).toBeVisible();
+  // When — 화면이 렌더링됨
+  // Then — badge-project 요소가 화면에 하나 이상 존재함
+  await expect(ui(page, 'B-01', 'badge-project').first()).toBeVisible();
+});

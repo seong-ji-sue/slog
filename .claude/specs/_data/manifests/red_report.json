@@ -1,12 +1,61 @@
 {
  "mode": "app",
- "total": 17,
+ "total": 33,
  "passed": 0,
- "logic_absent_fail": 17,
+ "logic_absent_fail": 33,
  "infra_fail": 0,
  "other_fail": 0,
- "summary": "total=17 pass=0 logic_absent=17 infra=0 other=0",
+ "summary": "total=33 pass=0 logic_absent=33 infra=0 other=0",
  "tests": [
+  {
+   "file": "_structure.spec.js",
+   "title": "STRUCT-B-01: 계약 컴포넌트가 렌더링된다",
+   "status": "failed",
+   "class": "LOGIC_ABSENT",
+   "reason": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-01-logo-slog')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"t"
+  },
+  {
+   "file": "_structure.spec.js",
+   "title": "STRUCT-B-02: 계약 컴포넌트가 렌더링된다",
+   "status": "failed",
+   "class": "LOGIC_ABSENT",
+   "reason": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-02-tab-filter')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \""
+  },
+  {
+   "file": "_structure.spec.js",
+   "title": "STRUCT-B-03: 계약 컴포넌트가 렌더링된다",
+   "status": "failed",
+   "class": "LOGIC_ABSENT",
+   "reason": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-03-text-post-meta')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expe"
+  },
+  {
+   "file": "_structure.spec.js",
+   "title": "STRUCT-B-04: 계약 컴포넌트가 렌더링된다",
+   "status": "failed",
+   "class": "LOGIC_ABSENT",
+   "reason": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-04-list-series')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect "
+  },
+  {
+   "file": "_structure.spec.js",
+   "title": "STRUCT-B-05: 계약 컴포넌트가 렌더링된다",
+   "status": "failed",
+   "class": "LOGIC_ABSENT",
+   "reason": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-05-text-bio-detail')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Exp"
+  },
+  {
+   "file": "_structure.spec.js",
+   "title": "STRUCT-B-06: 계약 컴포넌트가 렌더링된다",
+   "status": "failed",
+   "class": "LOGIC_ABSENT",
+   "reason": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-06-tab-view-toggle')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Exp"
+  },
+  {
+   "file": "_structure.spec.js",
+   "title": "STRUCT-B-07: 계약 컴포넌트가 렌더링된다",
+   "status": "failed",
+   "class": "LOGIC_ABSENT",
+   "reason": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-07-text-tag-title')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expe"
+  },
   {
    "file": "B-01.spec.js",
    "title": "AC-B01-01: 홈 페이지 렌더링 시 주요 구성 요소가 모두 표시됨",
@@ -50,6 +99,13 @@
    "reason": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-01-nav-main')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"to"
   },
   {
+   "file": "B-01.spec.js",
+   "title": "AC-B01-06: project 필드가 있는 포스트 카드에 project 배지가 표시됨",
+   "status": "failed",
+   "class": "LOGIC_ABSENT",
+   "reason": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-01-list-feed')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"t"
+  },
+  {
    "file": "B-02.spec.js",
    "title": "AC-B02-01: /posts 진입 시 필터 버튼 그룹과 글 카드 리스트가 표시됨",
    "status": "failed",
@@ -69,6 +125,13 @@
    "status": "failed",
    "class": "LOGIC_ABSENT",
    "reason": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-02-tab-filter')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \""
+  },
+  {
+   "file": "B-02.spec.js",
+   "title": "AC-B02-04: project 필드가 있는 포스트 카드에 project 배지가 표시됨",
+   "status": "failed",
+   "class": "LOGIC_ABSENT",
+   "reason": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-02-list-posts')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \""
   },
   {
    "file": "B-03.spec.js",
@@ -99,6 +162,13 @@
    "reason": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-03-nav-series')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \""
   },
   {
+   "file": "B-03.spec.js",
+   "title": "AC-B03-04: project 필드가 있는 글 상세 헤더 메타 영역에 project 배지가 표시됨",
+   "status": "failed",
+   "class": "LOGIC_ABSENT",
+   "reason": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-03-text-post-meta')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expe"
+  },
+  {
    "file": "B-04.spec.js",
    "title": "AC-B04-01: /series 진입 시 시리즈 카드 목록이 표시됨",
    "status": "failed",
@@ -125,6 +195,48 @@
    "status": "failed",
    "class": "LOGIC_ABSENT",
    "reason": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-05-list-projects')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expec"
+  },
+  {
+   "file": "B-06.spec.js",
+   "title": "AC-B06-01: /tags 진입 시 뷰 전환 토글과 태그 목록이 기본 목록 뷰로 표시됨",
+   "status": "failed",
+   "class": "LOGIC_ABSENT",
+   "reason": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-06-tab-view-toggle')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Exp"
+  },
+  {
+   "file": "B-06.spec.js",
+   "title": "AC-B06-02: 그래프 뷰 토글 클릭 시 태그 co-occurrence 그래프가 표시되고 목록 뷰가 감춰짐",
+   "status": "failed",
+   "class": "LOGIC_ABSENT",
+   "reason": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-06-tab-view-toggle')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Exp"
+  },
+  {
+   "file": "B-06.spec.js",
+   "title": "AC-B06-03: 목록 뷰에서 태그 클릭 시 태그 상세 화면(B-07)으로 이동함",
+   "status": "failed",
+   "class": "LOGIC_ABSENT",
+   "reason": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-06-list-tags')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"t"
+  },
+  {
+   "file": "B-06.spec.js",
+   "title": "AC-B06-04: 그래프 뷰에서 태그 노드 클릭 시 태그 상세 화면(B-07)으로 이동함",
+   "status": "failed",
+   "class": "LOGIC_ABSENT",
+   "reason": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-06-tab-view-toggle')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Exp"
+  },
+  {
+   "file": "B-07.spec.js",
+   "title": "AC-B07-01: /tags/[tag] 진입 시 태그 제목과 포스트 카드 목록이 표시됨",
+   "status": "failed",
+   "class": "LOGIC_ABSENT",
+   "reason": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-07-text-tag-title')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expe"
+  },
+  {
+   "file": "B-07.spec.js",
+   "title": "AC-B07-02: 태그별 포스트 카드 클릭 시 글 상세 화면(B-03)으로 이동함",
+   "status": "failed",
+   "class": "LOGIC_ABSENT",
+   "reason": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('B-07-list-posts-by-tag')\nExpected: visible\nTimeout: 2500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - E"
   }
  ],
  "valid_red": true

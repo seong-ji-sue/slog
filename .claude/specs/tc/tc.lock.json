@@ -4,31 +4,34 @@
  "files": [
   {
    "path": "tc/tests/B-01.spec.js",
-   "sha256": "1b7d4217414114713ed7c5a543aedb657d7882611362d65851ca275e63c9d85d",
+   "sha256": "dd8f6667d24e16644bf52a2fb5dacfbf2916cfb6f42d245b9258b7579965b439",
    "ac_refs": [
     "AC-B01-01",
     "AC-B01-02",
     "AC-B01-03",
     "AC-B01-04",
-    "AC-B01-05"
+    "AC-B01-05",
+    "AC-B01-06"
    ]
   },
   {
    "path": "tc/tests/B-02.spec.js",
-   "sha256": "f7e5f85c0d9039dc07fabc24734471338c69a9933160538780830d509dfcb156",
+   "sha256": "c018e069e8825f76ca28166777247cbe5a736cced5a1dc2ea528992a179bf506",
    "ac_refs": [
     "AC-B02-01",
     "AC-B02-02",
-    "AC-B02-03"
+    "AC-B02-03",
+    "AC-B02-04"
    ]
   },
   {
    "path": "tc/tests/B-03.spec.js",
-   "sha256": "7b68d1aa932ad19cc1d76c8e38350e5f593a89f7440f9973af343242ecb7ea5e",
+   "sha256": "67e4f9a8e53a079043be7fff8a53457cc144a16e824a2e86ca5c50ae9d87f975",
    "ac_refs": [
     "AC-B03-01",
     "AC-B03-02",
-    "AC-B03-03"
+    "AC-B03-03",
+    "AC-B03-04"
    ]
   },
   {
@@ -46,6 +49,29 @@
     "AC-B05-01",
     "AC-B05-02"
    ]
+  },
+  {
+   "path": "tc/tests/B-06.spec.js",
+   "sha256": "fac56bc30d49f0c7fbd3ab4f47c312e1866d77d363c632292e93ec3b25de2435",
+   "ac_refs": [
+    "AC-B06-01",
+    "AC-B06-02",
+    "AC-B06-03",
+    "AC-B06-04"
+   ]
+  },
+  {
+   "path": "tc/tests/B-07.spec.js",
+   "sha256": "97637a875594c79db1435c19f943aa91fe6dc27f53ca9de9987ac49684a07d81",
+   "ac_refs": [
+    "AC-B07-01",
+    "AC-B07-02"
+   ]
+  },
+  {
+   "path": "tc/tests/_structure.spec.js",
+   "sha256": "1f42d80893fb379d19eee36269ff9a346be9beaf053624bb879a66dc6e02ca52",
+   "ac_refs": []
   }
  ]
 }

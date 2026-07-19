@@ -1,0 +1,131 @@
+{
+  "feature": "blog",
+  "source_brief": "docs/PLAN.md §1·§5·§11(v2 피벗) + .claude/specs/prd/PRD_blog.md(기존 5화면 PRD, 이미 구현·배포) + feature/tags-page 브랜치(app/tags/page.tsx, app/tags/[tag]/page.tsx, lib/posts.ts getTagsList/getPostsByTag)",
+  "screens": [
+    {
+      "screen_ref": "SCR-01-HOME-GRAPH",
+      "title": "홈 그래프 뷰 토글",
+      "summary": "기존 B-01 홈 화면에 추가되는 신규 컴포넌트. 목록 뷰(기존 전체 글 피드)와 그래프 뷰를 토글로 전환. 그래프 뷰는 태그를 노드, 동일 글에 공존하는 태그 쌍을 엣지로 표현하는 네트워크 시각화. 태그 328개 규모로 성능 고려가 필요함.",
+      "confidence": 0.6,
+      "confidence_reason": "노드=태그, 엣지=공존 태그 쌍, 목록↔그래프 토글 구조는 PLAN.md §11-4에 명확히 기술됨. 기존 목록 뷰가 기본값임(§11-4 '기존 목록 뷰에 더해 그래프 뷰를 추가')도 확인. 그러나 초기 노출 방식('인기 태그 클러스터링 또는 포커스 필터링 — 상세는 PRD에서 결정')과 노드 클릭 인터랙션이 미명시로 핵심 AC를 확정할 수 없음. 그래프 라이브러리 선택도 PRD로 위임됨.",
+      "issues": [
+        {
+          "id": "ISSUE-001",
+          "detail": "그래프 뷰 초기 노출 방식 미결. PLAN.md §11-4: '태그 328개 규모 → 인기 태그 클러스터링 또는 포커스 필터링 필요, 상세는 PRD에서 결정'. 초기 표시 방식(상위 N개만, 전체+포커스, 클러스터 요약)이 결정되지 않으면 PRD 초기 렌더링 AC 작성 불가.",
+          "severity": "blocking"
+        },
+        {
+          "id": "ISSUE-002",
+          "detail": "노드(태그) 클릭 시 인터랙션 미명시. /tags/[tag] 페이지 이동인지, 홈 피드를 해당 태그로 필터링인지, 서브그래프 포커스 하이라이트인지 브리프에 없음. PRD AC layer:interaction 작성 불가.",
+          "severity": "blocking"
+        },
+        {
+          "id": "ISSUE-003",
+          "detail": "그래프 뷰 모바일 처리 방식 미명시. 태그 328개 네트워크는 모바일 화면에서 동일 렌더링이 현실적으로 어려울 수 있음. 축소 표시, 목록 뷰 강제 전환, 별도 모바일 레이아웃 중 어느 방식인지 브리프에 없음.",
+          "severity": "minor"
+        }
+      ]
+    },
+    {
+      "screen_ref": "SCR-02-PROJECT-FIELD",
+      "title": "project frontmatter 필드 (데이터 레이어 + UI 연동)",
+      "summary": "게시글 frontmatter에 project 필드 신설. 7종 값(유튜브-자막-요약, ai-스킬-오케스트레이션, autoit-자동화, ssh-key-관리, 윈도우-설정, aws-관리, ai-블로그-자동관리)으로 taxonomy 관리. 회사 프로젝트 4종은 식별 정보 마스킹 정책 적용(§11-3). blog-draft 스킬 연동은 PRD 범위 밖(§11-5).",
+      "confidence": 0.72,
+      "confidence_reason": "7종 값 목록(§11-2), 콘텐츠 정책(§11-3, 회사명·시스템명 일반화 치환), blog-draft 스킬 전제(§11-5, PRD 범위 밖 명시)는 명확히 기술됨. 그러나 project 필드가 어느 화면 UI에 어떻게 표시되는지(포스트 카드, 글 상세 메타, 필터 버튼 등)가 전혀 명시되지 않아 PRD UI AC를 작성할 수 없음.",
+      "issues": [
+        {
+          "id": "ISSUE-004",
+          "detail": "project 필드의 UI 노출 위치·방식이 미명시. §11-1 목적 2 '향후 AI 서칭 용이성'에서 데이터 전용(UI 없음)일 가능성도 있음. UI에 표시할 경우 포스트 카드 배지인지, 글 상세 메타 라인 추가인지, /posts 필터 버튼으로도 제공하는지 결정 없이 PRD 화면 AC 작성 불가.",
+          "severity": "blocking"
+        },
+        {
+          "id": "ISSUE-005",
+          "detail": "project 필드 필수/선택(nullable) 여부 미명시. 기존 81편에 project 필드 없으므로 선택(optional)임이 유추되나 명시 없음. PRD BE 계약의 nullable 처리 방침에 영향.",
+          "severity": "minor"
+        },
+        {
+          "id": "ISSUE-006",
+          "detail": "project 필드 없는 기존 포스트의 UI 표시 방식 미명시. project UI를 렌더링할 경우 기존 글(project 미설정)에 대해 빈 값 숨김인지 '미분류' 기본값 표시인지가 결정되어야 함.",
+          "severity": "minor"
+        }
+      ]
+    }
+  ],
+  "overview_issues": [
+    "/tags, /tags/[tag] 구현(getTagsList·getPostsByTag 포함)이 feature/tags-page 브랜치에만 존재하며 현재 feature/v2-pivot-spec 브랜치에 미병합 상태. '유지(대체 아님)' 방침은 브리프에 확인됨. PRD 갱신 기준 코드 베이스는 병합 이후 기준으로 작성됨을 전제로 함."
+  ],
+  "overall_confidence": 0.66,
+  "human_gate_required": true,
+  "questions": [
+    {
+      "question": "홈 화면 그래프 뷰에서 태그 328개를 초기에 어떻게 표시하겠습니까? 브리프에 '상세는 PRD에서 결정'으로 남아 있어 PRD 수용기준(AC) 작성을 위해 방향 확정이 필요합니다.",
+      "header": "그래프 노출 범위",
+      "options": [
+        {
+          "label": "상위 N개만 표시",
+          "description": "글 수 기준 인기 태그 상위 30~50개만 초기 렌더링, 나머지는 숨김 또는 더보기 제공"
+        },
+        {
+          "label": "전체 + 포커스 필터",
+          "description": "전체 328개 표시하되 검색·클릭으로 관련 서브그래프만 강조(포커스)"
+        },
+        {
+          "label": "클러스터 요약 뷰",
+          "description": "유사 태그를 자동으로 묶어 클러스터 단위로 표시, 클릭 시 드릴다운 확장"
+        },
+        {
+          "label": "PRD에서 제안받기",
+          "description": "레퍼런스 사례 조사 후 PRD 단계에서 구체 방식을 제안받고 최종 확정"
+        }
+      ],
+      "source_issue": "ISSUE-001",
+      "answer": "게시글끼리 공유하는(co-occurrence) 태그 관계로 그래프를 구성한다. 노드=태그, 엣지=같은 글에 함께 쓰인 태그 쌍. 다른 태그와 한 번도 같이 쓰인 적 없는 고립 태그는 그래프에서 자동 제외한다. 별도의 '상위 N개' 컷오프는 적용하지 않는다. 그래프 뷰는 홈이 아니라 기존 /tags 페이지 안에 '목록 뷰 / 그래프 뷰' 토글로 추가한다 — 신규 라우트 없음, 홈 화면은 변경하지 않는다."
+    },
+    {
+      "question": "그래프 뷰에서 태그 노드를 클릭하면 어떤 동작을 해야 합니까?",
+      "header": "노드 클릭 동작",
+      "options": [
+        {
+          "label": "/tags/[tag] 페이지 이동",
+          "description": "해당 태그의 글 목록 페이지(/tags/[tag])로 이동"
+        },
+        {
+          "label": "서브그래프 포커스",
+          "description": "클릭한 노드와 직접 연결된 태그들만 강조, 페이지 이동 없이 그래프 내 탐색"
+        },
+        {
+          "label": "홈 피드 필터링",
+          "description": "그래프 뷰 유지 상태에서 하단 피드를 해당 태그 글만 표시"
+        }
+      ],
+      "source_issue": "ISSUE-002",
+      "answer": "/tags/[tag] 페이지로 이동한다."
+    },
+    {
+      "question": "project 필드를 UI에서 시각적으로 표시하겠습니까? 표시한다면 어느 위치에 어떤 형태로 노출됩니까?",
+      "header": "project 노출",
+      "options": [
+        {
+          "label": "UI 표시 없음(메타데이터만)",
+          "description": "frontmatter에만 존재. 화면에 노출 안 함. AI 서칭·향후 RAG 용도 데이터"
+        },
+        {
+          "label": "글 상세에만 표시",
+          "description": "글 상세 메타 라인(LOG·카테고리·날짜·난이도)에 project 배지 추가"
+        },
+        {
+          "label": "카드 + 글 상세 표시",
+          "description": "포스트 카드(홈·글 목록)와 글 상세 메타 모두에 project 배지 표시"
+        },
+        {
+          "label": "표시 + project 필터 추가",
+          "description": "카드·상세 표시에 더해 /posts 화면에 project 기반 필터 버튼 그룹 추가"
+        }
+      ],
+      "source_issue": "ISSUE-004",
+      "answer": "포스트 카드(홈·글 목록)와 글 상세 메타 모두에 project 배지를 표시한다. /posts에 project 기반 필터 버튼 그룹은 이번 phase 범위 제외(후속 phase 후보)."
+    }
+  ],
+  "approved": true,
+  "approved_at": "2026-07-19T00:00:00+09:00"
+}

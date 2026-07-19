@@ -48,3 +48,12 @@ test('AC-B02-03: 전체 필터 클릭 시 모든 글이 복원됨', async ({ pag
   );
   expect(isActive).toBe(true);
 });
+
+test('AC-B02-04: project 필드가 있는 포스트 카드에 project 배지가 표시됨', async ({ page }) => {
+  // Given — /posts 화면에서 project 필드가 있는 포스트가 목록에 포함된 상태
+  await gotoScreen(page, 'B-02');
+  await expect(ui(page, 'B-02', 'list-posts')).toBeVisible();
+  // When — 화면이 렌더링됨
+  // Then — badge-project 요소가 화면에 하나 이상 존재함
+  await expect(ui(page, 'B-02', 'badge-project').first()).toBeVisible();
+});
