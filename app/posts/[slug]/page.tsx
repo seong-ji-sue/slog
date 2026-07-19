@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getPost, adjacent, stars, fmtDate, logNum, getAllPosts } from "@/lib/posts";
+import { getPost, adjacent, stars, fmtDate, logNum, getAllPosts, tagSlug } from "@/lib/posts";
 import "./post.css";
 
 // ── 파싱 유틸 (lib 수정 금지 — 페이지 내 함수) ──────────────────────
@@ -103,6 +103,17 @@ export default async function PostPage({ params }: Props) {
         data-testid="B-03-text-body"
         dangerouslySetInnerHTML={{ __html: bodyHtml }}
       />
+
+      {/* ── 태그 ── */}
+      {post.tags.length > 0 && (
+        <div data-testid="post-tags" className="post-tags">
+          {post.tags.map((t) => (
+            <Link key={t} href={`/tags/${tagSlug(t)}`} className="post-tag-chip">
+              #{t}
+            </Link>
+          ))}
+        </div>
+      )}
 
       {/* ── 참고한 링크 래퍼 ── */}
       <div data-testid="B-03-list-refs" className="refs">
