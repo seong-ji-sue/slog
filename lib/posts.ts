@@ -14,7 +14,8 @@ const POSTS_DIR = path.join(process.cwd(), "content", "posts");
 const DRAFTS_DIR = path.join(process.cwd(), "content", "drafts");
 
 export type { PostMeta } from "./format";
-export { stars, fmtDate, logNum } from "./format";
+export { stars, fmtDate, logNum, tagSlug } from "./format";
+import { tagSlug } from "./format";
 import type { PostMeta } from "./format";
 
 export interface Post extends PostMeta {
@@ -120,4 +121,29 @@ export function getSeriesPosts(name: string): PostMeta[] {
   return getAllPosts()
     .filter((p) => p.series === name)
     .sort((a, b) => (a.date < b.date ? -1 : 1)); // date 오름차순 = 1부부터
+}
+
+export function getTagsList(): { name: string; slug: string; count: number }[] {
+  const all = getAllPosts();
+  const map = new Map<string, { name: string; count: number }>();
+  for (const p of all) {
+    for (const tag of p.tags) {
+      const slug = tagSlug(tag);
+      const existing = map.get(slug);
+      if (!existing) {
+        map.set(slug, { name: tag, count: 1 });
+      } else {
+        existing.count += 1;
+      }
+    }
+  }
+  return Array.from(map.entries())
+    .map(([slug, v]) => ({ slug, name: v.name, count: v.count }))
+    .sort((a, b) => b.count - a.count);
+}
+
+export function getPostsByTag(slug: string): PostMeta[] {
+  return getAllPosts()
+    .filter((p) => p.tags.some((t) => tagSlug(t) === slug))
+    .sort((a, b) => (a.date < b.date ? 1 : -1));
 }

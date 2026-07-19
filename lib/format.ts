@@ -29,3 +29,11 @@ export function fmtDate(iso: string): string {
 export function logNum(n: number): string {
   return `LOG_${String(n).padStart(3, "0")}`;
 }
+
+export function tagSlug(tag: string): string {
+  return tag
+    .toLowerCase()
+    .replace(/\./g, "")
+    .replace(/[^a-z0-9가-힣]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
