@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getPost, adjacent, stars, fmtDate, logNum, getAllPosts, tagSlug } from "@/lib/posts";
+import { getPost, adjacent, stars, fmtDate, logNum, getAllPosts, tagSlug, projectLabel } from "@/lib/posts";
 import "./post.css";
 
 // ── 파싱 유틸 (lib 수정 금지 — 페이지 내 함수) ──────────────────────
@@ -66,6 +66,7 @@ export default async function PostPage({ params }: Props) {
   const dateStr = fmtDate(post.date);
   const logStr = logNum(post.log);
   const category = post.categories[0] ?? "";
+  const project = projectLabel(post.project);
 
   return (
     <div className="post-wrap">
@@ -77,6 +78,11 @@ export default async function PostPage({ params }: Props) {
         >
           {logStr} · <span className="cat">{category}</span> · {dateStr} ·{" "}
           <span className="stars">난이도 {starsStr}</span>
+          {project && (
+            <>
+              {" "}· <span className="project-badge" data-testid="post-project-badge">{project}</span>
+            </>
+          )}
         </span>
 
         <h1 data-testid="B-03-text-post-title">{post.title}</h1>

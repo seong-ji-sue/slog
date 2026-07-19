@@ -13,10 +13,10 @@ import rehypeStringify from "rehype-stringify";
 const POSTS_DIR = path.join(process.cwd(), "content", "posts");
 const DRAFTS_DIR = path.join(process.cwd(), "content", "drafts");
 
-export type { PostMeta } from "./format";
-export { stars, fmtDate, logNum, tagSlug } from "./format";
+export type { PostMeta, TagGraph, TagGraphNode, TagGraphEdge } from "./format";
+export { stars, fmtDate, logNum, tagSlug, projectLabel, PROJECT_TAXONOMY } from "./format";
 import { tagSlug } from "./format";
-import type { PostMeta } from "./format";
+import type { PostMeta, TagGraph, TagGraphNode, TagGraphEdge } from "./format";
 
 export interface Post extends PostMeta {
   html: string;
@@ -47,6 +47,7 @@ function parseFile(dir: string, file: string, draftDir: boolean): { meta: PostMe
     log: Number(data.log ?? 0),
     series: data.series ? String(data.series) : undefined,
     source: data.source ? String(data.source) : undefined,
+    project: data.project ? String(data.project) : undefined,
     draft: draftDir || Boolean(data.draft),
     readingMin: Math.max(1, Math.round(body.replace(/```[\s\S]*?```/g, "").length / 650)),
   };
@@ -123,6 +124,11 @@ export function getSeriesPosts(name: string): PostMeta[] {
     .sort((a, b) => (a.date < b.date ? -1 : 1)); // date 오름차순 = 1부부터
 }
 
+/**
+ * 태그 목록 조회 계약 (PRD backend: {tag, postCount} 목록).
+ * PRD의 `tag` = 아래 반환값의 `slug`(URL 식별자로도 재사용됨), `postCount` = `count`.
+ * `name`은 목록 뷰 표시용 원본 표기(대소문자 보존)이며 PRD 계약 필드는 아니다.
+ */
 export function getTagsList(): { name: string; slug: string; count: number }[] {
   const all = getAllPosts();
   const map = new Map<string, { name: string; count: number }>();
@@ -146,4 +152,120 @@ export function getPostsByTag(slug: string): PostMeta[] {
   return getAllPosts()
     .filter((p) => p.tags.some((t) => tagSlug(t) === slug))
     .sort((a, b) => (a.date < b.date ? 1 : -1));
+}
+
+const GRAPH_SIZE = 1000;
+const GRAPH_ITERATIONS = 300;
+
+/**
+ * 태그 co-occurrence 그래프 — 노드=태그, 엣지=같은 글에 함께 쓰인 태그 쌍.
+ * 레이아웃은 빌드 타임에 1회 계산되는 결정론적 force-directed 시뮬레이션(외부 라이브러리 미사용).
+ */
+export function getTagGraph(): TagGraph {
+  const all = getAllPosts();
+  const tags = getTagsList();
+
+  const edgeMap = new Map<string, TagGraphEdge>();
+  for (const p of all) {
+    const slugs = Array.from(new Set(p.tags.map((t) => tagSlug(t)))).sort();
+    for (let i = 0; i < slugs.length; i++) {
+      for (let j = i + 1; j < slugs.length; j++) {
+        const key = `${slugs[i]}::${slugs[j]}`;
+        const existing = edgeMap.get(key);
+        if (existing) {
+          existing.weight += 1;
+        } else {
+          edgeMap.set(key, { source: slugs[i], target: slugs[j], weight: 1 });
+        }
+      }
+    }
+  }
+
+  const nodes = layoutNodes(tags, Array.from(edgeMap.values()));
+  return { nodes, edges: Array.from(edgeMap.values()) };
+}
+
+function layoutNodes(
+  tags: { slug: string; name: string; count: number }[],
+  edges: TagGraphEdge[]
+): TagGraphNode[] {
+  const n = tags.length;
+  const center = GRAPH_SIZE / 2;
+  const radius = GRAPH_SIZE * 0.4;
+
+  // 초기 배치: 원형(결정론적 — 빌드마다 동일 레이아웃)
+  const pos = new Map<string, { x: number; y: number; vx: number; vy: number }>();
+  tags.forEach((t, i) => {
+    const angle = (2 * Math.PI * i) / n;
+    pos.set(t.slug, {
+      x: center + radius * Math.cos(angle),
+      y: center + radius * Math.sin(angle),
+      vx: 0,
+      vy: 0,
+    });
+  });
+
+  const idealDist = Math.sqrt((GRAPH_SIZE * GRAPH_SIZE) / Math.max(1, n));
+  const indexOf = new Map(tags.map((t, i) => [t.slug, i]));
+
+  for (let iter = 0; iter < GRAPH_ITERATIONS; iter++) {
+    const temperature = GRAPH_SIZE * 0.05 * (1 - iter / GRAPH_ITERATIONS);
+    const disp = tags.map(() => ({ dx: 0, dy: 0 }));
+
+    // 반발력 (모든 쌍)
+    for (let i = 0; i < n; i++) {
+      const a = pos.get(tags[i].slug)!;
+      for (let j = i + 1; j < n; j++) {
+        const b = pos.get(tags[j].slug)!;
+        let dx = a.x - b.x;
+        let dy = a.y - b.y;
+        let dist = Math.sqrt(dx * dx + dy * dy) || 0.01;
+        const force = (idealDist * idealDist) / dist;
+        dx = (dx / dist) * force;
+        dy = (dy / dist) * force;
+        disp[i].dx += dx;
+        disp[i].dy += dy;
+        disp[j].dx -= dx;
+        disp[j].dy -= dy;
+      }
+    }
+
+    // 인력 (엣지 — 가중치가 클수록 더 가깝게)
+    for (const e of edges) {
+      const si = indexOf.get(e.source);
+      const ti = indexOf.get(e.target);
+      if (si === undefined || ti === undefined) continue;
+      const a = pos.get(e.source)!;
+      const b = pos.get(e.target)!;
+      const dx = a.x - b.x;
+      const dy = a.y - b.y;
+      const dist = Math.sqrt(dx * dx + dy * dy) || 0.01;
+      const force = (dist * dist) / idealDist / Math.sqrt(e.weight);
+      const fx = (dx / dist) * force;
+      const fy = (dy / dist) * force;
+      disp[si].dx -= fx;
+      disp[si].dy -= fy;
+      disp[ti].dx += fx;
+      disp[ti].dy += fy;
+    }
+
+    // 변위 적용 (temperature로 제한, 중심 근처로 clamp)
+    tags.forEach((t, i) => {
+      const p = pos.get(t.slug)!;
+      const d = Math.sqrt(disp[i].dx * disp[i].dx + disp[i].dy * disp[i].dy) || 0.01;
+      const limited = Math.min(d, temperature);
+      p.x += (disp[i].dx / d) * limited;
+      p.y += (disp[i].dy / d) * limited;
+      p.x = Math.max(20, Math.min(GRAPH_SIZE - 20, p.x));
+      p.y = Math.max(20, Math.min(GRAPH_SIZE - 20, p.y));
+    });
+  }
+
+  return tags.map((t) => ({
+    slug: t.slug,
+    name: t.name,
+    count: t.count,
+    x: Math.round(pos.get(t.slug)!.x),
+    y: Math.round(pos.get(t.slug)!.y),
+  }));
 }

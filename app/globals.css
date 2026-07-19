@@ -206,6 +206,16 @@ header.site .col {
   color: var(--pen);
 }
 
+.project-badge {
+  display: inline-block;
+  font: 500 11px "JetBrains Mono", monospace;
+  color: var(--sub);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 1px 6px;
+  vertical-align: middle;
+}
+
 .post-item h2 {
   margin-top: 8px;
   font-size: 21px;

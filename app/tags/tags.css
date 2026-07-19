@@ -5,6 +5,82 @@
   padding-bottom: 80px;
 }
 
+/* 뷰 전환 토글 */
+.tags-view-toggle {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.view-btn {
+  font: 500 13px "JetBrains Mono", monospace;
+  color: var(--sub);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 6px 14px;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.view-btn.active {
+  color: var(--ink);
+  border-color: var(--ink);
+  background: var(--marker);
+}
+
+.view-btn:hover,
+.view-btn:focus-visible {
+  color: var(--ink);
+  outline: none;
+}
+
+/* 태그 그래프 */
+.tags-graph-wrap {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.tag-graph {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+}
+
+.tag-graph-edge {
+  stroke: var(--line);
+  transition: opacity 0.15s ease;
+}
+
+.tag-graph-edge.dimmed {
+  opacity: 0.08;
+}
+
+.tag-graph-node {
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.tag-graph-node.dimmed {
+  opacity: 0.25;
+}
+
+.tag-graph-node circle {
+  fill: var(--pen);
+  opacity: 0.85;
+}
+
+.tag-graph-node:hover circle,
+.tag-graph-node:focus-visible circle {
+  fill: var(--marker);
+}
+
+.tag-graph-node text {
+  font: 500 10px "JetBrains Mono", monospace;
+  fill: var(--sub);
+  text-anchor: middle;
+  pointer-events: none;
+}
+
 /* 태그 목록 */
 .tags-cloud {
   display: flex;

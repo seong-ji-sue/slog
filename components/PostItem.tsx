@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { PostMeta, fmtDate, logNum, stars } from "@/lib/format";
+import { PostMeta, fmtDate, logNum, stars, projectLabel } from "@/lib/format";
 
 interface Props {
   post: PostMeta;
@@ -9,6 +9,7 @@ interface Props {
 
 export default function PostItem({ post, testId }: Props) {
   const cat = post.categories[0] ?? "";
+  const project = projectLabel(post.project);
   return (
     <Link
       href={`/posts/${post.slug}`}
@@ -17,6 +18,11 @@ export default function PostItem({ post, testId }: Props) {
     >
       <span className="lognum">
         {logNum(post.log)}&nbsp;&nbsp;<span className="cat">{cat}</span>
+        {project && (
+          <>
+            &nbsp;&nbsp;<span className="project-badge" data-testid="post-project-badge">{project}</span>
+          </>
+        )}
       </span>
       <h2>
         <mark>{post.title}</mark>
