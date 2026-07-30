@@ -6,7 +6,6 @@ import PostItem from "@/components/PostItem";
 
 interface Props {
   posts: PostMeta[];
-  categories: string[];
   scopes: ScopeTaxonomyEntry[];
 }
 
@@ -42,13 +41,12 @@ function getPageNumbers(currentPage: number, totalPages: number): number[] {
   return Array.from({ length: end - start + 1 }, (_, i) => start + i);
 }
 
-export default function PostsFilter({ posts, categories, scopes }: Props) {
-  const [active, setActive] = useState<string>("전체");
+export default function PostsFilter({ posts, scopes }: Props) {
   const [activeScope, setActiveScope] = useState<string>("전체");
   const [query, setQuery] = useState<string>("");
   const [page, setPage] = useState<number>(1);
 
-  const filterKey = JSON.stringify([active, activeScope, query]);
+  const filterKey = JSON.stringify([activeScope, query]);
   const [prevFilterKey, setPrevFilterKey] = useState(filterKey);
   if (filterKey !== prevFilterKey) {
     setPrevFilterKey(filterKey);
@@ -56,12 +54,10 @@ export default function PostsFilter({ posts, categories, scopes }: Props) {
   }
 
   const filtered = useMemo(() => {
-    const byCategory =
-      active === "전체" ? posts : posts.filter((p) => p.categories.includes(active));
     const byScope =
-      activeScope === "전체" ? byCategory : byCategory.filter((p) => p.scope === activeScope);
+      activeScope === "전체" ? posts : posts.filter((p) => p.scope === activeScope);
     return byScope.filter((p) => matchesQuery(p, query));
-  }, [active, activeScope, posts, query]);
+  }, [activeScope, posts, query]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
 
@@ -84,32 +80,10 @@ export default function PostsFilter({ posts, categories, scopes }: Props) {
         onChange={(e) => setQuery(e.target.value)}
       />
 
-      <div
-        className="tab-filter"
-        data-testid="B-02-tab-filter"
-        role="group"
-        aria-label="카테고리 필터"
-      >
-        {["전체", ...categories].map((cat) => {
-          const isActive = active === cat;
-          return (
-            <button
-              key={cat}
-              onClick={() => setActive(cat)}
-              aria-selected={isActive}
-              data-active={isActive ? "true" : undefined}
-              className={`filter-btn${isActive ? " active" : ""}`}
-            >
-              {cat}
-            </button>
-          );
-        })}
-      </div>
-
       {scopes.length > 0 && (
         <div
           className="tab-filter"
-          data-testid="B-02-tab-filter-scope"
+          data-testid="B-02-tab-filter"
           role="group"
           aria-label="분류 필터"
         >

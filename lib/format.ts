@@ -27,7 +27,7 @@ export interface ScopeTaxonomyEntry {
 export const SCOPE_TAXONOMY: ScopeTaxonomyEntry[] = [
   { value: "company", label: "회사 프로젝트" },
   { value: "personal", label: "개인 프로젝트" },
-  { value: "reference", label: "참고자료 읽은것" },
+  { value: "reference", label: "참고자료" },
   { value: "research", label: "기술조사" },
 ];
 
