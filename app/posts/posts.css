@@ -14,6 +14,31 @@
   margin-bottom: 28px;
 }
 
+/* 검색창 */
+.search-input {
+  display: block;
+  width: 100%;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13.5px;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 10px 14px;
+  margin-bottom: 20px;
+  transition: border-color 0.15s ease;
+}
+
+.search-input::placeholder {
+  color: var(--faint);
+}
+
+.search-input:focus-visible,
+.search-input:focus {
+  outline: none;
+  border-color: var(--ink);
+}
+
 /* 필터 버튼 그룹 */
 .tab-filter {
   display: flex;
@@ -60,4 +85,55 @@
   font-size: 13px;
   color: var(--faint);
   padding: 40px 0;
+}
+
+/* 페이지네이션 */
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 36px;
+}
+
+.page-btn {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--sub);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 6px 12px;
+  cursor: pointer;
+  min-width: 34px;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  line-height: 1;
+}
+
+.page-btn-nav {
+  font-weight: 700;
+  min-width: auto;
+  padding: 6px 14px;
+}
+
+.page-btn:hover,
+.page-btn:focus-visible {
+  color: var(--ink);
+  border-color: var(--ink);
+  outline: none;
+}
+
+.page-btn.active,
+.page-btn[aria-current="page"] {
+  color: var(--ink);
+  background: var(--marker);
+  border-color: transparent;
+}
+
+.page-btn:disabled {
+  color: var(--faint);
+  cursor: not-allowed;
+  border-color: var(--line);
+  background: transparent;
 }

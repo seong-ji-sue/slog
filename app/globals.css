@@ -48,6 +48,7 @@
 html {
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 72px; /* sticky 헤더 실측 높이만큼 앵커 스크롤 보정 */
 }
 
 body {
@@ -90,7 +91,13 @@ mark {
 
 /* ---------- 헤더 ---------- */
 header.site {
+  position: sticky;
+  top: 0;
+  z-index: 50;
   border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 header.site .col {
