@@ -23,7 +23,7 @@ post_id: 211
 4. **시간을 다루는 라이브러리 종류와 사용방법, 예시**
 5. **실제 코드에 적용**
 
-### **✔️**Date 객체 사용 방법**
+### **✔️ Date 객체 사용 방법**
 
 #### **메소드 종류**
 
@@ -124,7 +124,7 @@ const timestamp = currentDate.getTime(); // 타임스탬프
 }());
 ```
 
-### **✔️**어느 곳에서나 한국시간 보여주기**
+### **✔️ 어느 곳에서나 한국시간 보여주기**
 
 #### **UTC, GMT, KST 의 차이점**
 
@@ -167,7 +167,7 @@ const kr_curr = new Date(utc + (KR_TIME_DIFF));
 console.log(kr_curr)
 ```
 
-### **✔️**Date 객체의 문제점**
+### **✔️ Date 객체의 문제점**
 
 #### **new Date해서 나온게 RFC 임 → ISO 로 바꿔줘야 함**
 
@@ -313,7 +313,7 @@ const formattedDate = dateFormatter.format(now);
 console.log(formattedDate); // "2023-08-30 14:30:00 UTC"
 ```
 
-### **✔️**실제 코드에 적용**
+### **✔️ 실제 코드에 적용**
 
 #### **상황**
 

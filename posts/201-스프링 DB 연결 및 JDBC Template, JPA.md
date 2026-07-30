@@ -26,7 +26,7 @@ post_id: 201
 
 **📢 데이터베이스를 사용 안하고 했던 이전 방식에서는 Map에 데이터를 저장했지만 사용을 하는 지금은 연결을 직접적으로 해야 되고 그 부분이 JDBC Template, JPA 방식 2가지가 있다.**
 
-### **✔️**H2 데이터 베이스 설치**
+### **✔️ H2 데이터 베이스 설치**
 
 **데이터베이스 설치 및 세팅**
 
@@ -70,7 +70,7 @@ post_id: 201
    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
    ```
 
-### **✔️**JDBC Template 방식**
+### **✔️ JDBC Template 방식**
 
 > **준비사항 라이브러리 설치 JdbcTemplate 사용**  
 > **DataSource 객체 빈 등록**   
@@ -89,7 +89,7 @@ post_id: 201
 
 하지만 쿼리문은 기존과 동일하게 사용자가 직접 작성을 해야 되는 번거로움이 있다.
 
-**코드(**JDBC → JDBC Template )**
+**코드(JDBC → JDBC Template )**
 
 ```java
 //JDBC(20년전 방식)
@@ -144,7 +144,7 @@ private  RowMapper<Person> personRowMapper() {
     }
 ```
 
-### **✔️**JPA 방식**
+### **✔️ JPA 방식**
 
 > **준비물   
 > 라이브러리 설치**  
@@ -185,7 +185,7 @@ private  RowMapper<Person> personRowMapper() {
     }
 ```
 
-### **✔️***강의 참고**
+### **✔️ 강의 참고**
 
 [스프링 입문 - 코드로 배우는 스프링 부트, 웹 MVC, DB 접근 기술](https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-%EC%9E%85%EB%AC%B8-%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8/dashboard)
 

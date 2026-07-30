@@ -266,7 +266,7 @@ navigateTo(Page.detail, newPost.id) //페이지 이동 함수 사용
 
 #### **함수나 변수 캐싱, 상수는 useRef 로 관리**
 
-**📢** 참고** : <https://zibu-story.tistory.com/203>
+**📢 참고** : <https://zibu-story.tistory.com/203>
 
 useState만 사용하면 state가 변경될 때마다 화면이 랜더링 되고 컴포넌트 자체가 함수이기 때문에 호출 시(랜더링 시) 함수와 변수가 재 할당 된다. 이 부분을 해결하기 위해 React는 useRef나 useCallback, useMemo 등을 제공해준다. 그리고 useEffect 훅은 요청 로직을 제외하고는 가급적 사용하지 않는 것이 좋다.
 

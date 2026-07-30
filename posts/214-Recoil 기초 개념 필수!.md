@@ -15,7 +15,7 @@ post_id: 214
 
 **있다면 자유롭게 댓글 달아줘)**
 
-### **✔️ **Summary**
+### **✔️ Summary**
 
 1. **Recoil 사용 이유**
 2. 초기 **세팅**
@@ -23,7 +23,7 @@ post_id: 214
 4. **Selector 활용**
 5. **리턴하는 팩토리 함수**
 
-### **✔️ **Recoil 사용 이유**
+### **✔️ Recoil 사용 이유**
 
 #### **전역상태를 사용이유**
 
@@ -106,7 +106,7 @@ const dispatch =useDispatch()
       ...(생략)
 ```
 
-### **✔️ **초기 세팅**
+### **✔️ 초기 세팅**
 
 #### **Recoil 사용 이유**
 
@@ -203,7 +203,7 @@ const listCountState = selector({
 const listCount = useRecoilValue<numver>(listCountState);
 ```
 
-### **✔️ **Selector 활용**
+### **✔️ Selector 활용**
 
 > 💡 selector는 값 자체를 캐싱함
 
@@ -279,7 +279,7 @@ const Component = () => {
 }
 ```
 
-### **✔️ **리턴하는 팩토리 함수**
+### **✔️ 리턴하는 팩토리 함수**
 
 > 💡 다른 atom 이 아닌 외부 인자로 인한 상태 관리 입니다.
 

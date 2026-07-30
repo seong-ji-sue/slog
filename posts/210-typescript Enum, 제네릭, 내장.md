@@ -303,7 +303,7 @@ const promise = [Promise.resolve("Mark"), Promise.resolve(38)]
 type Expected = UnpackPromise<typeof promise>//string | number
 ```
 
-### **✔️ **ReadonlyArray<T>, as const 차이점**
+### **✔️ ReadonlyArray<T>, as const 차이점**
 
 #### **ReadonlyArray<T>**
 
@@ -369,7 +369,7 @@ deepReadonlyObj.address.city = "Los Angeles";//error
 deepReadonlyArr.push({ name: "Charlie" });//error
 ```
 
-### **✔️ **내장 Conditional type**
+### **✔️ 내장 Conditional type**
 
 #### **Partial<User>**
 
