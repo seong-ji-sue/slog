@@ -123,9 +123,9 @@ export default function PostsFilter({ posts, categories }: Props) {
           <button
             type="button"
             className="page-btn page-btn-nav"
-            onClick={() => setPage((prev) => Math.max(1, prev - 1))}
+            onClick={() => setPage((prev) => Math.max(1, prev - PAGE_WINDOW_SIZE))}
             disabled={page === 1}
-            aria-label="이전 페이지"
+            aria-label="이전 5페이지"
           >
             이전
           </button>
@@ -146,9 +146,9 @@ export default function PostsFilter({ posts, categories }: Props) {
           <button
             type="button"
             className="page-btn page-btn-nav"
-            onClick={() => setPage((prev) => Math.min(totalPages, prev + 1))}
+            onClick={() => setPage((prev) => Math.min(totalPages, prev + PAGE_WINDOW_SIZE))}
             disabled={page === totalPages}
-            aria-label="다음 페이지"
+            aria-label="다음 5페이지"
           >
             다음
           </button>
