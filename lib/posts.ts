@@ -135,30 +135,6 @@ export function maxLog(): number {
   return Math.max(...all.map((p) => p.log));
 }
 
-export function getSeriesList(): { name: string; count: number; lastDate: string }[] {
-  const all = getAllPosts();
-  const map = new Map<string, { count: number; lastDate: string }>();
-  for (const p of all) {
-    if (!p.series) continue;
-    const existing = map.get(p.series);
-    if (!existing) {
-      map.set(p.series, { count: 1, lastDate: p.date });
-    } else {
-      existing.count += 1;
-      if (p.date > existing.lastDate) existing.lastDate = p.date;
-    }
-  }
-  return Array.from(map.entries())
-    .map(([name, v]) => ({ name, count: v.count, lastDate: v.lastDate }))
-    .sort((a, b) => (a.lastDate < b.lastDate ? 1 : -1));
-}
-
-export function getSeriesPosts(name: string): PostMeta[] {
-  return getAllPosts()
-    .filter((p) => p.series === name)
-    .sort((a, b) => (a.date < b.date ? -1 : 1)); // date 오름차순 = 1부부터
-}
-
 /**
  * 태그 목록 조회 계약 (PRD backend: {tag, postCount} 목록).
  * PRD의 `tag` = 아래 반환값의 `slug`(URL 식별자로도 재사용됨), `postCount` = `count`.

@@ -35,7 +35,6 @@ export default function Header() {
         </Link>
         <nav className="menu" data-testid="B-01-nav-main" aria-label="주 내비게이션">
           <Link href="/posts">글</Link>
-          <Link href="/series">시리즈</Link>
           <Link href="/tags">태그</Link>
           <Link href="/about">소개</Link>
           <a href="#">RSS</a>
