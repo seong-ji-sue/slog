@@ -7,6 +7,7 @@ tags: ["Kubernetes", "Secret", "암호화", "etcd", "보안"]
 series: "SSH Key 관리 콘솔"
 project: "ssh-key-관리"
 difficulty: 3
+scope: "company"
 log: 110
 draft: false
 ---

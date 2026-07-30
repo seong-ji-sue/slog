@@ -7,6 +7,7 @@ tags: ["AutoIt", "자동화", "자체 도구", "웹 크롤링", "진단 도구",
 series: "AutoIt 업무 자동화"
 project: "autoit-자동화"
 difficulty: 3
+scope: "company"
 log: 121
 draft: false
 ---

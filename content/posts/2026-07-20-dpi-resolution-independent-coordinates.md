@@ -7,6 +7,7 @@ tags: ["AutoIt", "OpenCV", "ORB", "DPI", "이미지매칭", "Windows 자동화"]
 series: "AutoIt 업무 자동화"
 project: "autoit-자동화"
 difficulty: 4
+scope: "company"
 log: 114
 draft: false
 ---

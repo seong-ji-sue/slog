@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["JavaScript", "삼항연산자", "spread", "구조분해할당", "옵셔널체이닝", "에러처리", "ES2015"]
 series: "JavaScript 파고들기"
 difficulty: 2
+scope: "research"
 log: 7
 slug: "js-ternary-spread-destructuring"
 source: https://zibu-story.tistory.com/114

@@ -6,6 +6,7 @@ categories: ["회고"]
 tags: ["위코드", "부트캠프", "1차프로젝트", "프론트엔드", "회고", "React"]
 series: "위코드 부트캠프 회고"
 difficulty: 1
+scope: "personal"
 log: 40
 slug: "wecode-week8-project1-frontend"
 source: https://zibu-story.tistory.com/175

@@ -7,6 +7,7 @@ tags: ["감사로그", "Export", "Excel", "PDF", "CSV", "HTML", "전후데이터
 series: "SSH Key 관리 콘솔"
 project: "ssh-key-관리"
 difficulty: 3
+scope: "company"
 log: 89
 draft: false
 ---

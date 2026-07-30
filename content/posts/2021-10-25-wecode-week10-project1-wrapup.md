@@ -6,6 +6,7 @@ categories: ["회고"]
 tags: ["위코드", "부트캠프", "1차프로젝트", "리팩토링", "AWS배포", "회고"]
 series: "위코드 부트캠프 회고"
 difficulty: 1
+scope: "personal"
 log: 42
 slug: "wecode-week10-project1-wrapup"
 source: https://zibu-story.tistory.com/178

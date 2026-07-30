@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["E2E 테스트", "AI 에이전트", "Playwright", "테스트 자동화"]
 series: ""
 difficulty: 2
+scope: "reference"
 log: 132
 draft: false
 ---

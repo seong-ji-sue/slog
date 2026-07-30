@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["Database", "MySQL", "MongoDB", "PK", "FK", "정규화"]
 series: "데이터베이스 파고들기"
 difficulty: 1
+scope: "research"
 log: 30
 slug: "database-relational-vs-nonrelational"
 source: https://zibu-story.tistory.com/159

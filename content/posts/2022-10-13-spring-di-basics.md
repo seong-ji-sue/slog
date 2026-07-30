@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["Spring", "SpringBoot", "DI", "의존성주입", "Bean"]
 series: "스프링 파고들기"
 difficulty: 1
+scope: "research"
 log: 63
 slug: "spring-di-basics"
 source: https://zibu-story.tistory.com/200

@@ -7,6 +7,7 @@ tags: ["AWS", "GCP", "SecretEngine", "React", "RESTAPI", "권한관리"]
 series: "SSH Key 관리 콘솔"
 project: "ssh-key-관리"
 difficulty: 3
+scope: "company"
 log: 85
 draft: false
 ---

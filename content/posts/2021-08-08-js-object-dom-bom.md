@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["JavaScript", "객체", "DOM", "BOM", "점표기법", "대괄호표기법", "라이브러리", "프레임워크"]
 series: "JavaScript 파고들기"
 difficulty: 1
+scope: "research"
 log: 12
 slug: "js-object-dom-bom"
 source: https://zibu-story.tistory.com/128

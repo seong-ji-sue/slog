@@ -7,6 +7,7 @@ tags: ["SSH", "SSH CA", "인증서", "OpenSSH", "Vault", "보안"]
 series: "SSH Key 관리 콘솔"
 project: "ssh-key-관리"
 difficulty: 4
+scope: "company"
 log: 91
 draft: false
 ---

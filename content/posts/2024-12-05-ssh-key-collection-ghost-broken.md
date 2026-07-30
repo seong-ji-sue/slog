@@ -7,6 +7,7 @@ tags: ["SSH", "authorized_keys", "쉘스크립트", "보안", "감사"]
 series: "SSH Key 관리 콘솔"
 project: "ssh-key-관리"
 difficulty: 3
+scope: "company"
 log: 145
 draft: false
 ---

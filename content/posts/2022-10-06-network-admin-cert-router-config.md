@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["네트워크관리사", "라우터", "시스코", "네트워크설정", "실기시험"]
 series: "네트워크관리사 2급 실기"
 difficulty: 2
+scope: "research"
 log: 57
 slug: "network-admin-cert-router-config"
 source: https://zibu-story.tistory.com/194

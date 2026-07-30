@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["AI 도입", "개발 생산성", "기술 부채", "조직 문화", "코드 리뷰"]
 series: ""
 difficulty: 2
+scope: "reference"
 log: 133
 draft: false
 ---

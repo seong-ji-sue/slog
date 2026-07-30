@@ -14,7 +14,7 @@ const POSTS_DIR = path.join(process.cwd(), "content", "posts");
 const DRAFTS_DIR = path.join(process.cwd(), "content", "drafts");
 
 export type { PostMeta, TagGraph, TagGraphNode, TagGraphEdge } from "./format";
-export { stars, fmtDate, logNum, tagSlug, projectLabel, PROJECT_TAXONOMY } from "./format";
+export { stars, fmtDate, logNum, tagSlug, projectLabel, PROJECT_TAXONOMY, scopeLabel, SCOPE_TAXONOMY } from "./format";
 import { tagSlug } from "./format";
 import type { PostMeta, TagGraph, TagGraphNode, TagGraphEdge } from "./format";
 
@@ -48,6 +48,7 @@ function parseFile(dir: string, file: string, draftDir: boolean): { meta: PostMe
     series: data.series ? String(data.series) : undefined,
     source: data.source ? String(data.source) : undefined,
     project: data.project ? String(data.project) : undefined,
+    scope: data.scope ? (String(data.scope) as PostMeta["scope"]) : undefined,
     draft: draftDir || Boolean(data.draft),
     readingMin: Math.max(1, Math.round(body.replace(/```[\s\S]*?```/g, "").length / 650)),
   };

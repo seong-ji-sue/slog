@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["React", "TypeScript", "Pagination", "게시판"]
 series: ""
 difficulty: 2
+scope: "research"
 log: 68
 slug: "pagination-implementation"
 source: https://zibu-story.tistory.com/205

@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["SQL", "JOIN", "Window Function", "그룹함수", "서브쿼리", "계층형 쿼리", "Oracle"]
 series: "데이터베이스 파고들기"
 difficulty: 3
+scope: "research"
 log: 70
 slug: "sql-join-groupby-window-subquery"
 source: https://zibu-story.tistory.com/207

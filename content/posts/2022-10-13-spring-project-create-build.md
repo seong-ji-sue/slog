@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["스프링", "IntelliJ", "Gradle", "빌드", "스프링부트"]
 series: "스프링 파고들기"
 difficulty: 1
+scope: "research"
 log: 60
 slug: "spring-project-create-build"
 source: https://zibu-story.tistory.com/197

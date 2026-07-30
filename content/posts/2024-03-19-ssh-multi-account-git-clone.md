@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["Git", "SSH", "ssh-keygen", "GitHub", "GitLab"]
 series: "Git 파고들기"
 difficulty: 1
+scope: "research"
 log: 78
 slug: "ssh-multi-account-git-clone"
 source: https://zibu-story.tistory.com/215

@@ -7,6 +7,7 @@ tags: ["DNS", "인프라", "배포", "TLS", "회고"]
 series: "SSH Key 관리 콘솔"
 project: "ssh-key-관리"
 difficulty: 2
+scope: "company"
 log: 111
 draft: false
 ---

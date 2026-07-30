@@ -6,6 +6,7 @@ categories: ["회고"]
 tags: ["위코드", "부트캠프", "추각코", "자율학습", "주간회고"]
 series: "위코드 부트캠프 회고"
 difficulty: 1
+scope: "personal"
 log: 36
 slug: "wecode-week6-chugakko"
 source: https://zibu-story.tistory.com/169

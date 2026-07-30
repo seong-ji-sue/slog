@@ -7,6 +7,7 @@ tags: ["React", "리팩토링", "공통 컴포넌트", "UI/UX", "프론트엔드
 series: "AutoIt 업무 자동화"
 project: "autoit-자동화"
 difficulty: 3
+scope: "company"
 log: 122
 draft: false
 ---

@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["Git", "GitHub", "버전관리", "분산모델", "Git명령어", "위코드", "부트캠프"]
 series: "Git 파고들기"
 difficulty: 2
+scope: "research"
 log: 14
 slug: "git-github-basics"
 source: https://zibu-story.tistory.com/132

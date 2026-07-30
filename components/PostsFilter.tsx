@@ -1,12 +1,13 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { PostMeta } from "@/lib/format";
+import { PostMeta, ScopeTaxonomyEntry } from "@/lib/format";
 import PostItem from "@/components/PostItem";
 
 interface Props {
   posts: PostMeta[];
   categories: string[];
+  scopes: ScopeTaxonomyEntry[];
 }
 
 const PAGE_SIZE = 20;
@@ -41,12 +42,13 @@ function getPageNumbers(currentPage: number, totalPages: number): number[] {
   return Array.from({ length: end - start + 1 }, (_, i) => start + i);
 }
 
-export default function PostsFilter({ posts, categories }: Props) {
+export default function PostsFilter({ posts, categories, scopes }: Props) {
   const [active, setActive] = useState<string>("전체");
+  const [activeScope, setActiveScope] = useState<string>("전체");
   const [query, setQuery] = useState<string>("");
   const [page, setPage] = useState<number>(1);
 
-  const filterKey = JSON.stringify([active, query]);
+  const filterKey = JSON.stringify([active, activeScope, query]);
   const [prevFilterKey, setPrevFilterKey] = useState(filterKey);
   if (filterKey !== prevFilterKey) {
     setPrevFilterKey(filterKey);
@@ -56,8 +58,10 @@ export default function PostsFilter({ posts, categories }: Props) {
   const filtered = useMemo(() => {
     const byCategory =
       active === "전체" ? posts : posts.filter((p) => p.categories.includes(active));
-    return byCategory.filter((p) => matchesQuery(p, query));
-  }, [active, posts, query]);
+    const byScope =
+      activeScope === "전체" ? byCategory : byCategory.filter((p) => p.scope === activeScope);
+    return byScope.filter((p) => matchesQuery(p, query));
+  }, [active, activeScope, posts, query]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
 
@@ -101,6 +105,30 @@ export default function PostsFilter({ posts, categories }: Props) {
           );
         })}
       </div>
+
+      {scopes.length > 0 && (
+        <div
+          className="tab-filter"
+          data-testid="B-02-tab-filter-scope"
+          role="group"
+          aria-label="분류 필터"
+        >
+          {[{ value: "전체", label: "전체" }, ...scopes].map((s) => {
+            const isActive = activeScope === s.value;
+            return (
+              <button
+                key={s.value}
+                onClick={() => setActiveScope(s.value)}
+                aria-selected={isActive}
+                data-active={isActive ? "true" : undefined}
+                className={`filter-btn${isActive ? " active" : ""}`}
+              >
+                {s.label}
+              </button>
+            );
+          })}
+        </div>
+      )}
 
       <div
         className="post-list"

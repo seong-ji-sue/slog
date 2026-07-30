@@ -7,6 +7,7 @@ tags: ["QA", "회고", "공통컴포넌트", "상태관리", "리팩토링"]
 series: "SSH Key 관리 콘솔"
 project: "ssh-key-관리"
 difficulty: 3
+scope: "company"
 log: 102
 draft: false
 ---

@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["JavaScript", "변수", "데이터타입", "함수선언", "조건문", "var-let-const", "호이스팅"]
 series: "JavaScript 파고들기"
 difficulty: 1
+scope: "research"
 log: 8
 slug: "js-variable-datatype-function-condition"
 source: https://zibu-story.tistory.com/118

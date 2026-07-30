@@ -6,6 +6,7 @@ categories: ["회고"]
 tags: ["CRUD", "pagination", "React", "TypeScript", "게시판구현", "페이지네이션", "Context"]
 series: ""
 difficulty: 2
+scope: "personal"
 log: 69
 slug: "board-project-crud-solo"
 source: https://zibu-story.tistory.com/206

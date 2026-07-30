@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["Claude Code", "AI 에이전트", "스킬 보안", "오픈소스 분석", "SOP"]
 series: "AutoIt 업무 자동화"
 difficulty: 3
+scope: "reference"
 log: 160
 draft: false
 ---

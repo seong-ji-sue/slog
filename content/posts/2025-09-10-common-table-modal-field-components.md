@@ -7,6 +7,7 @@ tags: ["React", "공통컴포넌트", "디자인시스템", "리팩토링", "모
 series: "SSH Key 관리 콘솔"
 project: "ssh-key-관리"
 difficulty: 3
+scope: "company"
 log: 106
 draft: false
 ---

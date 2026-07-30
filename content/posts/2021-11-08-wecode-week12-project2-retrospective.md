@@ -6,6 +6,7 @@ categories: ["회고"]
 tags: ["위코드", "부트캠프", "2차프로젝트", "styled-components", "React", "회고"]
 series: "위코드 부트캠프 회고"
 difficulty: 1
+scope: "personal"
 log: 44
 slug: "wecode-week12-project2-retrospective"
 source: https://zibu-story.tistory.com/181

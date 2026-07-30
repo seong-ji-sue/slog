@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["TypeScript", "타입스크립트", "Enum", "Generic", "제네릭", "keyof", "infer", "Partial", "Omit", "utility type"]
 series: "TypeScript 파고들기"
 difficulty: 2
+scope: "research"
 draft: false
 source: https://zibu-story.tistory.com/210
 log: 73

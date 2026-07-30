@@ -6,6 +6,7 @@ categories: ["회고"]
 tags: ["위코드", "부트캠프", "Node.js", "Express", "Prisma", "주간회고"]
 series: "위코드 부트캠프 회고"
 difficulty: 1
+scope: "personal"
 log: 32
 slug: "wecode-week5-foundation-review"
 source: https://zibu-story.tistory.com/162

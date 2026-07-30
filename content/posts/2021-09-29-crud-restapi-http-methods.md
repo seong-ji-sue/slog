@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["CRUD", "REST API", "HTTP", "URL", "URI", "위코드"]
 series: ""
 difficulty: 1
+scope: "research"
 log: 37
 slug: "crud-restapi-http-methods"
 source: https://zibu-story.tistory.com/171

@@ -7,6 +7,7 @@ tags: ["Webpack", "Module Federation", "Tree Shaking", "번들최적화", "Next.
 series: "SSH Key 관리 콘솔"
 project: "ssh-key-관리"
 difficulty: 3
+scope: "company"
 log: 150
 draft: false
 ---

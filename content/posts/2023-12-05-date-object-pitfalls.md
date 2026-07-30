@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["JavaScript", "Date", "moment", "Luxon", "Intl", "시간대"]
 series: "JavaScript 파고들기"
 difficulty: 2
+scope: "research"
 log: 74
 slug: "date-object-pitfalls"
 source: https://zibu-story.tistory.com/211

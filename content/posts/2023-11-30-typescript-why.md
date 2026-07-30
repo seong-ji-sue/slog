@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["TypeScript", "타입스크립트", "type", "interface", "타입가드", "any", "unknown", "never", "void"]
 series: "TypeScript 파고들기"
 difficulty: 2
+scope: "research"
 draft: false
 source: https://zibu-story.tistory.com/208
 log: 71

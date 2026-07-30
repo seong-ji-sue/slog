@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["JWT", "Session", "Cookie", "OAuth", "인증", "인가", "Token", "localStorage", "로그인"]
 series: ""
 difficulty: 2
+scope: "research"
 source: https://zibu-story.tistory.com/202
 log: 65
 slug: "login-token-session"

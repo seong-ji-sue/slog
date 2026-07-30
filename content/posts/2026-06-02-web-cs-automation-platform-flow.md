@@ -7,6 +7,7 @@ tags: ["AutoIt", "RPA", "로그분석", "RDP", "플랫폼아키텍처"]
 series: "AutoIt 업무 자동화"
 project: "autoit-자동화"
 difficulty: 4
+scope: "company"
 log: 155
 draft: false
 ---

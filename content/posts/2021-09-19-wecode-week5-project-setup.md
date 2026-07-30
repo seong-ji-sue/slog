@@ -6,6 +6,7 @@ categories: ["회고"]
 tags: ["위코드", "부트캠프", "초기세팅", "CRA", "Prisma", "Express"]
 series: "위코드 부트캠프 회고"
 difficulty: 1
+scope: "personal"
 log: 33
 slug: "wecode-week5-project-setup"
 source: https://zibu-story.tistory.com/164

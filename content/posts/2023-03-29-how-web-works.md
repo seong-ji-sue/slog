@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["HTTP", "GET", "POST", "브라우저렌더링", "DNS", "WAS", "DOM", "Reflow", "웹동작방식"]
 series: ""
 difficulty: 2
+scope: "research"
 source: https://zibu-story.tistory.com/204
 log: 67
 slug: "how-web-works"

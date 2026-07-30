@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["네트워크관리사", "윈도우서버", "DHCP", "DNS", "실기시험"]
 series: "네트워크관리사 2급 실기"
 difficulty: 2
+scope: "research"
 log: 58
 slug: "network-admin-cert-network-config"
 source: https://zibu-story.tistory.com/195

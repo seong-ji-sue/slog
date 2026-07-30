@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["DOM", "JavaScript", "노드", "addEventListener", "querySelector", "classList"]
 series: "JavaScript 파고들기"
 difficulty: 2
+scope: "research"
 log: 4
 slug: "dom-basics-node-access"
 source: https://zibu-story.tistory.com/105

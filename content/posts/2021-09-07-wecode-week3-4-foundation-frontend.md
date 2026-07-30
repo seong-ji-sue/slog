@@ -6,6 +6,7 @@ categories: ["회고"]
 tags: ["위코드", "부트캠프", "React", "Foundation", "회고"]
 series: "위코드 부트캠프 회고"
 difficulty: 1
+scope: "personal"
 log: 28
 slug: "wecode-week3-4-foundation-frontend"
 source: https://zibu-story.tistory.com/155

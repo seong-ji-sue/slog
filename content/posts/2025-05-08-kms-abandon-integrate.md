@@ -7,6 +7,7 @@ tags: ["아키텍처", "KMS", "제품통합", "회고", "중복구현"]
 series: "SSH Key 관리 콘솔"
 project: "ssh-key-관리"
 difficulty: 4
+scope: "company"
 log: 101
 draft: false
 ---

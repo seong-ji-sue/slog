@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["React", "React Hooks", "useState", "useEffect", "useMemo", "useCallback", "useContext", "useRef", "useReducer"]
 series: "React 파고들기"
 difficulty: 2
+scope: "research"
 log: 66
 slug: "react-hooks-overview"
 source: https://zibu-story.tistory.com/203

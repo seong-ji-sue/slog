@@ -6,6 +6,7 @@ categories: ["회고"]
 tags: ["위코드", "부트캠프", "Foundation", "회고", "RESTful API", "에러핸들링"]
 series: "위코드 부트캠프 회고"
 difficulty: 1
+scope: "personal"
 log: 38
 slug: "wecode-week7-foundation-final"
 source: https://zibu-story.tistory.com/172

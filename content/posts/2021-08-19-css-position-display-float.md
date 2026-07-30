@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["CSS", "position", "display", "float", "정렬", "웹퍼블리싱", "위코드"]
 series: "웹퍼블리싱 파고들기"
 difficulty: 1
+scope: "research"
 log: 18
 slug: "css-position-display-float"
 source: https://zibu-story.tistory.com/141

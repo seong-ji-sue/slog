@@ -6,6 +6,7 @@ categories: ["회고"]
 tags: ["위코드", "부트캠프", "Pre-Course", "HTML", "CSS", "회고", "1주차"]
 series: "위코드 부트캠프 회고"
 difficulty: 1
+scope: "personal"
 log: 21
 slug: "wecode-week1-precourse"
 source: https://zibu-story.tistory.com/144

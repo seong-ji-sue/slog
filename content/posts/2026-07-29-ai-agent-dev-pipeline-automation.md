@@ -7,6 +7,7 @@ tags: ["Claude Code", "AI 에이전트", "AutoIt", "RPA", "자동화 파이프�
 series: "AutoIt 업무 자동화"
 project: "autoit-자동화"
 difficulty: 3
+scope: "company"
 log: 124
 draft: false
 ---

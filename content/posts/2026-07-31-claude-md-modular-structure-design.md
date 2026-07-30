@@ -6,6 +6,7 @@ categories: ["일감"]
 tags: ["Claude Code", "CLAUDE.md", "문서 구조", "AI 에이전트", "토큰 최적화"]
 series: "Claude Code 워크플로우"
 difficulty: 3
+scope: "research"
 log: 129
 draft: false
 ---

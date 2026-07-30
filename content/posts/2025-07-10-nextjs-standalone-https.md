@@ -4,8 +4,10 @@ date: 2025-07-10 00:45:00 +0900
 description: "커스텀 server.mjs를 제거하고 standalone + Nginx + start.sh 조합으로 Docker 이미지를 600MB에서 250MB로 줄인 실전 기록"
 categories: ["트러블슈팅"]
 tags: ["Next.js", "standalone", "HTTPS", "Nginx", "Docker", "환경변수", "번들최적화"]
-series: ""
+series: "SSH Key 관리 콘솔"
+project: "ssh-key-관리"
 difficulty: 3
+scope: "company"
 log: 80
 slug: "nextjs-standalone-https"
 source: https://zibu-story.tistory.com/218

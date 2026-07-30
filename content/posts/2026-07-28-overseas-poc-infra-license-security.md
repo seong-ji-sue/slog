@@ -7,6 +7,7 @@ tags: ["RPA", "AutoIt", "Bastion", "AWS", "POC", "보안정책", "라이선스"]
 series: "AutoIt 업무 자동화"
 project: "autoit-자동화"
 difficulty: 3
+scope: "company"
 log: 123
 draft: false
 ---

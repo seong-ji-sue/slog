@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["JavaScript", "배열", "반복문", "forEach", "map", "reduce", "배열메서드"]
 series: "JavaScript 파고들기"
 difficulty: 2
+scope: "research"
 log: 9
 slug: "js-array-loop-methods"
 source: https://zibu-story.tistory.com/123

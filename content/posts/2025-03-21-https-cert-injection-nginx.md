@@ -7,6 +7,7 @@ tags: ["HTTPS", "Nginx", "TLS", "리버스프록시", "인증서"]
 series: "SSH Key 관리 콘솔"
 project: "ssh-key-관리"
 difficulty: 3
+scope: "company"
 log: 94
 draft: false
 ---

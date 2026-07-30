@@ -7,6 +7,7 @@ tags: ["AWS", "EKS", "Terraform", "IaC", "인프라"]
 series: "SSH Key 관리 콘솔"
 project: "ssh-key-관리"
 difficulty: 2
+scope: "company"
 log: 95
 draft: false
 ---

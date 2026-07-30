@@ -7,6 +7,7 @@ tags: ["PostgreSQL", "pgvector", "SQLAlchemy", "asyncpg", "벡터DB", "백엔드
 series: "AutoIt 업무 자동화"
 project: "autoit-자동화"
 difficulty: 3
+scope: "company"
 log: 120
 draft: false
 ---

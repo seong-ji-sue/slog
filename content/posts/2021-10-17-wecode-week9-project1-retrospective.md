@@ -6,6 +6,7 @@ categories: ["회고"]
 tags: ["위코드", "부트캠프", "1차프로젝트", "회고", "React", "Node.js"]
 series: "위코드 부트캠프 회고"
 difficulty: 1
+scope: "personal"
 log: 39
 slug: "wecode-week9-project1-retrospective"
 source: https://zibu-story.tistory.com/174

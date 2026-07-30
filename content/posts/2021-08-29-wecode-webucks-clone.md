@@ -6,6 +6,7 @@ categories: ["회고"]
 tags: ["위코드", "부트캠프", "Webucks", "클론코딩", "HTML", "CSS", "DOM", "회고"]
 series: "위코드 부트캠프 회고"
 difficulty: 1
+scope: "personal"
 log: 23
 slug: "wecode-webucks-clone"
 source: https://zibu-story.tistory.com/146

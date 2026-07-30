@@ -7,6 +7,7 @@ tags: ["Next.js", "standalone", "환경변수", "모듈페더레이션", "CSR", 
 series: "SSH Key 관리 콘솔"
 project: "ssh-key-관리"
 difficulty: 4
+scope: "company"
 log: 92
 draft: false
 ---

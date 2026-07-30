@@ -7,6 +7,7 @@ tags: ["CSS", "반응형", "트러블슈팅", "i18n", "React"]
 series: "SSH Key 관리 콘솔"
 project: "ssh-key-관리"
 difficulty: 2
+scope: "company"
 log: 108
 draft: false
 ---

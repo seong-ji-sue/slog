@@ -7,6 +7,7 @@ tags: ["SSH", "Fingerprint", "유효성검증", "React", "보안"]
 series: "SSH Key 관리 콘솔"
 project: "ssh-key-관리"
 difficulty: 3
+scope: "company"
 log: 146
 draft: false
 ---

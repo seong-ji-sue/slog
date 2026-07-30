@@ -7,6 +7,7 @@ tags: ["AutoIt", "RPA", "웹자동화", "GitLab", "Azure", "Jenkins", "공통화
 series: "AutoIt 업무 자동화"
 project: "autoit-자동화"
 difficulty: 3
+scope: "company"
 log: 126
 draft: false
 ---

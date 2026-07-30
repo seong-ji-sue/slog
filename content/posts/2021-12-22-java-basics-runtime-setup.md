@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["Java", "JDK", "JRE", "JVM", "Eclipse", "개발환경설정", "자바기초"]
 series: "Java 기초"
 difficulty: 1
+scope: "research"
 log: 1
 slug: "java-basics-runtime-setup"
 source: https://zibu-story.tistory.com/12

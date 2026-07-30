@@ -7,6 +7,7 @@ tags: ["claude-code", "multi-agent", "TDD", "Next.js", "playwright"]
 tools: ["spec-workflow", "playwright", "blog-draft"]
 series: ""
 difficulty: 3
+scope: "personal"
 log: 82
 slug: "building-slog-with-spec-pipeline"
 draft: false

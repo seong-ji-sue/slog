@@ -7,6 +7,7 @@ tags: ["Windows", "RDP", "사용자프로필", "트러블슈팅"]
 series: "AutoIt 업무 자동화"
 project: "autoit-자동화"
 difficulty: 2
+scope: "company"
 log: 157
 draft: false
 ---

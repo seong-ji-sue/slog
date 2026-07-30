@@ -7,6 +7,7 @@ tags: ["React", "i18n", "react-i18next", "다국어", "타입설계"]
 series: "SSH Key 관리 콘솔"
 project: "ssh-key-관리"
 difficulty: 2
+scope: "company"
 log: 107
 draft: false
 ---

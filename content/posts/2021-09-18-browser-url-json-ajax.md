@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["웹", "URL", "JSON", "AJAX", "HTTP상태코드", "ContentType", "XMLHttpRequest"]
 series: ""
 difficulty: 2
+scope: "research"
 log: 10
 slug: "browser-url-json-ajax"
 source: https://zibu-story.tistory.com/126

@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["JavaScript", "export", "export default", "예외처리", "에러객체", "try-catch"]
 series: "JavaScript 파고들기"
 difficulty: 1
+scope: "research"
 log: 35
 slug: "export-default-error-handling"
 source: https://zibu-story.tistory.com/166

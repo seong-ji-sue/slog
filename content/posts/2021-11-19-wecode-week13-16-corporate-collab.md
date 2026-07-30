@@ -6,6 +6,7 @@ categories: ["회고"]
 tags: ["위코드", "부트캠프", "기업협업", "CRUD", "리팩토링", "회고"]
 series: "위코드 부트캠프 회고"
 difficulty: 1
+scope: "personal"
 log: 46
 slug: "wecode-week13-16-corporate-collab"
 source: https://zibu-story.tistory.com/183

@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["React", "state", "props", "이벤트", "Router"]
 series: "React 파고들기"
 difficulty: 1
+scope: "research"
 log: 27
 slug: "react-state-props-events"
 source: https://zibu-story.tistory.com/152

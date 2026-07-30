@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["블록체인", "이더리움", "NFT", "암호화폐", "메타마스크", "Web3"]
 series: ""
 difficulty: 1
+scope: "research"
 log: 3
 slug: "blockchain-concept"
 source: https://zibu-story.tistory.com/54

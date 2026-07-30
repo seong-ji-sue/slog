@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["Node.js", "이벤트루프", "논블로킹", "프로세스", "스레드", "libuv"]
 series: "JavaScript 파고들기"
 difficulty: 2
+scope: "research"
 log: 31
 slug: "event-loop-non-blocking"
 source: https://zibu-story.tistory.com/160

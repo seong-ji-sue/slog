@@ -6,6 +6,7 @@ categories: ["트러블슈팅"]
 tags: ["sessionStorage", "localStorage", "Redis", "Recoil", "인증", "웹스토리지"]
 series: ""
 difficulty: 2
+scope: "personal"
 log: 79
 slug: "per-tab-login-session"
 source: https://zibu-story.tistory.com/216

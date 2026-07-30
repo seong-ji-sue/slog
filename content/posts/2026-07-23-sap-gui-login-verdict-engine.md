@@ -7,6 +7,7 @@ tags: ["AutoIt", "SAP GUI", "RPA", "판정엔진", "Windows 자동화", "OpenCV"
 series: "AutoIt 업무 자동화"
 project: "autoit-자동화"
 difficulty: 5
+scope: "company"
 log: 112
 draft: false
 ---

@@ -7,6 +7,7 @@ tags: ["React", "Tailwind CSS", "shadcn", "Monaco Editor", "Vite", "프론트엔
 series: "AutoIt 업무 자동화"
 project: "autoit-자동화"
 difficulty: 3
+scope: "company"
 log: 119
 draft: false
 ---

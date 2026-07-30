@@ -6,6 +6,7 @@ categories: ["회고"]
 tags: ["위코드", "리팩토링", "코드컨벤션", "Semantic태그", "HTML", "CSS", "회고"]
 series: "위코드 부트캠프 회고"
 difficulty: 1
+scope: "personal"
 log: 24
 slug: "wecode-week2-refactoring"
 source: https://zibu-story.tistory.com/147

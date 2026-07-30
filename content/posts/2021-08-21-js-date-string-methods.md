@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["JavaScript", "Date객체", "String메서드", "Object메서드", "일급객체", "위코드"]
 series: "JavaScript 파고들기"
 difficulty: 1
+scope: "research"
 log: 20
 slug: "js-date-string-methods"
 source: https://zibu-story.tistory.com/143

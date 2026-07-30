@@ -7,6 +7,7 @@ tags: ["IAM", "권한모델", "EntityRole", "RBAC", "설계"]
 series: "SSH Key 관리 콘솔"
 project: "ssh-key-관리"
 difficulty: 3
+scope: "company"
 log: 87
 draft: false
 ---

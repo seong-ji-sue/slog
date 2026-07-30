@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["스프링", "인프런", "김영한", "강의후기", "스프링부트"]
 series: "스프링 파고들기"
 difficulty: 1
+scope: "research"
 log: 55
 slug: "spring-inflearn-course-review"
 source: https://zibu-story.tistory.com/192

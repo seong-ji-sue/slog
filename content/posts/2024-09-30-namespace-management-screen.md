@@ -7,6 +7,7 @@ tags: ["React", "상태관리", "다이얼로그", "CRUD", "프로비저닝", "�
 series: "SSH Key 관리 콘솔"
 project: "ssh-key-관리"
 difficulty: 2
+scope: "company"
 log: 96
 draft: false
 ---

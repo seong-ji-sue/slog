@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["HTML", "CSS", "title태그", "table태그", "hover", "media쿼리", "웹퍼블리싱"]
 series: "웹퍼블리싱 파고들기"
 difficulty: 1
+scope: "research"
 log: 19
 slug: "html-css-etc-title-table-hover-media"
 source: https://zibu-story.tistory.com/142

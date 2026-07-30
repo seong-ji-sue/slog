@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["TypeScript", "타입스크립트", "any", "unknown", "never", "void", "interface", "type", "class", "싱글톤"]
 series: "TypeScript 파고들기"
 difficulty: 2
+scope: "research"
 draft: false
 source: https://zibu-story.tistory.com/209
 log: 72

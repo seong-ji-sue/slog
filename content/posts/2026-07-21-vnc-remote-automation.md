@@ -7,6 +7,7 @@ tags: ["AutoIt", "VNC", "RFB", "RPA", "원격접속자동화"]
 series: "AutoIt 업무 자동화"
 project: "autoit-자동화"
 difficulty: 3
+scope: "company"
 log: 113
 draft: false
 ---

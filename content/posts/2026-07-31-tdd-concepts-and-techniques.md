@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["TDD", "테스트", "Java", "JUnit", "리팩토링"]
 series: "TDD"
 difficulty: 2
+scope: "research"
 log: 131
 draft: false
 ---

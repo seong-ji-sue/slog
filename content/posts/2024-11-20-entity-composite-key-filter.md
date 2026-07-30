@@ -7,6 +7,7 @@ tags: ["React", "필터설계", "유효성검사", "폼설계", "리팩토링"]
 series: "SSH Key 관리 콘솔"
 project: "ssh-key-관리"
 difficulty: 3
+scope: "company"
 log: 98
 draft: false
 ---

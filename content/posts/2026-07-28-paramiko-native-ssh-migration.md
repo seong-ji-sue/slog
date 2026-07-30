@@ -7,6 +7,7 @@ tags: ["SSH", "paramiko", "asyncio", "FastAPI", "RPA", "인프라"]
 series: "AutoIt 업무 자동화"
 project: "autoit-자동화"
 difficulty: 4
+scope: "company"
 log: 116
 draft: false
 ---

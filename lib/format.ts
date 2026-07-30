@@ -12,8 +12,28 @@ export interface PostMeta {
   series?: string;
   source?: string;
   project?: string;
+  scope?: ScopeValue;
   draft: boolean;
   readingMin: number;
+}
+
+export type ScopeValue = "company" | "personal" | "reference" | "research";
+
+export interface ScopeTaxonomyEntry {
+  value: ScopeValue;
+  label: string;
+}
+
+export const SCOPE_TAXONOMY: ScopeTaxonomyEntry[] = [
+  { value: "company", label: "회사 프로젝트" },
+  { value: "personal", label: "개인 프로젝트" },
+  { value: "reference", label: "참고자료 읽은것" },
+  { value: "research", label: "기술조사" },
+];
+
+export function scopeLabel(scope?: ScopeValue): string | undefined {
+  if (!scope) return undefined;
+  return SCOPE_TAXONOMY.find((s) => s.value === scope)?.label;
 }
 
 export interface ProjectTaxonomyEntry {

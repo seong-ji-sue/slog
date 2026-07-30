@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["네트워크관리사", "OSI7계층", "리눅스명령어", "네트워크이론", "실기시험"]
 series: "네트워크관리사 2급 실기"
 difficulty: 1
+scope: "research"
 log: 59
 slug: "network-admin-cert-theory"
 source: https://zibu-story.tistory.com/196

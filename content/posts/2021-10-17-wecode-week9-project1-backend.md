@@ -6,6 +6,7 @@ categories: ["회고"]
 tags: ["위코드", "부트캠프", "1차프로젝트", "백엔드", "회고", "Node.js", "Express"]
 series: "위코드 부트캠프 회고"
 difficulty: 1
+scope: "personal"
 log: 41
 slug: "wecode-week9-project1-backend"
 source: https://zibu-story.tistory.com/176

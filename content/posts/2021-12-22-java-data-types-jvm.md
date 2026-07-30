@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["Java", "데이터타입", "메모리구조", "아스키코드", "진수표기법", "표준입출력", "자바기초"]
 series: "Java 기초"
 difficulty: 1
+scope: "research"
 log: 2
 slug: "java-data-types-jvm"
 source: https://zibu-story.tistory.com/13

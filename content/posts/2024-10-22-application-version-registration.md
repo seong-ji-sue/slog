@@ -7,6 +7,7 @@ tags: ["React", "레이아웃설계", "폼컴포넌트", "URL상태관리", "컴
 series: "SSH Key 관리 콘솔"
 project: "ssh-key-관리"
 difficulty: 3
+scope: "company"
 log: 99
 draft: false
 ---

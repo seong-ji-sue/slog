@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["시맨틱웹", "시맨틱태그", "HTML", "img태그", "background-image", "웹퍼블리싱", "위코드"]
 series: "웹퍼블리싱 파고들기"
 difficulty: 1
+scope: "research"
 log: 17
 slug: "semantic-web-tags"
 source: https://zibu-story.tistory.com/139

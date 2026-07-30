@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["React", "Recoil", "Redux", "Context", "상태관리", "atom", "selector"]
 series: "React 파고들기"
 difficulty: 1
+scope: "research"
 log: 77
 slug: "recoil-basics"
 source: https://zibu-story.tistory.com/214

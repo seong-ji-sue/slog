@@ -6,6 +6,7 @@ categories: ["일감"]
 tags: ["Claude Code", "컨텍스트 관리", "CLI 도구", "AI 워크플로우"]
 series: "Claude Code 워크플로우"
 difficulty: 3
+scope: "research"
 log: 130
 draft: false
 ---

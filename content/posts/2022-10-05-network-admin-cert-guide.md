@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["네트워크관리사", "자격증", "실기시험", "네트워크"]
 series: "네트워크관리사 2급 실기"
 difficulty: 1
+scope: "research"
 log: 56
 slug: "network-admin-cert-guide"
 source: https://zibu-story.tistory.com/193

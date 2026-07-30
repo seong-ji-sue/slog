@@ -7,6 +7,7 @@ tags: ["IAM", "Entity", "Policy", "MFA", "권한모델", "OTP"]
 series: "SSH Key 관리 콘솔"
 project: "ssh-key-관리"
 difficulty: 3
+scope: "company"
 log: 90
 draft: false
 ---

@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["JavaScript", "함수", "arguments", "this", "RestParameter", "고차함수", "클로저"]
 series: "JavaScript 파고들기"
 difficulty: 2
+scope: "research"
 log: 6
 slug: "js-function-arguments-this"
 source: https://zibu-story.tistory.com/113

@@ -7,6 +7,7 @@ tags: ["모노레포", "YarnWorkspaces", "Lerna", "아키텍처설계", "코드�
 series: "SSH Key 관리 콘솔"
 project: "ssh-key-관리"
 difficulty: 2
+scope: "company"
 log: 84
 draft: false
 ---

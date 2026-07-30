@@ -6,6 +6,7 @@ categories: ["회고"]
 tags: ["위코드", "부트캠프", "React", "리팩토링", "SCSS"]
 series: "위코드 부트캠프 회고"
 difficulty: 1
+scope: "personal"
 log: 29
 slug: "wecode-foundation-refactoring-frontend"
 source: https://zibu-story.tistory.com/157

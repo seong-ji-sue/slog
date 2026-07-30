@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["JDK", "Lombok", "Tomcat", "STS3", "JUnit", "Spring", "초기세팅"]
 series: "스프링 파고들기"
 difficulty: 1
+scope: "research"
 log: 47
 slug: "jdk-lombok-tomcat-setup"
 source: https://zibu-story.tistory.com/184

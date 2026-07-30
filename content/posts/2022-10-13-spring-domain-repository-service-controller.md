@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["Spring", "SpringBoot", "Repository", "Service", "Controller", "단위테스트"]
 series: "스프링 파고들기"
 difficulty: 2
+scope: "research"
 log: 62
 slug: "spring-domain-repository-service-controller"
 source: https://zibu-story.tistory.com/199

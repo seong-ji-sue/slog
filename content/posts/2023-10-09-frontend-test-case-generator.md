@@ -7,6 +7,7 @@ tags: ["Jest", "테스트자동화", "테스트케이스제너레이터", "크�
 series: "SSH Key 관리 콘솔"
 project: "ssh-key-관리"
 difficulty: 3
+scope: "company"
 log: 86
 draft: false
 ---

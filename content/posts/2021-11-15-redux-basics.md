@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["Redux", "React", "상태관리", "useSelector", "useDispatch", "리덕스"]
 series: "React 파고들기"
 difficulty: 2
+scope: "research"
 log: 45
 slug: "redux-basics"
 source: https://zibu-story.tistory.com/182

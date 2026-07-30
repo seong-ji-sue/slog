@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["Spring", "SpringBoot", "JDBC", "JDBCTemplate", "JPA", "H2"]
 series: "스프링 파고들기"
 difficulty: 2
+scope: "research"
 log: 64
 slug: "spring-jdbc-template-jpa"
 source: https://zibu-story.tistory.com/201

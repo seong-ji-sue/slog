@@ -7,6 +7,7 @@ tags: ["diff알고리즘", "CodeMirror", "YAML", "AST", "React", "커스텀훅"]
 series: "SSH Key 관리 콘솔"
 project: "ssh-key-관리"
 difficulty: 5
+scope: "company"
 log: 100
 draft: false
 ---

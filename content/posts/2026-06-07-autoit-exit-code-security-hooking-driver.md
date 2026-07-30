@@ -7,6 +7,7 @@ tags: ["AutoIt", "SSH", "RPA", "보안정책", "Windows 자동화"]
 series: "AutoIt 업무 자동화"
 project: "autoit-자동화"
 difficulty: 4
+scope: "company"
 log: 156
 draft: false
 ---

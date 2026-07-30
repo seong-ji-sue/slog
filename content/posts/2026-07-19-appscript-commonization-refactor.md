@@ -7,6 +7,7 @@ tags: ["AutoIt", "리팩토링", "RPA", "공통화", "설정외부화"]
 series: "AutoIt 업무 자동화"
 project: "autoit-자동화"
 difficulty: 3
+scope: "company"
 log: 115
 draft: false
 ---

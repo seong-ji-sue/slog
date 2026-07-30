@@ -7,6 +7,7 @@ tags: ["AutoIt", "RPA", "Claude Code", "스킬", "테스트", "회귀방지"]
 series: "AutoIt 업무 자동화"
 project: "autoit-자동화"
 difficulty: 4
+scope: "company"
 log: 127
 draft: false
 ---

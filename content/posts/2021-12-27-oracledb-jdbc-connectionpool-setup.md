@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["Oracle", "JDBC", "MyBatis", "HikariCP", "ConnectionPool", "Spring"]
 series: "데이터베이스 파고들기"
 difficulty: 1
+scope: "research"
 log: 49
 slug: "oracledb-jdbc-connectionpool-setup"
 source: https://zibu-story.tistory.com/186

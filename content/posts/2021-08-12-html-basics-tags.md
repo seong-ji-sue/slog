@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["HTML", "태그", "웹퍼블리싱", "CSS연동", "JavaScript연동", "위코드", "기초"]
 series: "웹퍼블리싱 파고들기"
 difficulty: 1
+scope: "research"
 log: 13
 slug: "html-basics-tags"
 source: https://zibu-story.tistory.com/129

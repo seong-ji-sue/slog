@@ -7,6 +7,7 @@ tags: ["SSE", "BFF", "Node.js", "실시간로그", "아키텍처"]
 series: "SSH Key 관리 콘솔"
 project: "ssh-key-관리"
 difficulty: 3
+scope: "company"
 log: 97
 draft: false
 ---

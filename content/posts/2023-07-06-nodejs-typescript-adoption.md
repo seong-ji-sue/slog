@@ -7,6 +7,7 @@ tags: ["TypeScript", "Node.js", "Babel", "타입추론", "리팩토링", "마이
 series: "SSH Key 관리 콘솔"
 project: "ssh-key-관리"
 difficulty: 2
+scope: "company"
 log: 83
 draft: false
 ---

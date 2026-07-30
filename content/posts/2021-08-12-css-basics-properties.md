@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["CSS", "속성", "display", "박스모델", "선택자", "웹퍼블리싱", "위코드"]
 series: "웹퍼블리싱 파고들기"
 difficulty: 1
+scope: "research"
 log: 15
 slug: "css-basics-properties"
 source: https://zibu-story.tistory.com/134

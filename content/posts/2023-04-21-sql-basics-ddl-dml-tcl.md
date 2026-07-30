@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["SQL", "DDL", "DML", "DCL", "TCL", "트랜잭션", "SQLD"]
 series: "데이터베이스 파고들기"
 difficulty: 2
+scope: "research"
 log: 34
 slug: "sql-basics-ddl-dml-tcl"
 source: https://zibu-story.tistory.com/165

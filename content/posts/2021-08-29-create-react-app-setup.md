@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["React", "create-react-app", "Node.js", "개발환경", "빌드"]
 series: "React 파고들기"
 difficulty: 1
+scope: "research"
 log: 25
 slug: "create-react-app-setup"
 source: https://zibu-story.tistory.com/149

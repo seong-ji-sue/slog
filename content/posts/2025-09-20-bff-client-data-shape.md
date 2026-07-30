@@ -7,6 +7,7 @@ tags: ["BFF", "아키텍처", "모노레포", "Node.js", "리팩토링"]
 series: "SSH Key 관리 콘솔"
 project: "ssh-key-관리"
 difficulty: 3
+scope: "company"
 log: 105
 draft: false
 ---

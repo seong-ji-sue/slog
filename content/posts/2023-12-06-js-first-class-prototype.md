@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["JavaScript", "prototype", "일급객체", "프로토타입체인", "상속", "proto"]
 series: "JavaScript 파고들기"
 difficulty: 3
+scope: "research"
 log: 75
 slug: "js-first-class-prototype"
 source: https://zibu-story.tistory.com/212

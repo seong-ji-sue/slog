@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["React", "Vue", "프론트엔드", "state", "props", "렌더링"]
 series: "React 파고들기"
 difficulty: 2
+scope: "research"
 log: 54
 slug: "react-vs-vue"
 source: https://zibu-story.tistory.com/191

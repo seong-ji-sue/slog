@@ -7,6 +7,7 @@ tags: ["Alembic", "DB마이그레이션", "배포자동화", "config", "FastAPI"
 series: "AutoIt 업무 자동화"
 project: "autoit-자동화"
 difficulty: 3
+scope: "company"
 log: 118
 draft: false
 ---

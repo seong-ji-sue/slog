@@ -7,6 +7,7 @@ tags: ["보안", "Fernet", "암호화", "코드리뷰", "FastAPI", "RPA"]
 series: "AutoIt 업무 자동화"
 project: "autoit-자동화"
 difficulty: 4
+scope: "company"
 log: 117
 draft: false
 ---

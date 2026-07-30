@@ -6,6 +6,7 @@ categories: ["회고"]
 tags: ["위코드", "부트캠프", "React", "트러블슈팅", "git"]
 series: "위코드 부트캠프 회고"
 difficulty: 1
+scope: "personal"
 log: 26
 slug: "wecode-week3-questions"
 source: https://zibu-story.tistory.com/151

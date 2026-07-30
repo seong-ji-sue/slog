@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["JavaScript", "비동기", "fetch", "Promise", "async-await", "이벤트루프", "axios"]
 series: "JavaScript 파고들기"
 difficulty: 3
+scope: "research"
 log: 11
 slug: "js-async-fetch-promise"
 source: https://zibu-story.tistory.com/127

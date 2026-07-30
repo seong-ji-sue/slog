@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["JavaScript", "var", "let", "const", "ECMAScript", "typeof", "호이스팅"]
 series: "JavaScript 파고들기"
 difficulty: 1
+scope: "research"
 log: 5
 slug: "var-let-const"
 source: https://zibu-story.tistory.com/111

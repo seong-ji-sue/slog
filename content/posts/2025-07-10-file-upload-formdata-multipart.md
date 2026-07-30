@@ -4,8 +4,10 @@ date: 2025-07-10 18:26:00 +0900
 description: "인증서는 단건, 라이센스는 3개 파일. File 데이터와 multipart/form-data를 파고들어 UI부터 전송까지 구현한 기록"
 categories: ["트러블슈팅"]
 tags: ["FormData", "multipart", "file-upload", "Next.js", "React"]
-series: ""
+series: "SSH Key 관리 콘솔"
+project: "ssh-key-관리"
 difficulty: 3
+scope: "company"
 source: https://zibu-story.tistory.com/219
 draft: false
 log: 81

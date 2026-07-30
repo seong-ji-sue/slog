@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["Spring", "어노테이션", "의존성주입", "Lombok", "TDD", "root-context"]
 series: "스프링 파고들기"
 difficulty: 2
+scope: "research"
 log: 48
 slug: "spring-basics-annotation-di"
 source: https://zibu-story.tistory.com/185

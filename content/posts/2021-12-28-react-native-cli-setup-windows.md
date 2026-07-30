@@ -6,6 +6,7 @@ categories: ["딥다이브"]
 tags: ["React Native", "React Native CLI", "Android Studio", "Windows", "에뮬레이터", "환경설정"]
 series: "React 파고들기"
 difficulty: 1
+scope: "research"
 log: 50
 slug: "react-native-cli-setup-windows"
 source: https://zibu-story.tistory.com/187
