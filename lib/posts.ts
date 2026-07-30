@@ -191,18 +191,29 @@ export function getPostsByTag(slug: string): PostMeta[] {
 
 const GRAPH_SIZE = 1000;
 const GRAPH_ITERATIONS = 300;
+// 그래프 뷰는 관계 시각화 보조 뷰 — 전체 태그 목록은 목록 뷰(TagsView)가 이미 담당.
+// count 상위 N개만 그래프에 포함해 노드 밀도를 줄이고 라벨 겹침 · 고립 노드 뭉침을 방지.
+const GRAPH_MAX_NODES = 60;
+// 중심으로 끌어당기는 약한 인력(gravity) 계수 — 노드-중심 거리에 비례.
+// 반발력(idealDist^2/dist 스케일)과 균형을 맞춰 고립 노드가 경계에 쌓이지 않고 안쪽에 모이도록 조정한 값.
+const GRAPH_GRAVITY_STRENGTH = 0.06;
 
 /**
  * 태그 co-occurrence 그래프 — 노드=태그, 엣지=같은 글에 함께 쓰인 태그 쌍.
  * 레이아웃은 빌드 타임에 1회 계산되는 결정론적 force-directed 시뮬레이션(외부 라이브러리 미사용).
+ * 노드는 count 상위 GRAPH_MAX_NODES개로 제한하고, 그중 co-occurrence 엣지가 없는
+ * 고립 태그는 명시적으로 제외한다 — 전체 태그 목록은 목록 뷰가 담당한다.
  */
 export function getTagGraph(): TagGraph {
   const all = getAllPosts();
-  const tags = getTagsList();
+  const tags = getTagsList().slice(0, GRAPH_MAX_NODES);
+  const includedSlugs = new Set(tags.map((t) => t.slug));
 
   const edgeMap = new Map<string, TagGraphEdge>();
   for (const p of all) {
-    const slugs = Array.from(new Set(p.tags.map((t) => tagSlug(t)))).sort();
+    const slugs = Array.from(new Set(p.tags.map((t) => tagSlug(t))))
+      .filter((s) => includedSlugs.has(s))
+      .sort();
     for (let i = 0; i < slugs.length; i++) {
       for (let j = i + 1; j < slugs.length; j++) {
         const key = `${slugs[i]}::${slugs[j]}`;
@@ -216,7 +227,16 @@ export function getTagGraph(): TagGraph {
     }
   }
 
-  const nodes = layoutNodes(tags, Array.from(edgeMap.values()));
+  // 고립 태그(co-occurrence 엣지가 없는 태그) 명시적 제외 — count 상위 컷과 별개로,
+  // edgeMap에 한 번도 등장하지 않은 slug는 최종 그래프 노드에서 제외한다.
+  const connectedSlugs = new Set<string>();
+  for (const e of edgeMap.values()) {
+    connectedSlugs.add(e.source);
+    connectedSlugs.add(e.target);
+  }
+  const connectedTags = tags.filter((t) => connectedSlugs.has(t.slug));
+
+  const nodes = layoutNodes(connectedTags, Array.from(edgeMap.values()));
   return { nodes, edges: Array.from(edgeMap.values()) };
 }
 
@@ -283,6 +303,13 @@ function layoutNodes(
       disp[ti].dx += fx;
       disp[ti].dy += fy;
     }
+
+    // 중심 인력(gravity) — 반발력만 받는 고립 노드가 경계로 밀려나지 않도록 중심 쪽으로 약하게 당김
+    tags.forEach((t, i) => {
+      const p = pos.get(t.slug)!;
+      disp[i].dx += (center - p.x) * GRAPH_GRAVITY_STRENGTH;
+      disp[i].dy += (center - p.y) * GRAPH_GRAVITY_STRENGTH;
+    });
 
     // 변위 적용 (temperature로 제한, 중심 근처로 clamp)
     tags.forEach((t, i) => {
