@@ -197,6 +197,15 @@ Unified under `claude` scope instead of per-file paths — groups all `.claude/`
 - Stats/changelog tools treating `ui/ui-developer`, `ui/architect`, and `ui` as separate groups is a known trade-off
 - Future `commitlint` adoption: resolve with scope-enum regex `^[a-z-]+(\/[a-z-]+(\+[a-z-]+)*)?$`
 
+### Blog Content Batch Commits (work-unit rule)
+
+When writing multiple `content/posts/*.md` files for the same source project/series (e.g. all posts derived from one company project's commit history + Redmine), commit them **as a single commit**, not one commit per post.
+
+- **Work-unit = one commit**: "SecureKey 시리즈 29편", "AutoIt 업무 자동화 15편" 등 하나의 조사·도출 작업에서 나온 포스트 묶음은 파일 개수와 무관하게 커밋 1개로 묶는다
+- Applies even when multiple parallel sub-agents wrote the individual files — the sub-agents must NOT run `git add`/`git commit` themselves; the orchestrating session stages and commits everything at the end
+- A new work-unit (different source project/series) gets its own separate commit — don't merge two unrelated series into one commit either
+- Rationale: keeps `git log` readable as "one series = one entry," and makes it trivial to revert/review an entire batch atomically
+
 ---
 
 ## Absolute Rules
