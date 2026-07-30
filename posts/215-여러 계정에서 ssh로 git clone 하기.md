@@ -74,7 +74,7 @@ ssh-keygen -t ed25519 -C "github 계정" -f "id_ed25519_github_ashappy"
 
 - 키 타입: **RSA**
 - 비트 수: **4096**
-- 키 파일 이름: 기본값 (일반적으로 \*\*id\_rsa\*\*와 \*\*id\_rsa.pub\*\*로 생성됨)
+- 키 파일 이름: 기본값 (일반적으로 **id_rsa**와 **id_rsa.pub**로 생성됨)
 - 설명: RSA 키는 전통적인 방식으로 많이 사용되며, 대부분의 Git 호스팅 서비스에서 지원됩니다.   
   GitHub도 RSA 키를 지원합니다.
 

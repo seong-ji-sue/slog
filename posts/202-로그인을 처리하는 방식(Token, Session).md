@@ -256,7 +256,7 @@ HMACSHA256(
 
 **Session Storage**
 
-- Session은 기간을 의미하고 Session \*\*\*\*Storage는 저장 공간을 의미함
+- Session은 기간을 의미하고 Session Storage는 저장 공간을 의미함
 - 브라우저가 꺼진다면 데이터는 소실 (보안 측면에서 유리)
 - 5-10 MB의 저장 공간을 가짐
 - 서버에 전송이 불가능 (client 에서만 저장 데이터 조회 가능)

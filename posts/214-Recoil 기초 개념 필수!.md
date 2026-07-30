@@ -187,7 +187,7 @@ atom 혹은 다른 Selector 상태를 입력받아 동적인 데이터를 반환
 참조하던 다른 상태가 변경되면 이도 같이 업데이트, 바라보던 컴포넌트들이 리렌더링
 
 - **key** : 고유한 key 값
-- **get** : \*\*\*\*Selector 순수함수. 사용할 값을 반환하며, 매개변수인 콜백객체 내 get() 메서드로 다른 atom 혹은 selector를 참조한다.
+- **get** : Selector 순수함수. 사용할 값을 반환하며, 매개변수인 콜백객체 내 get() 메서드로 다른 atom 혹은 selector를 참조한다.
 
 ```typescript
 //atom.js
@@ -260,7 +260,7 @@ const myQuery = selector({
 
 useRecoilValueLodable, useRecoilStateLodable 사용
 
-- **state** : \*\*\*\*hasValue , hasError , loading 3가지 상태를 반환한다.
+- **state** : hasValue , hasError , loading 3가지 상태를 반환한다.
 - **contents** : atom이나 contents의 상태값을 의미한다. hasValue 상태일 땐 value를, hasError 일 땐 Error 객체를, 그리고 loading 일 땐 Promise를 가지고 있다.
 
 ```javascript

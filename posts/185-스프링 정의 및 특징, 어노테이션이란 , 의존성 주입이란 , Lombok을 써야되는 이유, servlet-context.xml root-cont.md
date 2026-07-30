@@ -76,17 +76,17 @@ post_id: 185
 | --- | --- | --- |
 | 구분 | 종류 | 뜻 |
 | Lombok 관련 어노테이션 | @Data | @toString, @getter/setter, @RequiredArgsConstructor 등 모두 사용한것과 같은 기능 |
-| @AllArgsConstructor | 모든 필드를 파라미터로 가지는 생성자 생성 |
-| @NoArgsConstructor | 파라미터가 없는 기본 생성자를 생성시켜주는 어노테이션 |
-| @EqualsAndHashCode | equals와 hashCode를 오버라이딩 시켜주는 어노테이션 |
+|  | @AllArgsConstructor | 모든 필드를 파라미터로 가지는 생성자 생성 |
+|  | @NoArgsConstructor | 파라미터가 없는 기본 생성자를 생성시켜주는 어노테이션 |
+|  | @EqualsAndHashCode | equals와 hashCode를 오버라이딩 시켜주는 어노테이션 |
 | Spring Annotation | @Test | JUnit 에서 테스트 대상을 표시하며 단위 테스트 메소드임을 명시 |
-| @ContextConfiguration | 지정된 클래스나 문자열을 이용해 필요한 객체들을 스프링 내 객체로 등록 |
-| @RunWith | Unit 프레임워크의 테스트를 할수 있도록 설정 @Runwith에 Runner클래스 설정시 JUnit의 내장된 runner대신 설정한 SpringJUnit4ClassRunner를 실행 |
+|  | @ContextConfiguration | 지정된 클래스나 문자열을 이용해 필요한 객체들을 스프링 내 객체로 등록 |
+|  | @RunWith | Unit 프레임워크의 테스트를 할수 있도록 설정 @Runwith에 Runner클래스 설정시 JUnit의 내장된 runner대신 설정한 SpringJUnit4ClassRunner를 실행 |
 | Spring 관련 어노테이션 | @Getter | Get()메소드 자동생성 |
-| @Setter | Set()메소드 자동생성 |
-| @Log4j | Lombok을 이용해 로그를 기록하기 위한 Logger 변수 생성 |
-| @Autowired | 해당 인스턴스 변수에 스프링으로부터 자동으로 Bean을 주입, new 연사자와 같음 |
-| @Component | Component는 스프링에게 해당 클래스가 관리해야할 대상임을 표시 |
+|  | @Setter | Set()메소드 자동생성 |
+|  | @Log4j | Lombok을 이용해 로그를 기록하기 위한 Logger 변수 생성 |
+|  | @Autowired | 해당 인스턴스 변수에 스프링으로부터 자동으로 Bean을 주입, new 연사자와 같음 |
+|  | @Component | Component는 스프링에게 해당 클래스가 관리해야할 대상임을 표시 |
 
 ### ***✔️의존성 주입이란??? 코드 작성까지***
 

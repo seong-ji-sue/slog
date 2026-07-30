@@ -27,14 +27,12 @@ post_id: 157
 - 초기화 하는 세팅은 reset.scss에!
 - 모두가 같이 쓸 수 있는 css는 common.scss에!
 
-```css
 ```scss
 * {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
 }
-```
 ```
 
 ### ***2. Sass nesting 활용~!! (sass 문법화 하기)😍😃🤣***
@@ -43,7 +41,6 @@ post_id: 157
 
 - 참고) SPA, React, React Router 개념에 대해 정리해보시기 바랍니다.
 
-```css
 ```scss
 * {
 	font {
@@ -52,7 +49,6 @@ post_id: 157
 
     }
 }
-```
 ```
 
 ### ***3. className의 동적 사용~! (HTML에서 CSS 사용 금지!, 3항연산자 사용)😎🙂🤗***
