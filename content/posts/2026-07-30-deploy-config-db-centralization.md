@@ -74,6 +74,8 @@ except UnicodeDecodeError:
 - `app_targets`: (서버 × 앱) 조합마다 1행. 자주 쓰는 값(로그인 ID/비밀번호/URL, 실행파일 경로, DB 호스트/포트)은 canonical 컬럼으로 정규화
 - `app_target_props`: canonical 컬럼에 담기지 않는 나머지 모든 섹션/키를 `section/key/value`로 원문 그대로 보존
 
+<!-- 이미지 제안: servers/app_targets/app_target_props 3개 테이블 관계와 canonical 컬럼 vs 원문 보존 구조를 보여주는 ERD -->
+
 canonical과 원문 보존을 분리한 이유는 AutoIt의 `IniRead`가 키 대소문자에 민감하기 때문이다. DB에 넣는다고 값을 정규화(소문자 변환 등)해버리면 스크립트가 그 키를 못 읽는다. 그래서 자주 쓰는 값만 타입 있는 컬럼으로 뽑고, 나머지는 손대지 않고 그대로 저장하는 구조를 택했다.
 
 흥미로운 발견도 하나 있었다 — 이 작업을 하면서 보니 기존 Alembic 리비전 파일(0001~0010)이 저장소에 있긴 했는데, `alembic.ini`와 `env.py`가 없어서 **한 번도 실제로 실행된 적이 없는 문서용 파일**이었다. 이번에 스캐폴딩을 제대로 갖춰서 실제 `alembic upgrade head`가 동작하게 만들었다.

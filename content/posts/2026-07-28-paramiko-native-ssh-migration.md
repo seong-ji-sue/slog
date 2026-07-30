@@ -106,6 +106,8 @@ res = await q.get()
 
 여기서 아키텍처 결정을 다시 했다. paramiko를 더 안전하게 쓰는 방법을 찾는 대신, **SSH 통신 계층 전체를 subprocess로 native SSH CLI(`ssh`/`scp`)를 호출하는 방식으로 바꾸기로 했다.** 비밀번호 인증은 `sshpass`로 주입한다.
 
+<!-- 이미지 제안: "FastAPI 이벤트 루프 → paramiko(보안 솔루션에 차단됨) vs → subprocess native ssh CLI(통과됨)" 대비를 보여주는 흐름도 -->
+
 ```python
 # ssh_native.py — paramiko를 완전히 대체하는 신규 모듈
 def run(host: str, port: int, user: str, password: str, cmd: str,

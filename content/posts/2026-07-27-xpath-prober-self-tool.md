@@ -59,6 +59,8 @@ bastion_settings/probe/
   README.md
 ```
 
+<!-- 이미지 제안: probe_input.txt 입력 → 헤드리스 브라우저 DOM 탐색 → config.ini/flow.json 생성으로 이어지는 probe.au3 실행 흐름도 -->
+
 동작 방식은 이렇다.
 
 1. `probe_input.txt`에 URL·계정·비밀번호·출력 폴더를 채운다 (하나라도 비면 브라우저조차 뜨지 않고 즉시 오류 종료)

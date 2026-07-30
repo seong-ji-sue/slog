@@ -97,6 +97,8 @@ class Server(Base):
 
 그런데 실제 자동화 경로(`run_db_grant` 등)를 다시 훑어보니, PEM 기반 SSH 함수(`run_pem`)를 부르는 곳이 하나도 없었다. 자동화 흐름은 전부 ID/비밀번호 인증만 타고 있었고, PEM은 애초에 코드에만 존재하는 죽은 경로였다. 컬럼과 함수를 남겨두는 것 자체가 암호화 대상만 늘리고 실제로 쓰이지 않는 공격 표면이었다.
 
+<!-- 이미지 제안: 자격증명 인증 경로 Before/After — PEM+ID/PW 이원화 구조에서 ID/PW 단일 경로로 정리된 흐름도 -->
+
 그래서 PEM 관련 코드를 전면 제거했다.
 
 - `models/server.py`: `target_pem_enc` 컬럼 삭제 + Alembic 0009 마이그레이션으로 실제 DROP

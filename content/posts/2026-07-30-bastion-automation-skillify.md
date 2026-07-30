@@ -86,6 +86,8 @@ BastionIp=<이 베스천 서버 IP>
 
 3. 포트별 결과를 `[OK]` / `[FAIL]`로 화면에 출력한다. 열리지 않은 포트로 임의의 값(존재하지 않는 포트)을 하나 넣어서 "FAIL이 진짜로 FAIL로 뜨는지" 자체 검증까지 스크립트 안에 넣어뒀다.
 
+<!-- 이미지 제안: bastion-setup 단일 스킬 → bastion-firewall/bastion-init-setup 분리 후 PRE-CHECK~STEP7 파이프라인 흐름도 -->
+
 실행은 아래 명령 한 줄이다.
 
 ```powershell
@@ -165,6 +167,8 @@ Host target-server
     ProxyCommand ssh -W %h:%p bastion-user@bastion-host
     User target-user
 ```
+
+<!-- 이미지 제안: 사용자 PC → 베스천(ProxyCommand 경유) → 내부망 대상 서버로 이어지는 점프호스트 네트워크 토폴로지 다이어그램 -->
 
 점검 스크립트가 대상 서버에 직접 붙는 걸 전제로 짜여 있으면, 이런 네트워크 구조에서는 아예 점검 자체가 불가능하다. 점프호스트 경유를 기본값으로 바꾸면서, 베스천을 거쳐야 하는 환경과 직결이 가능한 환경 양쪽 모두를 하나의 로직으로 커버할 수 있게 됐다.
 

@@ -51,6 +51,8 @@ export function cn(...inputs: ClassValue[]) {
 
 App.tsx, LocalView.tsx, Editor.tsx, CodeModal.tsx, Toast.tsx 5개 파일을 순서대로 리스타일했고, 빌드는 `tsc -b` + `vite build` 기준 0 에러로 마무리했다.
 
+<!-- 이미지 제안: 인라인 스타일 시절 콘솔 화면과 Tailwind+shadcn 전환 후 화면 Before/After 스크린샷 비교 -->
+
 ### ✅ Monaco Editor 로컬 번들링 — CDN 의존 제거
 
 리뉴얼 도중 에디터 컴포넌트를 보다가 진짜 문제를 하나 더 찾았다. `@monaco-editor/react`는 기본 설정으로 쓰면 Monaco 코어 자체를 CDN(jsdelivr)에서 런타임에 내려받는다. 로컬 개발 환경에서는 아무 문제 없이 잘 뜨길래 몰랐는데, 사내망에서 열리는 화면 기준으로 보면 이건 그대로 못 쓰는 구조였다.

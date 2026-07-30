@@ -99,6 +99,8 @@ if not DATABASE_URL:
 
 폴백 경로를 없애고 `DATABASE_URL`을 필수값으로 바꿨다. `docker-compose.yml`의 DB 이미지도 `pgvector/pgvector:pg15`로 교체해서, 컨테이너를 띄우는 순간부터 pgvector 확장이 이미 설치돼 있는 상태로 시작하게 만들었다.
 
+<!-- 이미지 제안: SQLite 단일 파일 → (환경변수 폴백 공존) → PostgreSQL+pgvector 단일 DB로 이어지는 3단계 전환 아키텍처도 -->
+
 ### ✅ 결과 & 배운 점
 
 | 항목 | 이전(SQLite) | 이후(PostgreSQL+pgvector) |

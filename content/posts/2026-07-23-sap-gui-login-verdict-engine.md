@@ -38,6 +38,8 @@ draft: false
 - SAP GUI for Windows 7.70 클라이언트도 별도로 설치
 - 자동화 스크립트를 짜기 전에 "테스트할 수 있는 환경을 만드는 것"부터가 이미 하루치 일이었다는 걸 이번에 체감했다 — 자동화 난이도를 가늠할 때 실제 스크립트 분량보다 이 사전 준비 비용을 과소평가하기 쉽다
 
+<!-- 이미지 제안: HANA(indexserver) → ASCS01(enqueue+message server) → D00(dispatcher+worker) 순서로 기동해야 하는 SAP 테스트 환경 컨테이너 의존 순서도 -->
+
 ### ✅ SAP GUI Scripting 제약 발견 → 처음부터 폴백을 설계에 넣음
 
 SAP GUI Scripting(COM 인터페이스)으로 로그인 필드를 제어하려면 서버 파라미터(`sapgui/user_scripting=TRUE`)가 켜져 있어야 한다. 이건 우리 쪽에서 통제할 수 없는 전제조건이다 — 고객사 Basis팀의 협조가 있어야 켜지는 서버측 설정이기 때문이다.
@@ -121,6 +123,8 @@ BENIGN_EXCEPTION_PATTERNS: list[re.Pattern] = [
     re.compile(r"이\s*이미지는\s*존재하지\s*않습니다"),
 ]
 ```
+
+<!-- 이미지 제안: 로그 입력 → 마지막 실행 블록 한정 → SUCCESS/FAIL 마커 정확 매치 → 부정 증거 검출 시 SUSPECT 강등까지 이어지는 판정엔진 결정 흐름도(PASS/FAIL/SUSPECT/INCONCLUSIVE) -->
 
 이 benign exception 목록이 없었다면, 이미지매칭 방식으로 도는 앱들은 정상 실행 중에도 SUSPECT로 오판됐을 것이다. 판정 로직을 만들 때는 "실패로 봐야 할 것"만큼이나 "실패처럼 보이지만 실패가 아닌 것"을 구분하는 게 중요하다는 걸 여기서 배웠다.
 
