@@ -40,6 +40,8 @@ SQL Developer 설치 중 비밀번호 입력을 깜빡하면 계정 접속 자�
 | log4jdbc | Log4j를 JDBC와 연결해 SQL 로그를 다양하게 출력할 수 있게 해주는 오픈소스 |
 | DataSource | 여러 개 생성될 수 있는 Connection Pool들을 관리하는 인터페이스 |
 
+<!-- 이미지 제안: Oracle(DBMS) → SQL Developer → JDBC → HikariCP(Connection Pool) → MyBatis(sqlSessionFactory/Mapper) 순서로 쌓이는 계층 구조를 한눈에 보여주는 다이어그램 -->
+
 ## ✅ 직접 세팅해보기
 
 ### 1. Oracle 11g Express Edition 설치

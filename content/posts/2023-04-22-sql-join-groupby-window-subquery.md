@@ -340,7 +340,7 @@ WHERE JOB='CLEAR' OR JOB='SALESMAN';
 - `ALL` — 메인 쿼리 조건이 서브쿼리 결과 전체와 같아야 참
 
 ```sql
--- DEPTNO가 20, 30보다 작은 값(즉 30보다 작은 것)
+-- DEPTNO가 20, 30 모두보다 작거나 같은 값(즉 더 작은 20 기준으로 좁혀짐)
 SELECT * FROM EMP
 WHERE DEPTNO <= ALL (20, 30)
 ```

@@ -65,6 +65,8 @@ draft: false
 
 처음에는 최상단 컴포넌트인 `App.js`에서 상태를 들고 자식에게 props로 내려주는 방식으로 짰다.
 
+<!-- 이미지 제안: props drilling 구조와 useReducer+useContext(State/Dispatch 분리) 구조를 비교하는 다이어그램 -->
+
 ```javascript
 // App.js
 const [postList, setPostList] = useState<post[]>([]) // 게시글 데이터

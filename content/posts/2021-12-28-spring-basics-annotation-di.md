@@ -86,6 +86,8 @@ draft: false
 
 ### 주입 과정
 
+<!-- 이미지 제안: ApplicationContext 생성 → root-context.xml 스캔 → @Component 인스턴스 생성 → 의존 객체(Chef) 레퍼런스 주입까지 이어지는 DI 처리 흐름 다이어그램 -->
+
 1. 스프링 프레임워크가 시작되면 스프링이 사용하는 메모리 영역이 만들어지는데, 이를 context라고 부른다. 이때 `ApplicationContext`라는 객체가 생성된다
 2. 스프링이 직접 생성·관리해야 하는 객체들에 대한 설정이 필요한데, 이 설정이 `root-context.xml`이다
 3. `root-context.xml`에 설정된 태그 내용을 통해 대상 패키지를 스캔한다

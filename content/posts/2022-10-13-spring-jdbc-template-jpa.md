@@ -92,7 +92,7 @@ public JdbcTemplateMemberRepository(DataSource dataSource) {
 ```java
 //JDBC(순수 방식)
 @Override
- public Personsave(Person person) {
+ public Person save(Person person) {
 	 String sql = "insert into person(name) values(?)";
 	 Connection conn = null;
 	 PreparedStatement pstmt = null;
@@ -104,7 +104,7 @@ public JdbcTemplateMemberRepository(DataSource dataSource) {
 		 pstmt.executeUpdate();
 		 rs = pstmt.getGeneratedKeys();
 		 if (rs.next()) {
-			 member.setId(rs.getLong(1));
+			 person.setId(rs.getLong(1));
 		 } else {
 			 throw new SQLException("id 조회 실패");
 		 }

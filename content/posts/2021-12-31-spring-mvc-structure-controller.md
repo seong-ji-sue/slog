@@ -59,6 +59,8 @@ draft: false
 - `void` — 호출한 URL과 동일한 이름의 jsp를 호출
 - `String` — 리턴한 문자열과 같은 이름의 jsp를 호출
 
+<!-- 이미지 제안: Request → DispatcherServlet → @RequestMapping Controller → ViewResolver → jsp 응답까지 이어지는 요청 처리 흐름 다이어그램 -->
+
 ### 1. Request는 DispatcherServlet이 먼저 받는다
 
 ```xml
