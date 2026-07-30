@@ -27,9 +27,11 @@ draft: false
 
 ### ✅ 1차 문제 — 템플릿 매칭의 해상도 의존성
 
-C/S 애플리케이션 자동화 과제를 진행하면서 OpenCV로 이미지를 비교하는 방식(템플릿 매칭)을 구현했는데, 같은 해상도(2560×1440)임에도 A 장비에서는 매칭이 되고 B 장비에서는 안 되는 현상이 나타났다.
+암호 관리(KeePass) 자동화 과제를 진행하면서 OpenCV로 이미지를 비교하는 방식(템플릿 매칭)을 구현했는데, 같은 해상도(2560×1440)임에도 A 장비에서는 매칭이 되고 B 장비에서는 안 되는 현상이 나타났다.
 
 조사해보니 템플릿 매칭은 픽셀 단위로 거의 완전 일치에 가까운 비교 방식이다. 해상도가 같아도 렌더링·스케일링 조합에 따라 미세한 픽셀 차이가 누적되면 매칭이 실패로 이어질 수 있다는 게 원인이었다.
+
+전환하기 전에 OpenCV가 지원하는 비교 방식 자체를 먼저 정리했다 — 픽셀 차이(MSE), 히스토그램 비교, SSIM, 특징점 매칭, 이미지 해싱까지 총 6가지를 놓고 "해상도·크기 의존성이 얼마나 낮은가"를 기준으로 비교했는데, 특징점 매칭을 제외한 나머지는 전부 해상도가 바뀌면 매칭이 달라지는 문제가 있었다. 이미지 해싱도 후보이긴 했지만 AutoIt에서 쓰려면 별도 DLL이 더 필요해서 제외했고, 결국 AutoIt에서 그대로 쓸 수 있는 방식은 특징점 매칭(ORB)뿐이었다.
 
 ### ✅ 해결 — ORB 특징점 매칭으로 전환
 
@@ -65,9 +67,26 @@ EndFunc
 
 ### ✅ 2차 문제 — 해상도별 캡처 위치 자체가 어긋남
 
-특징점 매칭을 도입한 뒤에도 남은 문제가 있었다. 창을 캡처하는 시점의 위치 계산이 해상도가 바뀌면 어긋난다는 것이었다. 원격 접속 등으로 해상도가 바뀌면(예: 1920×1080 ↔ 1024×768) 캡처 좌표가 밀려서, 활성화된 창 대신 엉뚱한 영역을 캡처하게 됐다. 비교할 이미지 자체가 잘못 찍히니, 그 위의 특징점 매칭도 당연히 의미가 없어진다.
+특징점 매칭을 도입한 뒤에도 남은 문제가 있었다. 창을 캡처하는 함수(`TestWindowCapture`) 안에서 창 위치를 구하던 `WinGetPos`가, RDP 접속 등으로 해상도가 바뀌면(예: 1920×1080 ↔ 1024×768) 정확한 창 위치를 계산하지 못했다. 캡처 좌표가 밀려서 활성화된 창 대신 배경화면이 섞이거나 창의 일부가 잘린 영역을 캡처하게 됐다 — 비교할 이미지 자체가 잘못 찍히니, 그 위의 특징점 매칭도 당연히 의미가 없어진다.
 
-해결 방향은 DPI Aware API를 활용해서 창의 실제 위치(테두리 그림자 영역을 제외한 순수 창 영역)를 구하도록 캡처 로직을 바꾸는 것이었다. 기존 방식은 단순히 창 위치를 조회하는 API만 썼는데, 이 API는 해상도·배율이 바뀌는 환경에서 정확한 위치를 보장하지 못했다.
+이때 이미 배율 자체를 무시하고 실제 해상도를 가져오는 DPI Aware 설정(`SetProcessDPIAware`)은 적용돼 있었다. 문제는 그거로도 못 잡는 부분, 즉 "창의 그림자 영역까지 포함된 부정확한 좌표"였다. 그래서 추가로 DWM API(`DwmGetWindowAttribute`)를 도입해서, 옵션 값 9(`DWMWA_EXTENDED_FRAME_BOUNDS`)로 그림자를 걷어낸 순수 창 테두리 좌표를 가져오도록 캡처 로직을 바꿨다. DWM 호출이 실패하는 구버전 환경을 대비해 실패 시에는 기존 `WinGetPos`로 폴백하는 구조도 남겨뒀다.
+
+```autoit
+; [핵심 원리] 해상도 변화에도 흔들리지 않는 '실제 좌표' 구하기(DWM API)
+Local $tRect = DllStructCreate("int Left;int Top;int Right;int Bottom")
+Local $aRet = DllCall("dwmapi.dll", "long", "DwmGetWindowAttribute", _
+    "hwnd", $hWnd, "int", 9, _  ; DWMWA_EXTENDED_FRAME_BOUNDS — 그림자 제외한 실제 창 영역
+    "ptr", DllStructGetPtr($tRect), "int", DllStructGetSize($tRect))
+
+If Not @error And $aRet[0] = 0 Then
+    ; 성공 — 그림자 제거된 좌표로 계산
+    $aRect[2] = DllStructGetData($tRect, "Right") - DllStructGetData($tRect, "Left")
+    $aRect[3] = DllStructGetData($tRect, "Bottom") - DllStructGetData($tRect, "Top")
+Else
+    ; 실패(구버전 등) — 기존 WinGetPos로 폴백
+    Local $aPos = WinGetPos($hWnd)
+EndIf
+```
 
 ### ✅ 3차 문제 — 배율(DPI Scaling)에 따른 좌표 이동 오차
 

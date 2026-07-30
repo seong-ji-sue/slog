@@ -28,7 +28,12 @@ draft: false
 
 ### ✅ SAP 테스트 환경부터 직접 구축
 
-- 고객사 SAP 서버에는 접근할 수 없어서, 자체 SAP ABAP Platform Trial(A4H, HANA) 단일 구성 테스트 서버를 VM에 직접 세우고 라이선스 등록까지 했다
+고객사 SAP 서버에는 접근할 수 없어서, 자체 SAP ABAP Platform Trial(A4H, HANA) 테스트 백엔드를 Docker로 직접 구축하는 것부터 시작했다.
+
+- Docker Hub의 `toberic/abap-platform-trial:1909`(74.6GB) 이미지를 개발머신에서 pull 받아 pigz로 20GB까지 압축한 뒤 스트리밍으로 넘겨서 `docker load`로 반입했다 — 그대로 옮기기엔 너무 큰 이미지라 압축 전송이 필수였다
+- SELinux는 permissive 모드가 아니면 컨테이너가 정상 기동하지 않았다
+- 이미지 안에 들어있던 HANA 라이선스가 이미 유효기간이 지나 있었다. 시스템 시계를 임시로 되돌리는 방법도 검토했지만 재부팅 위험이 있어서, 최종적으로는 무료 MiniSAP 라이선스를 새로 발급받아 해결했다
+- 기동 순서를 지키지 않으면 `NIECONN_REFUSED` 오류가 났다 — HANA(indexserver) GREEN 확인 → ASCS01(enqueue+message server) GREEN 확인 → D00(dispatcher+worker) 순으로 올려야 했고, 순서가 꼬이면 컨테이너를 통째로 재시작해서 초기화 스크립트가 순서를 다시 잡게 하는 수밖에 없었다
 - SAP GUI for Windows 7.70 클라이언트도 별도로 설치
 - 자동화 스크립트를 짜기 전에 "테스트할 수 있는 환경을 만드는 것"부터가 이미 하루치 일이었다는 걸 이번에 체감했다 — 자동화 난이도를 가늠할 때 실제 스크립트 분량보다 이 사전 준비 비용을 과소평가하기 쉽다
 
@@ -38,11 +43,11 @@ SAP GUI Scripting(COM 인터페이스)으로 로그인 필드를 제어하려면
 
 그래서 설계 단계에서부터 "협조가 안 되면 어떻게 할 것인가"를 같이 넣었다. 답은 OpenCV 이미지매칭(특징점 방식) 폴백이었다. v2.0에서는 로그인 흐름을 3단계 폴백 체인으로 짰다 — COM Scripting → 이미지매칭 → 키보드 입력. config의 `LoginMethod`(auto/scripting/image) 값으로 어떤 경로를 강제할지도 제어할 수 있게 했다.
 
-### ✅ v1.0 — x64 COM 경로와 ConnString 접속
+### ✅ v1.0 — x64 COM 경로와 랜드스케이프 의존
 
 - x64 환경에서 흔히 쓰는 `SapROTWr`가 32bit 전용이라 그대로는 붙지 않았다. `ObjGet("SAPGUI")`를 우선 시도하고 실패하면 `SapROTWr`로 폴백하는 방식으로 우회했다
-- `OpenConnectionByConnectionString`을 채택해서, SAP Logon 엔트리를 미리 등록해둘 필요 없이 config의 Host/SystemNr/Router 값만으로 접속하도록 했다
-- 클라이언트 스크립팅 사용에 필요한 레지스트리 3키를 자동으로 설정하는 함수(`EnsureSapClientScripting`)를 넣어서, 배포 대상 장비마다 수동 설정을 반복하지 않게 했다
+- `GuiApplication.OpenConnection` → `GuiSession.findById(...)`로 로그온 화면 필드를 직접 조작하는 COM 방식이었는데, 이 방식은 SAP Logon에 접속 엔트리(랜드스케이프)가 미리 등록돼 있어야 동작한다는 제약이 있었다 — 이 제약이 나중에 v3.0에서 파라미터 방식으로 완전히 갈아엎는 이유 중 하나가 됐다
+- 클라이언트 스크립팅 사용에 필요한 레지스트리 3키(`UserScripting`, `WarnOnAttach`, `WarnOnConnection`)를 자동으로 설정하는 로직을 넣어서, 배포 대상 장비마다 수동 설정을 반복하지 않게 했다
 
 이 버전으로 POC-ready 상태를 만들었지만, 여기서 끝나지 않았다.
 

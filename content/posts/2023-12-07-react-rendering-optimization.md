@@ -16,7 +16,7 @@ slug: "react-rendering-optimization"
 
 난이도 : ★★☆☆☆
 
-1️⃣ `렌더링 조건` 2️⃣ `측정 도구` 3️⃣ `최적화 5가지 방법`
+1️⃣ `렌더링 조건` 2️⃣ `측정 도구` 3️⃣ `최적화 6가지 방법`
 
 ## ✅ 왜 알아야 하나
 
@@ -58,6 +58,21 @@ slug: "react-rendering-optimization"
 - **LCP(Largest Contentful Paint)** — 가장 큰 콘텐츠 요소가 완전히 렌더링되는 시점. Lighthouse·Performance 탭에서 확인함
 
 ![성능 지표](/images/213/img_06.png)
+
+## ✅ 렌더링 전에 — 로딩 자체를 줄이는 법
+
+렌더링 최적화를 파기 전에, 애초에 "로딩바가 뜨기까지"도 최적화 대상이라는 걸 짚고 넘어가야 한다. 페이지에 들어갔을 때 로딩바보다 먼저 흰 화면이 뜨는 구간이 있는데, 이건 리렌더링 문제가 아니라 **블록 리소스(block resource)** 때문이다.
+
+- **블록 리소스** — 브라우저가 페이지의 나머지 콘텐츠를 렌더링하는 동안 기다려야 하는 외부 리소스. 스크립트·스타일시트·폰트·이미지 등이 해당함
+- 자바스크립트와 CSS가 대표적인 블록 리소스라서, HTML 파싱이 끝나기 전에 만나면 **파싱을 중단하고** 먼저 처리함 — 이게 흰 화면 구간의 정체
+
+**TTFB(Time To First Byte)** — HTTP 요청 후 첫 바이트가 브라우저에 도달하는 시간. 이 시간을 줄이는 방법:
+
+- `<script>`를 `<head>`에 넣지 않기. 넣어야 한다면 `async`나 `defer` 사용
+- 스크립트는 `<body>` 끝에 넣기 (HTML 파싱이 끝난 뒤 JS를 파싱하도록)
+- 외부 스타일시트(`link`) 대신 인라인 스타일(`style` 태그)로 크리티컬 CSS를 처리해 파싱 대기를 줄임
+
+측정 도구는 [PageSpeed Insights](https://pagespeed.web.dev/)를 쓴다. 다만 여기서 주의할 게 하나 있다 — **DOMContentLoaded만 빠르게 만들면 로딩바만 빨리 뜨고, 사용자 체감 최적화는 안 된 것**이다. 사용자 입장에서 진짜 중요한 건 "로딩이 끝나고 어떤 콘텐츠를 먼저 보여주는가"이고, 그걸 재는 지표가 앞서 말한 FMP·LCP다.
 
 ## ✅ 방법 1. Hook 개선
 
@@ -117,7 +132,81 @@ function App() {
 }
 ```
 
-## ✅ 방법 3. 디바운싱과 스로틀링
+## ✅ 방법 3. Promise를 커스텀 훅으로 묶기
+
+`useEffect` 안에서는 `async` 함수를 직접 쓸 수 없다. 그래서 실무 코드는 대부분 이런 패턴으로 짜여 있다 — 함수 내부에 `async` 로직을 넣고 즉시 호출하는 식이다.
+
+```javascript
+useEffect(() => {
+  const getData = async () => {
+    try {
+      const res = await findByNameApi({ path, name: selected });
+      if (res.data) {
+        methods.reset({
+          credentialType: res.data.credentialType,
+          role: res.data.role,
+        });
+      }
+    } catch (e) {
+      console.log(e);
+      navigate(deleteSelectedFromQs());
+    }
+  };
+
+  if (selected) getData().then();
+}, [methods, navigate, path, selected]);
+```
+
+문제는 데이터를 불러오는 컴포넌트마다 `loading`·`error`·`data` state를 매번 따로 선언하고, 위와 같은 `getData` 함수를 반복해서 찍어낸다는 것이다. 로딩·에러 처리를 한곳으로 모으면 반복을 없앨 수 있다.
+
+```javascript
+// usePromise.js
+import { useState, useEffect } from 'react';
+
+function usePromise(asyncFunction, dependencies) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    setLoading(true);
+    setError(null);
+    setData(null);
+
+    async function fetchData() {
+      try {
+        const result = await asyncFunction();
+        setData(result);
+      } catch (e) {
+        setError(e);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, dependencies);
+
+  return { data, loading, error };
+}
+
+export default usePromise;
+```
+
+```jsx
+function YourComponent() {
+  const { data, loading, error } = usePromise(getData, [path, range, search]);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
+  return <div>{/* data를 사용해 UI 구성 */}</div>;
+}
+```
+
+이렇게 묶으면 컴포넌트는 `data`·`loading`·`error`만 꺼내 쓰면 되고, `try/catch/finally`를 컴포넌트마다 반복해서 적을 필요가 없어진다. 단, 기존 컴포넌트에 적용하려면 코드 수정이 꽤 필요해서, 신규 화면부터 우선 적용하는 쪽으로 방향을 잡았다.
+
+## ✅ 방법 4. 디바운싱과 스로틀링
 
 ![디바운싱 vs 스로틀링](/images/213/img_07.png)
 
@@ -162,7 +251,7 @@ const throttledScroll = throttle(scrollFunction);
 window.addEventListener('scroll', throttledScroll);
 ```
 
-## ✅ 방법 4. 비동기 automatic batching
+## ✅ 방법 5. 비동기 automatic batching
 
 React는 여러 state 변경을 한 번에 묶어(batching) 중복 렌더링을 막는다. 다만 비동기 콜백 안에서는 배칭이 깨질 수 있는데, 함수형 업데이트를 쓰면 묶인다.
 
@@ -184,7 +273,7 @@ function asyncFunction() {
 }
 ```
 
-## ✅ 방법 5. useTransition과 useDeferredValue
+## ✅ 방법 6. useTransition과 useDeferredValue
 
 무거운 계산 로직이 실행되면 메인 스레드가 블록돼서, 극단적으로는 다음 입력을 못 받을 정도로 프레임이 떨어진다. React 18은 상태 변화에 **우선순위**를 매겨 급한 것(입력)부터 처리하게 해준다.
 
@@ -212,11 +301,13 @@ export default function Home() {
 
 ## ✅ Summary
 
-1. 최적화 전에 측정함 — Performance 탭, React Profiler
-2. 메모이제이션(useMemo·useCallback·React.memo)은 비쌀 때만 씀
-3. 초기 로딩은 lazy + Suspense로 코드 스플리팅함
-4. 연속 이벤트는 디바운싱(마지막만)·스로틀링(주기마다)으로 줄임
-5. React 18이면 automatic batching과 useTransition·useDeferredValue를 활용함
+1. 최적화 전에 측정함 — Performance 탭, React Profiler, PageSpeed Insights
+2. 로딩바가 뜨기 전 흰 화면은 블록 리소스·TTFB 문제 — script 위치와 async/defer로 줄임
+3. 메모이제이션(useMemo·useCallback·React.memo)은 비쌀 때만 씀
+4. 초기 로딩은 lazy + Suspense로 코드 스플리팅함
+5. 반복되는 loading/error/data state는 usePromise 같은 커스텀 훅으로 묶음
+6. 연속 이벤트는 디바운싱(마지막만)·스로틀링(주기마다)으로 줄임
+7. React 18이면 automatic batching과 useTransition·useDeferredValue를 활용함
 
 ## 참고한 링크
 

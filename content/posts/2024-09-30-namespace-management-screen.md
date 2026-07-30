@@ -57,31 +57,45 @@ function NamespaceDialog({ mode, data }) {
 
 ### ✅ 상태 기반 제어 명세표
 
-Namespace는 상태값(예: 정상/프로비저닝중/삭제중/오류)에 따라 리스트 화면의 동작이 크게 달라졌다.
+Namespace는 실제로 5가지 상태를 가진다. 그냥 "활성/비활성"이 아니라, 소프트 삭제와 하드 삭제가 분리돼 있고 프로비저닝 중간 상태까지 화면에 노출해야 했다.
 
-- 프로비저닝 중이면 id를 눌러도 상세로 안 들어가고 진행 로그 다이얼로그가 뜸
-- 오류 상태면 재시도 안내 툴팁이 붙음
-- 삭제중이면 수정 버튼 자체가 비활성화
+- **Enabled** — 활성화 상태
+- **Disabled** — 비활성화 상태
+- **Deleted** — 소프트 삭제. DB에서 바로 지우지 않고 상태만 `Deleted`로 바꾼 뒤, 일정 기간 뒤에 DB에서 실제로 삭제됨
+- **Provisioning** — 생성 중. 서버가 인프라를 실제로 만드는 동안의 상태
+- **Destroying** — 하드 삭제 중. `Deleted` 상태에서 완전 삭제를 실행하면 이 상태로 전환됨
 
-이걸 컴포넌트 안에서 상태 문자열을 직접 비교(`if (status === 'PROVISIONING')`)하는 방식으로 짜면, 상태가 하나 늘 때마다 리스트·다이얼로그·툴팁 세 군데를 다 고쳐야 한다. 그래서 "상태 → 허용 동작"을 하나의 제어 명세표 객체로 뽑아내고, 컴포넌트는 이 표를 조회만 하도록 바꿨다.
+각 상태는 전이 가능한 액션도 다르다.
+
+| 상태 | 허용되는 액션 |
+|------|---------------|
+| Enabled | 상세보기, 수정, 비활성화(Disable), 삭제(Delete) |
+| Disabled | 상세보기, 수정, 활성화(Enable), 삭제(Delete) |
+| Deleted | 상세보기, 복구(Recovery), 완전 삭제(Destroy) |
+| Provisioning | 없음 — 리스트에는 진행중으로만 표시, 클릭 불가 |
+| Destroying | 없음 — 리스트에는 진행중으로만 표시, 클릭 불가 |
+
+리스트에서 `Provisioning`은 다른 사용자가 생성을 진행 중일 때, `Destroying`은 다른 사용자가 삭제를 진행 중이거나 삭제 도중 실패했을 때 표시되는 상태라, 같은 화면을 보는 여러 사용자에게 동시에 반영돼야 했다.
+
+이걸 컴포넌트 안에서 상태 문자열을 직접 비교(`if (status === 'PROVISIONING')`)하는 방식으로 짜면, 상태가 하나 늘 때마다 리스트·툴팁·상세보기 세 군데를 다 고쳐야 한다. 그래서 "상태 → 허용 동작"을 하나의 제어 명세표 객체로 뽑아내고, 컴포넌트는 이 표를 조회만 하도록 바꿨다.
 
 ```js
 // namespaceStatusPolicy.js
 export const statusPolicy = {
-  ACTIVE:       { clickable: true,  editable: true,  tooltip: null },
-  PROVISIONING: { clickable: false, editable: false, tooltip: '프로비저닝 진행중' },
-  DELETING:     { clickable: false, editable: false, tooltip: '삭제 처리중' },
-  ERROR:        { clickable: true,  editable: false, tooltip: '오류 — 로그 확인 필요' },
+  ENABLED:      { clickable: true,  tooltipActions: ['viewEdit', 'disable', 'delete'],   detailActions: ['edit', 'revision'] },
+  DISABLED:     { clickable: true,  tooltipActions: ['viewEdit', 'enable', 'delete'],     detailActions: ['edit', 'revision'] },
+  DELETED:      { clickable: true,  tooltipActions: ['view', 'recovery', 'destroy'],      detailActions: ['revision'] },
+  PROVISIONING: { clickable: false, tooltipActions: [], detailActions: [] },
+  DESTROYING:   { clickable: false, tooltipActions: [], detailActions: [] },
 };
 ```
 
 ```jsx
 function NamespaceIdCell({ status, onClick }) {
-  const policy = statusPolicy[status] ?? statusPolicy.ACTIVE;
+  const policy = statusPolicy[status] ?? statusPolicy.ENABLED;
   return (
     <span
       className={policy.clickable ? 'link' : 'disabled'}
-      title={policy.tooltip ?? undefined}
       onClick={policy.clickable ? onClick : undefined}
     >
       {/* ... */}
@@ -90,7 +104,11 @@ function NamespaceIdCell({ status, onClick }) {
 }
 ```
 
-상태를 코드값이 아니라 이 표로만 비교하게 만들어두니, 이후 QA에서 상태 하나가 추가되거나 정책이 바뀌어도(예: 특정 상태에서 삭제 아이콘만 숨기기) 명세표 한 줄만 고치면 리스트·다이얼로그·상세 화면이 한 번에 맞춰졌다.
+상태를 코드값이 아니라 이 표로만 비교하게 만들어두니, 이후 QA에서 상태 하나가 추가되거나 정책이 바뀌어도(예: 특정 상태에서 삭제 아이콘만 숨기기) 명세표 한 줄만 고치면 리스트·툴팁·상세 화면이 한 번에 맞춰졌다.
+
+### ✅ 완전 삭제는 이름을 직접 입력받는다
+
+`Deleted` 상태에서 한 번 더 `Destroy`를 실행하면 복구가 안 되기 때문에, 삭제 버튼 하나로 바로 실행시키지 않았다. 사용자가 해당 Namespace의 이름을 다이얼로그에 직접 입력해야만 삭제가 진행되도록 확인 절차를 넣었다 — 입력한 문자열이 실제 이름과 다르면 즉시 알림을 띄우고 진행하지 않는다.
 
 ### ✅ 생성/삭제 직후 — 폼을 닫고 로그창을 연다
 
