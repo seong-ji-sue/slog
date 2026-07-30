@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { PostMeta, fmtDate, logNum, stars, projectLabel } from "@/lib/format";
+import { PostMeta, fmtDate, logNum, stars, projectLabel, scopeLabel } from "@/lib/format";
 
 interface Props {
   post: PostMeta;
@@ -8,29 +8,38 @@ interface Props {
 }
 
 export default function PostItem({ post, testId }: Props) {
-  const cat = post.categories[0] ?? "";
+  const scope = scopeLabel(post.scope);
   const project = projectLabel(post.project);
   return (
-    <Link
-      href={`/posts/${post.slug}`}
-      className="post-item"
-      data-testid={testId}
-    >
+    <div className="post-item" data-testid={testId}>
       <span className="lognum">
-        {logNum(post.log)}&nbsp;&nbsp;<span className="cat">{cat}</span>
+        {logNum(post.log)}&nbsp;&nbsp;
+        {scope ? (
+          <Link
+            href={`/posts?scope=${encodeURIComponent(post.scope!)}`}
+            className="cat"
+            data-testid="post-scope-badge"
+          >
+            {scope}
+          </Link>
+        ) : (
+          <span className="cat">{post.categories[0] ?? ""}</span>
+        )}
         {project && (
           <>
             &nbsp;&nbsp;<span className="project-badge" data-testid="post-project-badge">{project}</span>
           </>
         )}
       </span>
-      <h2>
-        <mark>{post.title}</mark>
-      </h2>
-      {post.description && <p className="desc">{post.description}</p>}
-      <div className="meta">
-        {fmtDate(post.date)}&nbsp;&nbsp;·&nbsp;&nbsp;난이도&nbsp;{stars(post.difficulty)}&nbsp;&nbsp;·&nbsp;&nbsp;{post.readingMin}&nbsp;min
-      </div>
-    </Link>
+      <Link href={`/posts/${post.slug}`} className="post-item-link">
+        <h2>
+          <mark>{post.title}</mark>
+        </h2>
+        {post.description && <p className="desc">{post.description}</p>}
+        <div className="meta">
+          {fmtDate(post.date)}&nbsp;&nbsp;·&nbsp;&nbsp;난이도&nbsp;{stars(post.difficulty)}&nbsp;&nbsp;·&nbsp;&nbsp;{post.readingMin}&nbsp;min
+        </div>
+      </Link>
+    </div>
   );
 }

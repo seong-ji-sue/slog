@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { getAllPosts, SCOPE_TAXONOMY } from "@/lib/posts";
 import PostsFilter from "@/components/PostsFilter";
 import "./posts.css";
@@ -14,7 +15,9 @@ export default function PostsPage() {
   return (
     <main className="col posts-page">
       <h1 className="page-title mono">글</h1>
-      <PostsFilter posts={posts} scopes={scopes} />
+      <Suspense fallback={null}>
+        <PostsFilter posts={posts} scopes={scopes} />
+      </Suspense>
     </main>
   );
 }

@@ -216,10 +216,23 @@ header.site .col {
   border-bottom: 1px solid var(--line);
 }
 
+.post-item-link {
+  display: block;
+}
+
 .post-item .lognum {
   font: 500 12px "JetBrains Mono", monospace;
   color: var(--faint);
   margin-right: 10px; /* JSX 공백 트리밍 보정 — 목업의 라벨·제목 인라인 간격 */
+}
+
+.post-item .lognum a.cat {
+  color: var(--pen);
+  text-decoration: none;
+}
+
+.post-item .lognum a.cat:hover {
+  text-decoration: underline;
 }
 
 .post-item .lognum .cat {
@@ -250,13 +263,13 @@ header.site .col {
   transition: background-size 0.28s ease;
 }
 
-.post-item:hover h2 mark,
-.post-item:focus-visible h2 mark {
+.post-item-link:hover h2 mark,
+.post-item-link:focus-visible h2 mark {
   background-size: 100% 0.72em;
 }
 
 /* 키보드 포커스 시 형광펜 */
-.post-item:focus-visible {
+.post-item-link:focus-visible {
   outline: 2px solid var(--marker);
   outline-offset: 2px;
 }
@@ -312,6 +325,11 @@ footer.site a:focus-visible {
 
 .post-head .lognum .cat {
   color: var(--pen);
+  text-decoration: none;
+}
+
+.post-head .lognum a.cat:hover {
+  text-decoration: underline;
 }
 
 .post-head .lognum .stars {

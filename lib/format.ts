@@ -13,6 +13,7 @@ export interface PostMeta {
   source?: string;
   project?: string;
   scope?: ScopeValue;
+  updated?: string; // ISO — git 기준 마지막 수정일 (최초 커밋일과 같으면 미표시)
   draft: boolean;
   readingMin: number;
 }
@@ -87,7 +88,7 @@ export function fmtDate(iso: string): string {
 }
 
 export function logNum(n: number): string {
-  return `LOG_${String(n).padStart(3, "0")}`;
+  return `NO_${String(n).padStart(3, "0")}`;
 }
 
 export function tagSlug(tag: string): string {

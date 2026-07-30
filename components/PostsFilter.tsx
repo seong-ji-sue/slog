@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { PostMeta, ScopeTaxonomyEntry } from "@/lib/format";
 import PostItem from "@/components/PostItem";
 
@@ -42,7 +43,11 @@ function getPageNumbers(currentPage: number, totalPages: number): number[] {
 }
 
 export default function PostsFilter({ posts, scopes }: Props) {
-  const [activeScope, setActiveScope] = useState<string>("전체");
+  const searchParams = useSearchParams();
+  const scopeFromUrl = searchParams.get("scope");
+  const initialScope =
+    scopeFromUrl && scopes.some((s) => s.value === scopeFromUrl) ? scopeFromUrl : "전체";
+  const [activeScope, setActiveScope] = useState<string>(initialScope);
   const [query, setQuery] = useState<string>("");
   const [page, setPage] = useState<number>(1);
 

@@ -2,12 +2,11 @@
 title: "여러 AI에게 일을 나눠 맡기는 법 — 오케스트레이터 패턴과 Human Gate"
 date: 2026-07-31 10:00:00 +0900
 description: "AI를 팀원처럼 쓰기 위해 Main-Sub 오케스트레이터 구조를 만들고, AI가 스스로 멈춰서 사람에게 물어봐야 하는 조건(Human Gate)을 명문화한 기록. 재사용 가능한 에이전트·스킬 생태계(ECC)를 먼저 찾고, 없을 때만 직접 만든다는 원칙도 함께 정리했다"
-categories: ["일감"]
-tags: ["Claude Code", "AI 에이전트", "멀티 에이전트", "AutoIt", "RPA"]
-series: "AutoIt 업무 자동화"
-project: "autoit-자동화"
+categories: ["딥다이브"]
+tags: ["Claude Code", "AI 에이전트", "멀티 에이전트", "오케스트레이션"]
+series: "Claude Code 워크플로우"
 difficulty: 3
-scope: "company"
+scope: "research"
 log: 128
 draft: false
 ---

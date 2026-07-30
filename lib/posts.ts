@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { execSync } from "node:child_process";
 import matter from "gray-matter";
 import { unified } from "unified";
 import remarkParse from "remark-parse";
@@ -32,6 +33,32 @@ function listFiles(dir: string): string[] {
   return fs.readdirSync(dir).filter((f) => f.endsWith(".md"));
 }
 
+// content/posts 전체의 "파일별 마지막 커밋 날짜"를 한 번의 git 호출로 구해 캐싱
+let gitModifiedCache: Map<string, string> | null = null;
+
+function getGitModifiedMap(): Map<string, string> {
+  if (gitModifiedCache) return gitModifiedCache;
+  const map = new Map<string, string>();
+  try {
+    const out = execSync(
+      'git log --name-only --format="%x00%aI" -- content/posts',
+      { cwd: process.cwd(), encoding: "utf-8", maxBuffer: 1024 * 1024 * 32 }
+    );
+    let currentDate = "";
+    for (const line of out.split("\n")) {
+      if (line.startsWith("\x00")) {
+        currentDate = line.slice(1);
+      } else if (line.endsWith(".md") && currentDate && !map.has(line)) {
+        map.set(path.basename(line), currentDate);
+      }
+    }
+  } catch {
+    // git 없는 환경(예: 배포 아티팩트만 배포)에서는 조용히 빈 맵 반환
+  }
+  gitModifiedCache = map;
+  return map;
+}
+
 function parseFile(dir: string, file: string, draftDir: boolean): { meta: PostMeta; content: string } {
   const raw = fs.readFileSync(path.join(dir, file), "utf-8");
   const { data, content } = matter(raw);
@@ -49,6 +76,13 @@ function parseFile(dir: string, file: string, draftDir: boolean): { meta: PostMe
     source: data.source ? String(data.source) : undefined,
     project: data.project ? String(data.project) : undefined,
     scope: data.scope ? (String(data.scope) as PostMeta["scope"]) : undefined,
+    updated: (() => {
+      const gitDate = getGitModifiedMap().get(file);
+      if (!gitDate) return undefined;
+      const publishDay = toIso(data.date).slice(0, 10);
+      const modifiedDay = gitDate.slice(0, 10);
+      return modifiedDay > publishDay ? gitDate : undefined;
+    })(),
     draft: draftDir || Boolean(data.draft),
     readingMin: Math.max(1, Math.round(body.replace(/```[\s\S]*?```/g, "").length / 650)),
   };

@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getPost, adjacent, stars, fmtDate, logNum, getAllPosts, tagSlug, projectLabel } from "@/lib/posts";
+import { getPost, adjacent, stars, fmtDate, logNum, getAllPosts, tagSlug, projectLabel, scopeLabel } from "@/lib/posts";
 import "./post.css";
 
 // ── 파싱 유틸 (lib 수정 금지 — 페이지 내 함수) ──────────────────────
@@ -64,7 +64,9 @@ export default async function PostPage({ params }: Props) {
 
   const starsStr = stars(post.difficulty);
   const dateStr = fmtDate(post.date);
+  const updatedStr = post.updated ? fmtDate(post.updated) : undefined;
   const logStr = logNum(post.log);
+  const scope = scopeLabel(post.scope);
   const category = post.categories[0] ?? "";
   const project = projectLabel(post.project);
 
@@ -76,8 +78,21 @@ export default async function PostPage({ params }: Props) {
           className="lognum"
           data-testid="B-03-text-post-meta"
         >
-          {logStr} · <span className="cat">{category}</span> · {dateStr} ·{" "}
-          <span className="stars">난이도 {starsStr}</span>
+          {logStr} ·{" "}
+          {scope ? (
+            <Link href={`/posts?scope=${encodeURIComponent(post.scope!)}`} className="cat" data-testid="post-scope-badge">
+              {scope}
+            </Link>
+          ) : (
+            <span className="cat">{category}</span>
+          )}{" "}
+          · {dateStr}
+          {updatedStr && (
+            <span className="updated-badge" data-testid="post-updated-date">
+              {" "}(수정 {updatedStr})
+            </span>
+          )}{" "}
+          · <span className="stars">난이도 {starsStr}</span>
           {project && (
             <>
               {" "}· <span className="project-badge" data-testid="post-project-badge">{project}</span>
