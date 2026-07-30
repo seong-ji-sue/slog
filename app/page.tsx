@@ -1,8 +1,7 @@
-import { getAllPosts, maxLog } from "@/lib/posts";
-import PostItem from "@/components/PostItem";
+import Link from "next/link";
+import { maxLog } from "@/lib/posts";
 
 export default function HomePage() {
-  const posts = getAllPosts();
   const max = maxLog();
 
   return (
@@ -21,13 +20,9 @@ export default function HomePage() {
           2021.12 — ing&nbsp;&nbsp;·&nbsp;&nbsp;
           <b>LOG_{String(max).padStart(3, "0")}</b>까지 기록됨&nbsp;&nbsp;·&nbsp;&nbsp;주간 1회 목표
         </div>
-      </section>
-
-      {/* 피드 */}
-      <section className="feed" data-testid="B-01-list-feed">
-        {posts.map((post) => (
-          <PostItem key={post.slug} post={post} />
-        ))}
+        <Link href="/posts" className="hero-cta" data-testid="B-01-link-posts">
+          글 전체 보기 →
+        </Link>
       </section>
     </div>
   );
