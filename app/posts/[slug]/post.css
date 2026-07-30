@@ -219,6 +219,35 @@
   color: #E2E2E6;
 }
 
+/* ── 테이블 ── */
+.post-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  display: block;
+  overflow-x: auto;
+}
+
+.post-body th,
+.post-body td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+}
+
+.post-body th {
+  font-weight: 700;
+  font-size: 13.5px;
+  background: var(--bg2);
+  border-bottom: 2px solid var(--line);
+  color: var(--fg);
+}
+
+.post-body td {
+  font-size: 14.5px;
+  color: var(--fg);
+}
+
 /* ── 이미지 ── */
 .post-body img {
   max-width: 100%;
