@@ -5,9 +5,10 @@ interface Props {
   post: PostMeta;
   /** 부모가 list-feed 등 testid를 감싸는 래퍼에 붙이는 경우 불필요하므로 선택 */
   testId?: string;
+  viewCount?: number;
 }
 
-export default function PostItem({ post, testId }: Props) {
+export default function PostItem({ post, testId, viewCount }: Props) {
   const scope = scopeLabel(post.scope);
   const project = projectLabel(post.project);
   return (
@@ -38,6 +39,9 @@ export default function PostItem({ post, testId }: Props) {
         {post.description && <p className="desc">{post.description}</p>}
         <div className="meta">
           {fmtDate(post.date)}&nbsp;&nbsp;·&nbsp;&nbsp;난이도&nbsp;{stars(post.difficulty)}&nbsp;&nbsp;·&nbsp;&nbsp;{post.readingMin}&nbsp;min
+          {typeof viewCount === "number" && (
+            <>&nbsp;&nbsp;·&nbsp;&nbsp;조회 {viewCount}</>
+          )}
         </div>
       </Link>
     </div>

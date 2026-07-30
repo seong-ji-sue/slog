@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { PostMeta, ScopeTaxonomyEntry } from "@/lib/format";
 import PostItem from "@/components/PostItem";
@@ -8,11 +8,16 @@ import PostItem from "@/components/PostItem";
 interface Props {
   posts: PostMeta[];
   scopes: ScopeTaxonomyEntry[];
+  viewCounts: Record<string, number>;
 }
+
+type SortOrder = "latest" | "views";
+type ViewMode = "list" | "card";
 
 const PAGE_SIZE = 20;
 const PAGE_WINDOW_SIZE = 5;
 const WHITESPACE_RE = /\s+/g;
+const VIEW_MODE_STORAGE_KEY = "slog-posts-view-mode";
 
 function normalize(value: string): string {
   return value.toLowerCase().replace(WHITESPACE_RE, "");
@@ -42,7 +47,7 @@ function getPageNumbers(currentPage: number, totalPages: number): number[] {
   return Array.from({ length: end - start + 1 }, (_, i) => start + i);
 }
 
-export default function PostsFilter({ posts, scopes }: Props) {
+export default function PostsFilter({ posts, scopes, viewCounts }: Props) {
   const searchParams = useSearchParams();
   const scopeFromUrl = searchParams.get("scope");
   const initialScope =
@@ -50,8 +55,20 @@ export default function PostsFilter({ posts, scopes }: Props) {
   const [activeScope, setActiveScope] = useState<string>(initialScope);
   const [query, setQuery] = useState<string>("");
   const [page, setPage] = useState<number>(1);
+  const [sortOrder, setSortOrder] = useState<SortOrder>("latest");
+  const [viewMode, setViewMode] = useState<ViewMode>("list");
 
-  const filterKey = JSON.stringify([activeScope, query]);
+  useEffect(() => {
+    const saved = localStorage.getItem(VIEW_MODE_STORAGE_KEY);
+    if (saved === "card" || saved === "list") setViewMode(saved);
+  }, []);
+
+  function changeViewMode(next: ViewMode) {
+    setViewMode(next);
+    localStorage.setItem(VIEW_MODE_STORAGE_KEY, next);
+  }
+
+  const filterKey = JSON.stringify([activeScope, query, sortOrder]);
   const [prevFilterKey, setPrevFilterKey] = useState(filterKey);
   if (filterKey !== prevFilterKey) {
     setPrevFilterKey(filterKey);
@@ -61,8 +78,15 @@ export default function PostsFilter({ posts, scopes }: Props) {
   const filtered = useMemo(() => {
     const byScope =
       activeScope === "전체" ? posts : posts.filter((p) => p.scope === activeScope);
-    return byScope.filter((p) => matchesQuery(p, query));
-  }, [activeScope, posts, query]);
+    const byQuery = byScope.filter((p) => matchesQuery(p, query));
+
+    if (sortOrder === "views") {
+      return [...byQuery].sort(
+        (a, b) => (viewCounts[b.slug] ?? 0) - (viewCounts[a.slug] ?? 0)
+      );
+    }
+    return byQuery;
+  }, [activeScope, posts, query, sortOrder, viewCounts]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
 
@@ -109,12 +133,65 @@ export default function PostsFilter({ posts, scopes }: Props) {
         </div>
       )}
 
+      <div className="list-toolbar">
+        <div
+          className="tab-filter"
+          data-testid="B-02-tab-filter-sort"
+          role="group"
+          aria-label="정렬 기준"
+        >
+          {[
+            { value: "latest" as const, label: "최신순" },
+            { value: "views" as const, label: "조회수순" },
+          ].map((s) => {
+            const isActive = sortOrder === s.value;
+            return (
+              <button
+                key={s.value}
+                onClick={() => setSortOrder(s.value)}
+                aria-selected={isActive}
+                data-active={isActive ? "true" : undefined}
+                className={`filter-btn${isActive ? " active" : ""}`}
+              >
+                {s.label}
+              </button>
+            );
+          })}
+        </div>
+
+        <div
+          className="view-toggle"
+          data-testid="B-02-toggle-view"
+          role="group"
+          aria-label="보기 형식"
+        >
+          {[
+            { value: "list" as const, label: "목록" },
+            { value: "card" as const, label: "카드" },
+          ].map((v) => {
+            const isActive = viewMode === v.value;
+            return (
+              <button
+                key={v.value}
+                onClick={() => changeViewMode(v.value)}
+                aria-pressed={isActive}
+                data-active={isActive ? "true" : undefined}
+                className={`filter-btn${isActive ? " active" : ""}`}
+              >
+                {v.label}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
       <div
         className="post-list"
+        data-view={viewMode}
         data-testid="B-02-list-posts"
       >
         {paged.map((post) => (
-          <PostItem key={post.slug} post={post} />
+          <PostItem key={post.slug} post={post} viewCount={viewCounts[post.slug] ?? 0} />
         ))}
         {filtered.length === 0 && (
           <p className="no-posts">검색 결과가 없습니다.</p>

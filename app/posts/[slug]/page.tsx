@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getPost, adjacent, stars, fmtDate, logNum, getAllPosts, tagSlug, projectLabel, scopeLabel } from "@/lib/posts";
+import ViewTracker from "@/components/ViewTracker";
 import "./post.css";
 
 // ── 파싱 유틸 (lib 수정 금지 — 페이지 내 함수) ──────────────────────
@@ -72,6 +73,8 @@ export default async function PostPage({ params }: Props) {
 
   return (
     <div className="post-wrap">
+      <ViewTracker slug={slug} />
+
       {/* ── 포스트 헤더 ── */}
       <header className="post-head">
         <span

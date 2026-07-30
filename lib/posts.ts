@@ -104,6 +104,14 @@ export function getAllPosts(): PostMeta[] {
   return collect().map((e) => e.meta);
 }
 
+let cachedSlugSet: Set<string> | null = null;
+
+/** 전체 포스트 프론트매터를 매번 다시 읽지 않도록 slug 존재 여부만 캐시로 확인 */
+export function isKnownSlug(slug: string): boolean {
+  if (!cachedSlugSet) cachedSlugSet = new Set(getAllPosts().map((p) => p.slug));
+  return cachedSlugSet.has(slug);
+}
+
 export async function getPost(slug: string): Promise<Post | null> {
   const entry = collect().find((e) => e.meta.slug === slug);
   if (!entry) return null;

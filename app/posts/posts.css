@@ -75,9 +75,47 @@
   border-color: transparent;
 }
 
+.list-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.view-toggle {
+  display: flex;
+  gap: 8px;
+}
+
 .post-list {
   display: flex;
   flex-direction: column;
+}
+
+/* 카드 형태 */
+.post-list[data-view="card"] {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.post-list[data-view="card"] .post-item {
+  display: flex;
+  flex-direction: column;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  height: 100%;
+}
+
+.post-list[data-view="card"] .post-item p.desc {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  max-width: none;
 }
 
 .no-posts {
