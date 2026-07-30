@@ -102,6 +102,8 @@ draft: false
 
 ### 스케줄링 CRUD
 
+<!-- 이미지 제안: 유저 1명당 endpoint, endpoint 1개당 username, username 1개당 dataType으로 이어지는 CRUD 데이터 흐름도 -->
+
 **Create** — `+` 버튼 클릭 시 `onClick` 이벤트로 `getTotalList` 함수가 실행되고, 가공된 객체가 `totalJob` state 배열에 들어가 화면을 렌더링한다.
 
 ```javascript
@@ -440,6 +442,12 @@ Preference 페이지와 JobSetting 페이지는 같은 모달을 쓰되 세부 �
 **부족한 부분, 하고 싶었지만 못한 것**
 
 - **Redux** — 전역 상태 관리 중 하나인데, 이번엔 실제로 적용해보지 못했다
+
+| 항목 | 이전(이전 기수) | 이후(본인 작업) |
+| --- | --- | --- |
+| 스케줄링 CRUD | 미완성 상태로 인계 | Create/Read/Update/Delete 전체 구현 완료 |
+| 토큰 인증 | 미구현 | Refresh/Access 이중 토큰으로 자동 재발급·로그아웃 처리 |
+| 프로젝트 문서화 | 없음 | 다음 기수가 바로 이어받도록 Notion에 상세 문서화 |
 
 **깨달은 것 중 중요한 것**
 

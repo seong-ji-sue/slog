@@ -82,6 +82,8 @@ router
 - ERD로 데이터베이스 모델링을 정리했다.
 - Router → Controller → Service → Model 계층을 역할별로 명확히 구분해서 이해했다: Router는 경로 분기만, Controller는 req/res 처리와 에러 핸들링만, Service가 비즈니스 로직(토큰·비밀번호 암호화 포함)을, Model은 쿼리 작업만 담당한다.
 
+<!-- 이미지 제안: Router → Controller → Service → Model 4계층 구조와 각 계층의 책임을 화살표로 보여주는 다이어그램 -->
+
 ## ✅ 배운 점 / 아쉬운 점
 
 **잘한 것**
