@@ -39,6 +39,9 @@ Entity와 Role을 나누고 그 사이를 다대다(N:M) 매핑으로 연결하�
 Entity ----< binding >---- Role ----< policy >---- Resource
 ```
 
+<!-- 이미지 제안: Entity-Role-Resource 다대다 관계를 실제 ERD 형태로 그린 다이어그램 -->
+
+
 ### ✅ 화면 구조 선작업에서 잡은 것
 
 당시 이슈는 두 개로 나뉘어 있었다.

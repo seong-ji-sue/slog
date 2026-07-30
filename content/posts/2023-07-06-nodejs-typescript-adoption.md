@@ -122,6 +122,8 @@ router는 "요청을 받아서 controller에 넘기고 응답한다"는 역할�
 
 ### ✅ 전체 진행 순서 요약
 
+<!-- 이미지 제안: "끝단(API 호출) → controller → Common 모듈" 순으로 타입을 전파해 나간 단계적 마이그레이션 흐름도 -->
+
 1. Babel에 TS 프리셋 추가 — 빌드 체인 유지한 채 TS 문법 사용 가능하게
 2. API 호출 로직의 요청/응답 타입 정의 (제네릭 wrapper)
 3. router → controller 분리, 응답 타입 추론 가능하게

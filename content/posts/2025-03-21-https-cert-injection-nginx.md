@@ -57,6 +57,8 @@ standalone은 `server.js`를 빌드 시점에 자동 생성하고, 그 파일은
 
 ## ✅ 해결 — Nginx가 인증서를 들고 TLS를 종료(termination)
 
+<!-- 이미지 제안: 앱 코드가 인증서를 직접 물던 이전 구조 vs Nginx가 TLS를 종료하고 내부는 평문 HTTP로 프록시하는 이후 구조 아키텍처 다이어그램 -->
+
 `server.mjs`를 걷어내는 커밋에서 `nginx.conf`가 새로 생겼다.
 
 ```nginx

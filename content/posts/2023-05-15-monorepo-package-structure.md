@@ -44,6 +44,8 @@ draft: false
 
 ### ✅ 최종 구조
 
+<!-- 이미지 제안: apps/*(iam·vault·kms·client)와 packages/*(common·client-common·server-common) 간 의존 방향을 보여주는 모노레포 구조도 -->
+
 ```
 apps/
   iam/        # IAM 콘솔

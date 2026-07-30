@@ -28,6 +28,8 @@ Application 관리는 이 콘솔에서 다루는 리소스 계층 중 가장 아
 
 ### ✅ 좌우 분할 레이아웃 — SplitLayout
 
+<!-- 이미지 제안: 리스트+다이얼로그 방식(Namespace·Entity)과 좌우 2~3패널 SplitLayout(Application·Version) 화면을 나란히 비교하는 Before/After UI 스크린샷 -->
+
 Namespace·Entity는 리스트 화면과 다이얼로그가 분리돼 있었는데, Application·Version은 "왼쪽에서 항목을 고르면 오른쪽 폼이 그 항목 내용으로 바뀐다"는 마스터-디테일 패턴이 더 맞았다. 그래서 화면을 좌우로 나누는 `SplitLayout` 컴포넌트를 새로 만들었다.
 
 처음엔 좌/우 2개 영역만 고려했는데, Version 상세 화면에서는 "리스트 - 상세 폼 - 개정이력 패널"까지 3개 영역을 동시에 배치해야 하는 요구사항이 나와서, DOM 요소 2개가 아니라 3개까지 유연하게 처리할 수 있도록 구조를 넓혔다.

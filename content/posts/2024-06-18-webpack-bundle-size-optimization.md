@@ -26,6 +26,8 @@ draft: false
 
 ### ✅ 작업 전 — 사이즈부터 측정
 
+<!-- 이미지 제안: client·fabric·iam·kms·vault 5개 패키지의 최적화 전/후 번들 사이즈를 비교하는 막대그래프 -->
+
 빌드 스크립트 실행 기준으로 쟀다(도커 이미지 빌드 기준 아님). 패키지 5개(`client`·`fabric`·`iam`·`kms`·`vault`) 각각 서버 사이드/클라이언트 사이드 번들을 최적화 전에 먼저 재봤다.
 
 | 패키지 | server side | client side |

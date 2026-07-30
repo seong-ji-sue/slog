@@ -68,6 +68,9 @@ Namespace는 실제로 5가지 상태를 가진다. 그냥 "활성/비활성"이
 
 각 상태는 전이 가능한 액션도 다르다.
 
+<!-- 이미지 제안: Enabled·Disabled·Deleted·Provisioning·Destroying 5개 상태 간 전이 관계를 보여주는 상태 전이 다이어그램 -->
+
+
 | 상태 | 허용되는 액션 |
 |------|---------------|
 | Enabled | 상세보기, 수정, 비활성화(Disable), 삭제(Delete) |

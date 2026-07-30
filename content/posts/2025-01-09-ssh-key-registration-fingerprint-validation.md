@@ -37,6 +37,8 @@ draft: false
 
 이 차이가 화면 입력 항목에도 그대로 나타났다.
 
+<!-- 이미지 제안: [신규 키 생성] vs [기존 키 등록] 라디오 선택에 따라 활성화되는 필드가 달라지는 팝업 화면 비교 -->
+
 - **신규 키 생성 시 활성화**: Key 알고리즘(필수) / Key 길이(필수) / Key passphrase / Key comment / Fingerprint·PublicKey 내용(ReadOnly, 자동)
 - **기존 키 등록 시 활성화**: PublicKey/PrivateKey 가져오기 버튼 / PublicKey·PrivateKey 텍스트 영역 / Key 알고리즘·길이·Fingerprint·Comment(ReadOnly, 자동 파싱)
 

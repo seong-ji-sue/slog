@@ -47,6 +47,9 @@ SE(Secret Engine)와 role은 서로 종속 관계다. role은 "어떤 SE에 접�
 
 AWS에서 겪은 문제를 반영해서 GCP는 아예 티켓 자체를 둘로 나눴다.
 
+<!-- 이미지 제안: AWS(화면+API 한 티켓)와 GCP(화면 티켓 → API 티켓 분리) 진행 방식을 나란히 비교하는 Before/After 흐름도 -->
+
+
 1. **화면(레이아웃) 티켓** — GCP SE를 호출해 화면에 출력, SE 필터 추가, SE 생성 (GCP role도 동일하게 목록·필터·수정·삭제를 화면 단위로 먼저 구현)
 2. **API 적용 티켓** — SE CRUD, Credential(자격 증명) 발급을 화면이 확정된 뒤에 붙임
 

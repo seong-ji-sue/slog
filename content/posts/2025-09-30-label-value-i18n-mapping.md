@@ -87,6 +87,8 @@ Confirm/Alert/Error 메시지는 라벨보다 종류가 훨씬 많았다. 평평
 }
 ```
 
+<!-- 이미지 제안: value-label 쌍(lNamespace 등)이 컴포넌트에서 t(label)로 호출되어 계층형 common.json 사전(message.error.fail.login...)의 문자열로 해석되는 흐름을 보여주는 다이어그램 -->
+
 `{{value}}` 자리에 앞서 만든 라벨의 번역 결과(`t(lNamespace.label)` 같은)를 그대로 꽂아 넣을 수 있게 설계했다. 그래서 "중복된 네임스페이스가 이미 존재합니다"처럼 리소스 종류가 다른 메시지를, 문구마다 새로 안 만들고 `duplicated.detail` 하나로 전부 처리했다.
 
 코드 쪽은 상수 참조에서 훅 호출로 바뀌었다.
@@ -132,7 +134,14 @@ const locales = useMemo(
 3. Confirm/Alert/Error 메시지를 카테고리별 계층 구조(common.json)로 재구성, `{{value}}` 보간 처리
 4. 컴포넌트에서 흩어져 있던 `t()` 호출을 `useMemo`로 한곳에 모음
 
-### 🎯 결과
+### 🎯 결과 & 배운 점
+
+| 항목 | 이전 | 이후 |
+|------|------|------|
+| 문구 관리 | 컴포넌트가 `errorMessages`·`placeholderMessages` 상수를 직접 import | `t(label)`로 계층형 사전(`common.json`)을 참조 |
+| 라벨의 정체 | 사람이 읽는 한국어 문자열 그 자체 | 번역 키(`value`와 분리된 `label`) |
+| 새 언어 추가 | 라벨 정의 자체를 언어별로 따로 둬야 함 | `common.json` 파일 하나만 늘리면 됨 |
+| 컴포넌트 내 `t()` 호출 | 렌더 로직 곳곳에 흩어짐 | `useMemo`로 한 곳에 캡슐화 |
 
 value와 label을 분리해둔 덕분에 서버 응답 필드가 바뀌어도 번역 키는 그대로 두고 value만 갱신하면 됐고, 반대로 문구를 다듬을 때도 API 쪽은 전혀 안 건드렸다. 새 언어를 추가할 때도 `common.json` 파일 하나만 늘리면 되는 구조라, 이후 항목이 늘어날 때마다(로그 필드, 정책 Action 등) 같은 패턴을 계속 따라가게 됐다.
 

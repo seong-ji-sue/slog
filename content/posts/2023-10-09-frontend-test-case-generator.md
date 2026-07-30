@@ -59,6 +59,8 @@ draft: false
 - **대안 2: `test.each`만으로 파라미터화** — 케이스 몇 개면 충분하지만, "SE 생성·수정·삭제 + role 생성·수정·삭제"처럼 대상(target)과 액션의 조합이 늘어나면 배열 자체가 비대해지고 가독성이 떨어짐
 - **최종: 엔진별 케이스 정의 파일 + 그 파일을 읽어 테스트 스위트를 동적으로 생성하는 제너레이터**
 
+<!-- 이미지 제안: 케이스 정의 파일(*.cases.ts) → createFormTestSuite 제너레이터 → 실행되는 테스트 스위트로 이어지는 데이터 흐름도 -->
+
 ```ts
 // testcases/aws-se.cases.ts
 export const awsSeCases: FormTestCase[] = [

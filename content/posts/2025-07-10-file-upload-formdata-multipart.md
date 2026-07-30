@@ -107,7 +107,15 @@ const handleFileInputChange = (e) => {
 
 다건(라이센스 3개)은 같은 구조에서 `input`에 `multiple`을 주고, FormData에 같은 key로 여러 번 `append`하면 된다. 단건(인증서)은 텍스트 데이터와 파일을 하나의 FormData에 함께 담아 보낸다.
 
+<!-- 이미지 제안: 숨긴 input + 커스텀 버튼으로 완성된 파일 첨부 UI(After) 스크린샷 — 위 img_02.png(Before, 기본 input 모습)와 대비 -->
+
 ## ✅ 결과 & 재발 방지
+
+| 항목 | 이전 | 이후 |
+|---|---|---|
+| 파일 첨부 UI | 기본 `<input type="file">` — 스타일 커스터마이징 불가 | input은 숨기고 버튼 클릭 → ref로 클릭 위임, 선택한 파일명만 노출 |
+| 전송 방식 | (신규 요구사항 — JSON으로는 바이너리 전송 불가) | FormData + `multipart/form-data`로 텍스트·파일을 함께 전송 |
+| 업로드 개수 | 단건(인증서)·다건(라이선스) 요구사항이 각각 존재 | 동일 구조에서 `multiple` 여부·`append` 반복 횟수만 다르게 대응 |
 
 - 인증서(단건+데이터), 라이센스(3개 파일) 업로드 요구사항 구현 완료함
 - boundary는 브라우저가 자동 생성하므로 **Content-Type 헤더를 직접 지정하지 않는 것**이 오히려 정답임 — 직접 지정하면 boundary가 빠져서 서버가 파싱 못 함

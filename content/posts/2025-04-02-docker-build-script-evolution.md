@@ -103,6 +103,8 @@ COPY --from=builder --chown=nextjs:nodejs /app/packages/client/server.mjs ./pack
 
 `server.js`를 따로 복사하던 줄도 없앴다 — 어차피 `.next/standalone/` 통짜 복사에 이미 포함돼 있었기 때문이다. `lerna.json`, 각 패키지의 `package.json`·`tsconfig.json`처럼 런타임에 실제로는 쓰이지 않는 파일들도 이 시점에 정리됐다. client뿐 아니라 iam·vault·kms·fabric 등 나머지 서비스 Dockerfile에도 같은 패턴을 그대로 복제해서 일관성을 맞췄다.
 
+<!-- 이미지 제안: 전환점 1~5를 타임라인으로 놓고 이미지 크기(600MB대 → 250MB) 변화를 함께 표시한 그래프 -->
+
 ## ✅ 커밋 순서로 본 전체 흐름
 
 1. client/server Dockerfile 분리 — 멀티스테이징 도입(그러나 복사 대상은 아직 큼)
