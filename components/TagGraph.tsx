@@ -10,6 +10,9 @@ interface Props {
 }
 
 const VIEWBOX = 1000;
+// 라벨 상시 노출 기준 — count/maxCount 비율이 이 값 이상인 노드만 기본 라벨을 그린다.
+// 나머지는 hover(active/neighbor)일 때만 라벨이 나타나 겹침을 줄인다.
+const IMPORTANT_TAG_RATIO = 0.4;
 
 export default function TagGraph({ nodes, edges }: Props) {
   const router = useRouter();
@@ -65,6 +68,10 @@ export default function TagGraph({ nodes, edges }: Props) {
       <g className="tag-graph-nodes">
         {nodes.map((n) => {
           const dimmed = neighbors ? !neighbors.has(n.slug) : false;
+          const isImportant = n.count / maxCount >= IMPORTANT_TAG_RATIO;
+          // hover 또는 키보드 포커스 중(neighbors 존재)이고 이 노드가 active/neighbor(dimmed===false)일 때만 추가로 라벨 노출
+          const isFocusOrHoverActive = neighbors !== null && !dimmed;
+          const showLabel = isImportant || isFocusOrHoverActive;
           return (
             <g
               key={n.slug}
@@ -72,6 +79,8 @@ export default function TagGraph({ nodes, edges }: Props) {
               transform={`translate(${n.x} ${n.y})`}
               onMouseEnter={() => setActive(n.slug)}
               onMouseLeave={() => setActive(null)}
+              onFocus={() => setActive(n.slug)}
+              onBlur={() => setActive(null)}
               onClick={() => goToTag(n.slug)}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") goToTag(n.slug);
@@ -82,7 +91,7 @@ export default function TagGraph({ nodes, edges }: Props) {
               data-testid="tag-graph-node"
             >
               <circle r={radiusOf(n.count)} />
-              <text y={radiusOf(n.count) + 14}>{n.name}</text>
+              {showLabel && <text y={radiusOf(n.count) + 14}>{n.name}</text>}
             </g>
           );
         })}
