@@ -1,0 +1,276 @@
+/* H-01/H-02 — 핫이슈 피드 스타일 */
+
+.hot-issues-page {
+  padding-top: 52px;
+  padding-bottom: 80px;
+}
+
+.hot-issues-page .page-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--faint);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+
+.search-input {
+  display: block;
+  width: 100%;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13.5px;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 10px 14px;
+  margin-bottom: 20px;
+  transition: border-color 0.15s ease;
+}
+
+.search-input::placeholder {
+  color: var(--faint);
+}
+
+.search-input:focus-visible,
+.search-input:focus {
+  outline: none;
+  border-color: var(--ink);
+}
+
+.tab-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.filter-btn {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--sub);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  line-height: 1;
+}
+
+.filter-btn:hover,
+.filter-btn:focus-visible {
+  color: var(--ink);
+  border-color: var(--ink);
+  outline: none;
+}
+
+.filter-btn.active,
+.filter-btn[aria-selected="true"] {
+  color: var(--ink);
+  background: var(--marker);
+  border-color: transparent;
+}
+
+.hotissue-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.hotissue-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: border-color 0.15s ease;
+}
+
+a.hotissue-card:hover,
+a.hotissue-card:focus-visible {
+  border-color: var(--ink);
+  outline: none;
+}
+
+.hotissue-source {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11.5px;
+  color: var(--sub);
+}
+
+.hotissue-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0;
+}
+
+.hotissue-snippet {
+  font-size: 13px;
+  color: var(--sub);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  margin: 0;
+}
+
+.hotissue-date {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11.5px;
+  color: var(--faint);
+  margin-top: auto;
+}
+
+.hotissue-state {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  color: var(--faint);
+  padding: 40px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+/* 로딩 스켈레톤 */
+.hotissue-skeleton {
+  pointer-events: none;
+}
+
+.skeleton-line {
+  display: block;
+  height: 12px;
+  border-radius: 3px;
+  background: var(--line);
+  animation: hotissue-pulse 1.2s ease-in-out infinite;
+}
+
+.skeleton-source {
+  width: 40%;
+  height: 10px;
+}
+
+.skeleton-title {
+  width: 80%;
+  height: 16px;
+}
+
+.skeleton-snippet {
+  width: 100%;
+  height: 40px;
+}
+
+@keyframes hotissue-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* 페이지네이션 (posts.css와 동일 규칙) */
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 36px;
+}
+
+.page-btn {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--sub);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 6px 12px;
+  cursor: pointer;
+  min-width: 34px;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  line-height: 1;
+}
+
+.page-btn-nav {
+  font-weight: 700;
+  min-width: auto;
+  padding: 6px 14px;
+}
+
+.page-btn:hover,
+.page-btn:focus-visible {
+  color: var(--ink);
+  border-color: var(--ink);
+  outline: none;
+}
+
+.page-btn.active,
+.page-btn[aria-current="page"] {
+  color: var(--ink);
+  background: var(--marker);
+  border-color: transparent;
+}
+
+.page-btn:disabled {
+  color: var(--faint);
+  cursor: not-allowed;
+  border-color: var(--line);
+  background: transparent;
+}
+
+/* H-02 상세 */
+.hotissue-detail {
+  max-width: 640px;
+}
+
+.hotissue-detail-meta {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  color: var(--sub);
+  margin-bottom: 8px;
+}
+
+.hotissue-detail-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+
+.hotissue-detail-summary {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--ink);
+  margin-bottom: 24px;
+  white-space: pre-wrap;
+}
+
+.hotissue-detail-summary-error {
+  font-size: 13.5px;
+  color: var(--faint);
+  margin-bottom: 24px;
+}
+
+.hotissue-detail-link {
+  display: inline-block;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  color: var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+
+.hotissue-not-found {
+  padding: 60px 0;
+  font-family: "JetBrains Mono", monospace;
+  color: var(--faint);
+}
+
+.hotissue-not-found a {
+  display: inline-block;
+  margin-top: 12px;
+  color: var(--ink);
+  border-bottom: 1px solid var(--ink);
+}

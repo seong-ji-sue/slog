@@ -8,7 +8,7 @@ function createSql() {
 
 let _sql: ReturnType<typeof createSql> | null = null;
 
-function getSql() {
+export function getSql() {
   if (!_sql) _sql = createSql();
   return _sql;
 }

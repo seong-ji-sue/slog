@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
+    "ai": "^7.0.44",
     "gray-matter": "^4.0.3",
     "next": "^15.3.3",
     "react": "^19.1.0",
