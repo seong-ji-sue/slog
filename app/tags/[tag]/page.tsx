@@ -11,18 +11,28 @@ export async function generateStaticParams() {
   return getTagsList().map((t) => ({ tag: t.slug }));
 }
 
+function decodeTagParam(tag: string): string {
+  try {
+    return decodeURIComponent(tag);
+  } catch {
+    return tag;
+  }
+}
+
 export async function generateMetadata({ params }: Props) {
   const { tag } = await params;
-  const found = getTagsList().find((t) => t.slug === tag);
-  const name = found?.name ?? tag;
+  const decoded = decodeTagParam(tag);
+  const found = getTagsList().find((t) => t.slug === decoded);
+  const name = found?.name ?? decoded;
   return { title: `${name} — SLOG` };
 }
 
 export default async function TagDetailPage({ params }: Props) {
   const { tag } = await params;
-  const found = getTagsList().find((t) => t.slug === tag);
-  const name = found?.name ?? tag;
-  const posts = getPostsByTag(tag);
+  const decoded = decodeTagParam(tag);
+  const found = getTagsList().find((t) => t.slug === decoded);
+  const name = found?.name ?? decoded;
+  const posts = getPostsByTag(decoded);
 
   return (
     <main className="col tags-page">
