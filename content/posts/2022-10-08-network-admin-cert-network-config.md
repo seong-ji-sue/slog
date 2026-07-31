@@ -106,6 +106,8 @@ draft: false
 
 설정 내용 : 영역이름 icqa.or.kr / 일련번호 12 / 주서버 ns.icqa.or.kr / 책임자 admin.icqa.or.kr / 새로고침 간격 900초 / 다시 시도 600초 / 만료 86400초 / 최소 기본값 7200초 / 새 호스트 이름 www, IP 192.168.100.20 / 새 별칭 이름 ftp, 대상 호스트 www
 
+**헷갈리기 쉬운 A vs CNAME** — A 레코드(`www IN A 192.168.100.20`)는 호스트 이름을 실제 IP 주소에 직접 매핑하고, CNAME 레코드(`ftp IN CNAME www`)는 IP가 아니라 다른 호스트 이름에 별칭(alias)을 붙이는 것이다. 즉 `ftp.icqa.or.kr`은 자기 IP를 갖지 않고 `www.icqa.or.kr`을 한 번 더 거쳐서 최종 IP를 찾는다. 그래서 CNAME이 가리키는 대상(`www`)의 IP가 바뀌면 CNAME들은 손댈 필요 없이 자동으로 새 IP를 따라간다.
+
 ### DHCP 설정
 
 **1. 아래 보기와 같이 IP를 할당할 수 있는 DHCP를 설정하시오**

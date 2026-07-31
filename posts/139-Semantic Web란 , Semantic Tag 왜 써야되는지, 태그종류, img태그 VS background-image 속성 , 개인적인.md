@@ -57,6 +57,21 @@ post_id: 139
 
 *태그 사용했을때 구조*
 
+```html
+<!--Semantic Tag로 짜본 기본 레이아웃 예시-->
+<body>
+  <header>여기는 상단(로고, 메뉴)</header>
+  <nav>여기는 네비게이션 메뉴</nav>
+  <main>
+    <article>
+      <section>본문 첫번째 주제</section>
+      <section>본문 두번째 주제</section>
+    </article>
+  </main>
+  <footer>여기는 하단(저작권, 연락처)</footer>
+</body>
+```
+
 ### ***# 개인적인 뇌피셜~!***
 
 원래 div태그로만 감싸고 display 속성으로 상태를 바꿀수 있기에 그룹화 태그는 아무거나 쓰는줄 알았고 구분 하기위해서 식별자(id, class)를 특정하던가 주석으로 표시하는등 이해할수있게 적는줄 알았는데 새로운 깨닭음을 얻은것같음!   

@@ -54,8 +54,8 @@ post_id: 162
 
 - 백엔드 프론트엔드 종합적으로 초기세팅할때 해야되는것
 - express 를 효율적으로 사용하는 방법
-- MVC 모델을 사용하는이유
-- Route , Controller, Service, Server, Model(DAO) 에 어떤 코드를 써야되는지
+- MVC 모델을 사용하는이유(관심사 분리로 유지보수 쉽게 하기 위함 - 아래 질문한것 참고)
+- Route , Controller, Service, Server, Model(DAO) 에 어떤 코드를 써야되는지(Route는 경로 분기만, Controller는 req/res 처리, Service는 비즈니스 로직, Model은 쿼리 - 아래 질의응답 참고)
 - Require말고 import 구문으로 모듈 가져오는 방법
 - Prisma 사용방법, ORM 쓰기
 - 터미널 상에서 테이블 생성 및 문법 사용하는 방법

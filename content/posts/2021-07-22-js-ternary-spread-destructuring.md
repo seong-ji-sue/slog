@@ -113,6 +113,21 @@ console.log([{ ...arr3 }]); // 배열 → 객체 → 배열: 가능
 // console.log([...{ ...arr3 }]); // 객체 → spread: 불가능
 ```
 
+**함정 — spread는 얕은 복사(shallow copy)**
+
+```javascript
+let original = { name: '지수', address: { city: '서울' } };
+let copied = { ...original };
+
+copied.name = '수지';
+console.log(original.name); // '지수' — 최상위 프로퍼티는 복사되어 서로 영향 없음
+
+copied.address.city = '부산';
+console.log(original.address.city); // '부산' — 중첩된 객체는 참조를 공유해서 원본도 바뀜
+```
+
+spread는 한 단계(최상위) 프로퍼티만 복사하고, 값이 객체·배열처럼 참조 타입이면 내부는 여전히 같은 참조를 공유한다. 중첩된 구조까지 완전히 복사(깊은 복사)하려면 `structuredClone()`이나 재귀적으로 spread를 적용하는 등 별도 처리가 필요하다.
+
 ## ✅ 객체 프로퍼티 표기법 (ES2015+)
 
 - 변수 이름과 속성 이름이 같으면 축약 가능
@@ -164,6 +179,17 @@ let { ['좋아해?']: answer } = laptop;   // key를 표현식으로 지정해 �
 console.log(restObj); // { '좋아해?': '아니!', price: '300만원' }
 console.log(answer);  // 아니!
 ```
+
+**중첩 구조 분해**
+
+```javascript
+let user = { name: '지수', address: { city: '서울', zip: '00000' } };
+let { name, address: { city } } = user; // 중첩된 객체에서 바로 city만 꺼내기
+console.log(city); // '서울'
+// console.log(address); // ReferenceError — address 자체는 변수로 선언되지 않음
+```
+
+중첩 구조 분해에서는 중간 단계(`address`)의 이름이 실제 변수로 남지 않는다는 점이 헷갈리기 쉬운 포인트다. `address` 자체도 변수로 쓰고 싶다면 `{ name, address, address: { city } }`처럼 따로 적어줘야 한다.
 
 ## ✅ 에러와 예외 처리
 

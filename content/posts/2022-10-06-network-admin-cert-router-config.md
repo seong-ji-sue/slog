@@ -43,6 +43,19 @@ draft: false
 - "활성화" 문구가 나오면 `no shutdown`을 해야 함
 - 어느 상황에 어떤 명령어와 순서를 써야 하는지 필히 암기함
 
+**명령어 뜻 미리 알아두기** — 뜻을 모르고 외우면 문제 변형에 약해진다.
+
+| 명령어 | 뜻 |
+| --- | --- |
+| `en` (enable) | 사용자 모드 → 관리자(특권) 모드 진입 |
+| `conf t` (configure terminal) | 관리자 모드 → 전역 설정 모드 진입 |
+| `line console 0` | 콘솔 포트(직접 연결하는 관리용 포트)로 진입 — 포트가 1개뿐이라 번호는 항상 0 |
+| `line vty 0 4` | 가상 터미널(Telnet/SSH) 회선 0~4번, 즉 동시 접속 가능한 5개 세션에 설정을 적용 |
+| `no shutdown` | 기본적으로 비활성화(shutdown)돼 있는 인터페이스를 활성화함 |
+| `copy r s` (copy running-config startup-config) | 현재 메모리에만 반영된 설정(running)을 재부팅 후에도 남도록 저장(startup)함 |
+
+`line vty 0 4`처럼 "0 4"가 숫자 두 개인 이유는 라우터가 기본으로 5개(0~4)의 가상 터미널 회선만 지원하기 때문 — 그래서 동시에 Telnet 접속할 수 있는 사용자 수도 기본 5명으로 제한된다.
+
 ## ✅ 문제 총 정리
 
 > 출제 유형: 정보 확인, console 설정, Telnet 설정, fastethernet 설정, Serial 설정, dhcp 설정, 게이트웨이 설정, OSPF 설정, 네트워크 설정 문제

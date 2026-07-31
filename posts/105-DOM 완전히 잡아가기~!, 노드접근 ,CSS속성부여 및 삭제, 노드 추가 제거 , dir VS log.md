@@ -118,6 +118,11 @@ post_id: 105
 
 > **보통은 querySelector를 많이쓰고 Dom의 첫단계이자 꽃이기 때문에 이것은 무조건 필수 구현해보기~!**
 
+**\*추가로 알아두면 좋은것! : getElementsBy~ 계열이 리턴하는 HTMLCollection은 live(살아있는) 상태라서**  
+**DOM이 바뀌면 실시간으로 값도 같이 바뀌는데, querySelectorAll이 리턴하는 NodeList는 static(정적)이라서**  
+**가져온 시점 스냅샷 그대로 유지됨. 그래서 HTMLCollection을 반복문 돌리면서 노드를 추가/삭제하면**  
+**중간에 배열 길이나 인덱스가 밀려서 예상과 다르게 동작하는 버그가 날수 있음 조심!**
+
 ```html
 <!DOCTYPE html>
 <html lang="en">

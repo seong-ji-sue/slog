@@ -74,6 +74,27 @@ const handleUpdate = () => {
 - 객체는 값이 같아도 참조 주소가 다르기 때문에, 의존성 배열에 넣은 state가 아닌 다른 state가 바뀌어도 계속 렌더링될 수 있음
 - `useEffect` 안에서 다른 state를 변경하면 무한루프가 생길 수 있음
 
+**자주 하는 실수 — `useEffect` 콜백에 `async` 직접 붙이기**
+
+`useEffect`의 콜백은 클린업 함수(또는 `undefined`)를 반환해야 하는데, `async function`은 항상 Promise를 반환하기 때문에 React가 클린업 함수로 오해해서 경고가 발생한다. 콜백 자체를 async로 만들지 말고, 내부에 async 함수를 따로 선언해서 즉시 호출해야 한다.
+
+```javascript
+// ❌ 나쁜 예 — useEffect 콜백 자체를 async로 선언
+useEffect(async () => {
+  const res = await fetch('/api/user');
+  setUser(await res.json());
+}, []);
+
+// ✅ 좋은 예 — 내부에 async 함수를 선언하고 즉시 실행
+useEffect(() => {
+  const fetchUser = async () => {
+    const res = await fetch('/api/user');
+    setUser(await res.json());
+  };
+  fetchUser();
+}, []);
+```
+
 ```javascript
 //화면 랜더링되고 난 직후
 useEffect(() => {})

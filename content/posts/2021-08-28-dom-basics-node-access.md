@@ -162,6 +162,26 @@ React를 배우기 전에 무조건 알아야 하는 개념이다. 동적인 HTM
 </body>
 ```
 
+## ✅ 이벤트 버블링과 이벤트 위임
+
+이벤트는 발생한 요소에서 끝나지 않고, 부모 → 조상 방향으로 계속 전파된다. 이걸 이벤트 버블링(bubbling)이라고 한다. `li` 하나를 클릭했을 때 그 `li`의 클릭 이벤트뿐 아니라 부모 `ul`, 그 부모 `body`까지 순서대로 클릭 이벤트가 발생한다고 이해하면 된다.
+
+```html
+<ul id="list">
+  <li>사과</li>
+  <li>바나나</li>
+  <li>포도</li>
+</ul>
+<script>
+  // li마다 각각 리스너를 달지 않고, 부모(ul)에 하나만 달아서 처리 — 이벤트 위임(delegation)
+  document.getElementById('list').addEventListener('click', (e) => {
+    console.log(e.target.textContent); // 실제로 클릭된 li의 내용
+  });
+</script>
+```
+
+이렇게 자식 요소마다 리스너를 개별로 등록하지 않고 공통 부모에 리스너 하나만 등록해서, 이벤트가 버블링되어 올라올 때 `e.target`(실제로 이벤트가 발생한 요소)을 보고 처리하는 패턴을 이벤트 위임(event delegation)이라고 한다. 동적으로 추가되는 요소(나중에 `append`한 `li` 등)에도 별도 등록 없이 그대로 적용되고, 리스너 개수가 줄어 메모리 효율도 좋아진다. 버블링을 막고 싶다면 콜백 안에서 `e.stopPropagation()`을 호출하면 된다.
+
 ## ✅ console.dir vs console.log
 
 값을 확인할 때는 보통 `log`를 주로 쓰고, 나중에 JSON을 다룰 때는 `dir`을 많이 쓰게 될 것 같다.

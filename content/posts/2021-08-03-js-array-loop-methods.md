@@ -184,6 +184,19 @@ let sum = arr.reduce((acc, value, index) => {
 }, 2);
 ```
 
+**함정 — reduce에 초기값을 생략하면**
+
+```javascript
+console.log([].reduce((acc, cur) => acc + cur)); // TypeError: Reduce of empty array with no initial value
+console.log([5].reduce((acc, cur) => acc + cur)); // 5 — 초기값이 없으면 첫 요소가 초기 누산기가 됨
+```
+
+두 번째 인자(초기값)를 생략하면 배열의 첫 번째 요소가 초기 누산기 값이 되고, 콜백은 두 번째 요소부터 실행된다. 배열이 비어 있으면 초기값도 없고 순회할 요소도 없어서 에러가 난다 — 그래서 실무에서는 합계의 시작값(`0`)처럼 초기값을 명시적으로 넘기는 게 안전하다.
+
+**함정 — forEach는 break/return으로 중간에 멈출 수 없음**
+
+특정 조건을 만나면 반복을 중단하고 싶을 때 `forEach` 안에서 `break`를 쓰면 문법 에러가 나고, `return`을 써도 그 콜백 한 번만 빠져나갈 뿐 반복 자체는 끝까지 돈다. 중간에 멈춰야 한다면 `for...of` + `break`를 쓰거나, 찾는 값 하나만 필요하면 `find`/`some`을 쓰는 게 맞다.
+
 ## ✅ 정리
 
 - 배열은 참조 타입이라 그냥 대입하면 원본과 값을 공유함 — 복사가 필요하면 `slice()`나 spread 구문을 쓸 것

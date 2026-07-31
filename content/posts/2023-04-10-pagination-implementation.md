@@ -69,6 +69,8 @@ export default function NoticeBoard({postList}:NoticeBoardProps) {
 const totalPages = Math.ceil(totalPosts/postPerPage)//페이지 갯수
 ```
 
+`Math.floor`가 아니라 `Math.ceil`을 쓰는 이유는 나눠떨어지지 않는 나머지 게시물도 페이지 하나를 차지해야 하기 때문이다. 예를 들어 게시물이 7개, 페이지당 5개면 `7 / 5 = 1.4`인데, `floor`를 쓰면 1페이지로 계산돼 마지막 2개짜리 게시물이 갈 곳이 없어진다. `ceil`을 쓰면 2페이지로 계산돼 5개 + 2개로 정확히 나뉜다.
+
 ## ✅ 페이지 그룹마다 표시할 페이지 구하기
 
 `Array.from`을 쓰는 이유는 전체 페이지 수만큼 페이지 번호가 1씩 늘어난 배열이 필요하기 때문이다.
@@ -101,6 +103,10 @@ export default function Pagination({paginate,totalPosts,postPerPage,currentPage}
 	const endPage = 5 * pageGroup - 1; //페이지 끝
 	const visiblePages = pages.slice(startPage, endPage + 1);//보여지는 페이지
 ```
+
+**엣지케이스 — 마지막 그룹이 5개를 못 채울 때**
+
+전체 페이지가 23개라면 마지막 그룹은 `(21, 22, 23)` 3개짜리다. `pages.slice(startPage, endPage + 1)`은 `endPage`가 배열 길이를 넘어가도 에러 없이 존재하는 만큼만 잘라주기 때문에, 별도 분기 없이도 자동으로 3개만 반환된다. `slice`가 범위를 벗어난 인덱스를 알아서 배열 끝까지로 처리해주는 성질을 이용한 것이다.
 
 ## ✅ `<` `>` 표시 여부와 클릭했을 때 이동할 페이지
 

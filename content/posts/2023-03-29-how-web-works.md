@@ -101,6 +101,8 @@ DOM과 CSSOM을 결합해 렌더 트리를 만듦. `meta`나 `display: none` 속
 
 리플로우가 발생한 레이아웃을 실제 화면에 그려주는 작업. 텍스트, 색, 이미지, 그림자 효과가 모두 처리됨.
 
+**Reflow와 Repaint는 다르다** — 크기·위치처럼 레이아웃 자체가 바뀌면 Reflow(레이아웃 재계산) 후 Repaint까지 이어지지만, `color`나 `background-color`처럼 요소의 위치·크기에 영향을 주지 않는 속성만 바뀌면 Reflow 없이 Repaint만 발생한다. Repaint가 Reflow보다 비용이 적기 때문에, 애니메이션 등 자주 변경되는 스타일은 가능하면 `transform`·`opacity`처럼 Reflow를 일으키지 않는 속성으로 처리하는 게 성능에 유리하다.
+
 ![DOM 생성 파이프라인](/images/204/img_04.png)
 
 **Reflow 최적화 방법**

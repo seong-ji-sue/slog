@@ -121,3 +121,18 @@ order : 음수(왼) or 양수(오)
 | space-between | 여러 줄들 사이에 동일한 간격을 둡니다. |
 | space-around | 여러 줄들 주위에 동일한 간격을 둡니다. |
 | stretch | 여러 줄들을 컨테이너에 맞도록 늘립니다. |
+
+- flex-grow, flex-shrink, flex-basis 속성 (자식 크기 관련인데 위에서 빠뜨렸음, 진짜 중요함)
+
+|  |  |
+| --- | --- |
+| 속성 | 뭥미? |
+| flex-basis | 아이템의 기본 크기(늘어나거나 줄어들기 전 기준 크기), width/height보다 우선순위 높음 |
+| flex-grow | 남는 공간을 얼마나 나눠가질지 비율(숫자), 기본값 0이라 안주면 안늘어남 |
+| flex-shrink | 공간 부족할때 얼마나 줄어들지 비율(숫자), 기본값 1이라 기본적으로는 줄어듬 |
+
+```css
+/*flex-grow, flex-shrink, flex-basis 한번에 쓰는 축약형*/
+flex: <flex-grow> <flex-shrink> <flex-basis>;
+/*ex) flex: 1 1 0; 이러면 아이템들이 남는공간 똑같이 나눠가짐(자주쓰는 패턴)*/
+```

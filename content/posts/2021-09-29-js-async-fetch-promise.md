@@ -55,6 +55,25 @@ console.log('Hello Again');       // 3번 — 바로 실행
 
 ![이벤트 루프 동작 예시](/images/127/img_02.png)
 
+**함정 — 태스크 큐는 사실 두 종류다**
+
+"콜스택이 비면 태스크 큐에서 꺼내온다"는 설명은 단순화한 것이고, 실제로는 큐가 두 개다.
+
+- 마이크로태스크 큐(microtask queue) — `Promise.then/catch/finally`, `queueMicrotask`의 콜백이 여기 쌓임
+- 매크로태스크 큐(macrotask/task queue) — `setTimeout`, `setInterval`, I/O 콜백이 여기 쌓임
+
+이벤트 루프는 매크로태스크를 하나 실행할 때마다, 다음 매크로태스크로 넘어가기 전에 마이크로태스크 큐를 **완전히 비운다**. 그래서 지연 시간을 0으로 맞춰도 `Promise`가 `setTimeout`보다 먼저 실행된다.
+
+```javascript
+console.log('1');
+setTimeout(() => console.log('2'), 0);        // 매크로태스크
+Promise.resolve().then(() => console.log('3')); // 마이크로태스크
+console.log('4');
+
+// 실행 순서: 1 → 4 → 3 → 2
+// 둘 다 "즉시"처럼 보여도 마이크로태스크가 항상 먼저 처리됨
+```
+
 ## ✅ fetch 함수란
 
 프론트가 서버에 원하는 데이터를 요청할 수 있게 해주는 함수. 백엔드가 데이터를 보내도 fetch(또는 이에 준하는 통신 수단) 없이는 프론트에서 받을 방법이 없다.

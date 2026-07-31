@@ -153,6 +153,23 @@ ssh -Tvv git@git.netand.co.kr
 
 이런 경우는 SSH 설정 문제가 아니라 서버·네트워크 정책 문제이므로, config를 아무리 손봐도 해결되지 않는다. 먼저 해당 서버가 SSH 접근을 허용하는지부터 확인해야 한다.
 
+### 자주 걸리는 함정 — Permission denied (publickey)
+
+포트는 열려 있는데 인증에서 막히는 경우도 흔하다. 원인이 다양해서 하나씩 순서대로 좁혀가야 한다.
+
+```bash
+# 1. ssh-agent가 재부팅 후 초기화돼 키를 다시 못 불러오는 경우 — 에이전트에 키가 등록됐는지 확인
+ssh-add -l
+
+# 2. config의 IdentityFile 경로가 실제 키 파일과 다른 경우 — verbose 모드로 어떤 키를 시도하는지 확인
+ssh -vT git@github.com
+
+# 3. 공개 키(.pub)를 GitHub/GitLab 계정에 미처 등록하지 않은 경우
+cat ~/.ssh/hub.pub   # 이 내용을 GitHub Settings > SSH Keys에 등록했는지 재확인
+```
+
+`ssh-add -l`에 키가 안 보이면 `ssh-agent`가 새 셸 세션에서 초기화된 것이므로 `eval $(ssh-agent)`부터 다시 실행하고 `ssh-add`로 키를 재등록해야 한다. config를 제대로 짰는데도 안 되는 경우 대부분은 여기서 걸린다.
+
 ## ✅ git clone 잘 되는지 확인
 
 ### SSH clone 주소 형식

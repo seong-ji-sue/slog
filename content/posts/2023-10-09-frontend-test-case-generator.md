@@ -99,6 +99,8 @@ createFormTestSuite("AWS SE 폼 검증", awsSeCases, (testCase) => {
 });
 ```
 
+`createFormTestSuite`는 케이스 배열을 받아 `describe`로 스위트 하나를 감싸고, 케이스마다 `test`를 개별로 등록하는 얇은 래퍼다. 케이스 하나하나가 독립된 `test`로 등록되기 때문에, 특정 필드 하나(`engineName - pattern` 같은)만 실패해도 리포트에서 어떤 케이스가 깨졌는지 바로 식별할 수 있다는 게 `test.each` 배열 하나로 뭉뚱그리는 것보다 나은 지점이었다. `runCase` 콜백을 별도 인자로 받게 한 이유도 있다 — 실제 검증 대상 함수(`validateSecretEngineField`)는 엔진마다 달라질 수 있는데, 실행 로직(`describe`/`test` 등록)은 고정하고 "무엇을 검증할지"만 호출부에서 주입받는 형태로 나누면 엔진이 늘어도 제너레이터 자체는 손댈 일이 없기 때문이다.
+
 케이스 파일(`*.cases.ts`)만 새로 정의하면, 실행 로직(`createFormTestSuite`)은 그대로 재사용된다. GCP나 이후 추가되는 엔진도 케이스 파일 하나 추가로 커버 가능해졌다.
 
 ### ✅ 결과 & 배운 점

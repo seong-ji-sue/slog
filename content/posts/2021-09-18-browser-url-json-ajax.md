@@ -108,6 +108,24 @@ xhr.onerror = function () {
 xhr.send();
 ```
 
+**함정 — fetch로 JSON을 보낼 때 Content-Type을 빠뜨리면**
+
+```javascript
+fetch('https://example.com/api/users', {
+  method: 'POST',
+  body: JSON.stringify({ name: 'Jery' }),
+  // headers 없이 보내면 서버가 body를 어떤 타입으로 봐야 할지 알 수 없음
+});
+
+fetch('https://example.com/api/users', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' }, // 서버가 body를 JSON으로 파싱하려면 필요
+  body: JSON.stringify({ name: 'Jery' }),
+});
+```
+
+`fetch`는 `headers`를 명시하지 않아도 요청 자체는 보내지지만, 서버(특히 Express 같은 프레임워크)는 `Content-Type` 헤더를 보고 body를 어떻게 파싱할지 결정한다. JSON 문자열을 보내면서 이 헤더를 빠뜨리면 서버 쪽에서 body가 파싱되지 않거나 빈 값으로 도착하는 문제가 생길 수 있다.
+
 ## ✅ HTTP 상태 코드
 
 ![HTTP 상태 코드 분류](/images/126/img_09.jpg)

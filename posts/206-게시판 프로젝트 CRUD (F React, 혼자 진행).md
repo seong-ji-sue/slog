@@ -84,9 +84,13 @@ Javascript, Typescript, React, React Hooks, React Router, webpack, babel
 
 → useReducer, useContext 사용
 
+**props로 하다가 갈아탄 이유**
+
+list → detail → create/update로 페이지가 4개나 되다 보니 게시글 데이터를 계속 props로 내려야 했음. 중간에 라우팅만 담당하는 컴포넌트도 그냥 데이터를 다음 자식한테 넘겨주는 역할만 하게 되서, 필드 하나 추가할 때마다 관계 없는 컴포넌트까지 다 손대야 되는 상황이 됨. 그래서 데이터를 쓰는 곳에서 바로 꺼내 쓰게 Context로 옮김.
+
 Context를 사용하면 라이브러리 설치가 없지만 목적마다 Context를 만들어야 됨
 
-그래서 Redux나 Recoil을 사용하지만 해당 프로젝트는 규모가 작아서 내장 훅을 사용했음
+그래서 Redux나 Recoil을 사용하지만 해당 프로젝트는 과제 하나짜리라 규모가 작아서 내장 훅을 사용했음. 라이브러리 설치하고 세팅할 시간에 그냥 useReducer + useContext로 짜는게 더 빠르다고 판단함
 
 **App.js 관리**
 
@@ -276,5 +280,9 @@ const pageGroup = useRef<number>(1)
 //props로 넘기는 페이지 변경 함수
 const paginate = useCallback((pageNumber:number):void => {setCurrentPage(pageNumber)},[])
 ```
+
+### **✔️ 느낀 점**
+
+혼자 처음부터 끝까지 CRUD를 짜보니까 팀 프로젝트할 때는 몰랐던 부분들이 많이 보임. 특히 상태 관리를 어디서 할지 미리 안 정하고 시작하면 나중에 갈아엎어야 된다는 걸 직접 겪음(App.js props → Context로 갈아탄 것). 다음에 비슷한 규모 프로젝트하면 처음부터 전역 상태를 어디까지 쓸지 정하고 시작할 것 같음.
 
 ![필독.png](../images/206/img_04.png)

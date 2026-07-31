@@ -386,6 +386,19 @@ FROM tb_sal;
 - **NULLIF** — 첫 번째와 두 번째가 같으면 NULL, 다르면 첫 번째 값을 반환
 - **COALESCE** — NULL이 아닌 첫 번째 값을 반환
 
+```sql
+-- NVL: 보너스가 NULL이면 0으로 취급해서 급여에 더함
+SELECT emp_no, sal + NVL(bonus, 0) AS total_pay FROM tb_emp;
+
+-- NVL2: 보너스가 있으면 '지급', 없으면 '미지급'
+SELECT emp_no, NVL2(bonus, '지급', '미지급') AS bonus_status FROM tb_emp;
+
+-- COALESCE: 휴대폰 -> 집전화 -> 없으면 '연락처없음' 순으로 첫 번째 값 채택
+SELECT emp_no, COALESCE(mobile_no, home_no, '연락처없음') AS contact FROM tb_emp;
+```
+
+실무에서 자주 하는 실수는 `SUM(bonus)`처럼 집계 함수 안에 NULL이 섞여 있는데 이를 0으로 착각하는 것이다. `SUM`은 NULL을 무시하고 계산하므로 값 자체는 맞게 나오지만, 행 전체가 NULL이라 아무 것도 없으면 `SUM` 결과도 NULL이 된다. 이때 `NVL(SUM(bonus), 0)`으로 감싸지 않으면 "합계가 0"이 아니라 "합계가 NULL"인 화면이 나가서 혼동을 준다.
+
 ## ✅ GROUP BY, ORDER BY
 
 **GROUP BY**

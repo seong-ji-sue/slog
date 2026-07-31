@@ -159,7 +159,7 @@ Failed to construct transformer:  Error: error:0308010C:digital envelope routine
 
 ### 2. 빌드는 성공, 에뮬레이터만 안 뜸 — 원인은 node 버전
 
-node 17에서 발생하는 OpenSSL 호환성 문제다. node 17 → 16(LTS)로 다운그레이드하면 해결된다.
+node 17에서 발생하는 OpenSSL 호환성 문제다. node 17부터 내장 OpenSSL이 1.x에서 3.0으로 올라가면서 예전에 흔히 쓰이던 일부 해시 알고리즘(예: md4 기반 해시)을 기본적으로 막아버렸는데, 당시 오래된 버전의 webpack·metro 번들러가 내부적으로 이 알고리즘을 쓰고 있어서 `ERR_OSSL_EVP_UNSUPPORTED` 에러가 난다. 번들러 자체를 최신 버전으로 올려도 해결되지만, 프로젝트 구조를 안 건드리고 빠르게 해결하려면 node 17 → 16(LTS)로 다운그레이드하는 쪽이 간단하다.
 
 ```
 error: TypeError: Cannot read properties of undefined (reading 'transformFile')

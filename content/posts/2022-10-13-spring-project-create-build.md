@@ -60,6 +60,8 @@ java -jar hello-spring-0.0.1-SNAPSHOT.jar
 
 `gradlew.bat build`로 빌드하면 `build/libs` 폴더에 jar 파일이 생기고, 그걸 `java -jar`로 바로 실행할 수 있다.
 
+**왜 `gradle`이 아니라 `gradlew`(Gradle Wrapper)를 쓰는가** — `gradlew`는 프로젝트에 포함된 실행 스크립트로, 로컬에 Gradle이 설치돼 있지 않아도 프로젝트에 지정된 버전의 Gradle을 자동으로 내려받아 그 버전으로 빌드한다. 개발자마다 전역에 설치된 Gradle 버전이 달라서 "내 컴퓨터에선 되는데 남의 컴퓨터에선 안 되는" 문제를 막기 위한 장치다. 그래서 `Spring Initializr`로 만든 프로젝트는 전역 Gradle 대신 항상 `./gradlew`(Windows는 `gradlew.bat`)로 빌드하는 게 원칙이다.
+
 ## ✅ Summary
 
 - 프로젝트 생성은 Spring Initializr에서 Gradle/Java 11/Spring Web+Thymeleaf 조합으로 진행함

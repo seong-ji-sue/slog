@@ -35,7 +35,8 @@ post_id: 151
 ### ***# 두번째 질문들~!! 궁금한것!~!~! 😃 - git clone할때(리엑트버전)***
 
 **문제** : git push할때 package.json 만 넘겨주면 된다고 하셨는데 만약 팀원들이 git clone하게된다면 node\_modules내용이 자동으로 다운받는 개념인가요? 아니면 npm install로 각각 node\_modules 파일을 다운받아야되는 개념인가요?   
-**답변** : 후자가 맞음 npm install하면 node\_modules 가 자동적으로 다운받아지는데 package.json - dependencies 까지 다운받아지는거는 아님 그래서 npm install slider —-save 이렇게해서 다운 받아야됨
+**답변** : 후자가 맞음 npm install하면 node\_modules 가 자동적으로 다운받아지는데 package.json - dependencies 까지 다운받아지는거는 아님 그래서 npm install slider —-save 이렇게해서 다운 받아야됨  
+node_modules는 용량이 크고 사람마다 OS·환경이 다를 수 있어서 git에는 안올리고(.gitignore) package.json에 적힌 목록 그대로 각자 npm install로 새로 받는 방식임
 
 ### **# 세번째 질문들 ~!! 에러뜬것들~!!😁🤣😅 - self closing tag 오류**
 
@@ -73,6 +74,7 @@ input태그같은경우 HTML에서는 닫는 태그 없이 썼지만 JSX는 <태
 **해결방안** : HTML이랑 JSX랑 문법이 다르기에 이게 fontawsome에서도 구현방법이 다른것같음
 
 일단 npm으로 다운받고 import한후 Component태그로 써줘야됨~!  
+HTML은 CDN에서 불러온 아이콘 폰트 클래스를 전역으로 바로 쓰는 방식이고, 리엑트는 컴포넌트 단위로 번들링되기 때문에 CDN 방식이 안먹혀서 npm 패키지로 설치 후 import해서 써야됨
 
 **링크** : <https://www.digitalocean.com/community/tutorials/how-to-use-font-awesome-5-with-react>
 

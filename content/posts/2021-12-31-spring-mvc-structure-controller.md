@@ -58,6 +58,9 @@ draft: false
 
 - `void` — 호출한 URL과 동일한 이름의 jsp를 호출
 - `String` — 리턴한 문자열과 같은 이름의 jsp를 호출
+- 이 외에도 `ModelAndView`(모델 데이터와 뷰 이름을 함께 담아 리턴), `ResponseEntity`(상태 코드·헤더·바디를 함께 제어) 등 더 명시적인 리턴 타입도 지원한다
+
+**함정** — `void` 리턴은 코드가 짧아 보이지만, "요청 URL과 이름이 같은 jsp를 찾는다"는 규칙이 코드 어디에도 명시돼 있지 않다. URL 매핑 경로를 리팩터링하면 연결된 jsp 이름도 같이 바뀌어야 하는데, 이 관계가 눈에 안 보여서 실수하기 쉽다. 그래서 실무에서는 `void`보다 `return "viewName"`처럼 뷰 이름을 명시하는 `String` 리턴 방식을 더 권장한다.
 
 <!-- 이미지 제안: Request → DispatcherServlet → @RequestMapping Controller → ViewResolver → jsp 응답까지 이어지는 요청 처리 흐름 다이어그램 -->
 

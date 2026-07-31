@@ -70,6 +70,33 @@ console.log(currentTime); // 1629532547424
 
 (참고: [Date 객체 관련 정리](https://goddaehee.tistory.com/234))
 
+**값을 바꾸는 set\* 메서드** — `get*`이 값을 꺼낸다면, `set*`은 값을 직접 바꾼다. Date 객체는 참조 타입이라 `set*`을 호출하면 원본 객체 자체가 바뀐다는 점에 주의해야 한다(새 Date를 리턴하는 게 아님).
+
+```javascript
+let d = new Date(2021, 7, 21); // 2021-08-21
+d.setFullYear(2022);
+d.setMonth(0);   // 0 = 1월
+d.setDate(15);
+console.log(d);  // 2022-01-15
+```
+
+| Date 메서드 | 설명 |
+| --- | --- |
+| `setFullYear(연도)` | 연도를 변경 |
+| `setMonth(월)` | 월을 변경 (0부터 시작) |
+| `setDate(일)` | 일을 변경 |
+| `setHours(시)` | 시를 변경 |
+
+**함정 — 문자열로 Date를 만들 때**
+
+```javascript
+new Date('2021-08-21');       // ISO 형식 — 모든 최신 브라우저에서 안전하게 파싱됨
+new Date('August 21, 2021');  // 영어 형식 — 대부분 파싱되지만 브라우저마다 미묘하게 다를 수 있음
+new Date('21/08/2021');       // 지역 형식 — 브라우저에 따라 다르게 해석되거나 Invalid Date가 될 수 있음
+```
+
+`Date` 생성자에 문자열을 넘길 때는 브라우저마다 파싱 결과가 다를 수 있다. ISO 8601 형식(`YYYY-MM-DD` 또는 `YYYY-MM-DDTHH:mm:ss`)으로 넘기는 게 가장 안전하다.
+
 ## ✅ String 메서드
 
 ```javascript

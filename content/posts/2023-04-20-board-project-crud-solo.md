@@ -178,6 +178,8 @@ export function usePostDispatch() {
 }
 ```
 
+Context를 State/Dispatch 두 개로 쪼갠 이유도 있다. Context는 값이 하나라도 바뀌면 그 Context를 구독하는 컴포넌트가 전부 리렌더링되는 특성이 있다. State와 Dispatch를 하나의 Context에 합쳐뒀다면, `dispatch` 함수 자체는 안 바뀌어도 `state`가 바뀔 때마다 dispatch만 쓰는 컴포넌트까지 같이 리렌더링됐을 것이다. 두 Context로 분리하면 상태값만 구독하는 컴포넌트와 dispatch 함수만 구독하는 컴포넌트를 구분할 수 있어 불필요한 리렌더링을 줄일 수 있다.
+
 사용하는 쪽은 이렇게 단순해졌다.
 
 ```javascript

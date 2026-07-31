@@ -92,6 +92,23 @@ students.forEach((el) => {
 console.log(`총점 : ${total}, 평균 : ${Math.floor(total / students.length)}`);
 ```
 
+## ✅ 객체 순회 시 주의할 점
+
+`for...in`으로 객체를 순회하면 객체 자신의 프로퍼티뿐 아니라, 프로토타입 체인을 따라 상속받은 열거 가능한(enumerable) 프로퍼티까지 순회 대상에 포함될 수 있다. 반면 `Object.keys()`/`Object.values()`/`Object.entries()`는 객체 자신이 직접 가진 프로퍼티만 대상으로 한다. 그래서 실무에서는 `for...in`보다 `Object.keys()` + `forEach`/`for...of` 조합을 더 안전하게 여기는 경우가 많다.
+
+```javascript
+let base = { shared: '공통값' };
+let obj = Object.create(base); // base를 프로토타입으로 갖는 객체
+obj.own = '내 값';
+
+for (let key in obj) {
+  console.log(key); // 'own', 'shared' — 상속받은 프로퍼티까지 순회됨
+}
+console.log(Object.keys(obj)); // ['own'] — 자기 자신의 프로퍼티만
+```
+
+또한 객체를 다른 변수에 대입하는 것은 배열과 마찬가지로 주소값 복사다. 완전히 독립된 복사본이 필요하면 `{ ...obj }`(spread) 또는 `Object.assign({}, obj)`를 쓰되, 이 두 방법 모두 얕은 복사라서 중첩된 객체는 여전히 참조를 공유한다는 점을 기억해야 한다.
+
 ## ✅ 내장 객체 — DOM과 BOM
 
 자바스크립트 자체가 기본 제공하는 객체를 내장 객체라 하고(`Number`, `Error`, `Math`, `Date` 등), 직접 만드는 건 사용자 정의 객체다. 그중 프론트엔드에서 매일 마주치는 게 DOM과 BOM이다.

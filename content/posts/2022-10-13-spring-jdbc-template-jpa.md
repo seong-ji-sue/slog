@@ -164,6 +164,8 @@ private EntityManager em;
 
 기존 JDBC에서 반복되던 코드를 줄이고, 쿼리문을 직접 작성하지 않아도 JPA가 대신 만들어준다.
 
+**왜 `em.persist()`만 호출해도 되는가** — JPA는 `EntityManager`가 관리하는 **영속성 컨텍스트(persistence context)**라는 1차 캐시 공간에 엔티티 객체를 올려두고 상태를 추적한다. `save`처럼 명시적으로 호출하지 않아도, 트랜잭션이 끝나는 시점에 영속성 컨텍스트가 "커밋 전 마지막으로 처음 상태와 지금 상태를 비교"하는 **더티 체킹(dirty checking)**을 수행해서, 값이 바뀐 필드가 있으면 자동으로 `UPDATE` 쿼리를 만들어 실행한다. `save(person)`처럼 매번 명시적으로 저장 메서드를 호출해야 하는 JDBC Template과 달리, JPA는 엔티티 값만 바꿔두면 트랜잭션 종료 시점에 알아서 반영되는 것도 이 메커니즘 덕분이다.
+
 ```inform7
 @Override
     public Person save(Person person) {

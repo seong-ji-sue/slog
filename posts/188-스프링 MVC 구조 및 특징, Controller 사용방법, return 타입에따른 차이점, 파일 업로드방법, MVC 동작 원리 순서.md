@@ -68,6 +68,8 @@ void : 호출하는 URL 과 동일한 이름의 jsp
 
 String : return 과 같은 jsp 파일을 호출
 
+(관례 경로 규칙 덕분에 단순히 화면만 보여주면 되는 메소드는 return을 안 써도 돼서 코드가 짧아진다. 다만 조건에 따라 다른 화면으로 보내야 될 때는 String으로 명시적으로 return 해줘야된다)
+
 **1. 사용자의 Request는 DispatcherServlet에서 먼저 처리한다**
 
 ```java

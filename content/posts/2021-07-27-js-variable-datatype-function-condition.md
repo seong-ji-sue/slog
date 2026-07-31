@@ -245,6 +245,10 @@ switch (num) {
 }
 ```
 
+**자주 하는 실수 — switch에서 break를 빠뜨리면**
+
+위 예시의 `case null:` 아래에는 일부러 `break`를 안 넣어서 `default`까지 같이 실행되도록 했다(폴스루, fall-through). 의도한 폴스루라면 상관없지만, 대부분의 실수는 `break`를 깜빡해서 원치 않는 case까지 줄줄이 실행되는 경우다. 각 `case` 끝에는 `break`(또는 `return`)를 명시적으로 넣는 습관을 들이는 게 안전하다.
+
 ```javascript
 // for와 while — 결과는 동일
 for (var i = 1; i < 5; i++) {

@@ -152,6 +152,8 @@ java -jar lombok.jar
 </plugin>
 ```
 
+**자주 하는 실수** — `pom.xml`에 의존성만 추가하고 IDE용 Lombok 플러그인을 설치하지 않으면, Maven 빌드 자체는 성공하는데 IDE 화면에는 `getter`·`setter`가 안 보인다며 빨간 줄(에러)이 뜬다. Lombok은 컴파일 시점에 어노테이션 프로세서가 바이트코드에 메서드를 주입하는 방식이라 빌드는 문제없이 되지만, IDE는 그 생성 과정을 별도 플러그인 없이는 알지 못해서 코드 편집기에서만 에러로 보이는 것이다. Eclipse는 `java -jar lombok.jar`로 IDE에 직접 연결해야 하고, IntelliJ는 `Settings → Plugins`에서 Lombok 플러그인을 설치해야 한다.
+
 연결이 잘 됐는지 파일을 만들어 콘솔 출력으로 확인한다.
 
 ```java

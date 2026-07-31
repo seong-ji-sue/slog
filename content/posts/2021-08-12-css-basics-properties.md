@@ -86,6 +86,12 @@ CSS 속성이 워낙 많아서 처음엔 뭘 언제 써야 할지 감이 안 왔
 | `position` | `relative` — 원래 위치 기준 이동, 다른 요소에 영향 안 줌 / `static` — 기본값, 위치 속성 무시 / `fixed` — 브라우저 기준 고정, 스크롤해도 그대로 있음 / `absolute` — 가장 가까운 `position` 지정된 부모 기준 이동 |
 | `float`, `clear` | 그리드를 만드는 방법 |
 
+**함정 — margin collapse(마진 병합)**
+
+세로 방향으로 인접한 두 블록 요소의 `margin-top`/`margin-bottom`은 두 값이 더해지는 게 아니라, 둘 중 더 큰 값 하나로 합쳐진다(margin collapse). 예를 들어 위 요소의 `margin-bottom: 20px`과 아래 요소의 `margin-top: 30px`이 만나면 실제 간격은 50px이 아니라 30px이 된다. 가로 방향 마진이나 `padding`에는 이 현상이 없고, `display: flex`/`grid` 컨테이너 내부 자식에게도 적용되지 않는다.
+
+**box-sizing 기본값** — `box-sizing`의 기본값은 `content-box`다. `width`/`height`로 지정한 값은 콘텐츠 영역만의 크기이고, `padding`·`border`는 그 바깥에 추가로 더해진다. 그래서 `padding`을 주면 요소의 실제 크기가 지정한 값보다 커지는 문제가 생기는데, `box-sizing: border-box`를 주면 `padding`·`border`까지 포함해서 지정한 크기 안에서 계산되므로 레이아웃이 훨씬 예측 가능해진다.
+
 ## ✅ 폰트 설정 방법
 
 1. 사용자가 가진 폰트 사용 — `font-family: 폰트1, 폰트2, 폰트종류;` (폰트1이 없으면 폰트2, 그것도 없으면 폰트종류 중 있는 걸 사용)

@@ -35,6 +35,22 @@ slug: "react-rendering-optimization"
 - 컴포넌트를 매핑할 때 key 값으로 index를 사용하지 않기
 - state 변경 시 함수 콜백(`setState(prev => ...)`)을 쓰면 의존성 배열에 추가하지 않아도 됨
 
+**key로 index를 쓰면 안 되는 이유**: React는 리렌더링할 때 이전 가상 DOM과 새 가상 DOM을 `key`를 기준으로 비교해서 "같은 요소인지"를 판단한다. 배열 중간에 항목을 추가·삭제·정렬하면 각 항목의 index가 밀리는데, key로 index를 쓰면 실제로는 다른 데이터인데도 React가 "같은 요소"로 착각해 엉뚱한 컴포넌트에 이전 state(입력값, 체크박스 상태 등)가 남는 버그가 생긴다.
+
+```jsx
+// 문제 — todos 배열 맨 앞에 새 항목을 추가하면 기존 항목들의 index가 전부 밀림
+{todos.map((todo, index) => (
+  <TodoItem key={index} todo={todo} /> // 리스트 순서가 바뀌면 state가 잘못된 항목에 붙음
+))}
+
+// 해결 — 데이터 자체의 고유값을 key로 사용
+{todos.map((todo) => (
+  <TodoItem key={todo.id} todo={todo} />
+))}
+```
+
+정렬·삽입·삭제가 없는 정적인 리스트라면 index를 써도 당장 문제가 되지 않지만, 습관적으로 `todo.id`처럼 고유한 값을 쓰는 편이 안전하다.
+
 **렌더링 과정과 조정(reconciliation)**
 
 1. React가 DOM 트리를 구성하는 초기 렌더링을 함

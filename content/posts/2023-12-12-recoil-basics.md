@@ -158,6 +158,21 @@ export const todoListState = atom({
 });
 ```
 
+**key는 애플리케이션 전체에서 유일해야 함** — Recoil은 atom·selector를 이 key로 내부 등록하기 때문에, 다른 파일에서 같은 key 문자열을 실수로 재사용하면 다음과 같은 런타임 에러가 난다.
+
+```javascript
+// store/todoAtom.js
+export const listState = atom({ key: 'listState', default: [] });
+
+// store/userAtom.js (다른 파일에서 실수로 같은 key 사용)
+export const listState2 = atom({ key: 'listState', default: null });
+// Error: Duplicate atom key "listState". This is a FATAL ERROR in
+// production. But it is safe to ignore this warning if it occurred
+// because of hot module replacement.
+```
+
+파일이 늘어날수록 겹치기 쉬우므로 `도메인/역할` 형태로 네임스페이스를 붙이는 규칙(`todo/listState`, `user/loginState`)을 정해두는 게 안전하다.
+
 ### Hooks 종류
 
 atom·selector 상태를 get/set하기 위해 Recoil이 제공하는 Hooks들이다.

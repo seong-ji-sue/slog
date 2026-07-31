@@ -94,6 +94,7 @@ post_id: 183
 
 - **새로운유저 :** 회원가입 -> 로그인 -> connectDB -> preference -> 메인 -> Jobsetting
 - **기존유저 :** 회원가입 -> 로그인 -> main -> Jobsetting
+- 새로 가입한 유저는 아직 Blackboard 시스템이랑 연결할 DB 정보(connectDB)나 개인 설정(preference)이 하나도 없는 상태라 그 단계부터 순서대로 거치게 라우팅을 막아놨고, 이미 다 설정해둔 기존유저는 그 단계를 다시 밟을 필요가 없어서 바로 메인으로 가도록 분기했다.
 
 ![20211208_172413.png](../images/183/img_05.png)
 

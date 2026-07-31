@@ -65,6 +65,13 @@ draft: false
 2. 서버는 로그인 정보 확인 후 해싱으로 암호화된 Token을 클라이언트에게 전달함
 3. 클라이언트는 암호화된 Token으로 이후 모든 요청에서 인증을 받을 수 있음 (단, Token을 보관하고 있어야 함)
 
+**실제로 요청에 어떻게 실어 보내나** — 서버가 발급한 토큰은 이후 요청의 HTTP 헤더 중 `Authorization`에 `Bearer` 스킴을 붙여서 함께 보낸다. 서버는 이 헤더를 읽어 토큰을 검증하고 요청을 처리한다.
+
+```http
+GET /api/me HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+```
+
 ![JWT 동작 방식](/images/202/img_04.png)
 
 ![JWT 흐름](/images/202/img_05.png)

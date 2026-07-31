@@ -97,6 +97,8 @@ HTML과 템플릿 엔진을 거치지 않고 결과를 그대로 넘기는 방�
 
 동작 순서는 리턴한 문자열이 `HttpMessageConverter`에 전달되고, 여기에 속한 `StringConverter` 또는 `JsonConverter`가 브라우저에 전달하는 흐름이다.
 
+**참고** — 클래스 내부 모든 메서드가 API 응답만 반환한다면, 메서드마다 `@ResponseBody`를 반복해서 붙이는 대신 클래스 선언에 `@RestController`(`@Controller` + `@ResponseBody`를 합친 어노테이션) 하나만 붙이면 된다. 요즘 REST API 서버를 만들 때는 `@Controller` + 메서드별 `@ResponseBody` 조합보다 `@RestController`를 기본으로 쓰는 경우가 많다.
+
 ```dart
 /**
  * API 방식

@@ -82,6 +82,30 @@ long a = 20L;
 
 ![타입별 비트 예시](/images/13/img_05.png)
 
+**자주 하는 실수 1 — 오버플로우**
+
+`int`의 최댓값(`2^31-1 = 2147483647`)을 넘기면 에러 없이 조용히 최솟값 쪽으로 넘어간다(wrap-around). 예외가 나지 않기 때문에 디버깅할 때 놓치기 쉽다.
+
+```java
+int a = Integer.MAX_VALUE; // 2147483647
+System.out.println(a + 1); // -2147483648 — 컴파일·런타임 에러 없이 조용히 넘어감(overflow)
+```
+
+**자주 하는 실수 2 — `==`로 Wrapper 타입 비교**
+
+`int`, `long` 같은 기본형이 아니라 `Integer`, `Long` 같은 Wrapper(참조형) 타입을 `==`로 비교하면 값이 아니라 객체 주소를 비교하게 된다. 특히 자바는 `-128 ~ 127` 범위의 `Integer`를 내부적으로 캐싱해서 재사용하기 때문에, 이 범위 안에서는 우연히 `==`가 `true`가 나와서 더 헷갈린다.
+
+```java
+Integer a = 127, b = 127;
+System.out.println(a == b); // true — 캐시된 동일 객체를 참조
+
+Integer c = 128, d = 128;
+System.out.println(c == d); // false — 캐시 범위를 벗어나 서로 다른 객체
+
+// 값 비교는 항상 equals()를 써야 함
+System.out.println(c.equals(d)); // true
+```
+
 ## ✅ 자바 메모리 구조 — Stack, Heap, Data, Code
 
 data와 code 영역은 보통 객체와 함수가 들어가는 부분인데, 이 부분은 나중에 더 배우고 다듬을 예정이다. 참고: [beomseok95.tistory.com/221](https://beomseok95.tistory.com/221)

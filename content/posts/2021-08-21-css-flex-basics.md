@@ -36,6 +36,22 @@ float는 `display` 속성에 따라 동작이 달라지고, 원하는 위치(상
 실습: [flexboxfroggy.com](https://flexboxfroggy.com/#ko) (개구리 잡기 게임으로 flex 속성을 익힐 수 있음)
 참고: [studiomeal.com/archives/197](https://studiomeal.com/archives/197)
 
+### 코드로 확인하기
+
+```css
+.container {
+  display: flex;              /* 반드시 부모에 flex를 선언해야 자식에게 flex 속성이 적용됨 */
+  justify-content: center;    /* 가로(주축) 가운데 정렬 */
+  align-items: center;        /* 세로(교차축) 가운데 정렬 */
+  flex-wrap: wrap;
+  gap: 8px;                    /* 요소 사이 간격 — margin 없이 간격을 줄 때 사용 */
+}
+.item {
+  order: -1;             /* 이 요소만 맨 앞으로 이동 */
+  align-self: flex-end;  /* 이 요소만 교차축 기준 바닥에 정렬 */
+}
+```
+
 ### 부모 태그에 지정하는 속성
 
 **justify-content** — 주축(가로) 방향 정렬
@@ -94,6 +110,23 @@ flex-flow: <'flex-direction'> || <'flex-wrap'>;
 | `stretch` | 여러 줄을 컨테이너에 맞도록 늘림 |
 
 ### 자식 태그에 지정하는 속성
+
+**flex-grow / flex-shrink / flex-basis** — 자식 요소가 남는 공간을 어떻게 나눠 갖거나 줄어들지 결정
+
+| 속성 | 설명 |
+| --- | --- |
+| `flex-grow` | 남는 공간을 늘어날 비율로 분배. 기본값 `0`(안 늘어남). 형제 요소보다 값이 클수록 더 많이 늘어남 |
+| `flex-shrink` | 공간이 부족할 때 줄어드는 비율. 기본값 `1`(줄어듦). `0`을 주면 줄어들지 않음 |
+| `flex-basis` | 늘어나거나 줄어들기 전 기준이 되는 크기. `width`/`height`보다 우선 적용됨 |
+| `flex` | 위 세 속성을 한 번에 지정하는 축약형. `flex: 1;`은 `flex: 1 1 0%;`와 같음 |
+
+```css
+.item {
+  flex-grow: 1;    /* 남는 공간을 형제와 동일 비율로 나눠 가짐 */
+  flex-shrink: 1;
+  flex-basis: 200px;
+}
+```
 
 **order** — 자식 태그의 순서를 바꿀 때 사용
 

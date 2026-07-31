@@ -126,6 +126,8 @@ def run(host: str, port: int, user: str, password: str, cmd: str,
     return result.stdout
 ```
 
+`-o StrictHostKeyChecking=no`를 넣은 건 known_hosts에 없는 새 호스트에 처음 접속할 때 뜨는 "계속 연결하시겠습니까(yes/no)?" 대화형 프롬프트를 없애기 위해서다 — 이 프롬프트가 뜬 채로 멈추면 subprocess는 아무 응답도 못 받고 그대로 타임아웃까지 걸리기 때문에, 무인 자동화 경로에서는 필수적인 옵션이었다. 비밀번호 인증을 `sshpass`로 앞단에서 주입하는 것도 같은 이유다 — native `ssh`는 원래 비밀번호를 표준입력으로 대화형으로 받는 구조라, 그 상호작용 자체를 없애야 스크립트가 사람 개입 없이 호출할 수 있었다.
+
 `run`/`read_file`/`write_file`/`mkdir` 네 개 함수로 기존에 paramiko의 `SSHClient`·`SFTPClient`가 하던 일을 그대로 대체했다. 라이브러리를 쓰지 않고 서브프로세스로 CLI를 직접 호출한다는 게 얼핏 덜 세련돼 보일 수 있지만, native CLI는 이미 그 보안 솔루션을 통과한다는 게 실측으로 검증된 유일한 경로였다. "더 우아한 코드"보다 "실제로 뚫리는 경로"가 우선이었다.
 
 블로킹 subprocess 호출은 이전에 정리한 패턴 그대로 `run_in_executor`로 이벤트 루프에서 분리했다.

@@ -260,6 +260,13 @@ useEffect(() => {
 
 ![React·Vue 렌더링 시점 비교 다이어그램](/images/191/img_01.png)
 
+## ✅ 왜 이런 차이가 나는가 — 반응성(reactivity) 구현 방식의 차이
+
+React에서 `state`를 직접 대입하면 에러가 나고, Vue에서는 `this.test = 10`처럼 바로 대입해도 화면이 갱신되는 이유는 두 프레임워크가 "값이 바뀌었다"는 걸 감지하는 방식 자체가 다르기 때문이다.
+
+- **React** — `setState`(또는 `useState`의 setter)를 호출해야만 리렌더링이 예약된다. React는 이전 state와 새 state를 비교(Virtual DOM diffing)해서 바뀐 부분만 실제 DOM에 반영하는데, 이 비교 대상이 되려면 반드시 지정된 함수를 통해 값이 바뀌었다는 신호를 줘야 한다. 그래서 객체·배열도 항상 새로 만들어서(`{ ...state }`) 교체해야 하고, 원본을 직접 건드리면 React가 변경 자체를 감지하지 못한다.
+- **Vue (Options API, Vue 2 기준)** — `data()`가 반환한 객체의 각 프로퍼티를 Vue가 내부적으로 getter/setter로 감싸서(`Object.defineProperty`), 값이 대입되는 순간 그 setter가 자동으로 실행되며 리렌더링을 트리거한다. 이 방식 덕분에 `this.value = x`처럼 직접 대입해도 감지가 된다(참고로 Vue 3부터는 `Object.defineProperty` 대신 `Proxy` 기반 반응성 시스템으로 바뀌어서 배열 인덱스 직접 할당 등 Vue 2의 일부 감지 한계가 해소됐다).
+
 ## ✅ Summary
 
 - React는 라이브러리, Vue는 프레임워크 — 이 차이가 상태 관리·라우팅 내장 여부와 파일 구조를 가른다

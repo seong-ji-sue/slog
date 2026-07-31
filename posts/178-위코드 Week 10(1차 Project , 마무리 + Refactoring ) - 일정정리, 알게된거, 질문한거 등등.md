@@ -62,12 +62,12 @@ post_id: 178
 - ref 사용 방법
   - ref를 state에 선언해서 사용
   - 부모컨포넌트에서 자식컴포넌트로 ref 전달방법
-  - 다수의 ref를 객체로 관리하는 방법 (refs로 사용하면 않됨,이름주의)
+  - 다수의 ref를 객체로 관리하는 방법 (refs로 사용하면 않됨,이름주의 - this.refs는 리액트 레거시 문자열 ref API 이름이라 겹치면 안됨)
   - scrollIntoView로 사용하여 코드 가독성있게 줄이는 방법
   - observer 와 차이점
 - useEffect에 의존성 배열을 추가 안하면 수정될때마다 계속 실행되고   
   의존성 빈배열을 추가하면 딱 1번 실행되고(DidMount)   
-  의존성 배열에 값을넣어 추가하면 그 값이 변경될때마다 실행됨
+  의존성 배열에 값을넣어 추가하면 그 값이 변경될때마다 실행됨(매 렌더링마다 의존성 배열 값을 이전 값과 비교해서 실행 여부를 판단하는 방식이라 그럼)
 - npm install —save : save 옵션을 붙이면 package.json의 dependencies에 추가되고 다음 프로젝트 다운 받은뒤 npm install 하면 함께 설치됨   
   npm install -g : 패키지를 프로젝트가 아닌 시스템의 node\_modules 폴더에 설치한다.   
   npm install —save-dev : 모듈을 설치할 때 package.json 내의 devDependencies 항목에 설치한 모듈과 버전을 넣는 것

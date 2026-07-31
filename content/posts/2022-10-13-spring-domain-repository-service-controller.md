@@ -148,6 +148,8 @@ public class JpaPersonRepository implements PersonRepository {
 
 Repository에서 꺼내온 데이터를 가공해서 Controller에 넘기는 역할이다. Controller에서 바로 데이터를 CRUD하면 테이블에 저장된 원본 정보가 손상될 우려가 크기 때문에, Service 계층을 한 번 더 거치게 해서 그 위험을 낮춘다.
 
+**`@Transactional`을 Service에 붙이는 이유** — 아래 `PersonService` 클래스 상단에 `@Transactional`이 붙어 있는데, 이건 그 클래스의 public 메서드 전체를 하나의 트랜잭션 단위로 묶어준다는 뜻이다. 예를 들어 회원가입 로직 안에서 "중복 확인 → 저장" 두 단계가 실행되는데, 저장 도중 에러가 나면 중복 확인까지의 상태도 함께 롤백돼야 데이터 정합성이 깨지지 않는다. Controller가 아니라 Service에 `@Transactional`을 붙이는 이유도 같다 — 하나의 비즈니스 로직(여러 Repository 호출의 묶음)을 원자적으로 처리해야 하는 단위가 Service 계층이기 때문이다.
+
 ```java
 package hello.hellospring.service;
 

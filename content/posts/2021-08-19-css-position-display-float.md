@@ -72,6 +72,12 @@ position·display·float는 웹 퍼블리싱에서 숨 쉬듯 다루게 되는 �
 }
 ```
 
+**함정 — absolute인데 부모에 position이 없다면**
+
+`position: absolute`를 준 요소는 "가장 가까운 조상 중 `position`이 `static`이 아닌 요소"를 기준으로 움직인다. 부모·조상 전부가 `position: static`(기본값)이라면 기준점이 문서 전체(초기 컨테이닝 블록, 대략 뷰포트)로 올라가버려서 의도와 다른 위치에 배치되는 경우가 많다. 자식을 `absolute`로 띄우려면 보통 부모에 `position: relative`만 주고 `top`/`left`는 지정하지 않는 패턴을 쓴다.
+
+**z-index는 position이 있어야 먹는다** — `z-index`는 `position`이 `static`이 아닌 요소(`relative`/`absolute`/`fixed`/`sticky`)에만 적용된다. `position` 없이 `z-index`만 주면 아무 효과가 없다.
+
 ## ✅ Display 파트
 
 ### 왜 쓰는가

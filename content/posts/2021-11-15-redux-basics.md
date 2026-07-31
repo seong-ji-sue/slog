@@ -205,6 +205,35 @@ function ProductCard({ item }) {
 }
 ```
 
+## ✅ 자주 하는 실수 — 리듀서에서 state를 직접 변경(mutate)하기
+
+리듀서는 반드시 순수 함수여야 한다. 기존 state 객체를 직접 수정하고 그대로 반환하면, 참조 주소가 바뀌지 않아서 Redux가 변경을 감지하지 못하고 리렌더링도 일어나지 않는다.
+
+```javascript
+// ❌ 나쁜 예 — state를 직접 mutate
+const cartReducer = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case "ADD_ITEM":
+      state.push(action.payload); // 원본 배열을 직접 변경 — 참조가 그대로라 리렌더링 안 됨
+      return state;
+    default:
+      return state;
+  }
+};
+
+// ✅ 좋은 예 — 새 배열/객체를 만들어서 반환
+const cartReducer = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case "ADD_ITEM":
+      return [...state, action.payload]; // 새 배열을 반환 — 참조가 바뀌어 변경 감지됨
+    default:
+      return state;
+  }
+};
+```
+
+같은 이유로 중첩된 객체를 다룰 때도 `{ ...state, nested: { ...state.nested, value } }`처럼 변경이 필요한 경로 전체를 새로 만들어야 한다. 이 불변성 규칙을 지키기 번거로워서 실무에서는 내부적으로 Immer를 사용해 mutate하듯 코드를 써도 불변성을 보장해주는 **Redux Toolkit(RTK)**을 기본으로 쓰는 추세다. Redux 공식 문서도 RTK를 표준 사용 방식으로 권장한다.
+
 ## ✅ 실무에서는 이렇게 쓴다
 
 위 코드 순서(action → reducer → combineReducers → store/Provider → useSelector/useDispatch)가 Redux를 붙이는 기본 흐름이다. 컴포넌트가 늘어날수록 리듀서를 도메인별로 쪼개고 `combineReducers`로 합치는 구조가 유지보수에 유리했다. `useSelector`는 조회 전용, `useDispatch`는 변경 전용이라는 역할 구분을 지키는 게 핵심이었다.
