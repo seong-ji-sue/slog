@@ -13,7 +13,21 @@ function fmtCollectedDate(iso: string): string {
 
 export default async function HotIssueDetailPage({ params }: Props) {
   const { id } = await params;
-  const issue = await getHotIssueById(id);
+
+  let issue = null;
+  try {
+    issue = await getHotIssueById(id);
+  } catch (e) {
+    console.error("failed to load hot issue detail", { id, e });
+    return (
+      <main className="col hot-issues-page">
+        <div className="hotissue-not-found">
+          <p>이슈를 불러오지 못했습니다.</p>
+          <Link href="/hot-issues">← 핫이슈 목록으로 돌아가기</Link>
+        </div>
+      </main>
+    );
+  }
 
   if (!issue) {
     return (
