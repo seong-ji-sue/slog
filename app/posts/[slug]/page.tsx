@@ -98,7 +98,7 @@ export default async function PostPage({ params }: Props) {
           · <span className="stars">난이도 {starsStr}</span>
           {project && (
             <>
-              {" "}· <span className="project-badge" data-testid="post-project-badge">{project}</span>
+              {" "}· <span className="project-badge" data-testid="B-03-badge-project">{project}</span>
             </>
           )}
         </span>

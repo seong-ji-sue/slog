@@ -38,11 +38,11 @@ export default async function TagDetailPage({ params }: Props) {
     <main className="col tags-page">
       <div className="tag-detail-header">
         <Link href="/tags" className="back-link mono">← 태그 목록</Link>
-        <h1 className="tag-detail-title">{name}</h1>
+        <h1 className="tag-detail-title" data-testid="B-07-text-tag-title">{name}</h1>
         <p className="tag-detail-count mono">{posts.length}편</p>
       </div>
 
-      <div data-testid="tag-posts-list" className="post-list">
+      <div data-testid="B-07-list-posts-by-tag" className="post-list">
         {posts.map((post) => (
           <PostItem key={post.slug} post={post} />
         ))}

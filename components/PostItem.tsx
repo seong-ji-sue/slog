@@ -28,7 +28,7 @@ export default function PostItem({ post, testId, viewCount }: Props) {
         )}
         {project && (
           <>
-            &nbsp;&nbsp;<span className="project-badge" data-testid="post-project-badge">{project}</span>
+            &nbsp;&nbsp;<span className="project-badge" data-testid="B-02-badge-project">{project}</span>
           </>
         )}
       </span>

@@ -17,7 +17,7 @@ export default function TagsView({ tags, graph }: Props) {
 
   return (
     <>
-      <div className="tags-view-toggle" data-testid="tags-view-toggle" role="group" aria-label="태그 뷰 전환">
+      <div className="tags-view-toggle" data-testid="B-06-tab-view-toggle" role="group" aria-label="태그 뷰 전환">
         <button
           type="button"
           className={view === "list" ? "view-btn active" : "view-btn"}
@@ -39,7 +39,7 @@ export default function TagsView({ tags, graph }: Props) {
       </div>
 
       {view === "list" ? (
-        <div data-testid="tags-list" className="tags-cloud">
+        <div data-testid="B-06-list-tags" className="tags-cloud">
           {tags.map((t) => (
             <Link key={t.slug} href={`/tags/${t.slug}`} className="tag-chip">
               <span className="tag-chip-name">{t.name}</span>
@@ -49,7 +49,7 @@ export default function TagsView({ tags, graph }: Props) {
           {tags.length === 0 && <p className="no-tags mono">태그가 없습니다.</p>}
         </div>
       ) : (
-        <div data-testid="tags-graph-wrap" className="tags-graph-wrap">
+        <div data-testid="B-06-list-graph" className="tags-graph-wrap">
           <TagGraphSvg nodes={graph.nodes} edges={graph.edges} />
         </div>
       )}
