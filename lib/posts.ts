@@ -67,6 +67,46 @@ export function getAllPosts(): PostMeta[] {
   return collect().map((e) => e.meta);
 }
 
+/**
+ * 글 목록 조회 계약 응답 항목.
+ * PRD backend 명세(impl_requirements.backend) 고정 필드 — 필드명 변경 금지.
+ */
+export interface PostListItem {
+  slug: string;
+  lognum: number;
+  title: string;
+  description: string;
+  category: string;
+  date: string;
+  difficulty: number;
+  readingTime: number;
+}
+
+function toListItem(meta: PostMeta): PostListItem {
+  return {
+    slug: meta.slug,
+    lognum: meta.log,
+    title: meta.title,
+    description: meta.description,
+    category: meta.categories[0] ?? "",
+    date: meta.date,
+    difficulty: meta.difficulty,
+    readingTime: meta.readingMin,
+  };
+}
+
+/**
+ * 글 목록 조회 계약(AC-B02-01) + 카테고리 필터 계약(AC-B02-02·AC-B02-03).
+ * category 미지정 시 전체 글 목록 반환. 지정 시 해당 카테고리를 포함한 글만 반환.
+ */
+export function getPostsList(category?: string): PostListItem[] {
+  const all = getAllPosts();
+  const filtered = category
+    ? all.filter((p) => p.categories.includes(category))
+    : all;
+  return filtered.map(toListItem);
+}
+
 export async function getPost(slug: string): Promise<Post | null> {
   const entry = collect().find((e) => e.meta.slug === slug);
   if (!entry) return null;
