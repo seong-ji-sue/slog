@@ -1,0 +1,17 @@
+{
+ "unlock_condition": "E2E 재확정 필요 시만 수정(락 이후 변조=HUMAN GATE)",
+ "files": [
+  {
+   "path": "tc/tests/specs/e2e/SC-hot-issues-001.spec.js",
+   "sha256": "306ec98f3234ac0954ac26241e5d2264bef6a90935b84ffbe6c4eb345dc8588a"
+  },
+  {
+   "path": "tc/tests/specs/e2e/SC-hot-issues-002.spec.js",
+   "sha256": "0639418706f9b564a77e8c361898b3189aa0bb7b71f75a6379077cfedf9a60a5"
+  },
+  {
+   "path": "tc/tests/specs/e2e/SC-hot-issues-003.spec.js",
+   "sha256": "735fc9caee958d7327770fbf4234cd4f5403c86ddc3d6285704ae704d07d6a79"
+  }
+ ]
+}

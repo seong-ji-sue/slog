@@ -5,9 +5,9 @@ Workflow 스크립트는 매 호출이 stateless이므로, "같은 레벨이 3�
 Human Gate로 전환"을 판단하려면 재시도 횟수를 파일에 지속시켜야 한다. 이 도구가 그 카운터다.
 
 usage:
-  spec_retry.py bump  --feature {f} --stage {facts|prd|plan|tc}   # 실패 시 +1
-  spec_retry.py reset --feature {f} --stage {facts|prd|plan|tc}   # 성공 시 0으로 리셋
-  spec_retry.py get   --feature {f} --stage {facts|prd|plan|tc}   # 현재 값 조회
+  spec_retry.py bump  --feature {f} --stage {brief|design|facts|prd|plan|tc}   # 실패 시 +1
+  spec_retry.py reset --feature {f} --stage {brief|design|facts|prd|plan|tc}   # 성공 시 0으로 리셋
+  spec_retry.py get   --feature {f} --stage {brief|design|facts|prd|plan|tc}   # 현재 값 조회
 """
 import argparse
 import json
@@ -41,7 +41,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("action", choices=["bump", "reset", "get"])
     ap.add_argument("--feature", required=True)
-    ap.add_argument("--stage", required=True, choices=["facts", "prd", "plan", "tc"])
+    ap.add_argument("--stage", required=True, choices=["brief", "design", "facts", "prd", "plan", "tc"])
     a = ap.parse_args()
 
     data = load(a.feature)

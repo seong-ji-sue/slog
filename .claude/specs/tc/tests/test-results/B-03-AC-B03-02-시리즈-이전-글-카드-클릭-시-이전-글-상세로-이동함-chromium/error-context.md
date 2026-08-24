@@ -26,10 +26,38 @@ Call log:
 ```
 
 ```yaml
-- heading "Error response" [level=1]
-- paragraph: "Error code: 404"
-- paragraph: "Message: File not found."
-- paragraph: "Error code explanation: 404 - Nothing matches the given URI."
+- banner:
+  - link "SLOG 홈으로":
+    - /url: /
+    - text: SLOG_
+  - navigation "주 내비게이션":
+    - link "글":
+      - /url: /posts
+    - link "핫이슈":
+      - /url: /hot-issues
+    - link "태그":
+      - /url: /tags
+    - link "소개":
+      - /url: /about
+    - link "RSS":
+      - /url: "#"
+  - button "다크 모드로 전환": DARK
+- main:
+  - paragraph: 404 — NOT FOUND
+  - heading "존재하지 않는 기록입니다." [level=1]
+  - link "전체 글 목록으로 →":
+    - /url: /posts
+- contentinfo:
+  - text: © 2026 Zibu — 기록으로 증명
+  - link "GitHub":
+    - /url: https://github.com/seong-ji-sue
+  - text: ·
+  - link "RSS":
+    - /url: "#"
+  - text: ·
+  - link "Tistory 아카이브":
+    - /url: https://zibu-story.tistory.com
+- alert
 ```
 
 # Test source

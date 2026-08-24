@@ -5,11 +5,13 @@
 exit 0=PASS, 1=FAIL, 2=산출물 누락. 결과는 _data/manifests/{stage}.manifest.json 에 기록.
 
 usage:
-  gate_check.py facts --feature {feature}
-  gate_check.py prd   --feature {feature}
-  gate_check.py plan  --feature {feature}
-  gate_check.py tc    --feature {feature}
-  gate_check.py e2e   --feature {feature}
+  gate_check.py brief  --feature {feature}
+  gate_check.py design --feature {feature}
+  gate_check.py facts  --feature {feature}
+  gate_check.py prd    --feature {feature}
+  gate_check.py plan   --feature {feature}
+  gate_check.py tc     --feature {feature}
+  gate_check.py e2e    --feature {feature}
 
 계약 모델: prd.contract.json (CONTRACT.md). 스택 어댑터는 helpers.js 가 TC 실행 시점에 해석.
 """
@@ -57,6 +59,90 @@ def emit(stage, ok, fails, extra=None):
     for fl in fails:
         print(f"   ✗ {fl}")
     return 0 if ok else 1
+
+
+# ─────────────────────────── BRIEF ───────────────────────────
+BRIEF_SECTIONS = ["OVERVIEW", "CORE FACTS", "ASSUMPTIONS", "EARS REQUIREMENTS", "SCREENS", "OPEN QUESTIONS"]
+
+
+def gate_brief(feature):
+    """BRIEF_{feature}.md 검증 — 표준 기획서 규격(BRIEF_SCHEMA.md).
+    - 섹션 헤더 6개(## 0.~## 5.) 존재
+    - [F-NN] ≥1 · [REQ-NN] ≥1 · [S-NN] ≥1
+    - 모든 [REQ-NN] 라인에 '→' 포함 (EARS: 조건 → 행동)
+    - [Q-NN] 최대 5개
+    """
+    fails = []
+    brief_path = os.path.join(SPECS, "_data", "brief", f"BRIEF_{feature}.md")
+    if not os.path.exists(brief_path):
+        emit("brief", False, [f"BRIEF_{feature}.md 누락"])
+        return 2
+
+    src = read(brief_path)
+
+    for i, name in enumerate(BRIEF_SECTIONS):
+        if not re.search(rf"(?m)^##\s*{i}\.\s*{re.escape(name)}\b", src):
+            fails.append(f"섹션 '## {i}. {name}' 누락")
+
+    if not re.search(r"\[F-\d{2,}\]", src):
+        fails.append("[F-NN] CORE FACTS 항목 0건")
+    if not re.search(r"\[S-\d{2,}\]", src):
+        fails.append("[S-NN] SCREENS 항목 0건")
+
+    req_lines = [ln for ln in src.splitlines() if re.search(r"\[REQ-\d{2,}\]", ln)]
+    if not req_lines:
+        fails.append("[REQ-NN] EARS 요구사항 0건")
+    for ln in req_lines:
+        if "→" not in ln:
+            fails.append(f"EARS 위반('→' 없음): {ln.strip()[:60]}")
+
+    q_count = len(re.findall(r"\[Q-\d{2,}\]", src))
+    if q_count > 5:
+        fails.append(f"OPEN QUESTIONS {q_count}건 — 최대 5 (병합 또는 ASSUMPTIONS 확인형으로 전환)")
+
+    return emit("brief", not fails, fails, {"req_count": len(req_lines), "question_count": q_count})
+
+
+# ─────────────────────────── DESIGN ───────────────────────────
+def gate_design(feature):
+    """디자인 토큰·가이드 검증 — DESIGN_SCHEMA.md.
+    - design_system.json(앱 전역 싱글턴): JSON 파스 + 필수 키(colors.primary/background·typography·spacing·components≥1)
+    - DESIGN_{feature}.md(피처 가이드) 존재
+    """
+    fails = []
+    ds_path = os.path.join(SPECS, "_data", "design", "design_system.json")
+    doc_path = os.path.join(SPECS, "_data", "design", f"DESIGN_{feature}.md")
+
+    if not os.path.exists(ds_path):
+        emit("design", False, ["design_system.json 누락"])
+        return 2
+
+    try:
+        ds = jread(ds_path)
+    except json.JSONDecodeError as e:
+        emit("design", False, [f"design_system.json JSON 파싱 오류: {e}"])
+        return 2
+
+    for key in ("colors", "typography", "spacing", "components"):
+        if not ds.get(key):
+            fails.append(f"design_system.json 필수 키 '{key}' 누락/비어있음")
+
+    colors = ds.get("colors") or {}
+    if isinstance(colors, dict):
+        for c in ("primary", "background"):
+            if not colors.get(c):
+                fails.append(f"colors.{c} 누락")
+    else:
+        fails.append("colors 형식 오류 (object 필요)")
+
+    comps = ds.get("components") or {}
+    if not (isinstance(comps, dict) and len(comps) >= 1):
+        fails.append("components 프리셋 0건 (최소 1)")
+
+    if not os.path.exists(doc_path):
+        fails.append(f"DESIGN_{feature}.md 누락 — 피처 디자인 가이드 필수")
+
+    return emit("design", not fails, fails)
 
 
 # ─────────────────────────── FACTS ───────────────────────────
@@ -123,6 +209,7 @@ def gate_prd(feature):
     """prd.contract.json 검증 — prd.contract.schema.json 준수.
     screens·acs·impl_requirements 필수. AC-ID 포맷. acs[].components key 실재.
     HTML/목업/phantom 검사 없음.
+    contract_registry.json(피처별 누적 귀속)으로 타 피처 계약 손실 기계 FAIL — 멀티피처 누적 가드.
     """
     fails = []
     contract_path = os.path.join(SPECS, "prd", "prd.contract.json")
@@ -203,6 +290,41 @@ def gate_prd(feature):
     else:
         fails.append("impl_requirements 형식 오류 (object 필요)")
 
+    # 누적 레지스트리 가드: 타 피처(g != feature) 등록 항목이 계약에서 사라지면 FAIL
+    registry_path = os.path.join(MANIFEST_DIR, "contract_registry.json")
+    registry = {}
+    if os.path.exists(registry_path):
+        try:
+            registry = jread(registry_path)
+        except json.JSONDecodeError as e:
+            fails.append(f"contract_registry.json JSON 파싱 오류: {e}")
+
+    contract_screen_ids = set(screen_component_keys)
+    contract_ac_ids = set(ac_ids)
+    other_screen_ids, other_ac_ids = set(), set()
+    for g, ent in sorted(registry.get("features", {}).items()):
+        if g == feature:
+            continue
+        lost_screens = sorted(set(ent.get("screen_ids", [])) - contract_screen_ids)
+        lost_acs = sorted(set(ent.get("ac_ids", [])) - contract_ac_ids)
+        if lost_screens or lost_acs:
+            fails.append(
+                f"타 피처 '{g}' 계약 손실: screens {lost_screens} / acs {lost_acs}"
+                " — 누적 계약에서 타 피처 항목 삭제 금지"
+            )
+        other_screen_ids.update(ent.get("screen_ids", []))
+        other_ac_ids.update(ent.get("ac_ids", []))
+
+    # PASS 확정 시에만 이번 피처 귀속(타 피처 등록분 제외 나머지) 갱신 — FAIL 시 레지스트리 미갱신
+    if not fails:
+        registry.setdefault("features", {})[feature] = {
+            "screen_ids": sorted(contract_screen_ids - other_screen_ids),
+            "ac_ids": sorted(contract_ac_ids - other_ac_ids),
+        }
+        os.makedirs(MANIFEST_DIR, exist_ok=True)
+        with open(registry_path, "w", encoding="utf-8") as f:
+            json.dump(registry, f, ensure_ascii=False, indent=1)
+
     ac_ids_sorted = sorted(set(ac_ids))
     return emit("prd", not fails, fails, {"ac_ids": ac_ids_sorted})
 
@@ -249,6 +371,10 @@ def gate_plan(feature):
         orphan = prd_acs - covered_ac
         if orphan:
             fails.append(f"고아 AC {len(orphan)}건: {sorted(orphan)[:5]}")
+        # 역방향: 계약에 없는 AC를 참조하는 ac_refs (삭제·개정 AC 잔존 참조)
+        unknown = covered_ac - prd_acs
+        if unknown:
+            fails.append(f"계약에 없는 AC 참조 {len(unknown)}건 (tasks[].ac_refs): {sorted(unknown)[:5]}")
 
     return emit("plan", not fails, fails, {"ac_ids": sorted(covered_ac)})
 
@@ -256,7 +382,8 @@ def gate_plan(feature):
 # ─────────────────────────── TC ───────────────────────────
 def gate_tc(feature):
     """TC 검증.
-    - spec 제목=AC-ID 커버 (prd ac_ids − spec_acs = 0)
+    - spec 제목=AC-ID 커버 (prd ac_ids − spec_acs = 0, 누적 전체) + 계약 외 AC 잔존 spec 검출
+    - 시나리오 시트 커버리지는 이번 피처 귀속 AC(contract_registry)로 스코프 제한 — 시트는 피처별 파일
     - ghost 셀렉터 (계약 외 key)
     - valid RED (red_report.json.valid_red)
     - tc.lock.json 해시 드리프트
@@ -282,6 +409,17 @@ def gate_tc(feature):
     # prd manifest에서 ac_ids 로드
     prd_m_path = os.path.join(MANIFEST_DIR, "prd.manifest.json")
     prd_acs = set(jread(prd_m_path).get("ac_ids", [])) if os.path.exists(prd_m_path) else set()
+
+    # 이번 피처 귀속 AC — 시나리오 시트는 피처별 파일이므로 시트 커버리지는 피처 스코프로 제한 (누적 계약 대응)
+    feature_acs = prd_acs
+    registry_path = os.path.join(MANIFEST_DIR, "contract_registry.json")
+    if os.path.exists(registry_path):
+        try:
+            ent = jread(registry_path).get("features", {}).get(feature, {})
+            if ent.get("ac_ids"):
+                feature_acs = (set(ent["ac_ids"]) & prd_acs) if prd_acs else set(ent["ac_ids"])
+        except json.JSONDecodeError:
+            pass  # 레지스트리 파손은 gate_prd 소관 — 폴백: prd_acs 전체
 
     # AC 유닛 spec만 대상 — 비재귀(하위 specs/e2e/ 는 gate_e2e 소관, _structure.spec.js 는 구조검증 소관)
     spec_glob = os.path.join(SPECS, "tc", "tests", "*.spec.js")
@@ -325,11 +463,15 @@ def gate_tc(feature):
     if ghost:
         fails.append(f"ghost 셀렉터 {ghost}건 (계약 외 key 사용)")
 
-    # AC 커버리지
+    # AC 커버리지 (누적 전체 — spec 디렉토리도 누적이므로 대칭)
     if prd_acs:
         miss = prd_acs - spec_acs
         if miss:
             fails.append(f"AC 미커버 {len(miss)}건: {sorted(miss)[:5]}")
+        # 역방향: 계약에서 삭제·개정된 AC의 잔존 테스트 (real 실측 영구 실패 원인)
+        stale = spec_acs - prd_acs
+        if stale:
+            fails.append(f"계약에 없는 AC 잔존 spec {len(stale)}건 (삭제·개정 AC): {sorted(stale)[:5]}")
 
     # 구조검증 spec 위생 (있으면만 — AC-ID 타이틀 요구 제외, 최소 위생만)
     struct_path = os.path.join(SPECS, "tc", "tests", "_structure.spec.js")
@@ -353,10 +495,10 @@ def gate_tc(feature):
             sheet_rows = []
             fails.append("sheet json 파싱 오류")
         covered = {a for r in sheet_rows for a in (r.get("ac_refs") or [])}
-        if prd_acs:
-            uncovered = prd_acs - covered
+        if feature_acs:
+            uncovered = feature_acs - covered
             if uncovered:
-                fails.append(f"시나리오 시트 AC 미커버 {len(uncovered)}건: {sorted(uncovered)[:5]}")
+                fails.append(f"시나리오 시트 AC 미커버 {len(uncovered)}건 (피처 {feature} 귀속분): {sorted(uncovered)[:5]}")
     if not os.path.exists(xlsx_path):
         fails.append(f"sheet_{feature}.xlsx 없음 — 실제 엑셀 산출 필수(gen_test_sheet.py 실행)")
 
@@ -379,16 +521,22 @@ def gate_tc(feature):
 
 # ─────────────────────────── E2E ───────────────────────────
 def gate_e2e(feature):
-    """tc/tests/specs/e2e/*.spec.js 검증.
-    - 제목 SC-{feature}-{NNN} 형식 · 금지패턴 0 · expect 필수 · ghost 셀렉터 0
-    - sheet_{feature}.json e2e=true 행 ↔ spec 양방향 커버리지
-    - tc.e2e.lock.json 해시 드리프트(최초 PASS 시 자동 생성)
+    """tc/tests/specs/e2e/*.spec.js 검증 — 누적 디렉토리에서 이번 피처(SC-{feature}-*) spec만 소유 검사.
+    - 이번 피처 spec(파일명 규약 {scenario_id}.spec.js): 제목 SC-{feature}-{NNN} 형식 · ghost 셀렉터 0
+      + sheet_{feature}.json e2e=true 행 ↔ spec 양방향 커버리지
+    - 타 피처 spec(누적 보존분): 위생(금지패턴·expect)과 범용 제목 형식(SC-*-NNN)만 검사 —
+      커버리지·해시는 소유 피처 게이트 소관
+    - tc.e2e.lock.json: 이번 피처 항목만 해시 드리프트 검사·재락, 타 피처 항목은 존재 보존 확인 후 유지
     """
     fails = []
     e2e_dir = os.path.join(SPECS, "tc", "tests", "specs", "e2e")
     specs = sorted(glob.glob(os.path.join(e2e_dir, "*.spec.js")))
 
-    # 시트에 e2e 행이 0건이면 E2E spec이 없는 것이 정상 — PASS
+    # 파일명 규약 {scenario_id}.spec.js — 이번 피처 소유 spec 선별 (누적 보존된 타 피처 spec 제외)
+    cur_prefix = f"SC-{feature}-"
+    cur_specs = [s for s in specs if os.path.basename(s).startswith(cur_prefix)]
+
+    # 시트에 e2e 행이 0건이면 이번 피처 E2E spec이 없는 것이 정상 — PASS
     sheet_path = os.path.join(SPECS, "tc", f"sheet_{feature}.json")
     sheet_e2e_ids = None
     if os.path.exists(sheet_path):
@@ -401,10 +549,10 @@ def gate_e2e(feature):
         except json.JSONDecodeError:
             fails.append("sheet json 파싱 오류")
 
-    if not specs:
+    if not cur_specs:
         if sheet_e2e_ids is not None and not sheet_e2e_ids and not fails:
-            return emit("e2e", True, [], {"note": "시트 e2e 행 0건 — E2E spec 불필요"})
-        emit("e2e", False, fails + ["e2e spec 0건 (tc/tests/specs/e2e/*.spec.js)"])
+            return emit("e2e", True, [], {"note": f"시트 e2e 행 0건 — 피처 {feature} E2E spec 불필요"})
+        emit("e2e", False, fails + [f"이번 피처 e2e spec 0건 (tc/tests/specs/e2e/SC-{feature}-*.spec.js)"])
         return 2
 
     contract_keys = set()
@@ -418,12 +566,15 @@ def gate_e2e(feature):
         except json.JSONDecodeError:
             fails.append("prd.contract.json JSON 파싱 오류 — ghost 검사 불가")
 
-    sc_re = re.compile(rf"^SC-{re.escape(feature)}-[0-9]{{3}}\b")
+    sc_cur_re = re.compile(rf"^SC-{re.escape(feature)}-[0-9]{{3}}\b")
+    sc_any_re = re.compile(r"^SC-[A-Za-z0-9-]+-[0-9]{3}\b")
     ui_re = re.compile(r"ui\(\s*page\s*,\s*['\"]([^'\"]+)['\"]\s*,\s*['\"]([^'\"]+)['\"]")
     found_ids, ghost = set(), 0
 
     for sp in specs:
         src, bname = read(sp), os.path.basename(sp)
+        is_cur = bname.startswith(cur_prefix)
+        # 위생 검사는 전체 spec 공통 (타 피처 보존분 포함)
         for pat in FORBIDDEN:
             if pat in src:
                 fails.append(f"{bname}: 금지패턴 '{pat}'")
@@ -431,12 +582,16 @@ def gate_e2e(feature):
             fails.append(f"{bname}: expect 단언 없음")
         for m in re.finditer(r"test\(\s*['\"]([^'\"]+)['\"]", src):
             title = m.group(1)
-            sm = sc_re.match(title)
-            if sm:
-                found_ids.add(sm.group(0))
-            else:
-                fails.append(f"{bname}: 제목이 SC-{feature}-NNN 형식이 아님 — '{title[:50]}'")
-        if contract_keys:
+            if is_cur:
+                sm = sc_cur_re.match(title)
+                if sm:
+                    found_ids.add(sm.group(0))
+                else:
+                    fails.append(f"{bname}: 제목이 SC-{feature}-NNN 형식이 아님 — '{title[:50]}'")
+            elif not sc_any_re.match(title):
+                fails.append(f"{bname}: 제목이 SC-*-NNN 범용 형식이 아님(타 피처 보존분) — '{title[:50]}'")
+        # ghost·커버리지는 이번 피처 spec만 — 타 피처 spec은 소유 피처 게이트가 이미 검증·락
+        if is_cur and contract_keys:
             for sid, key in ui_re.findall(src):
                 if (sid, key) not in contract_keys:
                     ghost += 1
@@ -446,6 +601,7 @@ def gate_e2e(feature):
     if sheet_e2e_ids is None:
         fails.append(f"sheet_{feature}.json 없음 — e2e 행 대조 불가")
     else:
+        # 양방향 커버리지 — 시트가 피처별 파일이므로 이번 피처 spec 타이틀(found_ids)만 대조
         if sheet_e2e_ids - found_ids:
             fails.append(f"sheet e2e 행 중 spec 없음 {len(sheet_e2e_ids - found_ids)}건: {sorted(sheet_e2e_ids - found_ids)[:5]}")
         if found_ids - sheet_e2e_ids:
@@ -453,16 +609,36 @@ def gate_e2e(feature):
 
     lock_path = os.path.join(SPECS, "tc", "tc.e2e.lock.json")
     if not fails:
+        prev_entries = []
         if os.path.exists(lock_path):
-            drift = hash_drift(lock_path)
-            if drift:
-                fails.append(f"E2E 해시 드리프트 {len(drift)}건 (HUMAN GATE): {drift[:3]}")
+            try:
+                prev_entries = jread(lock_path).get("files", [])
+            except json.JSONDecodeError:
+                fails.append("tc.e2e.lock.json JSON 파싱 오류")
+        drift, kept = [], []
+        for e in prev_entries:
+            fp = os.path.join(SPECS, e["path"])
+            if os.path.basename(e["path"]).startswith(cur_prefix):
+                # 이번 피처 소유 락 — 해시 드리프트 검사 (PASS 시 아래에서 재계산·재락)
+                if not os.path.exists(fp):
+                    drift.append(e["path"] + " (소실)")
+                else:
+                    with open(fp, "rb") as fh:
+                        if hashlib.sha256(fh.read()).hexdigest() != e["sha256"]:
+                            drift.append(e["path"])
+            else:
+                # 타 피처 소유 락 — 존재 보존만 확인하고 항목 유지 (해시는 소유 피처 게이트 소관)
+                if not os.path.exists(fp):
+                    fails.append(f"타 피처 e2e spec 소실: {e['path']} — 누적 보존 위반")
+                kept.append(e)
+        if drift:
+            fails.append(f"E2E 해시 드리프트 {len(drift)}건 (HUMAN GATE): {drift[:3]}")
         if not fails:
             lock = {
                 "unlock_condition": "E2E 재확정 필요 시만 수정(락 이후 변조=HUMAN GATE)",
-                "files": [
+                "files": kept + [
                     {"path": os.path.relpath(sf, SPECS), "sha256": hashlib.sha256(open(sf, "rb").read()).hexdigest()}
-                    for sf in specs
+                    for sf in cur_specs
                 ],
             }
             with open(lock_path, "w", encoding="utf-8") as f:
@@ -487,13 +663,13 @@ def hash_drift(lock_path):
 # ─────────────────────────── main ───────────────────────────
 def main():
     ap = argparse.ArgumentParser(
-        description="gate_check.py {facts|prd|plan|tc|e2e} --feature {feature}"
+        description="gate_check.py {brief|design|facts|prd|plan|tc|e2e} --feature {feature}"
     )
-    ap.add_argument("stage", choices=["facts", "prd", "plan", "tc", "e2e"])
+    ap.add_argument("stage", choices=["brief", "design", "facts", "prd", "plan", "tc", "e2e"])
     ap.add_argument("--feature", required=True, help="기능/업무영역 식별자")
     a = ap.parse_args()
 
-    fn = {"facts": gate_facts, "prd": gate_prd, "plan": gate_plan, "tc": gate_tc, "e2e": gate_e2e}[a.stage]
+    fn = {"brief": gate_brief, "design": gate_design, "facts": gate_facts, "prd": gate_prd, "plan": gate_plan, "tc": gate_tc, "e2e": gate_e2e}[a.stage]
     result = fn(a.feature)
     sys.exit(result)
 

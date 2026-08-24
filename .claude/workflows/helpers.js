@@ -58,14 +58,15 @@ function componentOf(screenId, key) {
 
 /**
  * gotoScreen(page, screenId) — 화면 진입.
- * 웹 기본: app_route 또는 '/{screen_id}' (프리셋 환경변수로 주입 가능).
- * CONTRACT.md §4: 스택 종속 진입 경로는 프리셋이 주입.
+ * 웹 기본: 프리셋 환경변수(PRESET_SPEC_APP_ROUTE_*) 주입, 폴백 '/{screen_id}'.
+ * CONTRACT.md §4: 스택 종속 진입 경로는 프리셋이 주입한다.
+ * (계약 screens[].entry는 사용자 경로 '서술'이라 라우팅에 쓰지 않는다 — 스키마에 라우트 필드 없음.)
  */
 async function gotoScreen(page, screenId) {
-  const s = screenOf(screenId);
+  screenOf(screenId); // 계약에 없는 화면이면 즉시 에러 (오타 조기 검출)
   // 환경변수 우선: PRESET_SPEC_APP_ROUTE_A18 형태 (- → _ 변환)
   const envKey = 'PRESET_SPEC_APP_ROUTE_' + screenId.replace(/-/g, '_');
-  const route = process.env[envKey] || s.app_route || ('/' + screenId);
+  const route = process.env[envKey] || ('/' + screenId);
   await page.goto(route.startsWith('/') ? route : '/' + route);
 }
 
