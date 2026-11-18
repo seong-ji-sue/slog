@@ -1,0 +1,74 @@
+{
+  "meta": {
+    "style_direction": "원고지/노트 감성 에디토리얼 미니멀 — 종이색 배경 위 잉크 텍스트, 세리프 제목 + 모노스페이스 메타정보, 형광펜 하이라이트 포인트, 그림자 없는 얇은 라인 보더 기반 위계. SSoT: app/globals.css(:root, [data-theme=dark]) 실측값을 역추출해 최초 수립.",
+    "mode": "both",
+    "source_note": "이 파일은 기존 코드(app/globals.css·components/PostItem.tsx·components/PostsFilter.tsx·app/posts/posts.css)에서 이미 쓰이던 실측 토큰을 최초로 문서화한 것. 신규 도입 값이 아니라 기존 스타일의 SSoT 승격이며, hot-issues 피처를 위한 최소 확장(destructive·card 프리셋)만 추가."
+  },
+  "colors": {
+    "primary": "#2451B2",
+    "background": "#FAFAF8",
+    "foreground": "#1A1A1F",
+    "muted": "#6E6E76",
+    "faint": "#A8A8AD",
+    "accent": "#FFE94A",
+    "destructive": "#B3261E",
+    "border": "#E4E4DE",
+    "code_bg": "#1D1D22",
+    "code_text": "#E8E8E3",
+    "dark": {
+      "note": "[data-theme=dark] 스코프 오버라이드 — light 토큰과 동일 키를 다크 값으로 교체",
+      "primary": "#6B9BF5",
+      "background": "#17171B",
+      "foreground": "#ECECE6",
+      "muted": "#9B9BA3",
+      "faint": "#5A5A62",
+      "accent": "#FFE94A",
+      "destructive": "#E5867E",
+      "border": "#2A2A30",
+      "code_bg": "#1D1D22",
+      "code_text": "#E8E8E3"
+    }
+  },
+  "typography": {
+    "font_sans": "\"Pretendard Variable\", Pretendard, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif — 본문·UI 텍스트 기본",
+    "font_serif": "\"Noto Serif KR\", serif — 히어로·글 제목(h1) 전용, 남용 금지(제목 레벨에만)",
+    "font_mono": "\"JetBrains Mono\", monospace — 메타정보·라벨·버튼·코드 전용",
+    "scale": {
+      "h1": "2.5rem/900 (font_serif)",
+      "h2": "1.3125rem/700 (font_sans)",
+      "body": "0.9375rem/400, line-height 1.75 (font_sans)",
+      "caption": "0.75rem/500, letter-spacing 0.02em (font_mono)"
+    }
+  },
+  "spacing": {
+    "unit": 4,
+    "scale": [4, 8, 12, 16, 20, 24, 32, 40, 48, 64]
+  },
+  "radius": {
+    "sm": "3px",
+    "md": "4px",
+    "lg": "6px"
+  },
+  "components": {
+    "listRow": {
+      "default": "박스·그림자 없는 리스트 행 — border-bottom(colors.border) 구분선 + spacing 26(상하) 패딩. 제목에 hover 시 accent(형광펜) 언더레이 애니메이션. 자체 작성 글(post-item)에서 사용."
+    },
+    "card": {
+      "default": "border(colors.border) + radius.lg + spacing 16~20 내부 패딩, 그림자 없음 — background는 colors.background 유지(리스트 위 카드가 붕 뜨지 않도록). 외부 수집 콘텐츠(hot-issues) 등 listRow와 시각적으로 구분해야 하는 피처에서 사용.",
+      "hover": "border-color를 colors.foreground로 전이(150ms) — mark 하이라이트 대신 보더 강조로 '자동 수집 콘텐츠'임을 은근히 구분"
+    },
+    "badge": {
+      "default": "font_mono caption + border(colors.border) + radius.sm + padding 1~6px — project-badge·tag chip과 동일 프리셋",
+      "source": "출처 뱃지 전용 변형 — border-color를 colors.primary(연하게, 20% 정도의 tint)로 교체해 '외부출처' 신호를 색으로도 보강하되 텍스트 라벨 병행 필수(색만으로 구분 금지)"
+    },
+    "input": {
+      "search": "font_mono + border(colors.border) + radius.md + padding 10px 14px, focus 시 border-color colors.foreground"
+    },
+    "tab": {
+      "filter": "font_mono caption + border(colors.border) + radius.sm(3px) ghost 버튼, active 상태는 background colors.accent + border-color transparent (형광펜 강조)"
+    },
+    "pagination": {
+      "pageButton": "tab.filter와 동일 프리셋 재사용 — active는 aria-current=page + background colors.accent, disabled는 colors.faint + border colors.border"
+    }
+  }
+}
