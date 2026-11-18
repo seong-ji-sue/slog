@@ -23,3 +23,14 @@ __pycache__/
 # 시험 실행 찌꺼기(판정에 안 씀)
 .claude/specs/tc/tests/test-results/
 .claude/specs/_data/evidence/_artifacts/
+
+# BOSU (자동 세팅)
+.bosu/*
+!.bosu/hub.json
+.playwright-mcp/
+.playwright-cli/
+**/_data/evidence/_artifacts/
+dist/
+build/
+.vercel/
+coverage/
