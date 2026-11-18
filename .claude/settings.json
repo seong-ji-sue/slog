@@ -1,18 +1,13 @@
 {
   "model": "sonnet",
   "permissions": {
-    "defaultMode": "bypassPermissions"
-  },
-  "enabledPlugins": {
-    "bosu@bosu": true
-  },
-  "extraKnownMarketplaces": {
-    "bosu": {
-      "source": {
-        "source": "directory",
-        "path": "./BOSU"
-      }
-    }
+    "defaultMode": "bypassPermissions",
+    "allow": [
+      "Read(/**)",
+      "Edit(/**)",
+      "Read(~/.claude/projects/-Users-seongjisu-Documents-project-slog/memory/**)",
+      "Edit(~/.claude/projects/-Users-seongjisu-Documents-project-slog/memory/**)"
+    ]
   },
   "hooks": {
     "PostToolUse": [

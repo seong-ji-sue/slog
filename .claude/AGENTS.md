@@ -9,14 +9,14 @@
 
 | Name | File Path | Tools | Dispatch Trigger | Caller |
 |------|----------|-------|-----------------|--------|
-| `ui_developer` | [.claude/agents/ui_developer.md](agents/ui_developer.md) | Read, Edit, Write, Bash | Frontend UI code · component · design decisions | Team lead | 
-| `api_developer` | [.claude/agents/api_developer.md](agents/api_developer.md) | Read, Edit, Write, Bash | Backend API · server logic code | Team lead | 
-| `db_manager` | [.claude/agents/db_manager.md](agents/db_manager.md) | Read, Edit, Write, Bash | DB schema · migrations | Team lead | 
-| `architect` | [.claude/agents/architect.md](agents/architect.md) | Read, Edit, Write, Bash | Infrastructure · container · env var decisions | Team lead | 
+| `ui_developer` | `bosu:ui_developer` | Read, Edit, Write, Bash | Frontend UI code · component · design decisions | Team lead | 
+| `api_developer` | `bosu:api_developer` | Read, Edit, Write, Bash | Backend API · server logic code | Team lead | 
+| `db_manager` | `bosu:db_manager` | Read, Edit, Write, Bash | DB schema · migrations | Team lead | 
+| `architect` | `bosu:architect` | Read, Edit, Write, Bash | Infrastructure · container · env var decisions | Team lead | 
 | `ecc:code-reviewer` | ECC built-in | — | ECCC autonomous review loop (🔴 0 target) | Team lead (auto) |
-| `analyst` | [.claude/agents/analyst.md](agents/analyst.md) | Read, Bash (Gemini CLI) | Technical research · comparison · fact-checking · evidence | Team lead | 
-| `claude_curator` | [.claude/agents/claude_curator.md](agents/claude_curator.md) | Read, Edit, Write, Bash | `.claude/` structural changes · new files · CLAUDE.md oversight | Team lead | 
-| `deploy_agent` | [.claude/agents/deploy_agent.md](agents/deploy_agent.md) | Read, Edit, Write, Bash | Deployment · CI/CD · infrastructure operations | Team lead | 
+| `analyst` | `bosu:analyst` | Read, Bash (Gemini CLI) | Technical research · comparison · fact-checking · evidence | Team lead | 
+| `claude_curator` | `bosu:claude_curator` | Read, Edit, Write, Bash | `.claude/` structural changes · new files · CLAUDE.md oversight | Team lead | 
+| `deploy_agent` | `bosu:deploy_agent` | Read, Edit, Write, Bash | Deployment · CI/CD · infrastructure operations | Team lead | 
 | `ecc:e2e-runner` | ECC built-in | — | 구현 완료 후 빌드·흐름·기능 검증 · ecc:code-reviewer 전 단계 | Team lead |
 
 ---
@@ -24,7 +24,7 @@
 ## ECC Skill Usage
 
 Each agent may call ECC / Vercel plugin skills as supplementary tools during work.
-Skill matrix, priority order, and disabled hook list → [.claude/rules/ecc_skill_usage.md](rules/ecc_skill_usage.md)
+Skill matrix, priority order, and disabled hook list → AGENT.md 'BOSU 흐름 — 팀장 직접 호출 원칙' 표(스킬은 BOSU 플러그인 — `bosu:` 접두어)
 
 ---
 
@@ -73,7 +73,7 @@ Team lead (main Claude — prompt session)
 ## References
 
 - Team lead definition → [AGENT.md](AGENT.md)
-- Agent details → [.claude/agents/README.md](agents/README.md)
-- ECC skill matrix → [.claude/rules/ecc_skill_usage.md](rules/ecc_skill_usage.md)
+- Agent details → BOSU 플러그인 에이전트(`bosu:<이름>`)
+- ECC skill matrix → AGENT.md 'BOSU 흐름 — 팀장 직접 호출 원칙' 표(스킬은 BOSU 플러그인 — `bosu:` 접두어)
 - ECCC harness → [.claude/workflow/harness_ecc.md](workflow/harness_ecc.md)
 - Absolute rules → [CLAUDE.md](../CLAUDE.md)

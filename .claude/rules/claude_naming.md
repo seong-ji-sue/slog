@@ -63,4 +63,4 @@
 ## References
 
 - File content rules → [claude_file.md](claude_file.md)
-- Folder structure → [../structures/project.md](../structures/project.md)
+- Folder structure → 일감 명세(`bosu-output/tasks/<task_id>/` — PRD · Plan)

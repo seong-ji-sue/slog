@@ -70,4 +70,4 @@
 ## References
 
 - Code style → [code_style_ts.md](code_style_ts.md)
-- Feature spec → [../structures/project.md](../structures/project.md)
+- Feature spec → 일감 명세(`bosu-output/tasks/<task_id>/` — PRD · Plan)

@@ -146,7 +146,7 @@ git push origin develop  →  🚀 deploy
 | 작업 후 검증 | `ecc:harness-audit` · `ecc:repo-scan` |
 | 모델 라우팅 결정 | `ecc:model-route` |
 
-전체 매트릭스 → [rules/ecc_skill_usage.md](rules/ecc_skill_usage.md)
+전체 매트릭스 → AGENT.md 'BOSU 흐름 — 팀장 직접 호출 원칙' 표(스킬은 BOSU 플러그인 — `bosu:` 접두어)
 
 ---
 
@@ -205,7 +205,7 @@ When authority or principles in this document conflict with CLAUDE.md absolute r
 
 - Agent routing → [AGENTS.md](AGENTS.md)
 - Harness details → [.claude/workflow/harness_ecc.md](workflow/harness_ecc.md)
-- Agent index → [.claude/agents/README.md](agents/README.md)
+- Agent index → BOSU 플러그인 에이전트(`bosu:<이름>`)
 - Git rules → [.claude/rules/git_convention.md](rules/git_convention.md)
 - Meeting note SOP → [.claude/workflow/meeting_log.md](workflow/meeting_log.md)
 - Gemini MCP loop SOP → [.claude/workflow/gemini_mcp_loop.md](workflow/gemini_mcp_loop.md)

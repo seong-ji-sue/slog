@@ -1,0 +1,24 @@
+# slog — Orca 저장소 훅 (BOSU 생성)
+#
+# Orca 가 이 저장소에서 워크트리를 만들면 scripts.setup 을, 워크트리를 정리(보관·삭제)하기 직전에
+# scripts.archive 를 실행한다. BOSU 일감 작업 공간은 git 으로 만들고 훅 없이 지워서 이 훅을 돌리지 않는다
+# (Orca 앱에서 사람이 직접 작업 공간을 만들 때만 Orca 가 이 파일을 믿을지 묻는다 — 신뢰 기록은 Orca 앱 설정).
+# Orca 는 기본 브랜치(develop)에 커밋된 orca.yaml 을 읽는다 — 워크트리에서만 고친 내용은 머지 전까지 반영되지 않는다.
+#
+# 쓸 수 있는 변수(Orca 제공):
+#   $ORCA_ROOT_PATH       메인 체크아웃 경로 (develop)
+#   $ORCA_WORKTREE_PATH   새/정리할 워크트리 경로
+#   $ORCA_WORKSPACE_NAME  워크트리 이름
+scripts:
+  setup: |
+    # 메인 체크아웃의 로컬 전용 파일(.env 류, git 에 없음)을 새 워크트리로 복사 — 이미 있으면 건드리지 않는다.
+    for f in .env .env.local; do
+      if [ -f "$ORCA_ROOT_PATH/$f" ] && [ ! -e "$ORCA_WORKTREE_PATH/$f" ]; then
+        cp "$ORCA_ROOT_PATH/$f" "$ORCA_WORKTREE_PATH/$f"
+      fi
+    done
+  archive: |
+    # 커밋하지 않은 변경이 남은 워크트리를 정리할 때 경고만 남긴다(정리를 막지 않는다).
+    if [ -n "$(git -C "$ORCA_WORKTREE_PATH" status --porcelain 2>/dev/null)" ]; then
+      echo "⚠ 커밋하지 않은 변경이 있는 워크트리를 정리함: $ORCA_WORKTREE_PATH" >&2
+    fi
