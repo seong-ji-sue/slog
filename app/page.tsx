@@ -18,7 +18,7 @@ export default function HomePage() {
         </p>
         <div className="stat" data-testid="B-01-text-stat">
           2021.12 — ing&nbsp;&nbsp;·&nbsp;&nbsp;
-          <b>LOG_{String(max).padStart(3, "0")}</b>까지 기록됨&nbsp;&nbsp;·&nbsp;&nbsp;주간 1회 목표
+          <b>NO_{String(max).padStart(3, "0")}</b>까지 기록됨&nbsp;&nbsp;·&nbsp;&nbsp;주간 1회 목표
         </div>
         <Link href="/posts" className="hero-cta" data-testid="B-01-link-posts">
           글 전체 보기 →
