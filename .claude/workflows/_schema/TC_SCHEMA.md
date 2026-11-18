@@ -37,7 +37,7 @@
 
 ```javascript
 const { test, expect } = require('@playwright/test');
-const { gotoScreen, ui } = require('../helpers');
+const { gotoScreen, ui } = require('./helpers');
 
 test('AC-A18-01: 피드 목록 화면 진입 시 그리드가 렌더링된다', async ({ page }) => {
   // Given/When — 화면 진입

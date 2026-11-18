@@ -1,25 +1,41 @@
-# CONTRACT — 명세 파이프라인 단계 간 계약 (PRD → Plan → TC)
+# CONTRACT — 파이프라인 단계 간 계약 (기획 → 명세 → 구현 → 테스트)
 
 > **이 문서가 이 시스템에서 제일 중요하다 (SSOT).**
 > 방법론은 **ECC TDD** — 테스트를 코드보다 먼저 쓰고, **코드가 전무한 상태에서 valid RED**를 확정한 뒤, 구현이 그 테스트를 GREEN으로 만든다.
-> 목업(HTML)·구현물은 **어느 단계에서도 만들지 않는다.** PRD/Plan/TC는 전부 **명세**다.
+> 목업(HTML)·구현물은 **명세 단계 어디서도 만들지 않는다.** BRIEF/FACTS/PRD/Plan/TC는 전부 **명세**다.
 
 ---
 
-## 0. 파이프라인 (단계 독립 + 순차 위임)
+## 0. 파이프라인 (4개 메인 워크플로우 · Human Gate 2곳)
 
 ```
-기획서 브리프
-  → [FACTS 단계] agent:facts-writer · skill:facts-spec → FACTS_{feature}.json (Human Gate)
-  → [PRD 단계]  agent:prd-writer  · skill:prd-spec   → PRD.md      + prd.contract.json
-  → [PLAN 단계] agent:plan-writer · skill:plan-spec  → PLAN.md     + plan.contract.json
-  → [TC 단계]   agent:tc-writer   · skill:tc-spec    → tests/*(RED) + 시나리오 시트(.xlsx) + TC.md
+[1 기획  brief-workflow]  아이디어/기존 자료
+  → [BRIEF 단계]  agent:brief-writer · skill:brief-spec → BRIEF_{feature}.md (선제 가정 + EARS)
+  → [DESIGN 단계] agent:designer     · DESIGN_SCHEMA    → design_system.json + DESIGN_{feature}.md
+  → [FACTS 단계]  agent:facts-writer · skill:facts-spec → FACTS_{feature}.json  🛑 Human Gate 1
+
+[2 명세  spec-workflow]   ← 진입조건: FACTS approved (하드 게이트)
+  → [PRD 단계]  agent:prd-writer  · skill:prd-spec   → PRD.md  + prd.contract.json  (기계 게이트+judge)
+  → [PLAN 단계] agent:plan-writer · skill:plan-spec  → PLAN.md + plan.contract.json (기계 게이트+judge)
+  → [TC 단계]   agent:tc-writer   · skill:tc-spec    → tests/*(RED) + 시트(.xlsx) + tc.lock.json
+                                                                                    🛑 Human Gate 2 (계약·락 승인)
+[3 구현  impl-workflow — ECRC]  ← 진입조건: valid RED + tc.lock (하드 게이트) · 이후 완전 자동
+  → Execute(병렬 구현·소유권 배타) → Check(build/lint) → Review(code-reviewer 합의 max 3) → Complete(락 드리프트)
+
+[4 테스트 test-workflow]  ← 완전 자동
+  → VERIFY(실앱 GREEN 실측) → TRIAGE(3분류) → FEEDBACK(BUG만 재구현 루프) → REPORT
 ```
 
-- **명세 워크플로우 1개**(`spec-workflow.js`)가 네 단계를 **순차 위임**만 한다. 단계 자체는 워크플로우가 아니라 `[agent+skill+hook+rule+계약]` 단위다.
-- **단계 독립**: 각 단계는 앞 단계의 **계약 파일(json)만** 입력으로 받는다. 계약만 있으면 단계 하나를 단독 실행할 수 있다(앞 단계 재실행 불필요).
-- **FACTS는 계약이 아니라 Human Gate**: FACTS_{feature}.json은 PRD의 참고 입력일 뿐 `prd.contract.json` 필드에 편입되지 않는다. `approved:true`가 파일에 기록되기 전까지 PRD 단계는 시작되지 않는다.
+- **워크플로우 4개**가 각 단계를 **순차 위임**만 한다. 단계 자체는 워크플로우가 아니라 `[agent+skill+hook+rule+계약]` 단위다.
+- **Human Gate 2곳 고정**: Gate 1 = FACTS 질문 승인(기획 확정), Gate 2 = 계약+RED 락 승인(명세 확정). 구현→테스트 구간은 100% 자동 — 중단 신호(SPEC_MISMATCH·해시 드리프트·human_gate_required)만 사람에게 올라온다.
+- **하이브리드 게이트**: 각 명세 단계는 기계 게이트(`gate_check.py` — 형태·ID 체인)가 1차, LLM judge(`spec-lead` — 상류 대비 의미 누락·모순)가 2차. judge는 기계 PASS를 역전할 수 없다.
+- **단계 독립**: 각 단계는 앞 단계의 **계약 파일(json/md)만** 입력으로 받는다. 계약만 있으면 단계 하나를 단독 실행할 수 있다(앞 단계 재실행 불필요).
+- **FACTS는 계약이 아니라 Human Gate**: FACTS_{feature}.json은 PRD의 참고 입력일 뿐 `prd.contract.json` 필드에 편입되지 않는다. `approved:true`가 파일에 기록되기 전까지 PRD 단계는 시작되지 않는다(spec-workflow 진입 하드 게이트).
 - **TC portability**: TC 단계는 **`prd.contract.json`만** 소비한다(Plan을 보지 않는다). 그래서 tests/ 를 떼어 **계약 형태가 같은 다른 PRD/Plan에 붙여도 동작**한다.
+- **멀티피처 누적 계약(v2.2)**: `prd.contract.json`·`plan.contract.json`은 피처마다 새 파일을 만들지 않고 **싱글턴 경로 고정**(`prd/prd.contract.json`, `plan/plan.contract.json`) — 앱 전체 누적 명세가 된다. 각 writer는 **자기 피처의 screens/acs/tasks만 추가·갱신**하고 타 피처 항목은 그대로 보존한다(덮어쓰기 금지).
+- `gate_prd`는 `_data/manifests/contract_registry.json`(피처별 `screen_ids`/`ac_ids` 누적 기록)과 현재 `prd.contract.json`을 비교해 **타 피처 계약이 사라졌으면 FAIL**한다(레지스트리 가드).
+  **레거시 도입 주의**: 레지스트리 부재 상태에서 이미 다피처 항목이 누적된 계약에 첫 `gate prd`를 돌리면 첫 PASS 피처가 전 항목을 귀속받는다 — 레거시 편입 시 피처별로 `gate prd`를 순서대로 실행하거나, `contract_registry.json`을 SID 기준으로 수동 분배해 초기화한 뒤 시작할 것.
+- `plan.contract.json`의 각 `tasks[]`에는 `feature` 필드를 스탬프한다 — `impl-workflow`가 이 값으로 **자기 피처 task만 필터링**해 병렬 구현 대상을 좁힌다. 단, `focusAcs`/`focusScreens` 재구현(전체 회귀 수리) 시에는 피처 필터 대신 **`ac_refs` 교집합 기준**으로 선별해 타 피처 소속 task도 수리 대상에 포함한다.
 
 ---
 
@@ -29,8 +45,10 @@
 
 | 단계 | 입력(이전 단계에서 필요한 것) | 출력(다음 단계에 주는 것) |
 |------|------------------------------|---------------------------|
-| **FACTS** | 기획서 브리프(사람) | `FACTS_{feature}.json`(confidence·issues·questions·approved) — Human Gate, 계약 아님 |
-| **PRD** | 기획서 브리프(사람) + 승인된 FACTS(선택) | `prd.contract.json`(screens·acs·impl_requirements) + `PRD.md` |
+| **BRIEF** | 아이디어(러프) 또는 기존 기획 자료(사람) | `BRIEF_{feature}.md`(§0~§5: OVERVIEW·CORE FACTS·ASSUMPTIONS·EARS·SCREENS·OPEN QUESTIONS) — `BRIEF_SCHEMA.md` |
+| **DESIGN** | `BRIEF_{feature}.md`의 §0·§4 | `design_system.json`(앱 전역 토큰, 누적) + `DESIGN_{feature}.md` — `DESIGN_SCHEMA.md` |
+| **FACTS** | `BRIEF_{feature}.md` (표준 기획서) | `FACTS_{feature}.json`(confidence·issues·questions≤5·approved) — Human Gate 1, 계약 아님 |
+| **PRD** | `BRIEF_{feature}.md`(§3 EARS 전수) + 승인된 FACTS | `prd.contract.json`(screens·acs·impl_requirements) + `PRD.md` |
 | **PLAN** | `prd.contract.json`의 **acs + screens** | `plan.contract.json`(tasks, 모든 AC 커버) + `PLAN.md` |
 | **TC** | `prd.contract.json`의 **acs + screens.components** (Plan 미참조) | `tests/**/*.spec.*`(코드부재 RED) + 시나리오 시트(`.xlsx`) + `TC.md` |
 
@@ -157,11 +175,60 @@ TC는 **구현 코드가 하나도 없다는 가정**에서 시작한다. 목업
 
 문제가 있으면 같은 단계를 반복하지 않고 **원인이 있는 상위 단계로 되돌아간다.** 자동 롤백(파일을 직접 고쳐씀)은 없다 — 대신 진단 → 재진입 신호 → Main이 재호출하는 구조다.
 
-| 단계 | 같은 단계 1회 재시도 실패 시 | 반복(3회 초과) 시 |
+| 단계 | 같은 단계 1회 재시도 실패 시 | 반복(3회 이상, 3회째 연속 실패 도달 시) |
 |------|------------------------------|--------------------|
-| FACTS/PRD/PLAN/TC (spec-workflow) | `spec-lead` dispatch → `root_cause_level`(`facts`\|`prd`\|`plan`\|`tc`\|`null`) 진단 → `spec_retry.py bump` | `human_gate_required:true` 반환 — Main 재호출 금지, 사용자 보고 |
-| IMPL(impl-workflow) | `impl-lead`가 REPORT에 `root_cause_level`(`prd`\|`plan`\|`null`) 포함 가능 | 해당 시 Main이 명세 파이프라인으로 복귀 |
-| TEST(test-workflow) | `test-lead`가 REPORT에 `root_cause_level`(`prd`\|`plan`\|`tc`\|`null`) 포함 가능 | 해당 시 Main이 명세 파이프라인으로 복귀 |
+| BRIEF/DESIGN/FACTS (brief-workflow) | 파이프라인 최상류 — 역행 없음. `spec_retry.py bump` 후 중단 신호(원인 대부분 입력 부족 — 사용자 보강) | `human_gate_required:true` 반환 — 사용자 보고 |
+| PRD/PLAN/TC (spec-workflow) | `spec-lead` dispatch → `root_cause_level`(`brief`\|`facts`\|`prd`\|`plan`\|`tc`\|`null`) 진단 → `spec_retry.py bump` | `human_gate_required:true` 반환 — Main 재호출 금지, 사용자 보고 |
+| IMPL(impl-workflow) | REVIEW 합의 루프(max 3) 내 자체 수리. `impl-lead`가 REPORT에 `root_cause_level`(`prd`\|`plan`\|`null`) 포함 가능 | 해당 시 Main이 명세 파이프라인으로 복귀 |
+| TEST(test-workflow) | **TRIAGE 3분류가 선행** — `IMPLEMENTATION_BUG`만 재구현 루프, `SPEC_MISMATCH`는 즉시 중단+`root_cause_level`(`prd`\|`plan`\|`tc`), `TEST_FLAKY`는 재검증 1회 | 해당 시 Main이 명세 파이프라인으로 복귀 |
 
-- `root_cause_level`이 현재 단계보다 상위(순서: facts < prd < plan < tc)면 Main은 `Workflow('spec-workflow', {base, feature, startAt: root_cause_level, hints: concerns})`로 재호출한다.
+- `root_cause_level` 순서: **brief < facts < prd < plan < tc**. Main의 재진입 경로:
+  - `brief`·`facts` → `Workflow('brief-workflow', {base, feature, startAt: root_cause_level, hints: concerns})`
+  - `prd`·`plan`·`tc` → `Workflow('spec-workflow', {base, feature, startAt: root_cause_level, hints: concerns})`
+- **TRIAGE 원칙(test-workflow)**: 실패를 고치기 전에 원인부터 분류한다 — 명세가 틀렸는데 코드를 고치는 "무한 삽질"을 기계적으로 차단. SPEC_MISMATCH 판정 시 재구현 루프는 즉시 멈춘다.
+- **REVIEW 합의(impl-workflow, ECRC의 R)**: build 통과 후 `code-reviewer`가 계약(AC) 대비 논리 검수 — critical/major 0건 합의까지 워커와 핑퐁(max 3). 리뷰어는 파일을 수정하지 않는다(판정·지시만).
 - 성공한 단계는 `spec_retry.py reset`으로 카운터가 즉시 0으로 리셋된다 — "연속 실패"만 누적, 성공하면 다시 3회부터 시작.
+
+---
+
+## 8. 브라운필드(baseline-workflow) — 기존 코드 도입
+
+신규 피처(§0~§7)는 코드가 전무한 상태를 전제한다. **기존 코드베이스**(사양서·테스트 없음)를 파이프라인에 편입시킬 때는 별도 워크플로우 `baseline-workflow.js`를 쓴다. 기존 게이트·러너(`gate_check.py`·`red_run.sh`)는 **무변경 재사용** — SCAN·MARK·VERIFY 세 단계만 앞뒤로 덧붙인다.
+
+```
+SCAN   → 기존 코드 구조/화면/컴포넌트 정적 스캔 (계약 아님, PRD 역도출 입력 자료)
+FACTS  → agent:facts-writer · skill:facts-spec → FACTS_{feature}.json (Human Gate, §0과 동일)
+PRD    → agent:prd-writer · skill:prd-spec → prd.contract.json — **현행 동작만 역도출**한다.
+          "있어야 할 기능"이 아니라 "지금 코드가 실제로 하는 동작"만 acs/screens로 서술한다.
+PLAN   → agent:plan-writer · skill:plan-spec → plan.contract.json — 신규 구현 계획이 아니라
+          **기존 코드 → AC 매핑**(어느 파일/컴포넌트가 이미 그 AC를 구현하고 있는지)
+TC     → agent:tc-writer · skill:tc-spec → tests/*(RED) — §5와 동일하게 **빈 셸(shell_app)**을
+          대상으로 실행해 valid RED를 확정한다. 실제 서비스 코드는 존재하지만 RED 판정 대상은
+          계약 key 마커가 없는 빈 셸이므로, §5의 valid RED 정의(LOGIC_ABSENT=total)가 그대로 성립한다.
+MARK   → agent:ui_developer dispatch → 기존 코드에 계약 key마다
+          `data-testid="{screen_id}-{key}"` 마커만 부착. §4 "구현 의무"의 브라운필드 판 —
+          **동작 변경 금지**, 로직 작성 금지, 마커 부착만 허용.
+          (test-lead는 브라운필드 파트장으로서 VERIFY 실패 진단·REPORT 인수검수만 담당 —
+          리드 재작성 금지 원칙상 마커 부착 같은 파일 수정은 ui_developer 소관)
+VERIFY → red_run.sh real로 실앱 GREEN 실측(test-workflow와 동일 절차). 실패 시 원인은 대개
+          "PRD가 실제 동작과 다르게 역도출됨" — §7 root_cause_level 역행 규약에 따라 PRD 단계로
+          되돌아가 계약을 재도출한다(코드를 고치지 않는다).
+```
+
+- **RED 유효성**: §5의 valid RED는 "코드가 전무하다"가 아니라 "계약 key 마커가 없어 `ui(key)`가 요소를 못 찾는다"가 조건이다. 브라운필드는 로직은 있어도 마커가 없으므로 이 조건을 그대로 만족한다 — TC 단계·`red_run.sh`·`tc.lock.json` 로직 전부 무변경.
+- **MARK ≠ 구현**: 신규 피처의 "구현 의무"(§4)는 로직+마커를 함께 만드는 것이지만, 브라운필드는 로직이 이미 있으므로 마커만 얹는다. 로직을 고치면 기존 동작이 바뀌어 브라운필드 전제(현행 보존)가 깨진다.
+- **VERIFY 역행**: MARK 이후에도 GREEN이 안 나오면 코드를 고치는 대신 PRD를 다시 역도출한다 — 브라운필드는 "코드가 진실(source of truth)"이므로 계약이 코드에 맞춰 조정된다(반대가 아니다).
+
+---
+
+## 9. 시나리오 매핑 — 워크플로우 선택
+
+| 시나리오 | 워크플로우 조합 | 비고 |
+|---|---|---|
+| 신규(아이디어부터) | **brief-workflow(HG1) → spec-workflow(HG2) → impl-workflow → test-workflow** | §0 기본 흐름 — 4단계 전체 |
+| 신규(기획서 이미 있음) | brief-workflow(`brief:` 입력 — 정형화만) → 이후 동일 | 기존 자료를 표준 BRIEF로 정형화 후 동일 경로 |
+| 수정(동일 피처, AC 불변) | impl-workflow → (필요 시) test-workflow | plan.contract.json 해당 task만 갱신, prd.contract.json 불변 |
+| 수정(기능 추가, 동일 피처에 AC 추가) | spec-workflow(`startAt:"prd"`, 기존 계약에 병합) → impl-workflow → test-workflow | §0 누적 계약 원칙 적용 — 기존 screens/acs 보존, 신규 AC만 추가, `contract_registry.json` 가드 통과 필수 |
+| 기존 코드(사양·테스트 없음) | baseline-workflow(SCAN→FACTS→PRD→PLAN→TC→MARK→VERIFY) | §8. GREEN 베이스라인 확보 후, 그 위에 얹는 다음 피처부터 위 표의 다른 행으로 전환 |
+
+- **직렬 운영 제약**: `red_run.sh real`은 `.claude/specs/tc/tests/` 전체 스위트를 한 번에 실행한다. 어떤 피처의 spec이 아직 RED인 채로 남아있으면 다른 피처를 GREEN 검증해도 all_green은 항상 실패한다. 따라서 **한 피처는 test-workflow의 all_green 완료 후 다음 피처에 착수**한다 — 여러 피처를 spec 단계까지만 병행 진행해 놓고 impl을 동시에 돌리는 것은 금지.

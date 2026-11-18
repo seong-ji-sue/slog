@@ -45,6 +45,20 @@ else
   MODE="app"
 fi
 
+# real(GREEN) 모드는 seed 스크립트가 실제 DB에 접속해야 함 — 프로젝트 루트 .env.local을
+# 이 프로세스에도 주입한다(Playwright 하위 프로세스는 상위 셸 env를 그대로 상속하므로
+# 여기서 한 번만 로드하면 됨). 이미 환경변수로 주입돼 있으면 건드리지 않는다.
+if [ "$MODE" = "real" ] && [ -z "${DATABASE_URL:-}" ]; then
+  PROJECT_ROOT="$(cd "$ROOT/.." && pwd)"
+  ENV_LOCAL="$PROJECT_ROOT/.env.local"
+  if [ -f "$ENV_LOCAL" ]; then
+    set -a
+    # shellcheck disable=SC1090
+    source "$ENV_LOCAL"
+    set +a
+  fi
+fi
+
 ( cd "$TESTS_DIR" && TC_TARGET="$MODE" BASE_URL="$RUN_BASE_URL" npx playwright test )
 PW_EXIT=$?
 
