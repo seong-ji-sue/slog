@@ -16,3 +16,10 @@ BOSU/
 # BOSU workflows 경로버그 산출물 방지 (SPECS_BASE 미주입 시 .claude/.claude 생성)
 .claude/.claude/
 __pycache__/
+
+# 로컬 환경변수
+.env*.local
+
+# 시험 실행 찌꺼기(판정에 안 씀)
+.claude/specs/tc/tests/test-results/
+.claude/specs/_data/evidence/_artifacts/
