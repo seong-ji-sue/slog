@@ -11,6 +11,11 @@
   "ports": {
     "start": 10200,
     "end": 10299,
-    "slot_size": 10
+    "slot_size": 10,
+    "env": {
+      ".env": {
+        "PORT": "web"
+      }
+    }
   }
 }
